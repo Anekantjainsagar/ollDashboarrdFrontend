@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     font-size: 10px;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: arial,sans-serif;
     box-sizing: border-box;
 }
@@ -14,7 +14,7 @@
     color: white;
     padding: 1rem;
     background-color: #242424;
-    height: 27vw;
+    height: 38.75vw;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -38,11 +38,10 @@
     width: 100%;
     padding: 0 1.6rem;
     justify-content: space-between;
-    font-size: 1.9rem;
 }
 
-.name, .id, .inquiryDate, .phone, .offerDetails, .status, .actions, .source, .stage{
-    font-size: 1.7rem;
+.name, .id, .inquiryDate, .phone, .offerDetails, .status, .actions, .source, .stage, .classType{
+    font-size: 1.6rem;
     margin-top: 0.2rem;
 }
 
@@ -61,43 +60,53 @@
     margin: 1.5rem 0;
 }
 
-.nameValue, .idValue, .inquiryDateValue, .phoneValue, .offerDetailsValue, .statusValue, .actionsValue, .sourceValue, .stageValue{
-    font-size: 1.7rem;  
+.nameValue, .idValue, .inquiryDateValue, .phoneValue, .offerDetailsValue, .statusValue, .actionsValue, .sourceValue, .stageValue, .classTypeValue{
+    font-size: 1.6rem;  
     padding: 0.2rem 0;
 }
 
 .inquiryDate{
     position: relative;
-    right: 4.5rem;
+    right: 3rem;
 }
 
 .name{
     position: relative;
-    right: 6rem;
+    right: 3.8rem;
 }
 
 .phone{
     position: relative;
-    right: 7rem;
+    right: 3rem;
+}
+
+.classType{
+    position: relative;
+    right: 4rem;
 }
 
 .offerDetails{
     position: relative;
-    right: 5rem;
+    right: 8rem;
+}
+
+.status{
+    position: relative;
+    right: 8rem;
 }
 
 .stage{
     position: relative;
-    right: 2rem;
+    right: 3rem;
 }
 
 .source{
     position: relative;
-    left: 5rem;
+    left: 2.6rem;
 }
 
 .user .actionsValue{
-    width: 15%;
+    width: 14%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -111,23 +120,27 @@
     font-size: 1.6rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
     justify-content: space-evenly;
 }
 
 .user select{
-    width: 100%;
+    width: 78%;
     outline: none;
+    align-self: center;
     border: none;
     padding: 0.5rem 1rem;
     font-size: 1.6rem;
     font-weight: 700;
     border-radius: 1rem;
+    text-transform: uppercase;
 }
 
 .user select option{
     outline: none;
     font-weight: 700;
     border: none;
+    text-transform: uppercase;
     font-size: 1.6rem;
     border-radius: 2rem;
     margin: 0.2rem 0;
@@ -139,7 +152,7 @@
 }
 
 .new{
-    color: #0558B9;
+    color: #0056b8;
     background-color: #acd3ff;
 }
 
@@ -154,8 +167,8 @@
 }
 
 .started{
-    color: #0AC032;
-    background-color: #9affb0;
+    color: #009c22;
+    background-color: #b0ffc1;
 }
 
 .hot{
@@ -169,11 +182,18 @@
 }
 
 .cold{
-    color: #646464;
-    background-color: #999999;
+    color: #575757;
+    background-color: #b6b6b6;
 }
 
 .won{
-    color: #0AC032;
+    color: #009c22;
     background-color: #9affb0;
+}
+
+.offerDetailsValue{
+    text-decoration: underline;
+    text-decoration-color: #dadada;
+    text-decoration-thickness: 0.5px;
+    cursor: pointer;
 }

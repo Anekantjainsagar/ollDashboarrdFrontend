@@ -1,18 +1,18 @@
-import React from 'react'
+import React from "react";
 
 const SearchSection = () => {
   return (
     <>
-        <div className='topbarSearch'>
-            <input type="text" placeholder='Search' />
-            <select name="" id="">
-                <option value="Type">Type</option>
-                <option value="inactive">Inactive</option>
-                <option value="active">Active</option>
-            </select>
-        </div>
+      <div className="topbarSearch">
+        <input type="text" placeholder="Search" />
+        <select name="" id="">
+          <option value="Type">Type</option>
+          <option value="inactive">Inactive</option>
+          <option value="active">Active</option>
+        </select>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SearchSection
+export default SearchSection;

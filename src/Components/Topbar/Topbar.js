@@ -1,16 +1,16 @@
-import React from 'react'
-import Form from './Form'
-import SearchSection from './SearchSection'
+import React from "react";
+import Form from "./Form";
+import SearchSection from "./SearchSection";
 
-const Topbar = () => {
+const Topbar = ({ usersData, getUserData }) => {
   return (
     <>
-        <div style={{display: 'flex',justifyContent:'space-between'}}>
-            <Form/>
-            <SearchSection/>
-        </div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Form usersData={usersData} getUserData={getUserData} />
+        <SearchSection />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Topbar
+export default Topbar;

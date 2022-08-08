@@ -8,6 +8,7 @@ const UserHeadings = () => {
             <p className="inquiryDate">Inquiry Date</p>
             <p className="name">Name</p>
             <p className="phone">Phone</p>
+            <p className="classType">Class Type</p>
             <p className="offerDetails">Offer Details</p>
             <p className="status">Status</p>
             <p className="actions">Actions</p>

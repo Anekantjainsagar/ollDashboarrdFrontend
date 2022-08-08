@@ -42,7 +42,7 @@ form{
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     color: white;
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
 }
 
 .inputContainer .input::placeholder{
@@ -67,6 +67,83 @@ form{
 
 .inputUserContainer .button:hover{
     border: 1px solid white;
+}
+
+.inputContainer .detailsBtn{
+    border: none;
+    background-color: rgb(80, 80, 80);
+    outline: none;
+    width: 23%;
+    font-size: 1.65rem;
+    border-radius: 1rem;
+    padding: 0.7rem 0.1rem;
+    color:rgb(170, 170, 170);
+    cursor: pointer;
+    margin: 0.5rem 0;
+}
+
+.inputContainer .detailsBtnContainer{
+    position: absolute;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgba(63, 63, 63, 1);
+    width: 18%;
+    left: 21%;
+    z-index: 10;
+    top: 19.5rem;
+}
+
+.detailsBtnContainer .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detailsBtnContainer .header p{
+    font-size: 1.75rem;
+    color: rgb(163, 163, 163);
+}
+
+.detailsBtnContainer .selectModes{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.4rem;
+}
+
+.detailsBtnContainer .selectModes .selectMode{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1.1rem;
+}
+
+.detailsBtnContainer .selectModes .selectMode p{
+    font-size: 1.55rem
+}
+
+.detailsBtnContainer .inputSections{
+    display: flex;
+}
+
+.detailsBtnContainer .inputSections .inputSection{
+    margin-right: 1.2rem;
+    margin-top: -0.65rem;
+}
+
+.detailsBtnContainer .inputSections p{
+    font-size: 1.55rem;
+}
+
+.detailsBtnContainer .inputSections input{
+    border: none;
+    background-color: rgb(105, 105, 105);
+    outline: none;
+    width: 100%;
+    font-size: 1.7rem;
+    padding: 0.35rem 1rem;
+    border-radius: 1rem;
+    color: white;
+    margin-top: 0.25rem;
 }
 
 .topbarSearch{
