@@ -6,7 +6,21 @@
     z-index: 10;
     top: 0%;
     height: 100%;
+    overflow-y: scroll;
     right: -50%;
+}
+
+.offerDetailContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.offerDetailContainer::-webkit-scrollbar-track {
+    background: rgba(129, 129, 129, 1);
+}
+
+.offerDetailContainer::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 2rem;
 }
 
 .animate {
@@ -181,29 +195,24 @@
 .offerDetailContainer .commentsDisplay{
     display: flex;
     align-items: center;
-    padding: 1rem 0.75rem;
+    justify-content: space-evenly;
+    padding: 0.5rem;
     border: 1px solid white;
     margin-top: 0.8rem;
     border-radius: 1rem;
-}
-
-.offerDetailContainer .commentsDisplay img{
-    width: 16%;
-    margin-right: 1rem;
-    border-radius: 50%;
-}
-
-.offerDetailContainer .commentsDisplay h6{
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     font-weight: 500;
 }
 
-.offerDetailContainer .commentsDisplay p{
-    font-size: 1.2rem;
+.viewALl{
+    font-size: 1.3rem;
     position: relative;
-    margin-top: 2rem;
+    left: 81%;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+    width: fit-content;
     bottom: 0;
-    width: 25%;
+    margin-top: 0.5rem;
 }
 
 .offerDetailContainer .inqReports{
@@ -240,8 +249,8 @@
 }
 
 .offerDetailContainer .inqReports .content p{
-    font-size: 1.6rem;
-    margin: 0.4rem 0;
+    font-size: 1.55rem;
+    margin: 0.25rem 0;
     width: 48%;
 }
 

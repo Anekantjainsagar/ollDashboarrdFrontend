@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
 import { BsWhatsapp } from "react-icons/bs";
 import { BiUpArrowAlt } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
 import FloatingUserData from "./FloatingUserData";
+import { BASE_URL } from "../../Utils/index";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -31,8 +33,9 @@ const User = (props) => {
     course,
     batchDetails,
     source,
+    _id,
     id,
-    comment,
+    commentValues,
     status,
     stage,
     inqDate,
@@ -47,15 +50,16 @@ const User = (props) => {
   const [details, setDetails] = useState(false);
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
+  const [comment, setcomment] = useState();
 
   useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
   useOutsideAlerter(commentRef, showComments, setshowComments);
 
-  const showTempltext = () =>{
-    if (details===false) {
-      setDetails(true)
+  const showTempltext = () => {
+    if (details === false) {
+      setDetails(true);
     }
-  }
+  };
 
   return (
     <>
@@ -65,7 +69,7 @@ const User = (props) => {
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{id}</p>
-        <p className="inquiryDateValue">{inqDate}</p>
+        <p className="inquiryDateValue">{inqDate.slice(4, 15)}</p>
         <p className="nameValue">{name}</p>
         <p className="phoneValue">{phone}</p>
         <p className="classTypeValue">
@@ -76,6 +80,7 @@ const User = (props) => {
           data={props.data}
           details={details}
           setDetails={setDetails}
+          getUserData={props.getUserData}
         />
         <p className="statusValue" style={{ display: "flex" }}>
           <div
@@ -149,17 +154,16 @@ const User = (props) => {
               e.stopPropagation();
             }}
           >
-            <BsWhatsapp
-              size={20}
-              style={{ marginRight: "0.3rem" }}
-              color={"#0ac032"}
-            />
+            <BsWhatsapp size={25} color={"#0ac032"} />
             Template
           </div>
           <div
             ref={templateRef}
             style={showTemplate ? { display: "block" } : { display: "none" }}
             className="templateBox"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <p className="heading">Select a Template</p>
             <div className="content">
@@ -197,6 +201,9 @@ const User = (props) => {
             ref={commentRef}
             style={showComments ? { display: "block" } : { display: "none" }}
             className="commentBox"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <div
               style={{
@@ -205,15 +212,32 @@ const User = (props) => {
                 alignItems: "center",
               }}
             >
-              <input type="text" placeholder="Comment.." />
-              <AiOutlineRight size={19} className="icon" />
+              <input
+                type="text"
+                name="comment"
+                value={comment}
+                onChange={(e) => setcomment(e.target.value)}
+                placeholder="Comment.."
+              />
+              <AiOutlineRight
+                size={19}
+                className="icon"
+                onClick={() => {
+                  axios.put(`${BASE_URL}/comment`, {
+                    id: _id,
+                    comment: comment,
+                  });
+                  setcomment("");
+                  props.getUserData();
+                }}
+              />
             </div>
           </div>
         </p>
         <p className="sourceValue">{source}</p>
         <p className="stageValue" onClick={(e) => e.stopPropagation()}>
           <select
-            style={{ width: "100%" }}
+            style={{ width: "80%" }}
             name=""
             ref={stageRef}
             id=""

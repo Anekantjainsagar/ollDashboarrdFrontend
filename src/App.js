@@ -34,7 +34,7 @@ function App() {
     >
       <Nav />
       <Topbar getUserData={getUserData} usersData={data} />
-      <UsersData usersData={data} />
+      <UsersData getUserData={getUserData} usersData={data} />
     </div>
   );
 }

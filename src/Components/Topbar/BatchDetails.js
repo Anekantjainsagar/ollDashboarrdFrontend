@@ -35,7 +35,7 @@ const BatchDetails = ({
   sessionsCount,
   setsessionsCount,
   etime,
-  setetime
+  setetime,
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
@@ -56,7 +56,12 @@ const BatchDetails = ({
         />
       </div>
       <div className="selectModes">
-        <div className="selectMode" name="mode" value={mode} onChange={(e)=>setmode(e.target.value)}>
+        <div
+          className="selectMode"
+          name="mode"
+          value={mode}
+          onChange={(e) => setmode(e.target.value)}
+        >
           <p>Mode</p>
           <div
             style={{
@@ -89,7 +94,11 @@ const BatchDetails = ({
             <p style={{ marginLeft: "0.4rem" }}>Off.</p>
           </div>
         </div>
-        <div className="selectMode" value={type} onChange={(e)=>settype(e.target.value)}>
+        <div
+          className="selectMode"
+          value={type}
+          onChange={(e) => settype(e.target.value)}
+        >
           <p>Type</p>
           <div
             style={{
@@ -102,7 +111,7 @@ const BatchDetails = ({
               style={{ color: "black", cursor: "pointer" }}
               type={"radio"}
               name="type"
-              value={'1 to 1'}
+              value={"1 to 1"}
             />
             <p style={{ marginLeft: "0.4rem" }}>1 on 1</p>
           </div>
@@ -122,7 +131,12 @@ const BatchDetails = ({
             <p style={{ marginLeft: "0.4rem" }}>Group</p>
           </div>
         </div>
-        <div className="selectMode" name="days" value={days} onChange={(e)=>setdays(e.target.value)}>
+        <div
+          className="selectMode"
+          name="days"
+          value={days}
+          onChange={(e) => setdays(e.target.value)}
+        >
           <p>Days</p>
           <div
             style={{
@@ -175,29 +189,64 @@ const BatchDetails = ({
         <div className="inputSection">
           <div style={{ margin: "0.75rem 0" }}>
             <p>Start Date</p>
-            <input type="date" name="startDate" value={startDate}d
-              onChange={(e)=>setstartDate(e.target.value)} />
+            <input
+              type="date"
+              name="startDate"
+              value={startDate}
+              d
+              onChange={(e) => setstartDate(e.target.value)}
+            />
           </div>
           <div style={{ margin: "0.75rem 0" }}>
             <p>Time</p>
-            <div style={{display:'flex',justifyContent:'space-between'}}>
-              <input type="text" style={{width:'48%'}} name="time" value={stime}
-                onChange={(e)=>setstime(e.target.value)} />
-              <input type="text" style={{width:'48%'}} name="time" value={etime}
-                onChange={(e)=>setetime(e.target.value)} />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            >
+              <input
+                type="time"
+                style={{ width: "100%" }}
+                name="time"
+                value={stime}
+                onChange={(e) => {
+                  setstime(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <input
+                type="time"
+                style={{ width: "100%" }}
+                name="time"
+                value={etime}
+                onChange={(e) => {
+                  setetime(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
             </div>
           </div>
         </div>
         <div className="inputSection">
           <div style={{ margin: "0.75rem 0" }}>
             <p>No. Sessions</p>
-            <input type="text" name="sessionsCount" value={sessionsCount}
-              onChange={(e)=>setsessionsCount(e.target.value)} />
+            <input
+              type="number"
+              name="sessionsCount"
+              value={sessionsCount}
+              onChange={(e) => setsessionsCount(e.target.value)}
+            />
           </div>
           <div style={{ margin: "0.75rem 0" }}>
             <p>Adress (opt)</p>
-            <input type="text" name="address" value={address}
-              onChange={(e)=>setaddress(e.target.value)} />
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={(e) => setaddress(e.target.value)}
+            />
           </div>
         </div>
       </div>

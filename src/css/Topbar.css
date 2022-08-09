@@ -82,12 +82,18 @@ form{
     margin: 0.5rem 0;
 }
 
+.inputPhone::-webkit-outer-spin-button,
+.inputPhone::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .inputContainer .detailsBtnContainer{
     position: absolute;
     padding: 1rem;
     border-radius: 1rem;
     background-color: rgba(63, 63, 63, 1);
-    width: 18%;
+    width: 20%;
     left: 21%;
     z-index: 10;
     top: 19.5rem;

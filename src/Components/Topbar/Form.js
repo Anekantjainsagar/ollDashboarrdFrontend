@@ -20,7 +20,7 @@ const Form = ({ usersData, getUserData }) => {
   const [startDate, setstartDate] = useState();
   const [stime, setstime] = useState();
   const [sessionsCount, setsessionsCount] = useState();
-  const [etime, setetime] = useState()
+  const [etime, setetime] = useState();
 
   const postData = async (e) => {
     e.preventDefault();
@@ -39,34 +39,37 @@ const Form = ({ usersData, getUserData }) => {
       address,
       days,
       startDate,
-      time : stime +" "+ etime,
+      time: stime + " " + etime,
       sessionsCount,
     });
-    alert(res.data.message);
     console.log(res);
+    console.log(stime);
+    console.log(etime);
 
-    if(res.status==500){
-      alert("Internal server error")
+    if (res.status == 500) {
+      alert("Internal server error");
     }
 
-    if(res.data.message==="User Saved Successfully"){
-      setemail("")
-      setName("")
-      setschool("")
-      setcourse("")
-      setmode("")
-      settype("")
-      setdays("")
-      setsource("")
-      setstartDate("")
-      setphone("")
-      setage("")
-      setsessionsCount("")
-      setstime("")
-      setetime("")
-      setaddress("")
+    if (res.data.message === "User Saved Successfully") {
+      setemail("");
+      setName("");
+      setschool("");
+      setcourse("");
+      setmode("");
+      settype("");
+      setdays("");
+      setsource("");
+      setstartDate("");
+      setphone("");
+      setage("");
+      setsessionsCount("");
+      setstime("");
+      setetime("");
+      setaddress("");
     }
-    getUserData();
+    setTimeout(() => {
+      getUserData();
+    }, 500);
   };
 
   return (
@@ -86,16 +89,16 @@ const Form = ({ usersData, getUserData }) => {
                 className="input"
               />
               <input
-                type="text"
+                type="number"
                 name="phone"
                 value={phone}
                 onChange={(e) => setphone(e.target.value)}
                 placeholder="Phone *"
                 required
-                className="input"
+                className="input inputPhone"
               />
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
@@ -103,12 +106,14 @@ const Form = ({ usersData, getUserData }) => {
                 className="input"
               />
               <input
-                type="text"
+                type="number"
                 value={age}
                 name="age"
                 onChange={(e) => setage(e.target.value)}
                 placeholder="Age"
                 className="input"
+                min={1}
+                max={100}
               />
             </div>
             <div className="inputContainer">
@@ -151,7 +156,7 @@ const Form = ({ usersData, getUserData }) => {
                 startDate={startDate}
                 setstartDate={setstartDate}
                 stime={stime}
-                ssettime={setstime}
+                setstime={setstime}
                 sessionsCount={sessionsCount}
                 setsessionsCount={setsessionsCount}
                 etime={etime}

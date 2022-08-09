@@ -3,14 +3,14 @@ import User from "./User";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
 
-const UsersData = ({ usersData }) => {
+const UsersData = ({ usersData, getUserData }) => {
   return (
     <>
       <div className="usersData">
         <UserHeading />
         {usersData ? (
           usersData.map((e, index) => {
-            return <User data={e} key={index} />;
+            return <User getUserData={getUserData} data={e} key={index} />;
           })
         ) : (
           <div
