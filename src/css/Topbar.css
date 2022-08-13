@@ -90,13 +90,13 @@ form{
 
 .inputContainer .detailsBtnContainer{
     position: absolute;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 1rem;
     background-color: rgba(63, 63, 63, 1);
     width: 20%;
     left: 21%;
     z-index: 10;
-    top: 19.5rem;
+    top: 17rem;
 }
 
 .detailsBtnContainer .header{
@@ -106,7 +106,7 @@ form{
 }
 
 .detailsBtnContainer .header p{
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     color: rgb(163, 163, 163);
 }
 
@@ -194,4 +194,15 @@ form{
     color: white;
     background-color: #000;
     font-size: 1.75rem;
+}
+
+.Toastify__toast--error {
+    border: 1px solid #EB5757;
+    background: #FAE1E2 !important;
+}
+
+.price::-webkit-outer-spin-button,
+.price::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -3,6 +3,11 @@ import React, { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import BatchDetails from "./BatchDetails";
 import axios from "axios";
+import { css } from "glamor";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
+// import 'moment-timezone';
 
 const Form = ({ usersData, getUserData }) => {
   const [details, setDetails] = useState(false);
@@ -18,9 +23,16 @@ const Form = ({ usersData, getUserData }) => {
   const [address, setaddress] = useState();
   const [days, setdays] = useState();
   const [startDate, setstartDate] = useState();
-  const [stime, setstime] = useState();
   const [sessionsCount, setsessionsCount] = useState();
-  const [etime, setetime] = useState();
+  const [stime, setstime] = useState("09:00AM");
+  const [etime, setetime] = useState(
+    (stime.slice(3, 5) == "30")
+      ? moment({ hour: Number(stime.slice(0, 2)), minute: Number(stime.slice(3,5)) }).add(60, "m").format("hh:mmA")
+      : moment({ hour: Number(stime.slice(0, 2)) })
+          .add(1, "hours")
+          .format("hh:mmA")
+  );
+  const [price, setprice] = useState();
 
   const postData = async (e) => {
     e.preventDefault();
@@ -37,14 +49,14 @@ const Form = ({ usersData, getUserData }) => {
       mode,
       type,
       address,
+      price,
       days,
       startDate,
       time: stime + " " + etime,
       sessionsCount,
+      stage: "🔥 hot",
+      status: "new",
     });
-    console.log(res);
-    console.log(stime);
-    console.log(etime);
 
     if (res.status == 500) {
       alert("Internal server error");
@@ -53,6 +65,7 @@ const Form = ({ usersData, getUserData }) => {
     if (res.data.message === "User Saved Successfully") {
       setemail("");
       setName("");
+      setprice("");
       setschool("");
       setcourse("");
       setmode("");
@@ -70,12 +83,27 @@ const Form = ({ usersData, getUserData }) => {
     setTimeout(() => {
       getUserData();
     }, 500);
+
+    const notify = () =>
+      toast(res.data.message, {
+        type: res.data.success
+          ? "success"
+          : res.data.message === "User Saved Successfully"
+          ? "success"
+          : "error",
+      }).configure({
+        bodyClassName: css({
+          backgroundColor: "blue",
+          height: "100%",
+          width: "100%",
+        }),
+      });
+    notify();
   };
 
   return (
     <>
       <div className="inputUserContainer">
-        <h1>New Lead</h1>
         <form action="">
           <div className="inputSection">
             <div className="inputContainer">
@@ -161,6 +189,8 @@ const Form = ({ usersData, getUserData }) => {
                 setsessionsCount={setsessionsCount}
                 etime={etime}
                 setetime={setetime}
+                price={price}
+                setprice={setprice}
               />
               <input
                 type="text"
@@ -179,6 +209,15 @@ const Form = ({ usersData, getUserData }) => {
           </button>
         </form>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+      />
     </>
   );
 };

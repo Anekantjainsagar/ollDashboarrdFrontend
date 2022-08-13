@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import moment from "moment";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -36,16 +37,18 @@ const BatchDetails = ({
   setsessionsCount,
   etime,
   setetime,
+  price,
+  setprice,
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
-
+  
   return (
     <div
       ref={ref}
       className="detailsBtnContainer"
       style={details === true ? { display: "block" } : { display: "none" }}
-    >
+      >
       <div className="header">
         <p>Batch Detail</p>
         <AiOutlineClose
@@ -198,7 +201,7 @@ const BatchDetails = ({
             />
           </div>
           <div style={{ margin: "0.75rem 0" }}>
-            <p>Time</p>
+            <p>Class Timings</p>  
             <div
               style={{
                 display: "flex",
@@ -206,26 +209,131 @@ const BatchDetails = ({
                 flexDirection: "column",
               }}
             >
-              <input
-                type="time"
+              <p className="valueSelectorHead">Start Time</p>
+              <select
                 style={{ width: "100%" }}
-                name="time"
+                name="stime"
                 value={stime}
+                className="valueSelector"
                 onChange={(e) => {
                   setstime(e.target.value);
                   console.log(e.target.value);
+                  setetime((e.target.value.slice(3, 5) == "30")
+                  ? moment({ hour: Number(e.target.value.slice(0, 2)), minute: Number(e.target.value.slice(3,5)) }).add(60, "m").format("hh:mmA")
+                  : moment({ hour: Number(e.target.value.slice(0, 2)) })
+                      .add(1, "hours")
+                      .format("hh:mmA"))
                 }}
-              />
-              <input
-                type="time"
+              >
+                <option value={"09:00AM"}>09:00AM</option>
+                <option value={"09:30AM"}>09:30AM</option>
+                <option value={"10:00AM"}>10:00AM</option>
+                <option value={"10:30AM"}>10:30AM</option>
+                <option value={"11:00AM"}>11:00AM</option>
+                <option value={"11:30AM"}>11:30AM</option>
+                <option value={"12:00PM"}>12:00PM</option>
+                <option value={"12:30PM"}>12:30PM</option>
+                <option value={"01:00PM"}>01:00PM</option>
+                <option value={"01:30PM"}>01:30PM</option>
+                <option value={"02:00PM"}>02:00PM</option>
+                <option value={"02:30PM"}>02:30PM</option>
+                <option value={"03:00PM"}>03:00PM</option>
+                <option value={"03:30PM"}>03:30PM</option>
+                <option value={"04:00PM"}>04:00PM</option>
+                <option value={"04:30PM"}>04:30PM</option>
+                <option value={"05:00PM"}>05:00PM</option>
+                <option value={"05:30PM"}>05:30PM</option>
+                <option value={"06:00PM"}>06:00PM</option>
+                <option value={"06:30PM"}>06:30PM</option>
+                <option value={"07:00PM"}>07:00PM</option>
+                <option value={"07:30PM"}>07:30PM</option>
+                <option value={"08:00PM"}>08:00PM</option>
+                <option value={"08:30PM"}>08:30PM</option>
+                <option value={"09:00PM"}>09:00PM</option>
+                <option value={"09:30PM"}>09:30PM</option>
+                <option value={"10:00PM"}>10:00PM</option>
+                <option value={"10:30PM"}>10:30PM</option>
+                <option value={"11:00PM"}>11:00PM</option>
+                <option value={"11:30PM"}>11:30PM</option>
+                <option value={"12:00AM"}>12:00AM</option>
+                <option value={"12:30AM"}>12:30AM</option>
+                <option value={"01:00AM"}>01:00AM</option>
+                <option value={"01:30AM"}>01:30AM</option>
+                <option value={"02:00AM"}>02:00AM</option>
+                <option value={"02:30AM"}>02:30AM</option>
+                <option value={"03:00AM"}>03:00AM</option>
+                <option value={"03:30AM"}>03:30AM</option>
+                <option value={"04:00AM"}>04:00AM</option>
+                <option value={"04:30AM"}>04:30AM</option>
+                <option value={"05:00AM"}>05:00AM</option>
+                <option value={"05:30AM"}>05:30AM</option>
+                <option value={"06:00AM"}>06:00AM</option>
+                <option value={"06:30AM"}>06:30AM</option>
+                <option value={"07:00AM"}>07:00AM</option>
+                <option value={"07:30AM"}>07:30AM</option>
+                <option value={"08:00AM"}>08:00AM</option>
+                <option value={"08:30AM"}>08:30AM</option>
+              </select>
+              <p className="valueSelectorHead">End Time</p>
+              <select
                 style={{ width: "100%" }}
-                name="time"
+                name="etime"
                 value={etime}
+                className="valueSelector"
                 onChange={(e) => {
                   setetime(e.target.value);
                   console.log(e.target.value);
                 }}
-              />
+              >
+                <option value={"09:00AM"}>09:00AM</option>
+                <option value={"09:30AM"}>09:30AM</option>
+                <option value={"10:00AM"}>10:00AM</option>
+                <option value={"10:30AM"}>10:30AM</option>
+                <option value={"11:00AM"}>11:00AM</option>
+                <option value={"11:30AM"}>11:30AM</option>
+                <option value={"12:00PM"}>12:00PM</option>
+                <option value={"12:30PM"}>12:30PM</option>
+                <option value={"01:00PM"}>01:00PM</option>
+                <option value={"01:30PM"}>01:30PM</option>
+                <option value={"02:00PM"}>02:00PM</option>
+                <option value={"02:30PM"}>02:30PM</option>
+                <option value={"03:00PM"}>03:00PM</option>
+                <option value={"03:30PM"}>03:30PM</option>
+                <option value={"04:00PM"}>04:00PM</option>
+                <option value={"04:30PM"}>04:30PM</option>
+                <option value={"05:00PM"}>05:00PM</option>
+                <option value={"05:30PM"}>05:30PM</option>
+                <option value={"06:00PM"}>06:00PM</option>
+                <option value={"06:30PM"}>06:30PM</option>
+                <option value={"07:00PM"}>07:00PM</option>
+                <option value={"07:30PM"}>07:30PM</option>
+                <option value={"08:00PM"}>08:00PM</option>
+                <option value={"08:30PM"}>08:30PM</option>
+                <option value={"09:00PM"}>09:00PM</option>
+                <option value={"09:30PM"}>09:30PM</option>
+                <option value={"10:00PM"}>10:00PM</option>
+                <option value={"10:30PM"}>10:30PM</option>
+                <option value={"11:00PM"}>11:00PM</option>
+                <option value={"11:30PM"}>11:30PM</option>
+                <option value={"12:00AM"}>12:00AM</option>
+                <option value={"12:30AM"}>12:30AM</option>
+                <option value={"01:00AM"}>01:00AM</option>
+                <option value={"01:30AM"}>01:30AM</option>
+                <option value={"02:00AM"}>02:00AM</option>
+                <option value={"02:30AM"}>02:30AM</option>
+                <option value={"03:00AM"}>03:00AM</option>
+                <option value={"03:30AM"}>03:30AM</option>
+                <option value={"04:00AM"}>04:00AM</option>
+                <option value={"04:30AM"}>04:30AM</option>
+                <option value={"05:00AM"}>05:00AM</option>
+                <option value={"05:30AM"}>05:30AM</option>
+                <option value={"06:00AM"}>06:00AM</option>
+                <option value={"06:30AM"}>06:30AM</option>
+                <option value={"07:00AM"}>07:00AM</option>
+                <option value={"07:30AM"}>07:30AM</option>
+                <option value={"08:00AM"}>08:00AM</option>
+                <option value={"08:30AM"}>08:30AM</option>
+              </select>
             </div>
           </div>
         </div>
@@ -246,6 +354,16 @@ const BatchDetails = ({
               name="address"
               value={address}
               onChange={(e) => setaddress(e.target.value)}
+            />
+          </div>
+          <div style={{ margin: "0.75rem 0" }}>
+            <p>Price</p>
+            <input
+              type="number"
+              name="price"
+              value={price}
+              className="price"
+              onChange={(e) => setprice(e.target.value)}
             />
           </div>
         </div>

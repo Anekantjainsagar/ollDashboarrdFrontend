@@ -34,8 +34,8 @@
 
 .userPanelHeadings{
     display: grid;
-    grid-template-rows: repeat(1,1fr);
-    grid-template-columns: repeat(10,2fr);
+    /* grid-template-columns: repeat(10,2fr); */
+    grid-template-columns:  5% 8% 12% 9% 10% 10% 13% 13% 10% 12%;
     width: 100%;
     padding: 0 1.6rem;
 }
@@ -53,7 +53,7 @@
     background-color: rgb(48, 48, 48);
     display: grid;
     grid-template-rows: repeat(1,1fr);
-    grid-template-columns: repeat(10,2fr);
+    grid-template-columns: 5% 8% 12% 9% 10% 10% 13% 13% 10% 12%;
     padding: 1rem 1.5rem;
     border-radius: 1rem;
     margin: 1.5rem 0;
@@ -78,6 +78,7 @@
 
 .inquiryDateValue{
     margin-right: 1rem;
+    line-height: 2.25rem;
 }
 
 .inquiryDate{
@@ -100,28 +101,20 @@
     margin-right: 1rem;
 }
 
-.stage{
-    margin-left: 2rem;
-}
-
-.stageValue{
-    margin-left: 2rem;
-}
-
-
 .source{
-    margin-left:5rem;
+    margin-left:2rem;
 }
 
 .sourceValue{
-    margin-left:5rem;
+    margin-left:2rem;
 }
 
 .user .actionsValue{
-    width: 130%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: 1rem;
 }
 
 .user .actionsValue .btn{
@@ -137,11 +130,11 @@
 }
 
 .user select{
-    width: 90%;
+    width: 68%;
     outline: none;
     align-self: center;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     font-size: 1.6rem;
     font-weight: 700;
     border-radius: 1rem;
@@ -208,4 +201,48 @@
     text-decoration-color: #dadada;
     text-decoration-thickness: 0.5px;
     cursor: pointer;
+}
+
+.valueSelectorHead{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.valueSelector{
+    outline: none;
+    align-self: center;
+    border: none;
+    padding: 0.5rem 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 1rem;
+    background-color: #696969;
+    color: white;
+    text-transform: uppercase;
+}
+
+.valueSelector option{
+    outline: none;
+    font-weight: 500;
+    border: none;
+    text-transform: uppercase;
+    background-color: #555555;
+    color: white;
+    font-size: 1.6rem;
+    border-radius: 2rem;
+    margin: 0.2rem 0;
+}
+
+.valueSelector::-webkit-scrollbar {
+    width: 5px;
+}
+
+.valueSelector::-webkit-scrollbar-track {
+    background: rgba(129, 129, 129, 1);
+}
+
+.valueSelector::-webkit-scrollbar-thumb {
+    background: rgba(217, 217, 217, 1);
+    border-radius: 2rem;
 }

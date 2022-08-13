@@ -6,6 +6,7 @@ import { FaGripLines } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
 import FloatingUserData from "./FloatingUserData";
 import { BASE_URL } from "../../Utils/index";
+import ShowModal from "./ShowModal";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -27,53 +28,74 @@ const User = (props) => {
   const {
     name,
     phone,
-    email,
-    age,
-    school,
     course,
     batchDetails,
     source,
     _id,
     id,
-    commentValues,
     status,
     stage,
     inqDate,
+    cCode
   } = props.data;
 
   const stageRef = useRef(null);
   const statusRef = useRef(null);
   const templateRef = useRef(null);
   const commentRef = useRef(null);
-
-  const [iconType, setIconType] = useState(0);
   const [details, setDetails] = useState(false);
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
   const [comment, setcomment] = useState();
-
+  const [stageValue, setstage] = useState("🥶 cold");
   useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
   useOutsideAlerter(commentRef, showComments, setshowComments);
+  const [statusValue, setstatusValue] = useState();
+  const [searchTemplate, setsearchTemplate] = useState();
+  const [clickedTemplate, setclickedTemplate] = useState()
+  const [templateUser, settemplateUser] = useState()
 
   const showTempltext = () => {
     if (details === false) {
       setDetails(true);
     }
   };
+  const d = new Date(inqDate).toString();
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal(e,data) {
+    setIsOpen(true);
+    setclickedTemplate(e)
+    settemplateUser(data)
+  }
 
   return (
     <>
+      <ShowModal
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        setIsOpen={setIsOpen}
+        clickedTemplate={clickedTemplate}
+        templateUser={templateUser}
+      />
       <div
         className="user"
         onClick={showTempltext}
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{id}</p>
-        <p className="inquiryDateValue">{inqDate.slice(4, 15)}</p>
+        <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
-        <p className="phoneValue">{phone}</p>
+        <p className="phoneValue">{((cCode===undefined)?"":cCode)+phone}</p>
         <p className="classTypeValue">
-          {batchDetails ? batchDetails.type + " " + batchDetails.mode : null}
+          {batchDetails
+            ? batchDetails.type.slice(0, 3) +
+              "." +
+              " " +
+              batchDetails.mode.slice(0, 3) +
+              "."
+            : null}
         </p>
         <p className="offerDetailsValue">{course}</p>
         <FloatingUserData
@@ -81,6 +103,7 @@ const User = (props) => {
           details={details}
           setDetails={setDetails}
           getUserData={props.getUserData}
+          templateMsg={props.templateMsg}
         />
         <p className="statusValue" style={{ display: "flex" }}>
           <div
@@ -92,57 +115,66 @@ const User = (props) => {
               flexDirection: "column",
             }}
           >
-            {iconType === 0 ? (
+            {status === "new" ? (
               <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-            ) : iconType === 1 ? (
+            ) : status === "follow" ? (
               <BiUpArrowAlt
                 size={30}
                 color={"rgba(255, 161, 74, 1)"}
                 style={{ transform: "rotate(-45deg)" }}
               />
-            ) : iconType === 2 ? (
+            ) : status === "noCourse" ? (
               <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
             ) : (
               <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
             )}
             <p style={{ fontSize: "1.1rem" }}>
-              {iconType === 0
+              {status === "new"
                 ? "URG"
-                : iconType === 1
+                : status === "follow"
                 ? "High"
-                : iconType === 2
+                : status === "noCourse"
                 ? "Med."
                 : "Low"}
             </p>
           </div>
           <select
-            name=""
             onClick={(e) => e.stopPropagation()}
-            id=""
             ref={statusRef}
-            className="new"
-            onChange={() => {
-              statusRef.current.className =
-                statusRef.current.options[
-                  statusRef.current.options.selectedIndex
-                ].className;
-              setIconType(statusRef.current.options.selectedIndex);
+            className={status ? status : statusValue}
+            value={status ? status : statusValue}
+            onChange={async (e) => {
+              setstatusValue(e.target.value);
+              await axios
+                .put(`${BASE_URL}/setStatus`, {
+                  id: id,
+                  newStatus: e.target.value,
+                })
+                .then((response) => {
+                  console.log(response);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+              setTimeout(() => {
+                props.getUserData();
+              }, 100);
             }}
           >
             <option className="new" value="new">
               New
             </option>
             <option className="follow" value="follow">
-              Follow Up
+              Fol. Up
             </option>
             <option className="noCourse" value="noCourse">
-              ! No Course
+              !Course
             </option>
             <option className="started" value="started">
               Started
             </option>
             <option className="noBatch" value="noBatch">
-              ! No Batch
+              !Batch
             </option>
           </select>
         </p>
@@ -154,7 +186,7 @@ const User = (props) => {
               e.stopPropagation();
             }}
           >
-            <BsWhatsapp size={25} color={"#0ac032"} />
+            <BsWhatsapp size={21} color={"#0ac032"} />
             Template
           </div>
           <div
@@ -167,15 +199,36 @@ const User = (props) => {
           >
             <p className="heading">Select a Template</p>
             <div className="content">
-              <p>Call Shreyaan dag...</p>
-              <div className="line"></div>
-              <p>Call Shreyaan dag...</p>
-              <div className="line"></div>
-              <p>Call Shreyaan dag...</p>
-              <div className="line"></div>
-              <p>Call Shreyaan dag...</p>
-              <div className="line"></div>
-              <p>Call Shreyaan dag...</p>
+              {props.templateMsg
+                ? props.templateMsg
+                    .filter((e) => {
+                      if (searchTemplate) {
+                        if (
+                          e.elementName.toLowerCase().includes(searchTemplate)
+                        ) {
+                          return e;
+                        }
+                      } else {
+                        return e;
+                      }
+                      return 0;
+                    })
+                    .map((template) => {
+                      return (
+                        <div>
+                          <p
+                            onClick={async () => {
+                              setshowTemplate(!showTemplate)
+                              openModal(template,props.data);
+                            }}
+                          >
+                            {template.elementName}
+                          </p>
+                          <div className="line"></div>
+                        </div>
+                      );
+                    })
+                : null}
             </div>
             <div
               style={{
@@ -184,8 +237,12 @@ const User = (props) => {
                 alignItems: "center",
               }}
             >
-              <input type="text" placeholder="Comment.." />
-              <AiOutlineRight size={19} className="icon" />
+              <input
+                type="text"
+                value={searchTemplate}
+                onChange={(e) => setsearchTemplate(e.target.value)}
+                placeholder="Search templates..."
+              />
             </div>
           </div>
           <div
@@ -227,8 +284,10 @@ const User = (props) => {
                     id: _id,
                     comment: comment,
                   });
+                  setTimeout(() => {
+                    props.getUserData();
+                  }, 1000);
                   setcomment("");
-                  props.getUserData();
                 }}
               />
             </div>
@@ -237,30 +296,40 @@ const User = (props) => {
         <p className="sourceValue">{source}</p>
         <p className="stageValue" onClick={(e) => e.stopPropagation()}>
           <select
-            style={{ width: "80%" }}
-            name=""
+            style={{ width: "75%" }}
             ref={stageRef}
-            id=""
-            onChange={(e) => {
-              stageRef.current.className =
-                stageRef.current.options[
-                  stageRef.current.options.selectedIndex
-                ].className;
+            value={stage ? stage : stageValue}
+            className={stage ? stage : stageValue}
+            onChange={async (e) => {
               e.stopPropagation();
+              setstage(e.target.value);
+              await axios
+                .put(`${BASE_URL}/setStage`, {
+                  id: id,
+                  newStage: e.target.value,
+                })
+                .then((response) => {
+                  console.log(response);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+              setTimeout(() => {
+                props.getUserData();
+              }, 100);
             }}
-            className="hot"
           >
-            <option className="hot" value="hot">
-              Hot
+            <option className="hot" value="🔥 hot">
+              🔥 Hot
             </option>
-            <option className="warm" value="warm">
-              Warm
+            <option className="warm" value="🥵 warm">
+              🥵 Warm
             </option>
-            <option className="cold" value="cold">
-              Cold
+            <option className="cold" value="🥶 cold">
+              🥶 Cold
             </option>
-            <option className="won" value="won">
-              Won
+            <option className="won" value="🥳 won">
+              🥳 Won
             </option>
           </select>
         </p>
