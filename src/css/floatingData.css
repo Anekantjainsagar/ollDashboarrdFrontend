@@ -197,7 +197,7 @@
     align-items: center;
     justify-content: space-between;
     display: grid;
-    grid-template-columns: 13% 60% 22%;
+    grid-template-columns: 13% 58% 22%;
     padding: 0.5rem;
     border: 1px solid white;
     margin-top: 0.8rem;
@@ -212,7 +212,10 @@
 .commentsDisplay h6{
     font-size: 1.6rem;
     font-weight: 500;
-    white-space: pre;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 

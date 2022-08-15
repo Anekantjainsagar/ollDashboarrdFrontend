@@ -18,16 +18,21 @@ const Form = ({ usersData, getUserData }) => {
   const [school, setschool] = useState();
   const [course, setcourse] = useState();
   const [source, setsource] = useState();
-  const [mode, setmode] = useState();
-  const [type, settype] = useState();
+  const [mode, setmode] = useState("Online");
+  const [type, settype] = useState("group");
+  const [days, setdays] = useState("MWF");
   const [address, setaddress] = useState();
-  const [days, setdays] = useState();
   const [startDate, setstartDate] = useState();
   const [sessionsCount, setsessionsCount] = useState();
   const [stime, setstime] = useState("09:00AM");
   const [etime, setetime] = useState(
-    (stime.slice(3, 5) == "30")
-      ? moment({ hour: Number(stime.slice(0, 2)), minute: Number(stime.slice(3,5)) }).add(60, "m").format("hh:mmA")
+    stime.slice(3, 5) == "30"
+      ? moment({
+          hour: Number(stime.slice(0, 2)),
+          minute: Number(stime.slice(3, 5)),
+        })
+          .add(60, "m")
+          .format("hh:mmA")
       : moment({ hour: Number(stime.slice(0, 2)) })
           .add(1, "hours")
           .format("hh:mmA")
@@ -57,7 +62,7 @@ const Form = ({ usersData, getUserData }) => {
       stage: "🔥 hot",
       status: "new",
     });
-
+    console.log(res);
     if (res.status == 500) {
       alert("Internal server error");
     }
@@ -130,7 +135,7 @@ const Form = ({ usersData, getUserData }) => {
                 name="email"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
-                placeholder="Email"
+                placeholder="Email *"
                 className="input"
               />
               <input
@@ -138,7 +143,7 @@ const Form = ({ usersData, getUserData }) => {
                 value={age}
                 name="age"
                 onChange={(e) => setage(e.target.value)}
-                placeholder="Age"
+                placeholder="Age *"
                 className="input"
                 min={1}
                 max={100}

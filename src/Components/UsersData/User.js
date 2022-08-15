@@ -36,7 +36,7 @@ const User = (props) => {
     status,
     stage,
     inqDate,
-    cCode
+    cCode,
   } = props.data;
 
   const stageRef = useRef(null);
@@ -52,8 +52,8 @@ const User = (props) => {
   useOutsideAlerter(commentRef, showComments, setshowComments);
   const [statusValue, setstatusValue] = useState();
   const [searchTemplate, setsearchTemplate] = useState();
-  const [clickedTemplate, setclickedTemplate] = useState()
-  const [templateUser, settemplateUser] = useState()
+  const [clickedTemplate, setclickedTemplate] = useState();
+  const [templateUser, settemplateUser] = useState();
 
   const showTempltext = () => {
     if (details === false) {
@@ -64,11 +64,26 @@ const User = (props) => {
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  function openModal(e,data) {
+  function openModal(e, data) {
     setIsOpen(true);
-    setclickedTemplate(e)
-    settemplateUser(data)
+    setclickedTemplate(e);
+    settemplateUser(data);
   }
+
+  const handleKeyPress = (e) => {
+    if (comment.length > 0) {
+      if (e.key === "Enter") {
+        axios.put(`${BASE_URL}/comment`, {
+          id: _id,
+          comment: comment,
+        });
+        setcomment("");
+        setTimeout(() => {
+          props.getUserData();
+        }, 500);
+      }
+    }
+  };
 
   return (
     <>
@@ -87,13 +102,15 @@ const User = (props) => {
         <p className="idValue">{id}</p>
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
-        <p className="phoneValue">{((cCode===undefined)?"":cCode)+phone}</p>
+        <p className="phoneValue">
+          {(cCode === undefined ? "" : cCode) + phone}
+        </p>
         <p className="classTypeValue">
           {batchDetails
-            ? batchDetails.type.slice(0, 3) +
+            ? batchDetails?.type.slice(0, 3) +
               "." +
               " " +
-              batchDetails.mode.slice(0, 3) +
+              batchDetails?.mode.slice(0, 3) +
               "."
             : null}
         </p>
@@ -218,8 +235,8 @@ const User = (props) => {
                         <div>
                           <p
                             onClick={async () => {
-                              setshowTemplate(!showTemplate)
-                              openModal(template,props.data);
+                              setshowTemplate(!showTemplate);
+                              openModal(template, props.data);
                             }}
                           >
                             {template.elementName}
@@ -275,6 +292,7 @@ const User = (props) => {
                 value={comment}
                 onChange={(e) => setcomment(e.target.value)}
                 placeholder="Comment.."
+                onKeyPress={handleKeyPress}
               />
               <AiOutlineRight
                 size={19}

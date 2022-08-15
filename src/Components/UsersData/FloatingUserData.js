@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import countryData from "./countryData";
+import ShowModal from "./ShowModal";
 import {
   AiOutlineClose,
   AiOutlineMail,
@@ -72,17 +73,19 @@ const FloatingUserData = ({
   const [price, setprice] = useState();
   const [sourcePlatform, setsourcePlatform] = useState();
   const [sourceTime, setsourceTime] = useState();
-  const [mode, setmode] = useState(batchDetails ? batchDetails.mode : null);
-  const [type, settype] = useState(batchDetails.type);
-  const [days, setdays] = useState(batchDetails.days);
-  const [stime, setstime] = useState(batchDetails.time.split(" ")[0]);
-  const [etime, setetime] = useState(batchDetails.time.split(" ")[1]);
+  const [mode, setmode] = useState(batchDetails ? batchDetails?.mode : null);
+  const [type, settype] = useState(batchDetails?.type);
+  const [days, setdays] = useState(batchDetails?.days);
+  const [stime, setstime] = useState(batchDetails?.time.split(" ")[0]);
+  const [etime, setetime] = useState(batchDetails?.time.split(" ")[1]);
   const [displayComment, setdisplayComment] = useState(true);
   const [comments, setcomments] = useState();
   const [stages, setstages] = useState();
   const [statuses, setstatuses] = useState();
   const [searchTemplate, setsearchTemplate] = useState();
   const [showTemplate, setshowTemplate] = useState(false);
+  const [clickedTemplate, setclickedTemplate] = useState();
+  const [templateUser, settemplateUser] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
 
@@ -98,18 +101,19 @@ const FloatingUserData = ({
       school: schoolName === undefined ? school : schoolName,
       course: courseName === undefined ? course : courseName,
       source: sourcePlatform === undefined ? source : sourcePlatform,
-      mode: mode === undefined ? batchDetails.mode : mode,
-      type: type === undefined ? batchDetails.type : type,
-      address: address === undefined ? batchDetails.address : address,
-      days: days === undefined ? batchDetails.days : days,
+      mode: mode === undefined ? batchDetails?.mode : mode,
+      type: type === undefined ? batchDetails?.type : type,
+      address: address === undefined ? batchDetails?.address : address,
+      days: days === undefined ? batchDetails?.days : days,
       status: statuses === undefined ? status : statuses,
       stage: stages === undefined ? stage : stages,
-      startDate: sourceTime === undefined ? batchDetails.startDate : sourceTime,
+      startDate:
+        sourceTime === undefined ? batchDetails?.startDate : sourceTime,
       time: stime + " " + etime,
       sessionsCount:
-        NoSessions === undefined ? batchDetails.sessionsCount : NoSessions,
-      price: price === undefined ? batchDetails.price : price,
-      cCode
+        NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
+      price: price === undefined ? batchDetails?.price : price,
+      cCode,
     };
 
     axios.put(`${BASE_URL}/updateUser`, obj).then((res) => {
@@ -136,8 +140,38 @@ const FloatingUserData = ({
 
   const d = new Date(inqDate).toString();
 
+  const handleKeyPress = (e) => {
+    if (comments.length > 0) {
+      if (e.key === "Enter") {
+        axios.put(`${BASE_URL}/comment`, {
+          id: _id,
+          comment: comments,
+        });
+        setcomments("");
+        setTimeout(() => {
+          getUserData();
+        }, 500);
+      }
+    }
+  };
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal(e, data) {
+    setIsOpen(true);
+    setclickedTemplate(e);
+    settemplateUser(data);
+  }
+
   return (
     <>
+      <ShowModal
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        setIsOpen={setIsOpen}
+        clickedTemplate={clickedTemplate}
+        templateUser={templateUser}
+      />
       <div style={{ position: "absolute" }}>
         <ToastContainer
           position="top-right"
@@ -170,25 +204,26 @@ const FloatingUserData = ({
                 flexDirection: "column",
               }}
             >
-              {((statuses===undefined) ? status : statuses) === "new" ? (
+              {(statuses === undefined ? status : statuses) === "new" ? (
                 <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-              ) : ((statuses===undefined) ? status : statuses) === "follow" ? (
+              ) : (statuses === undefined ? status : statuses) === "follow" ? (
                 <BiUpArrowAlt
                   size={30}
                   color={"rgba(255, 161, 74, 1)"}
                   style={{ transform: "rotate(-45deg)" }}
                 />
-              ) : ((statuses===undefined) ? status : statuses) === "noCourse" ? (
+              ) : (statuses === undefined ? status : statuses) ===
+                "noCourse" ? (
                 <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
               ) : (
                 <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
               )}
               <p style={{ fontSize: "1.1rem" }}>
-                {((statuses===undefined) ? status : statuses) === "new"
+                {(statuses === undefined ? status : statuses) === "new"
                   ? "URG"
-                  : ((statuses===undefined) ? status : statuses) === "follow"
+                  : (statuses === undefined ? status : statuses) === "follow"
                   ? "High"
-                  : ((statuses===undefined) ? status : statuses) === "noCourse"
+                  : (statuses === undefined ? status : statuses) === "noCourse"
                   ? "Med."
                   : "Low"}
               </p>
@@ -197,8 +232,8 @@ const FloatingUserData = ({
               name=""
               id=""
               ref={statusRef}
-              className={((statuses===undefined) ? status : statuses)}
-              value={(statuses===undefined) ? status : statuses}
+              className={statuses === undefined ? status : statuses}
+              value={statuses === undefined ? status : statuses}
               onChange={(e) => {
                 setstatuses(e.target.value);
               }}
@@ -300,11 +335,13 @@ const FloatingUserData = ({
               type="text"
               style={{ width: "35%" }}
               value={number === undefined ? phone : number}
+              placeholder="Phone"
               onChange={(e) => setNumber(e.target.value)}
             />
             <input
               type="text"
               style={{ width: "44%" }}
+              placeholder="Email"
               value={emailName === undefined ? email : emailName}
               onChange={(e) => setemailName(e.target.value)}
             />
@@ -313,6 +350,7 @@ const FloatingUserData = ({
             <input
               type="number"
               style={{ width: "17%" }}
+              placeholder="Age"
               value={userAge === undefined ? age : userAge}
               max={20}
               min={1}
@@ -321,13 +359,15 @@ const FloatingUserData = ({
             <input
               type="text"
               style={{ width: "36%" }}
+              placeholder="School"
               value={schoolName === undefined ? school : schoolName}
               onChange={(e) => setschoolName(e.target.value)}
             />
             <input
               type="text"
               style={{ width: "43%" }}
-              value={address === undefined ? batchDetails.address : address}
+              placeholder="Address"
+              value={address === undefined ? batchDetails?.address : address}
               onChange={(e) => setaddress(e.target.value)}
             />
           </div>
@@ -341,13 +381,22 @@ const FloatingUserData = ({
             <AiOutlineMail
               size={30}
               color={"white"}
-              onClick={() => window.open("https://mail.google.com/mail/u/0")}
+              onClick={async () => {
+                await navigator.clipboard.writeText(email);
+                const notify = () => {
+                  toast("Email copied successfully", { type: "success" });
+                };
+                notify();
+                window.open("https://mail.google.com/mail/u/0");
+              }}
               className="iconStyle"
             />
             <AiOutlineCopy
               size={30}
-              onClick={() => {
-                navigator.clipboard.writeText(name + " " + phone + " " + email);
+              onClick={async () => {
+                await navigator.clipboard.writeText(
+                  name + " " + phone + " " + email
+                );
                 const notify = () => {
                   toast("Copied successfully", { type: "success" });
                 };
@@ -390,17 +439,19 @@ const FloatingUserData = ({
                         return 0;
                       })
                       .map((template) => {
-                        return template.elementName.length > 0 ? (
+                        return (
                           <div>
-                            <p style={{ fontWeight: 500 }}>
-                              {template.elementName}.
+                            <p
+                              onClick={async () => {
+                                setshowTemplate(!showTemplate);
+                                openModal(template, data);
+                              }}
+                              style={{ fontWeight: 500 }}
+                            >
+                              {template.elementName}
                             </p>
                             <div className="line"></div>
                           </div>
-                        ) : (
-                          <p style={{ color: "white", fontSize: "2rem" }}>
-                            No template found
-                          </p>
                         );
                       })
                   : null}
@@ -442,6 +493,7 @@ const FloatingUserData = ({
             <input
               type="text"
               style={{ width: "78%" }}
+              placeholder="Course name"
               value={courseName === undefined ? course : courseName}
               onChange={(e) => {
                 setCourseName(e.target.value);
@@ -653,9 +705,10 @@ const FloatingUserData = ({
               <input
                 type="text"
                 style={{ width: "50%", marginRight: "1rem" }}
+                placeholder="Sessions"
                 value={
                   NoSessions === undefined
-                    ? batchDetails.sessionsCount
+                    ? batchDetails?.sessionsCount
                     : NoSessions
                 }
                 onChange={(e) => {
@@ -666,8 +719,9 @@ const FloatingUserData = ({
                 <p>Rs. </p>
                 <input
                   type="text"
+                  placeholder="Price"
                   style={{ width: "45%", textAlign: "center" }}
-                  value={price === undefined ? batchDetails.price : price}
+                  value={price === undefined ? batchDetails?.price : price}
                   onChange={(e) => {
                     setprice(e.target.value);
                   }}
@@ -781,6 +835,7 @@ const FloatingUserData = ({
               <input
                 type="text"
                 style={{ width: "50%", marginRight: "1rem" }}
+                placeholder="Source"
                 value={sourcePlatform === undefined ? source : sourcePlatform}
                 onChange={(e) => {
                   setsourcePlatform(e.target.value);
@@ -789,10 +844,11 @@ const FloatingUserData = ({
               <input
                 type="text"
                 style={{ width: "50%", textAlign: "center" }}
+                placeholder="Start date"
                 value={
                   sourceTime === undefined
-                    ? batchDetails.startDate.slice(0, 10)
-                    : sourceTime.slice(0, 10)
+                    ? new Date(batchDetails?.startDate).toString().slice(4, 24)
+                    : new Date(sourceTime).toString().slice(4, 24)
                 }
                 onChange={(e) => {
                   setsourceTime(e.target.value);
@@ -809,6 +865,7 @@ const FloatingUserData = ({
             value={comments}
             onChange={(e) => setcomments(e.target.value)}
             placeholder="Add Comment"
+            onKeyPress={handleKeyPress}
           />
           <AiOutlineRight
             size={19}
