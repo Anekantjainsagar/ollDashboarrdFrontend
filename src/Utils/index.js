@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://ollbackend.herokuapp.com'
+export const BASE_URL = 'http://43.205.174.245/api'
