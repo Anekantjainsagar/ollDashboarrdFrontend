@@ -27,7 +27,6 @@ const ShowModal = ({
       backgroundColor: "#000",
     },
   };
-  console.log(clickedTemplate);
 
   function closeModal() {
     setIsOpen(false);
@@ -38,7 +37,6 @@ const ShowModal = ({
   const handleInputChange = (e) => {
     setstate({ ...state, [e.target.name]: e.target.value });
   };
-  console.log(state);
 
   return clickedTemplate ? (
     <Modal

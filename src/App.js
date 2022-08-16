@@ -6,8 +6,9 @@ import "./css/floatingData.css";
 
 import Nav from "./Components/Nav";
 import Topbar from "./Components/Topbar/Topbar";
+import axios from "axios";
+import { BASE_URL } from "./Utils";
 import UsersData from "./Components/UsersData/UsersData";
-import { getUserData } from "./Services/userService";
 
 function App() {
   const [data, setdata] = useState();
@@ -18,14 +19,11 @@ function App() {
   //Use tab for camelCase in states
   const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
 
-  getUserData((err, res) => {
-    if (err) {
-      return console.log(err);
-    }
-    if (res !== null) {
+  const getUserData = () => {
+    axios.get(`${BASE_URL}/getUser`).then((res) => {
       setdata(res.data.reverse());
-    }
-  });
+    });
+  };
 
   useEffect(() => {
     getUserData();
