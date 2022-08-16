@@ -42,13 +42,13 @@ const BatchDetails = ({
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
-  
+
   return (
     <div
       ref={ref}
       className="detailsBtnContainer"
       style={details === true ? { display: "block" } : { display: "none" }}
-      >
+    >
       <div className="header">
         <p>Batch Detail</p>
         <AiOutlineClose
@@ -201,7 +201,7 @@ const BatchDetails = ({
             />
           </div>
           <div style={{ margin: "0.75rem 0" }}>
-            <p>Class Timings</p>  
+            <p>Class Timings</p>
             <div
               style={{
                 display: "flex",
@@ -218,11 +218,18 @@ const BatchDetails = ({
                 onChange={(e) => {
                   setstime(e.target.value);
                   console.log(e.target.value);
-                  setetime((e.target.value.slice(3, 5) == "30")
-                  ? moment({ hour: Number(e.target.value.slice(0, 2)), minute: Number(e.target.value.slice(3,5)) }).add(60, "m").format("hh:mmA")
-                  : moment({ hour: Number(e.target.value.slice(0, 2)) })
-                      .add(1, "hours")
-                      .format("hh:mmA"))
+                  setetime(
+                    e.target.value.slice(3, 5) == "30"
+                      ? moment({
+                          hour: Number(e.target.value.slice(0, 2)),
+                          minute: Number(e.target.value.slice(3, 5)),
+                        })
+                          .add(60, "m")
+                          .format("hh:mmA")
+                      : moment({ hour: Number(e.target.value.slice(0, 2)) })
+                          .add(1, "hours")
+                          .format("hh:mmA")
+                  );
                 }}
               >
                 <option value={"09:00AM"}>09:00AM</option>

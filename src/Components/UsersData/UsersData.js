@@ -3,7 +3,17 @@ import User from "./User";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
 
-const UsersData = ({ usersData, getUserData }) => {
+const UsersData = ({
+  usersData,
+  getUserData,
+  filterBySearch,
+  filterByClass,
+  setfilterByClass,
+  filterByStatus,
+  setfilterByStatus,
+  filterByStage,
+  setfilterByStage,
+}) => {
   const [templateMsg, settemplateMsg] = useState();
 
   useEffect(() => {
@@ -29,18 +39,49 @@ const UsersData = ({ usersData, getUserData }) => {
   return (
     <>
       <div className="usersData">
-        <UserHeading />
+        <UserHeading
+          filterByClass={filterByClass}
+          setfilterByClass={setfilterByClass}
+          filterByStatus={filterByStatus}
+          setfilterByStatus={setfilterByStatus}
+          filterByStage={filterByStage}
+          setfilterByStage={setfilterByStage}
+        />
         {usersData ? (
-          usersData.map((e, index) => {
-            return (
-              <User
-                getUserData={getUserData}
-                data={e}
-                key={index}
-                templateMsg={templateMsg}
-              />
-            );
-          })
+          usersData
+            .filter((e) => {
+              if (filterBySearch !== undefined && filterBySearch !== "") {
+                if (isNaN(filterBySearch) === true) {
+                  return e?.name.toLowerCase().includes(filterBySearch);
+                } else {
+                  filterBySearch = filterBySearch.toString();
+
+                  if (
+                    filterBySearch.length <= usersData.length.toString().length
+                  ) {
+                    return e?.id.toString().includes(filterBySearch);
+                  } else if (filterBySearch > usersData.length) {
+                    return e?.phone.toString().includes(filterBySearch);
+                  }
+                }
+              } else {
+                return e;
+              }
+            })
+            .filter((e)=>{
+              console.log(filterByStage)
+              return e
+            })
+            .map((e, index) => {
+              return (
+                <User
+                  getUserData={getUserData}
+                  data={e}
+                  key={index}
+                  templateMsg={templateMsg}
+                />
+              );
+            })
         ) : (
           <div
             style={{

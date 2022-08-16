@@ -2,12 +2,11 @@ import { BASE_URL } from "../../Utils/index";
 import React, { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import BatchDetails from "./BatchDetails";
-import axios from "axios";
+import axios from 'axios';
 import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
-// import 'moment-timezone';
 
 const Form = ({ usersData, getUserData }) => {
   const [details, setDetails] = useState(false);

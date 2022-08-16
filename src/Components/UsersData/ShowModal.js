@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../css/Modal.css";
@@ -27,10 +27,18 @@ const ShowModal = ({
       backgroundColor: "#000",
     },
   };
+  console.log(clickedTemplate);
 
   function closeModal() {
     setIsOpen(false);
   }
+
+  const [state, setstate] = useState({});
+
+  const handleInputChange = (e) => {
+    setstate({ ...state, [e.target.name]: e.target.value });
+  };
+  console.log(state);
 
   return clickedTemplate ? (
     <Modal
@@ -54,11 +62,16 @@ const ShowModal = ({
         {clickedTemplate.customParams.length > 0
           ? clickedTemplate.customParams.map((e, index) => {
               return (
-                <div className="input">
+                <div className="input" key={index}>
                   <p className="heading">
                     {index + 1 + ".  " + e.paramName + " :"}
                   </p>
-                  <input type="text" className={e.paramName} />
+                  <input
+                    type="text"
+                    onChange={handleInputChange}
+                    name={e.paramName}
+                    className={e.paramName}
+                  />
                 </div>
               );
             })

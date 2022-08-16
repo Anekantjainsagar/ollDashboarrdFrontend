@@ -55,11 +55,6 @@ const User = (props) => {
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
 
-  const showTempltext = () => {
-    if (details === false) {
-      setDetails(true);
-    }
-  };
   const d = new Date(inqDate).toString();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -96,7 +91,7 @@ const User = (props) => {
       />
       <div
         className="user"
-        onClick={showTempltext}
+        onClick={()=>{setDetails(!details)}}
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{id}</p>
