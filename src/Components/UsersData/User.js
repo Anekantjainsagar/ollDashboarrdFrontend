@@ -91,23 +91,17 @@ const User = (props) => {
       />
       <div
         className="user"
-        onClick={()=>{setDetails(!details)}}
+        onClick={() => {
+          setDetails(!details);
+        }}
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{id}</p>
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
-        <p className="phoneValue">
-          {(cCode === undefined ? "" : cCode) + phone}
-        </p>
+        <p className="phoneValue">{(cCode ? cCode : "") + phone}</p>
         <p className="classTypeValue">
-          {batchDetails
-            ? batchDetails?.type.slice(0, 3) +
-              "." +
-              " " +
-              batchDetails?.mode.slice(0, 3) +
-              "."
-            : null}
+          {((batchDetails?.type==="group")?"Grp":"1-1")+" " +((batchDetails?.mode==="Online")?"Onl.":"Off.")}
         </p>
         <p className="offerDetailsValue">{course}</p>
         <FloatingUserData
@@ -164,13 +158,13 @@ const User = (props) => {
                 })
                 .then((response) => {
                   console.log(response);
+                  setTimeout(() => {
+                    props.getUserData();
+                  }, 100);
                 })
                 .catch((err) => {
                   console.log(err);
                 });
-              setTimeout(() => {
-                props.getUserData();
-              }, 100);
             }}
           >
             <option className="new" value="new">
@@ -184,6 +178,9 @@ const User = (props) => {
             </option>
             <option className="started" value="started">
               Started
+            </option>
+            <option className="noPay" value="noPay">
+              !Pay
             </option>
             <option className="noBatch" value="noBatch">
               !Batch
@@ -323,13 +320,13 @@ const User = (props) => {
                 })
                 .then((response) => {
                   console.log(response);
+                  setTimeout(() => {
+                    props.getUserData();
+                  }, 100);
                 })
                 .catch((err) => {
                   console.log(err);
                 });
-              setTimeout(() => {
-                props.getUserData();
-              }, 100);
             }}
           >
             <option className="hot" value="🔥 hot">

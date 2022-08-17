@@ -16,6 +16,8 @@ import { BiUpArrowAlt } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { ImPhone } from "react-icons/im";
+import "jspdf-autotable";
+import jsPDF from "jspdf";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -73,9 +75,9 @@ const FloatingUserData = ({
   const [price, setprice] = useState();
   const [sourcePlatform, setsourcePlatform] = useState();
   const [sourceTime, setsourceTime] = useState();
-  const [mode, setmode] = useState(batchDetails ? batchDetails?.mode : null);
-  const [type, settype] = useState(batchDetails?.type);
-  const [days, setdays] = useState(batchDetails?.days);
+  const [mode, setmode] = useState();
+  const [type, settype] = useState();
+  const [days, setdays] = useState();
   const [stime, setstime] = useState(batchDetails?.time.split(" ")[0]);
   const [etime, setetime] = useState(batchDetails?.time.split(" ")[1]);
   const [displayComment, setdisplayComment] = useState(true);
@@ -163,6 +165,99 @@ const FloatingUserData = ({
     settemplateUser(data);
   }
 
+  const print = () => {
+    const { name, phone, course, batchDetails, source, id, inqDate, cCode } =
+      data;
+    const pdf = new jsPDF("p", "pt", "a4");
+    const columns = [
+      "Id",
+      "Name",
+      "Phone",
+      "Email",
+      "Age",
+      "School",
+      "Course",
+      "Source",
+    ];
+    var rows = [];
+
+    var temp = [
+      id,
+      name,
+      (cCode ? cCode : "+91") + phone,
+      email,
+      age,
+      school,
+      course,
+      source,
+    ];
+    rows.push(temp);
+
+    pdf.text(225, 40, `Lead : ${name}`, {
+      halign: "center",
+      valign: "middle",
+    });
+    pdf
+      .setFontSize(10)
+      .text(
+        40,
+        60,
+        `Inquiry date : ${new Date(inqDate).toString().slice(0, 24)}`,
+        {
+          halign: "center",
+          valign: "middle",
+        }
+      );
+    pdf.setFontSize(10).text(40, 75, `Address : ${batchDetails.address}`, {
+      halign: "center",
+      valign: "middle",
+    });
+    pdf
+      .setFontSize(10)
+      .text(
+        40,
+        90,
+        `Sessions starting from ${new Date(batchDetails.startDate)
+          .toString()
+          .slice(0, 16)} (${batchDetails?.time.split(" ")[0]} - ${
+          batchDetails?.time.split(" ")[1]
+        }) at Rs. ${batchDetails.price}/hour`,
+        {
+          halign: "center",
+          valign: "middle",
+        }
+      );
+    pdf
+      .setFontSize(10)
+      .text(
+        40,
+        105,
+        `${batchDetails.mode} classes will be in ${batchDetails.type} mode`,
+        {
+          halign: "center",
+          valign: "middle",
+        }
+      );
+    pdf.autoTable(columns, rows, {
+      startY: 115,
+      theme: "grid",
+      styles: {
+        font: "times",
+        halign: "center",
+        cellPadding: 3.5,
+        lineWidth: 0.5,
+        lineColor: [0, 0, 0],
+        textColor: [0, 0, 0],
+      },
+      headStyles: {
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        fillColor: [166, 204, 247],
+      },
+    });
+    pdf.save(`${name}`);
+  };
+
   return (
     <>
       <ShowModal
@@ -249,6 +344,9 @@ const FloatingUserData = ({
               </option>
               <option className="started" value="started">
                 Started
+              </option>
+              <option className="noPay" value="noPay">
+                !Pay
               </option>
               <option className="noBatch" value="noBatch">
                 !Batch
@@ -519,55 +617,27 @@ const FloatingUserData = ({
                 value={days}
                 onChange={(e) => setdays(e.target.value)}
               >
-                <p>Days</p>
-                <div
+                <p style={{ fontSize: "1.7rem" }}>Days</p>
+                <select
+                  className="floatDataSelector"
                   style={{
-                    margin: "0.75rem 0",
-                    paddingLeft: "0.15rem",
-                    display: "flex",
+                    width: "100%",
+                    fontSize: "1.6rem",
+                    textTransform: "capitalize",
                   }}
+                  onChange={(e) => setdays(e.target.value)}
+                  value={days === undefined ? batchDetails?.days : days}
                 >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    name="days"
-                    value={"MWF"}
-                    checked={days === "MWF" ? true : false}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>MWF</p>
-                </div>
-                <div
-                  style={{
-                    margin: "0.75rem 0",
-                    paddingLeft: "0.15rem",
-                    display: "flex",
-                  }}
-                >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    name="days"
-                    checked={days === "TTF" ? true : false}
-                    value={"TTF"}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>TTF</p>
-                </div>
-                <div
-                  style={{
-                    margin: "0.75rem 0",
-                    paddingLeft: "0.15rem",
-                    display: "flex",
-                  }}
-                >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    checked={days === "SS" ? true : false}
-                    type={"radio"}
-                    name="days"
-                    value={"SS"}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>SS</p>
-                </div>
+                  <option style={{ fontSize: "1.6rem" }} value={"MWF"}>
+                    MWF
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"TTF"}>
+                    TTF
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"SS"}>
+                    SS
+                  </option>
+                </select>
               </div>
             </div>
             <div
@@ -739,7 +809,7 @@ const FloatingUserData = ({
             <p style={{ marginTop: "1rem" }}>Type :</p>
             <div
               className="selectModes"
-              style={{ width: "80%", padding: "0 3rem" }}
+              style={{ width: "85%", padding: "0 2rem" }}
             >
               <div
                 className="selectMode"
@@ -752,36 +822,24 @@ const FloatingUserData = ({
                 }}
                 onChange={(e) => setmode(e.target.value)}
               >
-                <p>Mode</p>
-                <div
+                <p style={{ fontSize: "1.7rem" }}>Mode</p>
+                <select
+                  className="floatDataSelector"
                   style={{
-                    paddingLeft: "0.15rem",
+                    width: "100%",
+                    fontSize: "1.6rem",
+                    textTransform: "capitalize",
                   }}
+                  onChange={(e) => setmode(e.target.value)}
+                  value={mode === undefined ? batchDetails?.mode : mode}
                 >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    name="mode"
-                    checked={mode === "Online" ? true : false}
-                    value={"Online"}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>Onl.</p>
-                </div>
-                <div
-                  style={{
-                    paddingLeft: "0.15rem",
-                    display: "flex",
-                  }}
-                >
-                  <input
-                    checked={mode === "Offline" ? true : false}
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    name="mode"
-                    value={"Offline"}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>Off.</p>
-                </div>
+                  <option style={{ fontSize: "1.6rem" }} value={"Online"}>
+                    Online
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"Offline"}>
+                    Offline
+                  </option>
+                </select>
               </div>
               <div
                 className="selectMode"
@@ -791,39 +849,25 @@ const FloatingUserData = ({
                   alignSelf: "flex-start",
                 }}
                 value={type}
-                onChange={(e) => settype(e.target.value)}
               >
-                <p>Type</p>
-                <div
+                <p style={{ fontSize: "1.7rem" }}>Type</p>
+                <select
+                  className="floatDataSelector"
                   style={{
-                    paddingLeft: "0.15rem",
-                    display: "flex",
+                    width: "100%",
+                    fontSize: "1.6rem",
+                    textTransform: "capitalize",
                   }}
+                  onChange={(e) => settype(e.target.value)}
+                  value={type === undefined ? batchDetails?.type : type}
                 >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    checked={type === "1 to 1" ? true : false}
-                    name="type"
-                    value={"1 to 1"}
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>1 on 1</p>
-                </div>
-                <div
-                  style={{
-                    paddingLeft: "0.15rem",
-                    display: "flex",
-                  }}
-                >
-                  <input
-                    style={{ color: "black", cursor: "pointer" }}
-                    type={"radio"}
-                    checked={type === "group" ? true : false}
-                    value="group"
-                    name="type"
-                  />
-                  <p style={{ marginLeft: "0.4rem" }}>Group</p>
-                </div>
+                  <option style={{ fontSize: "1.6rem" }} value={"1 to 1"}>
+                    1 to 1
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"group"}>
+                    Group
+                  </option>
+                </select>
               </div>
             </div>
           </div>
@@ -924,7 +968,33 @@ const FloatingUserData = ({
         <div className="inqReports">
           <div className="header">
             <p className="head">Inquiry Reports</p>
-            <button className="btn">SHARE</button>
+            <button
+              className="btn"
+              onClick={async () => {
+                print();
+                await navigator.clipboard.writeText(
+                  name +
+                    " " +
+                    phone +
+                    " " +
+                    email +
+                    " " +
+                    school +
+                    " " +
+                    course +
+                    " " +
+                    source +
+                    " " +
+                    d.slice(4, 21)
+                );
+                const notify = () => {
+                  toast("Copied successfully", { type: "success" });
+                };
+                notify();
+              }}
+            >
+              SHARE
+            </button>
           </div>
           <div className="content">
             <div className="container1">

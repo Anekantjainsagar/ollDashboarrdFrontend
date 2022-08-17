@@ -12,10 +12,9 @@ import UsersData from "./Components/UsersData/UsersData";
 
 function App() {
   const [data, setdata] = useState();
-  const [filterBySearch, setfilterBySearch] = useState();
-  const [filterByStage, setfilterByStage] = useState("");
-  const [filterByStatus, setfilterByStatus] = useState();
-  const [filterByClass, setfilterByClass] = useState();
+  var [filterBySearch, setfilterBySearch] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userPerPage, setuserPerPage] = useState(6);
   //Use tab for camelCase in states
   const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
 
@@ -29,13 +28,77 @@ function App() {
     getUserData();
   }, []);
 
+  const [filteredData, setfilteredData] = useState(data);
+  useEffect(() => {
+    var searchFilter = data
+      ?.filter((e) => {
+        if (filterBySearch !== undefined && filterBySearch !== "") {
+          if (isNaN(filterBySearch) === true) {
+            if (e.name.toLowerCase().includes(filterBySearch)) {
+              return e;
+            }
+          } else {
+            filterBySearch = filterBySearch.toString();
+
+            if (filterBySearch.length <= data.length.toString().length) {
+              return e?.id.toString().includes(filterBySearch);
+            } else if (filterBySearch > data.length) {
+              return e?.phone.toString().includes(filterBySearch);
+            }
+          }
+        } else {
+          return e;
+        }
+      })
+      .filter((e) => {
+        if (filter.stage !== "") {
+          if (filter.stage == "all") {
+            return e;
+          } else {
+            return e.stage === filter.stage;
+          }
+        } else {
+          return e;
+        }
+      })
+      .filter((e) => {
+        if (filter.status !== "") {
+          if (filter.status == "all") {
+            return e;
+          } else {
+            return e.status === filter.status;
+          }
+        } else {
+          return e;
+        }
+      })
+      .filter((e) => {
+        if (filter.class !== "") {
+          if (filter.class == "all") {
+            return e;
+          } else {
+            return (
+              e.batchDetails.type + " " + e.batchDetails.mode === filter.class
+            );
+          }
+        } else {
+          return e;
+        }
+      });
+    setfilteredData(searchFilter);
+  }, [filterBySearch, data, filter]);
+
+  const indexOfLastUser = currentPage * userPerPage;
+  const indexOfFirstUser = indexOfLastUser - userPerPage;
+  const currentUsers = filteredData?.slice(indexOfFirstUser, indexOfLastUser);
+
   return (
     <div
       style={{
         backgroundColor: "#000",
-        height: "90%",
+        height: "100vh",
         padding: "1.5rem",
-        boxSizing: "border-box",
+        boxSizing: "border-box"
       }}
     >
       <Nav />
@@ -47,14 +110,13 @@ function App() {
       />
       <UsersData
         getUserData={getUserData}
-        usersData={data}
+        usersData={currentUsers}
         filterBySearch={filterBySearch}
-        filterByClass={filterByClass}
-        setfilterByClass={setfilterByClass}
-        filterByStatus={filterByStatus}
-        setfilterByStatus={setfilterByStatus}
-        filterByStage={filterByStage}
-        setfilterByStage={setfilterByStage}
+        filter={filter}
+        setfilter={setFilter}
+        usersPerPage={userPerPage}
+        totalUsers={filteredData?.length}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );

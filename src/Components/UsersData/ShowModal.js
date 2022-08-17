@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../css/Modal.css";
@@ -32,11 +32,25 @@ const ShowModal = ({
     setIsOpen(false);
   }
 
-  const [state, setstate] = useState({});
+  const [state, setstate] = useState([]);
 
-  const handleInputChange = (e) => {
-    setstate({ ...state, [e.target.name]: e.target.value });
+  const onChangeInput = (e) => {
+    const newState = state.map((element) => {
+      return element.name === e.target.name
+        ? { ...element, value: e.target.value }
+        : element;
+    });
+    setstate(newState);
   };
+
+  useEffect(() => {
+    if (clickedTemplate?.customParams.length > 0) {
+      var newState = clickedTemplate?.customParams.map((param) => {
+        return { name: param.paramName, value: "" };
+      });
+      setstate(newState);
+    }
+  }, [clickedTemplate?.customParams]);
 
   return clickedTemplate ? (
     <Modal
@@ -45,6 +59,7 @@ const ShowModal = ({
       style={customStyles}
       contentLabel="Example Modal"
       id="modal"
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="header">
         <h2>{clickedTemplate.elementName}</h2>
@@ -66,7 +81,7 @@ const ShowModal = ({
                   </p>
                   <input
                     type="text"
-                    onChange={handleInputChange}
+                    onChange={onChangeInput}
                     name={e.paramName}
                     className={e.paramName}
                   />
@@ -90,7 +105,10 @@ const ShowModal = ({
                   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzIyYzViYi1kYzQwLTRmODctYjZiMi1iMjMyOTQyMjBiOGUiLCJ1bmlxdWVfbmFtZSI6ImluZm9Ab2xsLmNvIiwibmFtZWlkIjoiaW5mb0BvbGwuY28iLCJlbWFpbCI6ImluZm9Ab2xsLmNvIiwiYXV0aF90aW1lIjoiMDgvMDEvMjAyMiAwNDowMDo1NiIsImRiX25hbWUiOiIxMTUwNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.k89dQ0gkjcZ3T8VYDz6FIbr4sisaSiSTvjLZ7FhLEAc",
               },
               body: JSON.stringify({
-                parameters: [{ name: "name", value: `${templateUser.name}` }],
+                parameters: [
+                  ...state,
+                  { name: "name", value: `${templateUser.name}` },
+                ],
                 template_name: `${clickedTemplate.elementName}`,
                 broadcast_name: "test1",
               }),

@@ -2,15 +2,7 @@ import React from "react";
 import { AiOutlineFilter } from "react-icons/ai";
 import "../../css/filters.css";
 
-const UserHeadings = (
-  filterByClass,
-  setfilterByClass,
-  filterByStatus,
-  setfilterByStatus,
-  filterByStage,
-  setfilterByStage
-) => {
-  console.log(filterByStage)
+const UserHeadings = ({ filter, setfilter }) => {
   return (
     <>
       <div className="userPanelHeadings">
@@ -25,11 +17,19 @@ const UserHeadings = (
             size={20}
             className="icon"
           />
-          <select className="filterSelector">
+          <select
+            className="filterSelector"
+            value={filter.class}
+            onChange={(e) => {
+              console.log(e.target.value)
+              setfilter({ ...filter, class: e.target.value });
+            }}
+          >
+            <option value="all">All</option>
             <option value="group Online">group Online</option>
             <option value="group Offline">group Offline</option>
             <option value="1 to 1 Online">1 to 1 Online</option>
-            <option value="1 to 1 Offline">1 to 1 Online</option>
+            <option value="1 to 1 Offline">1 to 1 Offline</option>
           </select>
         </p>
         <p className="offerDetails">Offer Det.</p>
@@ -40,9 +40,18 @@ const UserHeadings = (
             size={20}
             className="icon"
           />
-          <select className="filterSelector">
+          <select
+            className="filterSelector"
+            value={filter.status}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setfilter({ ...filter, status: e.target.value });
+            }}
+          >
+            <option value="all">All</option>
             <option value="new">New</option>
             <option value="follow">Fol. Up</option>
+            <option value="noPay">!Pay</option>
             <option value="noCourse">!Course</option>
             <option value="started">Started</option>
             <option value="noBatch">!Batch</option>
@@ -59,12 +68,13 @@ const UserHeadings = (
           />
           <select
             className="filterSelector"
-            value={filterByStage}
+            value={filter.stage}
             onChange={(e) => {
-              console.log(e.target.value)
-              setfilterByStage(e.target.value);
+              console.log(e.target.value);
+              setfilter({ ...filter, stage: e.target.value });
             }}
           >
+            <option value="all">🙃 All</option>
             <option value="🔥 hot">🔥 Hot</option>
             <option value="🥵 warm">🥵 Warm</option>
             <option value="🥶 cold">🥶 Cold</option>

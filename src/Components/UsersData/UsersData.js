@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import User from "./User";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./Pagination";
 
 const UsersData = ({
   usersData,
   getUserData,
-  filterBySearch,
-  filterByClass,
-  setfilterByClass,
-  filterByStatus,
-  setfilterByStatus,
-  filterByStage,
-  setfilterByStage,
+  filter,
+  setfilter,
+  usersPerPage,
+  totalUsers,
+  setCurrentPage
 }) => {
   const [templateMsg, settemplateMsg] = useState();
 
@@ -39,39 +38,10 @@ const UsersData = ({
   return (
     <>
       <div className="usersData">
-        <UserHeading
-          filterByClass={filterByClass}
-          setfilterByClass={setfilterByClass}
-          filterByStatus={filterByStatus}
-          setfilterByStatus={setfilterByStatus}
-          filterByStage={filterByStage}
-          setfilterByStage={setfilterByStage}
-        />
-        {usersData ? (
+        <Pagination usersPerPage={usersPerPage} totalUsers={totalUsers} setCurrentPage={setCurrentPage} />
+        <UserHeading filter={filter} setfilter={setfilter} /> 
+        {(usersData?.length >= 0) ? (
           usersData
-            .filter((e) => {
-              if (filterBySearch !== undefined && filterBySearch !== "") {
-                if (isNaN(filterBySearch) === true) {
-                  return e?.name.toLowerCase().includes(filterBySearch);
-                } else {
-                  filterBySearch = filterBySearch.toString();
-
-                  if (
-                    filterBySearch.length <= usersData.length.toString().length
-                  ) {
-                    return e?.id.toString().includes(filterBySearch);
-                  } else if (filterBySearch > usersData.length) {
-                    return e?.phone.toString().includes(filterBySearch);
-                  }
-                }
-              } else {
-                return e;
-              }
-            })
-            .filter((e)=>{
-              console.log(filterByStage)
-              return e
-            })
             .map((e, index) => {
               return (
                 <User
