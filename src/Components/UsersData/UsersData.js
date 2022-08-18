@@ -9,9 +9,10 @@ const UsersData = ({
   getUserData,
   filter,
   setfilter,
-  usersPerPage,
-  totalUsers,
-  setCurrentPage
+  page,
+  setpage,
+  noOfUsers,
+  loading,
 }) => {
   const [templateMsg, settemplateMsg] = useState();
 
@@ -38,21 +39,7 @@ const UsersData = ({
   return (
     <>
       <div className="usersData">
-        <Pagination usersPerPage={usersPerPage} totalUsers={totalUsers} setCurrentPage={setCurrentPage} />
-        <UserHeading filter={filter} setfilter={setfilter} /> 
-        {(usersData?.length >= 0) ? (
-          usersData
-            .map((e, index) => {
-              return (
-                <User
-                  getUserData={getUserData}
-                  data={e}
-                  key={index}
-                  templateMsg={templateMsg}
-                />
-              );
-            })
-        ) : (
+        {loading ? (
           <div
             style={{
               display: "flex",
@@ -63,6 +50,32 @@ const UsersData = ({
           >
             <ThreeDots color="#fff" height={80} width={80} />
           </div>
+        ) : (
+          <>
+            <UserHeading filter={filter} setfilter={setfilter} />
+            {
+              (usersData?.length>=0)?usersData.map((e, index) => {
+                      return <User
+                              getUserData={getUserData}
+                              data={e}
+                              key={index}
+                              templateMsg={templateMsg}
+                            />
+                }):(
+                  <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDots color="#fff" height={80} width={80} />
+                </div>
+                )
+            }
+            <Pagination page={page} setpage={setpage} NoOfUsers={noOfUsers} />
+          </>
         )}
       </div>
     </>

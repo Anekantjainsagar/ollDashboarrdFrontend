@@ -2,13 +2,13 @@ import { BASE_URL } from "../../Utils/index";
 import React, { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import BatchDetails from "./BatchDetails";
-import axios from 'axios';
+import axios from "axios";
 import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
-const Form = ({ usersData, getUserData }) => {
+const Form = ({ getUserData }) => {
   const [details, setDetails] = useState(false);
   const [name, setName] = useState();
   const [phone, setphone] = useState();
@@ -40,9 +40,7 @@ const Form = ({ usersData, getUserData }) => {
 
   const postData = async (e) => {
     e.preventDefault();
-    let id = usersData.length + 1;
     const res = await axios.post(`${BASE_URL}/addUser`, {
-      id,
       name,
       phone,
       email,

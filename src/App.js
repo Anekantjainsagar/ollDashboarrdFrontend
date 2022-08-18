@@ -13,22 +13,31 @@ import UsersData from "./Components/UsersData/UsersData";
 function App() {
   const [data, setdata] = useState();
   var [filterBySearch, setfilterBySearch] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage, setuserPerPage] = useState(6);
-  //Use tab for camelCase in states
   const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
+  const [filteredData, setfilteredData] = useState(data);
+  const [page, setpage] = useState(1);
+  //Use tab for camelCase in states
+  const [noOfUsers, setnoOfUsers] = useState();
+  const [loading, setloading] = useState(false);
 
   const getUserData = () => {
-    axios.get(`${BASE_URL}/getUser`).then((res) => {
-      setdata(res.data.reverse());
-    });
+    axios
+      .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
+      .then((res) => {
+        setloading(true);
+        setdata(res.data.users.reverse());
+        setnoOfUsers(res.data.NoOfUsers - 1);
+        setloading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [page]);
 
-  const [filteredData, setfilteredData] = useState(data);
   useEffect(() => {
     var searchFilter = data
       ?.filter((e) => {
@@ -88,35 +97,31 @@ function App() {
     setfilteredData(searchFilter);
   }, [filterBySearch, data, filter]);
 
-  const indexOfLastUser = currentPage * userPerPage;
-  const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUsers = filteredData?.slice(indexOfFirstUser, indexOfLastUser);
-
   return (
     <div
       style={{
         backgroundColor: "#000",
         height: "100vh",
         padding: "1.5rem",
-        boxSizing: "border-box"
+        boxSizing: "border-box",
       }}
     >
       <Nav />
       <Topbar
         getUserData={getUserData}
-        usersData={data}
         filterBySearch={filterBySearch}
         setfilterBySearch={setfilterBySearch}
       />
       <UsersData
         getUserData={getUserData}
-        usersData={currentUsers}
+        usersData={filteredData}
         filterBySearch={filterBySearch}
         filter={filter}
+        page={page}
+        setpage={setpage}
         setfilter={setFilter}
-        usersPerPage={userPerPage}
-        totalUsers={filteredData?.length}
-        setCurrentPage={setCurrentPage}
+        noOfUsers={noOfUsers}
+        loading={loading}
       />
     </div>
   );

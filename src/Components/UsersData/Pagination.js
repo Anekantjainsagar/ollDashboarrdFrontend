@@ -1,32 +1,19 @@
 import React from "react";
-import '../../css/pagination.css'
+import "../../css/pagination.css";
 
-const Pagination = ({ usersPerPage, totalUsers, setCurrentPage }) => {
-
-  const pageNumbers = [];
-  for (let i = 0; i < Math.ceil(totalUsers / usersPerPage); i++) {
-    pageNumbers.push(i + 1);
-  }
+const Pagination = ({ page, setpage, NoOfUsers }) => {
   return (
-    <nav>
-      <ul
-        className="pagination"
-      >
-        {pageNumbers.map((number, i) => {
-          return (
-            <li
-              key={i}
-              className="pageItem"
-              onClick={() => {
-                setCurrentPage(number);
-              }}
-            >
-              {number}
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <div className="div">
+      {NoOfUsers < page * 10 && NoOfUsers > (page - 1) * 10 ? null : (
+        <button
+          onClick={() => {
+            setpage(page + 1);
+          }}
+        >
+          Load more...
+        </button>
+      )}
+    </div>
   );
 };
 

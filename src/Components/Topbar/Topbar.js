@@ -3,7 +3,6 @@ import Form from "./Form";
 import SearchSection from "./SearchSection";
 
 const Topbar = ({
-  usersData,
   getUserData,
   filterBySearch,
   setfilterBySearch
@@ -11,7 +10,7 @@ const Topbar = ({
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Form usersData={usersData} getUserData={getUserData} />
+        <Form getUserData={getUserData} />
         <SearchSection
           filterBySearch={filterBySearch}
           setfilterBySearch={setfilterBySearch}
