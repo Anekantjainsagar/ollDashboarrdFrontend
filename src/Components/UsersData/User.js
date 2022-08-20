@@ -47,7 +47,7 @@ const User = (props) => {
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
   const [comment, setcomment] = useState();
-  const [stageValue, setstage] = useState("🥶 cold");
+  const [stageValue, setstage] = useState();
   useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
   useOutsideAlerter(commentRef, showComments, setshowComments);
   const [statusValue, setstatusValue] = useState();
@@ -101,7 +101,9 @@ const User = (props) => {
         <p className="nameValue">{name}</p>
         <p className="phoneValue">{(cCode ? cCode : "") + phone}</p>
         <p className="classTypeValue">
-          {((batchDetails?.type==="group")?"Grp":"1-1")+" " +((batchDetails?.mode==="Online")?"Onl.":"Off.")}
+          {(batchDetails?.type === "group" ? "Grp" : "1-1") +
+            " " +
+            (batchDetails?.mode === "Online" ? "Onl." : "Off.")}
         </p>
         <p className="offerDetailsValue">{course}</p>
         <FloatingUserData
@@ -129,7 +131,7 @@ const User = (props) => {
                 color={"rgba(255, 161, 74, 1)"}
                 style={{ transform: "rotate(-45deg)" }}
               />
-            ) : (status === "noCourse" || status === "noBatch") ? (
+            ) : status === "noCourse" || status === "noBatch" ? (
               <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
             ) : (
               <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
@@ -139,7 +141,7 @@ const User = (props) => {
                 ? "URG"
                 : status === "follow"
                 ? "High"
-                : (status === "noCourse" || status === "noBatch")
+                : status === "noCourse" || status === "noBatch"
                 ? "Med."
                 : "Low"}
             </p>
@@ -153,14 +155,14 @@ const User = (props) => {
               setstatusValue(e.target.value);
               await axios
                 .put(`${BASE_URL}/setStatus`, {
-                  id: id,
+                  id: _id,
                   newStatus: e.target.value,
                 })
                 .then((response) => {
                   console.log(response);
-                  setTimeout(() => {
+                  if (response.data.acknowledged === true) {
                     props.getUserData();
-                  }, 100);
+                  }
                 })
                 .catch((err) => {
                   console.log(err);
@@ -315,14 +317,14 @@ const User = (props) => {
               setstage(e.target.value);
               await axios
                 .put(`${BASE_URL}/setStage`, {
-                  id: id,
+                  id: _id,
                   newStage: e.target.value,
                 })
                 .then((response) => {
                   console.log(response);
-                  setTimeout(() => {
+                  if (response.data.acknowledged === true) {
                     props.getUserData();
-                  }, 100);
+                  }
                 })
                 .catch((err) => {
                   console.log(err);

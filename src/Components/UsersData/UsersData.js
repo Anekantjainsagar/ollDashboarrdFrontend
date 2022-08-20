@@ -13,7 +13,8 @@ const UsersData = ({
   page,
   setpage,
   noOfUsers,
-  loading,
+  loading,  
+  setdata
 }) => {
   const [templateMsg, settemplateMsg] = useState();
 
@@ -67,9 +68,11 @@ const UsersData = ({
                 return (
                   <User
                     getUserData={getUserData}
+                    usersData={usersData}
                     data={e}
                     key={index}
                     templateMsg={templateMsg}
+                    setdata={setdata}
                   />
                 );
               })

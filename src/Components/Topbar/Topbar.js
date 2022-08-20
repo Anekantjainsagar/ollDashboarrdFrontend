@@ -5,7 +5,7 @@ import SearchSection from "./SearchSection";
 const Topbar = ({
   getUserData,
   filterBySearch,
-  setfilterBySearch
+  setfilterBySearch,
 }) => {
   return (
     <>

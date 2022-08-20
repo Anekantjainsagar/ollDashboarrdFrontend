@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import moment from "moment";
+import times from "./times";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -217,69 +218,13 @@ const BatchDetails = ({
                 className="valueSelector"
                 onChange={(e) => {
                   setstime(e.target.value);
-                  console.log(e.target.value);
-                  setetime(
-                    e.target.value.slice(3, 5) == "30"
-                      ? moment({
-                          hour: Number(e.target.value.slice(0, 2)),
-                          minute: Number(e.target.value.slice(3, 5)),
-                        })
-                          .add(1, "hours")
-                          .format("hh:mmA")
-                      : moment({ hour: Number(e.target.value.slice(0, 2)) })
-                          .add(1, "hours")
-                          .format("hh:mmP")
-                  );
+                  var index = times.indexOf(e.target.value)
+                  setetime(times[index+2]);
                 }}
               >
-                <option value={"09:00AM"}>09:00AM</option>
-                <option value={"09:30AM"}>09:30AM</option>
-                <option value={"10:00AM"}>10:00AM</option>
-                <option value={"10:30AM"}>10:30AM</option>
-                <option value={"11:00AM"}>11:00AM</option>
-                <option value={"11:30AM"}>11:30AM</option>
-                <option value={"12:00PM"}>12:00PM</option>
-                <option value={"12:30PM"}>12:30PM</option>
-                <option value={"01:00PM"}>01:00PM</option>
-                <option value={"01:30PM"}>01:30PM</option>
-                <option value={"02:00PM"}>02:00PM</option>
-                <option value={"02:30PM"}>02:30PM</option>
-                <option value={"03:00PM"}>03:00PM</option>
-                <option value={"03:30PM"}>03:30PM</option>
-                <option value={"04:00PM"}>04:00PM</option>
-                <option value={"04:30PM"}>04:30PM</option>
-                <option value={"05:00PM"}>05:00PM</option>
-                <option value={"05:30PM"}>05:30PM</option>
-                <option value={"06:00PM"}>06:00PM</option>
-                <option value={"06:30PM"}>06:30PM</option>
-                <option value={"07:00PM"}>07:00PM</option>
-                <option value={"07:30PM"}>07:30PM</option>
-                <option value={"08:00PM"}>08:00PM</option>
-                <option value={"08:30PM"}>08:30PM</option>
-                <option value={"09:00PM"}>09:00PM</option>
-                <option value={"09:30PM"}>09:30PM</option>
-                <option value={"10:00PM"}>10:00PM</option>
-                <option value={"10:30PM"}>10:30PM</option>
-                <option value={"11:00PM"}>11:00PM</option>
-                <option value={"11:30PM"}>11:30PM</option>
-                <option value={"12:00AM"}>12:00AM</option>
-                <option value={"12:30AM"}>12:30AM</option>
-                <option value={"01:00AM"}>01:00AM</option>
-                <option value={"01:30AM"}>01:30AM</option>
-                <option value={"02:00AM"}>02:00AM</option>
-                <option value={"02:30AM"}>02:30AM</option>
-                <option value={"03:00AM"}>03:00AM</option>
-                <option value={"03:30AM"}>03:30AM</option>
-                <option value={"04:00AM"}>04:00AM</option>
-                <option value={"04:30AM"}>04:30AM</option>
-                <option value={"05:00AM"}>05:00AM</option>
-                <option value={"05:30AM"}>05:30AM</option>
-                <option value={"06:00AM"}>06:00AM</option>
-                <option value={"06:30AM"}>06:30AM</option>
-                <option value={"07:00AM"}>07:00AM</option>
-                <option value={"07:30AM"}>07:30AM</option>
-                <option value={"08:00AM"}>08:00AM</option>
-                <option value={"08:30AM"}>08:30AM</option>
+                {times.map((time,index) => {
+                  return <option key={index} value={time}>{time}</option>;
+                })}
               </select>
               <p className="valueSelectorHead">End Time</p>
               <select
@@ -289,57 +234,11 @@ const BatchDetails = ({
                 className="valueSelector"
                 onChange={(e) => {
                   setetime(e.target.value);
-                  console.log(e.target.value);
                 }}
               >
-                <option value={"09:00AM"}>09:00AM</option>
-                <option value={"09:30AM"}>09:30AM</option>
-                <option value={"10:00AM"}>10:00AM</option>
-                <option value={"10:30AM"}>10:30AM</option>
-                <option value={"11:00AM"}>11:00AM</option>
-                <option value={"11:30AM"}>11:30AM</option>
-                <option value={"12:00PM"}>12:00PM</option>
-                <option value={"12:30PM"}>12:30PM</option>
-                <option value={"01:00PM"}>01:00PM</option>
-                <option value={"01:30PM"}>01:30PM</option>
-                <option value={"02:00PM"}>02:00PM</option>
-                <option value={"02:30PM"}>02:30PM</option>
-                <option value={"03:00PM"}>03:00PM</option>
-                <option value={"03:30PM"}>03:30PM</option>
-                <option value={"04:00PM"}>04:00PM</option>
-                <option value={"04:30PM"}>04:30PM</option>
-                <option value={"05:00PM"}>05:00PM</option>
-                <option value={"05:30PM"}>05:30PM</option>
-                <option value={"06:00PM"}>06:00PM</option>
-                <option value={"06:30PM"}>06:30PM</option>
-                <option value={"07:00PM"}>07:00PM</option>
-                <option value={"07:30PM"}>07:30PM</option>
-                <option value={"08:00PM"}>08:00PM</option>
-                <option value={"08:30PM"}>08:30PM</option>
-                <option value={"09:00PM"}>09:00PM</option>
-                <option value={"09:30PM"}>09:30PM</option>
-                <option value={"10:00PM"}>10:00PM</option>
-                <option value={"10:30PM"}>10:30PM</option>
-                <option value={"11:00PM"}>11:00PM</option>
-                <option value={"11:30PM"}>11:30PM</option>
-                <option value={"12:00AM"}>12:00AM</option>
-                <option value={"12:30AM"}>12:30AM</option>
-                <option value={"01:00AM"}>01:00AM</option>
-                <option value={"01:30AM"}>01:30AM</option>
-                <option value={"02:00AM"}>02:00AM</option>
-                <option value={"02:30AM"}>02:30AM</option>
-                <option value={"03:00AM"}>03:00AM</option>
-                <option value={"03:30AM"}>03:30AM</option>
-                <option value={"04:00AM"}>04:00AM</option>
-                <option value={"04:30AM"}>04:30AM</option>
-                <option value={"05:00AM"}>05:00AM</option>
-                <option value={"05:30AM"}>05:30AM</option>
-                <option value={"06:00AM"}>06:00AM</option>
-                <option value={"06:30AM"}>06:30AM</option>
-                <option value={"07:00AM"}>07:00AM</option>
-                <option value={"07:30AM"}>07:30AM</option>
-                <option value={"08:00AM"}>08:00AM</option>
-                <option value={"08:30AM"}>08:30AM</option>
+                {times.map((time,index) => {
+                  return <option key={index} value={time}>{time}</option>;
+                })}
               </select>
             </div>
           </div>

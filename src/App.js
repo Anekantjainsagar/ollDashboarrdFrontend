@@ -122,6 +122,7 @@ function App() {
         setfilter={setFilter}
         noOfUsers={noOfUsers}
         loading={loading}
+        setdata={setdata}
       />
     </div>
   );
