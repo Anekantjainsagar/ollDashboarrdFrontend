@@ -206,8 +206,7 @@ const Form = ({ getUserData }) => {
             </div>
           </div>
           <button className="button" onClick={postData}>
-            <IoIosAdd size={25} color="white" />
-            Create Lead
+            Save Lead
           </button>
         </form>
       </div>

@@ -129,7 +129,7 @@ const User = (props) => {
                 color={"rgba(255, 161, 74, 1)"}
                 style={{ transform: "rotate(-45deg)" }}
               />
-            ) : status === "noCourse" ? (
+            ) : (status === "noCourse" || status === "noBatch") ? (
               <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
             ) : (
               <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
@@ -139,7 +139,7 @@ const User = (props) => {
                 ? "URG"
                 : status === "follow"
                 ? "High"
-                : status === "noCourse"
+                : (status === "noCourse" || status === "noBatch")
                 ? "Med."
                 : "Low"}
             </p>

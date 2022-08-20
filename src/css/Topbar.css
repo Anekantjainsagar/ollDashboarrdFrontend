@@ -154,7 +154,7 @@ form{
 
 .topbarSearch{
     align-self: flex-end;
-    width: 18vw;
+    width: 20vw;
     display: flex;
     justify-content: space-evenly;
     margin: 1.5rem;
@@ -179,7 +179,7 @@ form{
 
 .topbarSearch select{
     background-color: transparent;
-    width: 38%;
+    width: 45%;
     outline: none;
     border: none;
     color: white;

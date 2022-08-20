@@ -224,11 +224,11 @@ const BatchDetails = ({
                           hour: Number(e.target.value.slice(0, 2)),
                           minute: Number(e.target.value.slice(3, 5)),
                         })
-                          .add(60, "m")
+                          .add(1, "hours")
                           .format("hh:mmA")
                       : moment({ hour: Number(e.target.value.slice(0, 2)) })
                           .add(1, "hours")
-                          .format("hh:mmA")
+                          .format("hh:mmP")
                   );
                 }}
               >
@@ -364,7 +364,7 @@ const BatchDetails = ({
             />
           </div>
           <div style={{ margin: "0.75rem 0" }}>
-            <p>Price</p>
+            <p>Price per hour</p>
             <input
               type="number"
               name="price"

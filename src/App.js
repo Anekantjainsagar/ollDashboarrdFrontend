@@ -25,7 +25,7 @@ function App() {
       .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
       .then((res) => {
         setloading(true);
-        setdata(res.data.users.reverse());
+        setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
         setloading(false);
       })

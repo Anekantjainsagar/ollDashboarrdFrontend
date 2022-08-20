@@ -307,8 +307,8 @@ const FloatingUserData = ({
                   color={"rgba(255, 161, 74, 1)"}
                   style={{ transform: "rotate(-45deg)" }}
                 />
-              ) : (statuses === undefined ? status : statuses) ===
-                "noCourse" ? (
+              ) : (statuses === undefined ? status : statuses) === "noCourse" ||
+                (statuses === undefined ? status : statuses) === "noBatch" ? (
                 <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
               ) : (
                 <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
@@ -318,7 +318,9 @@ const FloatingUserData = ({
                   ? "URG"
                   : (statuses === undefined ? status : statuses) === "follow"
                   ? "High"
-                  : (statuses === undefined ? status : statuses) === "noCourse"
+                  : (statuses === undefined ? status : statuses) ===
+                      "noCourse" ||
+                    (statuses === undefined ? status : statuses) === "noBatch"
                   ? "Med."
                   : "Low"}
               </p>

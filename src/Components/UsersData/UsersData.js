@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import User from "./User";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
+import { FaArrowCircleUp } from "react-icons/fa";
 import Pagination from "./Pagination";
 
 const UsersData = ({
@@ -15,6 +16,13 @@ const UsersData = ({
   loading,
 }) => {
   const [templateMsg, settemplateMsg] = useState();
+
+  const usersRef = useRef(null);
+  const userData = usersRef.current;
+
+  const scrollTop = () => {
+    userData.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const options = {
@@ -38,7 +46,8 @@ const UsersData = ({
 
   return (
     <>
-      <div className="usersData">
+      <div className="usersData" ref={usersRef}>
+        <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
         {loading ? (
           <div
             style={{
@@ -53,27 +62,29 @@ const UsersData = ({
         ) : (
           <>
             <UserHeading filter={filter} setfilter={setfilter} />
-            {
-              (usersData?.length>=0)?usersData.map((e, index) => {
-                      return <User
-                              getUserData={getUserData}
-                              data={e}
-                              key={index}
-                              templateMsg={templateMsg}
-                            />
-                }):(
-                  <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
-                  }}
-                >
-                  <ThreeDots color="#fff" height={80} width={80} />
-                </div>
-                )
-            }
+            {usersData?.length >= 0 ? (
+              usersData.map((e, index) => {
+                return (
+                  <User
+                    getUserData={getUserData}
+                    data={e}
+                    key={index}
+                    templateMsg={templateMsg}
+                  />
+                );
+              })
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                <ThreeDots color="#fff" height={80} width={80} />
+              </div>
+            )}
             <Pagination page={page} setpage={setpage} NoOfUsers={noOfUsers} />
           </>
         )}

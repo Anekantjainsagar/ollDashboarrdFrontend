@@ -269,3 +269,21 @@
   background: rgba(217, 217, 217, 1);
   border-radius: 2rem;
 }
+
+.scrollTop {
+  position: fixed;
+  z-index: 1000;
+  bottom: 3%;
+  left: 95%;
+  width: 3%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+}
+
+.scrollTop:hover {
+  opacity: 1;
+}
