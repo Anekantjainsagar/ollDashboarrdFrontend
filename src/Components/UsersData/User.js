@@ -112,6 +112,8 @@ const User = (props) => {
           setDetails={setDetails}
           getUserData={props.getUserData}
           templateMsg={props.templateMsg}
+          setdata={props.setdata}
+          usersData={props.usersData}
         />
         <p className="statusValue" style={{ display: "flex" }}>
           <div
@@ -271,6 +273,7 @@ const User = (props) => {
             value={comment}
             onChange={(e) => setcomment(e.target.value)}
             placeholder="Comment.."
+            autoFocus={true}
             onKeyPress={handleKeyPress}
           />
           <AiOutlineRight
@@ -340,6 +343,7 @@ const User = (props) => {
             value={searchTemplate}
             onChange={(e) => setsearchTemplate(e.target.value)}
             placeholder="Search templates..."
+            autoFocus={true}
           />
         </div>
       </div>

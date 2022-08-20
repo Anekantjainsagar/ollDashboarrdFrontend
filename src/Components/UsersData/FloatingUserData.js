@@ -41,8 +41,9 @@ const FloatingUserData = ({
   setDetails,
   data,
   getUserData,
-  setstatusChanged,
   templateMsg,
+  setdata,
+  usersData
 }) => {
   const {
     name,
@@ -89,9 +90,11 @@ const FloatingUserData = ({
   const [showTemplate, setshowTemplate] = useState(false);
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
-
+  
   useOutsideAlerter(sideRef, details, setDetails);
-
+  
+  const user = usersData.find(user => user._id === _id )
+  
   const updateData = async (e) => {
     e.preventDefault();
 

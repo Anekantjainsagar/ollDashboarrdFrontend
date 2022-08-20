@@ -19,7 +19,7 @@ const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
               style={{
                 position: "relative",
                 right: "-85%",
-                zIndex: "200",
+                zIndex: 9,
                 cursor: "pointer",
               }}
               onClick={() => {
