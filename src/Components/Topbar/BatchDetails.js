@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import moment from "moment";
 import times from "./times";
 
 function useOutsideAlerter(ref, show, setShow) {

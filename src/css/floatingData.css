@@ -286,11 +286,10 @@
 
 /* //Showing comments block */
 .commentBox {
-  position: absolute;
-  z-index: 10;
-  margin-top: 7rem;
+  position: relative;
+  z-index: 1000;
   width: 13vw;
-  margin-left: 2.5rem;
+  top: 0%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -323,9 +322,9 @@
 
 /* Showing Templates */
 .templateBox {
-  position: absolute;
+  position: relative;
   z-index: 100;
-  margin-top: 22rem;
+  bottom: 0%;
   background-color: #454545;
   padding: 0.5rem;
   width: 15vw;
@@ -434,7 +433,7 @@
   font-size: 1.6rem;
 }
 
-.floatDataSelector option{
-    background-color: black;
-    color: white;
+.floatDataSelector option {
+  background-color: black;
+  color: white;
 }

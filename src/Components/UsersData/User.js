@@ -201,62 +201,6 @@ const User = (props) => {
             Template
           </div>
           <div
-            ref={templateRef}
-            style={showTemplate ? { display: "block" } : { display: "none" }}
-            className="templateBox"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <p className="heading">Select a Template</p>
-            <div className="content">
-              {props.templateMsg
-                ? props.templateMsg
-                    .filter((e) => {
-                      if (searchTemplate) {
-                        if (
-                          e.elementName.toLowerCase().includes(searchTemplate)
-                        ) {
-                          return e;
-                        }
-                      } else {
-                        return e;
-                      }
-                      return 0;
-                    })
-                    .map((template) => {
-                      return (
-                        <div>
-                          <p
-                            onClick={async () => {
-                              setshowTemplate(!showTemplate);
-                              openModal(template, props.data);
-                            }}
-                          >
-                            {template.elementName}
-                          </p>
-                          <div className="line"></div>
-                        </div>
-                      );
-                    })
-                : null}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <input
-                type="text"
-                value={searchTemplate}
-                onChange={(e) => setsearchTemplate(e.target.value)}
-                placeholder="Search templates..."
-              />
-            </div>
-          </div>
-          <div
             className="btn"
             onClick={(e) => {
               setshowComments(!showComments);
@@ -264,45 +208,6 @@ const User = (props) => {
             }}
           >
             Comment
-          </div>
-          <div
-            ref={commentRef}
-            style={showComments ? { display: "block" } : { display: "none" }}
-            className="commentBox"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <input
-                type="text"
-                name="comment"
-                value={comment}
-                onChange={(e) => setcomment(e.target.value)}
-                placeholder="Comment.."
-                onKeyPress={handleKeyPress}
-              />
-              <AiOutlineRight
-                size={19}
-                className="icon"
-                onClick={() => {
-                  axios.put(`${BASE_URL}/comment`, {
-                    id: _id,
-                    comment: comment,
-                  });
-                  setTimeout(() => {
-                    props.getUserData();
-                  }, 1000);
-                  setcomment("");
-                }}
-              />
-            </div>
           </div>
         </p>
         <p className="sourceValue">{source}</p>
@@ -321,7 +226,6 @@ const User = (props) => {
                   newStage: e.target.value,
                 })
                 .then((response) => {
-                  console.log(response);
                   if (response.data.acknowledged === true) {
                     props.getUserData();
                   }
@@ -345,6 +249,99 @@ const User = (props) => {
             </option>
           </select>
         </p>
+      </div>
+      <div
+        ref={commentRef}
+        style={showComments ? { display: "block" } : { display: "none" }}
+        className="commentBox"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="text"
+            name="comment"
+            value={comment}
+            onChange={(e) => setcomment(e.target.value)}
+            placeholder="Comment.."
+            onKeyPress={handleKeyPress}
+          />
+          <AiOutlineRight
+            size={19}
+            className="icon"
+            onClick={() => {
+              axios.put(`${BASE_URL}/comment`, {
+                id: _id,
+                comment: comment,
+              });
+              setTimeout(() => {
+                props.getUserData();
+              }, 1000);
+              setcomment("");
+            }}
+          />
+        </div>
+      </div>
+      <div
+        ref={templateRef}
+        style={showTemplate ? { display: "block" } : { display: "none" }}
+        className="templateBox"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <p className="heading">Select a Template</p>
+        <div className="content">
+          {props.templateMsg
+            ? props.templateMsg
+                .filter((e) => {
+                  if (searchTemplate) {
+                    if (e.elementName.toLowerCase().includes(searchTemplate)) {
+                      return e;
+                    }
+                  } else {
+                    return e;
+                  }
+                  return 0;
+                })
+                .map((template, i) => {
+                  return (
+                    <div key={i}>
+                      <p
+                        onClick={async () => {
+                          setshowTemplate(!showTemplate);
+                          openModal(template, props.data);
+                        }}
+                      >
+                        {template.elementName}
+                      </p>
+                      <div className="line"></div>
+                    </div>
+                  );
+                })
+            : null}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="text"
+            value={searchTemplate}
+            onChange={(e) => setsearchTemplate(e.target.value)}
+            placeholder="Search templates..."
+          />
+        </div>
       </div>
     </>
   );

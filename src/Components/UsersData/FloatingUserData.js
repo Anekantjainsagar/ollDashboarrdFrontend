@@ -92,11 +92,11 @@ const FloatingUserData = ({
 
   useOutsideAlerter(sideRef, details, setDetails);
 
-  const updateData = (e) => {
+  const updateData = async (e) => {
     e.preventDefault();
 
     const obj = {
-      id,
+      _id: _id,
       name: nameVal === undefined ? name : nameVal,
       phone: number === undefined ? phone : number,
       email: emailName === undefined ? email : emailName,
@@ -118,8 +118,7 @@ const FloatingUserData = ({
       price: price === undefined ? batchDetails?.price : price,
       cCode,
     };
-
-    axios.put(`${BASE_URL}/updateUser`, obj).then((res) => {
+    await axios.put(`${BASE_URL}/updateUser`, obj).then((res) => {
       const notify = () =>
         toast(
           res.data.acknowledged
@@ -135,8 +134,7 @@ const FloatingUserData = ({
         });
       setTimeout(() => {
         getUserData();
-        setstatusChanged(true);
-      }, 1000);
+      }, 100);
       notify();
     });
   };
@@ -416,9 +414,10 @@ const FloatingUserData = ({
               className="codeSelector"
               onChange={(e) => setcCode(e.target.value)}
             >
-              {countryData.map((e) => {
+              {countryData.map((e,i) => {
                 return (
                   <option
+                    key={i}
                     style={{
                       backgroundColor: "#444444",
                       color: "white",
@@ -539,9 +538,9 @@ const FloatingUserData = ({
                         }
                         return 0;
                       })
-                      .map((template) => {
+                      .map((template,i) => {
                         return (
-                          <div>
+                          <div key={i}>
                             <p
                               onClick={async () => {
                                 setshowTemplate(!showTemplate);
@@ -864,9 +863,9 @@ const FloatingUserData = ({
                 </p>
               </div>
             ) : (
-              comment.map(({ msg, date }) => {
+              comment.map(({ msg, date },i) => {
                 return (
-                  <div className="commentsDisplay">
+                  <div className="commentsDisplay" key={i}>
                     <img
                       src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
                       alt="this is a comment"
