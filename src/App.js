@@ -45,14 +45,13 @@ function App() {
           if (isNaN(filterBySearch) === true) {
             if (e.name.toLowerCase().includes(filterBySearch)) {
               return e;
+            } else if (e?._id.toString().includes(filterBySearch)) {
+              return e;
             }
           } else {
             filterBySearch = filterBySearch.toString();
-
-            if (filterBySearch.length <= data.length.toString().length) {
-              return e?.id.toString().includes(filterBySearch);
-            } else if (filterBySearch > data.length) {
-              return e?.phone.toString().includes(filterBySearch);
+            if (e?.phone.toString().includes(filterBySearch)) {
+              return e;
             }
           }
         } else {

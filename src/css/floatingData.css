@@ -289,6 +289,7 @@
   position: relative;
   z-index: 1000;
   width: 13vw;
+  margin: auto;
   top: 0%;
   display: flex;
   align-items: center;
@@ -325,6 +326,7 @@
   position: relative;
   z-index: 100;
   bottom: 0%;
+  margin: auto;
   background-color: #454545;
   padding: 0.5rem;
   width: 15vw;

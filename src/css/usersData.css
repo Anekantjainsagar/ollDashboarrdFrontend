@@ -184,6 +184,11 @@
   background-color: rgb(255, 163, 163);
 }
 
+.noTeacher {
+  color: rgb(255, 119, 149);
+  background-color: rgb(207, 0, 28);
+}
+
 .noPay {
   background-color: #00b1f7;
   color: #005f85;
@@ -286,4 +291,15 @@
 
 .scrollTop:hover {
   opacity: 1;
+}
+
+.sendToTop{
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  width: fit-content;
+  margin: auto;
+  border-radius: 1.5rem;
+  cursor: pointer;
 }

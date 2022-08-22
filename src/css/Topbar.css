@@ -171,6 +171,7 @@ form{
     border-radius: 1rem;
     color: white;
     margin: 0.5rem 0;
+    padding-right: 3.5rem;
 }
 
 .topbarSearch input::placeholder{

@@ -4,9 +4,12 @@ import { BsWhatsapp } from "react-icons/bs";
 import { BiUpArrowAlt } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
+import { ThreeDots } from "react-loader-spinner";
 import FloatingUserData from "./FloatingUserData";
 import { BASE_URL } from "../../Utils/index";
 import ShowModal from "./ShowModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -42,22 +45,26 @@ const User = (props) => {
   const stageRef = useRef(null);
   const statusRef = useRef(null);
   const templateRef = useRef(null);
+  const topRef = useRef(null);
   const commentRef = useRef(null);
   const [details, setDetails] = useState(false);
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
   const [comment, setcomment] = useState();
   const [stageValue, setstage] = useState();
-  useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
-  useOutsideAlerter(commentRef, showComments, setshowComments);
   const [statusValue, setstatusValue] = useState();
   const [searchTemplate, setsearchTemplate] = useState();
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
+  const [sendToTop, setsendToTop] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [loading, setloading] = useState(false);
+  useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
+  useOutsideAlerter(commentRef, showComments, setshowComments);
+  useOutsideAlerter(commentRef, showComments, setshowComments);
+  useOutsideAlerter(topRef, sendToTop, setsendToTop);
 
   const d = new Date(inqDate).toString();
-
-  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal(e, data) {
     setIsOpen(true);
@@ -80,6 +87,57 @@ const User = (props) => {
     }
   };
 
+  const sendToTopFunction = (e) => {
+    var data = e;
+    setloading(true);
+    axios
+      .delete(`${BASE_URL}/deleteUser`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: data._id,
+        },
+      })
+      .then((res) => {
+        if (res.data.acknowledged === true) {
+          axios
+            .post(`${BASE_URL}/addUser`, data)
+            .then((res) => {
+              const notify = () =>
+                toast(
+                  res.data.Success
+                    ? "Sended to top successfully"
+                    : "Internal server error",
+                  {
+                    type: res.data.Success ? "success" : "error",
+                  }
+                );
+              if (res.data.Success === true) {
+                props.getUserData();
+                notify();
+                setsendToTop(false);
+                setloading(false);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              setloading(false);
+            });
+        } else {
+          const notify = () =>
+            toast("Internal server error", {
+              type: "error",
+            });
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setloading(false);
+      });
+  };
+
   return (
     <>
       <ShowModal
@@ -89,14 +147,28 @@ const User = (props) => {
         clickedTemplate={clickedTemplate}
         templateUser={templateUser}
       />
+      <div style={{ position: "absolute" }}>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+        />
+      </div>
       <div
         className="user"
+        onContextMenu={() => {
+          setsendToTop(!sendToTop);
+        }}
         onClick={() => {
           setDetails(!details);
         }}
         style={{ cursor: "pointer" }}
       >
-        <p className="idValue">{id}</p>
+        <p className="idValue">{_id.slice(22, 24)}</p>
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
         <p className="phoneValue">{(cCode ? cCode : "") + phone}</p>
@@ -179,6 +251,9 @@ const User = (props) => {
             </option>
             <option className="noCourse" value="noCourse">
               !Course
+            </option>
+            <option className="noTeacher" value="noTeacher">
+              !Teacher
             </option>
             <option className="started" value="started">
               Started
@@ -346,6 +421,27 @@ const User = (props) => {
             autoFocus={true}
           />
         </div>
+      </div>
+      <div
+        ref={topRef}
+        className="sendToTop"
+        style={
+          sendToTop
+            ? { display: "block", border: "1px solid white" }
+            : { display: "none" }
+        }
+        onClick={() => sendToTopFunction(props.data)}
+      >
+        {loading ? (
+          <ThreeDots
+            style={{ display: "block" }}
+            color="#fff"
+            height={40}
+            width={40}
+          />
+        ) : (
+          "Send to Top"
+        )}
       </div>
     </>
   );

@@ -21,7 +21,7 @@ const UserHeadings = ({ filter, setfilter }) => {
             className="filterSelector"
             value={filter.class}
             onChange={(e) => {
-              console.log(e.target.value)
+              console.log(e.target.value);
               setfilter({ ...filter, class: e.target.value });
             }}
           >
@@ -54,6 +54,7 @@ const UserHeadings = ({ filter, setfilter }) => {
             <option value="noPay">!Pay</option>
             <option value="noCourse">!Course</option>
             <option value="started">Started</option>
+            <option value="noTeacher">!Teacher</option>
             <option value="noBatch">!Batch</option>
           </select>
         </p>

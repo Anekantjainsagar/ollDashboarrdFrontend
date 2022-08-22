@@ -16,7 +16,7 @@ const Form = ({ getUserData }) => {
   const [age, setage] = useState();
   const [school, setschool] = useState();
   const [course, setcourse] = useState();
-  const [source, setsource] = useState();
+  const [source, setsource] = useState("Website");
   const [mode, setmode] = useState("Online");
   const [type, settype] = useState("group");
   const [days, setdays] = useState("MWF");
@@ -140,7 +140,7 @@ const Form = ({ getUserData }) => {
                 value={age}
                 name="age"
                 onChange={(e) => setage(e.target.value)}
-                placeholder="Age *"
+                placeholder="Age"
                 className="input"
                 min={1}
                 max={100}

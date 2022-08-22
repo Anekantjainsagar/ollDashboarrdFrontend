@@ -43,7 +43,7 @@ const FloatingUserData = ({
   getUserData,
   templateMsg,
   setdata,
-  usersData
+  usersData,
 }) => {
   const {
     name,
@@ -90,11 +90,11 @@ const FloatingUserData = ({
   const [showTemplate, setshowTemplate] = useState(false);
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
-  
+
   useOutsideAlerter(sideRef, details, setDetails);
-  
-  const user = usersData.find(user => user._id === _id )
-  
+
+  const user = usersData.find((user) => user._id === _id);
+
   const updateData = async (e) => {
     e.preventDefault();
 
@@ -290,7 +290,17 @@ const FloatingUserData = ({
         }
       >
         <div className="header">
-          <p>OLL - {id}</p>
+          <p
+            onClick={async () => {
+              await navigator.clipboard.writeText(_id);
+              const notify = () => {
+                toast("Id copied successfully", { type: "success" });
+              };
+              notify();
+            }}
+          >
+            OLL -<br/> {_id.slice(0, 12)}
+          </p>
           <div style={{ display: "flex" }}>
             <div
               style={{
@@ -339,6 +349,9 @@ const FloatingUserData = ({
             >
               <option className="new" value="new">
                 New
+              </option>
+              <option className="noTeacher" value="noTeacher">
+                !Teacher
               </option>
               <option className="follow" value="follow">
                 Fol. Up
@@ -417,7 +430,7 @@ const FloatingUserData = ({
               className="codeSelector"
               onChange={(e) => setcCode(e.target.value)}
             >
-              {countryData.map((e,i) => {
+              {countryData.map((e, i) => {
                 return (
                   <option
                     key={i}
@@ -541,7 +554,7 @@ const FloatingUserData = ({
                         }
                         return 0;
                       })
-                      .map((template,i) => {
+                      .map((template, i) => {
                         return (
                           <div key={i}>
                             <p
@@ -866,7 +879,7 @@ const FloatingUserData = ({
                 </p>
               </div>
             ) : (
-              comment.map(({ msg, date },i) => {
+              comment.map(({ msg, date }, i) => {
                 return (
                   <div className="commentsDisplay" key={i}>
                     <img
