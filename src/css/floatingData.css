@@ -286,12 +286,13 @@
 
 /* //Showing comments block */
 .commentBox {
-  position: relative;
+  position: absolute;
   z-index: 1000;
   width: 13vw;
   margin: auto;
-  top: 0%;
   display: flex;
+  left: 70%;
+  height: 25%;
   align-items: center;
   justify-content: space-between;
 }
@@ -323,15 +324,16 @@
 
 /* Showing Templates */
 .templateBox {
-  position: relative;
+  position: absolute;
   z-index: 100;
   bottom: 0%;
-  margin: auto;
   background-color: #454545;
   padding: 0.5rem;
   width: 15vw;
   border-radius: 1rem;
   text-align: center;
+  left: 66%;
+  height: 25%;
 }
 
 .templateBox .heading {

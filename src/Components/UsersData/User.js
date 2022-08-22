@@ -63,6 +63,7 @@ const User = (props) => {
   useOutsideAlerter(commentRef, showComments, setshowComments);
   useOutsideAlerter(commentRef, showComments, setshowComments);
   useOutsideAlerter(topRef, sendToTop, setsendToTop);
+  const [height, setheight] = useState();
 
   const d = new Date(inqDate).toString();
 
@@ -150,7 +151,7 @@ const User = (props) => {
       <div style={{ position: "absolute" }}>
         <ToastContainer
           position="top-right"
-          autoClose={2000}
+          autoClose={1000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -270,21 +271,129 @@ const User = (props) => {
           <div
             className="btn"
             onClick={(e) => {
+              console.log(e.clientY);
+              setheight(e.clientY);
               setshowTemplate(!showTemplate);
               e.stopPropagation();
             }}
           >
             <BsWhatsapp size={21} color={"#0ac032"} />
             Template
+            <div
+              ref={templateRef}
+              style={
+                showTemplate
+                  ? { display: "block", top: `${height + 35}px` }
+                  : { display: "none" }
+              }
+              className="templateBox"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <p className="heading">Select a Template</p>
+              <div className="content">
+                {props.templateMsg
+                  ? props.templateMsg
+                      .filter((e) => {
+                        if (searchTemplate) {
+                          if (
+                            e.elementName.toLowerCase().includes(searchTemplate)
+                          ) {
+                            return e;
+                          }
+                        } else {
+                          return e;
+                        }
+                        return 0;
+                      })
+                      .map((template, i) => {
+                        return (
+                          <div key={i}>
+                            <p
+                              onClick={async () => {
+                                setshowTemplate(!showTemplate);
+                                openModal(template, props.data);
+                              }}
+                            >
+                              {template.elementName}
+                            </p>
+                            <div className="line"></div>
+                          </div>
+                        );
+                      })
+                  : null}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  type="text"
+                  value={searchTemplate}
+                  onChange={(e) => setsearchTemplate(e.target.value)}
+                  placeholder="Search templates..."
+                  autoFocus={true}
+                />
+              </div>
+            </div>
           </div>
           <div
             className="btn"
             onClick={(e) => {
+              setheight(e.clientY);
               setshowComments(!showComments);
               e.stopPropagation();
             }}
           >
             Comment
+            <div
+              ref={commentRef}
+              style={
+                showComments
+                  ? { display: "block", top: `${height + 35}px` }
+                  : { display: "none" }
+              }
+              className="commentBox"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  type="text"
+                  name="comment"
+                  value={comment}
+                  onChange={(e) => setcomment(e.target.value)}
+                  placeholder="Comment.."
+                  autoFocus={true}
+                  onKeyPress={handleKeyPress}
+                />
+                <AiOutlineRight
+                  size={19}
+                  className="icon"
+                  onClick={() => {
+                    axios.put(`${BASE_URL}/comment`, {
+                      id: _id,
+                      comment: comment,
+                    });
+                    setTimeout(() => {
+                      props.getUserData();
+                    }, 1000);
+                    setcomment("");
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </p>
         <p className="sourceValue">{source}</p>
@@ -326,101 +435,6 @@ const User = (props) => {
             </option>
           </select>
         </p>
-      </div>
-      <div
-        ref={commentRef}
-        style={showComments ? { display: "block" } : { display: "none" }}
-        className="commentBox"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <input
-            type="text"
-            name="comment"
-            value={comment}
-            onChange={(e) => setcomment(e.target.value)}
-            placeholder="Comment.."
-            autoFocus={true}
-            onKeyPress={handleKeyPress}
-          />
-          <AiOutlineRight
-            size={19}
-            className="icon"
-            onClick={() => {
-              axios.put(`${BASE_URL}/comment`, {
-                id: _id,
-                comment: comment,
-              });
-              setTimeout(() => {
-                props.getUserData();
-              }, 1000);
-              setcomment("");
-            }}
-          />
-        </div>
-      </div>
-      <div
-        ref={templateRef}
-        style={showTemplate ? { display: "block" } : { display: "none" }}
-        className="templateBox"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <p className="heading">Select a Template</p>
-        <div className="content">
-          {props.templateMsg
-            ? props.templateMsg
-                .filter((e) => {
-                  if (searchTemplate) {
-                    if (e.elementName.toLowerCase().includes(searchTemplate)) {
-                      return e;
-                    }
-                  } else {
-                    return e;
-                  }
-                  return 0;
-                })
-                .map((template, i) => {
-                  return (
-                    <div key={i}>
-                      <p
-                        onClick={async () => {
-                          setshowTemplate(!showTemplate);
-                          openModal(template, props.data);
-                        }}
-                      >
-                        {template.elementName}
-                      </p>
-                      <div className="line"></div>
-                    </div>
-                  );
-                })
-            : null}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <input
-            type="text"
-            value={searchTemplate}
-            onChange={(e) => setsearchTemplate(e.target.value)}
-            placeholder="Search templates..."
-            autoFocus={true}
-          />
-        </div>
       </div>
       <div
         ref={topRef}
