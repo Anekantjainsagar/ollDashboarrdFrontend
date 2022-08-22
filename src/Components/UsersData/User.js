@@ -215,7 +215,7 @@ const User = (props) => {
         <p className="sourceValue">{source}</p>
         <p className="stageValue" onClick={(e) => e.stopPropagation()}>
           <select
-            style={{ width: "75%" }}
+            style={{ width: "73%" }}
             ref={stageRef}
             value={stage ? stage : stageValue}
             className={stage ? stage : stageValue}

@@ -145,7 +145,7 @@ const FloatingUserData = ({
   const d = new Date(inqDate).toString();
 
   const handleKeyPress = (e) => {
-    if (comments.length > 0) {
+    if (comments?.length > 0) {
       if (e.key === "Enter") {
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
