@@ -18,20 +18,16 @@ function App() {
   const [page, setpage] = useState(1);
   //Use tab for camelCase in states
   const [noOfUsers, setnoOfUsers] = useState();
-  const [loading, setloading] = useState(false);
 
   const getUserData = () => {
     axios
     .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
     .then((res) => {
-        setloading(true);
         setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
-        setloading(false);
       })
       .catch((err) => {
         console.log(err);
-        setloading(false);
       });
   };
 
@@ -121,7 +117,6 @@ function App() {
         setpage={setpage}
         setfilter={setFilter}
         noOfUsers={noOfUsers}
-        loading={loading}
         setdata={setdata}
       />
     </div>

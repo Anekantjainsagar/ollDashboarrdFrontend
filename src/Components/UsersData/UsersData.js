@@ -13,8 +13,8 @@ const UsersData = ({
   page,
   setpage,
   noOfUsers,
-  loading,  
-  setdata
+  loading,
+  setdata,
 }) => {
   const [templateMsg, settemplateMsg] = useState();
 
@@ -43,56 +43,43 @@ const UsersData = ({
         settemplateMsg(response.messageTemplates);
       })
       .catch((err) => console.error(err));
-    }, []);
-    
+  }, []);
+
   return (
     <>
       <div className="usersData" ref={usersRef}>
         <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
         <UserHeading filter={filter} setfilter={setfilter} />
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <ThreeDots color="#fff" height={80} width={80} />
-          </div>
-        ) : (
-          <>
-            {usersData?.length >= 0 ? (
-              usersData.map((e, index) => {
-                return (
-                  <User
-                    getUserData={getUserData}
-                    usersData={usersData}
-                    data={e}
-                    key={index}
-                    index={index}
-                    templateMsg={templateMsg}
-                    setdata={setdata}
-                    noOfUsers={noOfUsers}
-                  />
-                );
-              })
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                }}
-              >
-                <ThreeDots color="#fff" height={80} width={80} />
-              </div>
-            )}
-            <Pagination page={page} setpage={setpage} NoOfUsers={noOfUsers} />
-          </>
-        )}
+        <>
+          {usersData?.length >= 0 ? (
+            usersData.map((e, index) => {
+              return (
+                <User
+                  getUserData={getUserData}
+                  usersData={usersData}
+                  data={e}
+                  key={index}
+                  index={index}
+                  templateMsg={templateMsg}
+                  setdata={setdata}
+                  noOfUsers={noOfUsers}
+                />
+              );
+            })
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <ThreeDots color="#fff" height={80} width={80} />
+            </div>
+          )}
+          <Pagination page={page} setpage={setpage} NoOfUsers={noOfUsers} />
+        </>
       </div>
     </>
   );
