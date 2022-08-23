@@ -1,12 +1,12 @@
-{
-    "name":"Anekant jain",
-    "email":"anekant@gmail.com",
-    "source":"website",
-    "phone":7692045606
-}
-,{
-    "name":"Anekant jain",
-    "email":"anekant@gmail.com",
-    "source":"website",
-    "phone":7692045606
-}
+[
+    {
+        "name":"Mr. abc",
+        "email":"abc@gmail.com",
+        "phone":6261917559
+    }
+    ,{
+        "name":"Mr. xyz",
+        "email":"xyz@gmail.com",
+        "phone":7692045606
+    }
+]

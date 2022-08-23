@@ -36,7 +36,6 @@
   display: grid;
   /* grid-template-columns: repeat(10,2fr); */
   grid-template-columns: 5% 8% 12% 9% 10% 10% 13% 13% 10% 12%;
-  width: 100%;
   padding: 0 1.6rem;
 }
 

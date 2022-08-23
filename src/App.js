@@ -21,16 +21,17 @@ function App() {
   const [loading, setloading] = useState(false);
 
   const getUserData = () => {
+    setloading(true);
     axios
       .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
       .then((res) => {
-        setloading(true);
         setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
         setloading(false);
       })
       .catch((err) => {
         console.log(err);
+        setloading(false);
       });
   };
 

@@ -170,6 +170,7 @@ const User = (props) => {
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{_id.slice(22, 24)}</p>
+        {/* <p className="idValue">{props.noOfUsers - props.index}</p> */}
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
         <p className="phoneValue">{(cCode ? cCode : "") + phone}</p>

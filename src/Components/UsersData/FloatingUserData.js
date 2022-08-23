@@ -90,6 +90,7 @@ const FloatingUserData = ({
   const [showTemplate, setshowTemplate] = useState(false);
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
+  const [height, setheight] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
 
@@ -299,7 +300,7 @@ const FloatingUserData = ({
               notify();
             }}
           >
-            OLL -<br/> {_id.slice(0, 12)}
+            OLL -<br /> {_id.slice(0, 12)}
           </p>
           <div style={{ display: "flex" }}>
             <div
@@ -491,7 +492,7 @@ const FloatingUserData = ({
         <div className="contactContainer">
           <p>Contact</p>
           <div className="container">
-            <a href="tel:9920188188">
+            <a href={`tel:${phone}`}>
               <ImPhone size={30} color={"white"} className="iconStyle" />
             </a>
             <AiOutlineMail
@@ -521,7 +522,13 @@ const FloatingUserData = ({
               color={"white"}
               className="iconStyle"
             />
-            <div className="btn" onClick={() => setshowTemplate(!showTemplate)}>
+            <div
+              className="btn"
+              onClick={(e) => {
+                setheight(e.clientY)
+                setshowTemplate(!showTemplate);
+              }}
+            >
               <BsWhatsapp
                 size={20}
                 style={{ marginRight: "0.3rem" }}
@@ -530,7 +537,7 @@ const FloatingUserData = ({
               Template
             </div>
             <div
-              style={showTemplate ? { display: "block" } : { display: "none" }}
+              style={showTemplate ? { display: "block",top: `${height + 30}px`, left:"38%" } : { display: "none" }}
               className="templateBox"
               onClick={(e) => {
                 e.stopPropagation();

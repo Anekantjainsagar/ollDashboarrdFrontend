@@ -43,12 +43,13 @@ const UsersData = ({
         settemplateMsg(response.messageTemplates);
       })
       .catch((err) => console.error(err));
-  }, []);
-
+    }, []);
+    
   return (
     <>
       <div className="usersData" ref={usersRef}>
         <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
+        <UserHeading filter={filter} setfilter={setfilter} />
         {loading ? (
           <div
             style={{
@@ -62,7 +63,6 @@ const UsersData = ({
           </div>
         ) : (
           <>
-            <UserHeading filter={filter} setfilter={setfilter} />
             {usersData?.length >= 0 ? (
               usersData.map((e, index) => {
                 return (
@@ -71,8 +71,10 @@ const UsersData = ({
                     usersData={usersData}
                     data={e}
                     key={index}
+                    index={index}
                     templateMsg={templateMsg}
                     setdata={setdata}
+                    noOfUsers={noOfUsers}
                   />
                 );
               })
