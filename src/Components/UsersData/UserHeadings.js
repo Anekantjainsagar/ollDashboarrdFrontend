@@ -30,6 +30,8 @@ const UserHeadings = ({ filter, setfilter }) => {
             <option value="group Offline">group Offline</option>
             <option value="1 to 1 Online">1 to 1 Online</option>
             <option value="1 to 1 Offline">1 to 1 Offline</option>
+            <option value="Trial Offline">trial Offline</option>
+            <option value="Trial Online">trial Online</option>
           </select>
         </p>
         <p className="offerDetails">Offer Det.</p>

@@ -133,7 +133,7 @@ const Form = ({ getUserData }) => {
                 name="email"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
-                placeholder="Email *"
+                placeholder="Email"
                 className="input"
               />
               <input

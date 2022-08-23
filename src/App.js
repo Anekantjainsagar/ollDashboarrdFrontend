@@ -21,8 +21,8 @@ function App() {
 
   const getUserData = () => {
     axios
-    .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
-    .then((res) => {
+      .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
+      .then((res) => {
         setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
       })
@@ -42,12 +42,14 @@ function App() {
           if (isNaN(filterBySearch) === true) {
             if (e.name.toLowerCase().includes(filterBySearch)) {
               return e;
-            } else if (e?._id.toString().includes(filterBySearch)) {
-              return e;
             }
           } else {
             filterBySearch = filterBySearch.toString();
-            if (e?.phone.toString().includes(filterBySearch)) {
+            if (filterBySearch.length > e?.id.toString().length) {
+              if (e?.phone.toString().includes(filterBySearch)) {
+                return e;
+              }
+            } else if (e?.id.toString().includes(filterBySearch)) {
               return e;
             }
           }

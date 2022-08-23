@@ -101,21 +101,6 @@ const BatchDetails = ({
             />
             <p style={{ marginLeft: "0.4rem" }}>Off.</p>
           </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="mode"
-              value={"Trial"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>Trial</p>
-          </div>
         </div>
         <div
           className="selectMode"
@@ -152,6 +137,21 @@ const BatchDetails = ({
               name="type"
             />
             <p style={{ marginLeft: "0.4rem" }}>Group</p>
+          </div>
+          <div
+            style={{
+              margin: "0.75rem 0",
+              paddingLeft: "0.15rem",
+              display: "flex",
+            }}
+          >
+            <input
+              style={{ color: "black", cursor: "pointer" }}
+              type={"radio"}
+              name="type"
+              value={"Trial"}
+            />
+            <p style={{ marginLeft: "0.4rem" }}>Trial</p>
           </div>
         </div>
         <div

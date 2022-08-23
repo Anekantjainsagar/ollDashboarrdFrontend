@@ -777,9 +777,6 @@ const FloatingUserData = ({
                   <option style={{ fontSize: "1.6rem" }} value={"Offline"}>
                     Offline
                   </option>
-                  <option style={{ fontSize: "1.6rem" }} value={"Trial"}>
-                    Trial
-                  </option>
                 </select>
               </div>
               <div
@@ -807,6 +804,9 @@ const FloatingUserData = ({
                   </option>
                   <option style={{ fontSize: "1.6rem" }} value={"group"}>
                     Group
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"Trial"}>
+                    Trial
                   </option>
                 </select>
               </div>
