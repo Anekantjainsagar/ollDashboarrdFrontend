@@ -39,6 +39,7 @@ const BatchDetails = ({
   setetime,
   price,
   setprice,
+  height,
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
@@ -47,7 +48,11 @@ const BatchDetails = ({
     <div
       ref={ref}
       className="detailsBtnContainer"
-      style={details === true ? { display: "block" } : { display: "none" }}
+      style={
+        details === true
+          ? { display: "block", top: `${height + 30}px` }
+          : { display: "none" }
+      }
     >
       <div className="header">
         <p>Batch Detail</p>
@@ -95,6 +100,21 @@ const BatchDetails = ({
               value={"Offline"}
             />
             <p style={{ marginLeft: "0.4rem" }}>Off.</p>
+          </div>
+          <div
+            style={{
+              margin: "0.75rem 0",
+              paddingLeft: "0.15rem",
+              display: "flex",
+            }}
+          >
+            <input
+              style={{ color: "black", cursor: "pointer" }}
+              type={"radio"}
+              name="mode"
+              value={"Trial"}
+            />
+            <p style={{ marginLeft: "0.4rem" }}>Trial</p>
           </div>
         </div>
         <div
@@ -217,12 +237,16 @@ const BatchDetails = ({
                 className="valueSelector"
                 onChange={(e) => {
                   setstime(e.target.value);
-                  var index = times.indexOf(e.target.value)
-                  setetime(times[index+2]);
+                  var index = times.indexOf(e.target.value);
+                  setetime(times[index + 2]);
                 }}
               >
-                {times.map((time,index) => {
-                  return <option key={index} value={time}>{time}</option>;
+                {times.map((time, index) => {
+                  return (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
               <p className="valueSelectorHead">End Time</p>
@@ -235,8 +259,12 @@ const BatchDetails = ({
                   setetime(e.target.value);
                 }}
               >
-                {times.map((time,index) => {
-                  return <option key={index} value={time}>{time}</option>;
+                {times.map((time, index) => {
+                  return (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
             </div>

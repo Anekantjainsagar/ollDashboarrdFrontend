@@ -290,18 +290,8 @@ const FloatingUserData = ({
             : "null offerDetailContainer"
         }
       >
-        <div className="header">
-          <p
-            onClick={async () => {
-              await navigator.clipboard.writeText(_id);
-              const notify = () => {
-                toast("Id copied successfully", { type: "success" });
-              };
-              notify();
-            }}
-          >
-            OLL -<br /> {_id.slice(0, 12)}
-          </p>
+        <div className="header" onContextMenu={(e) => e.stopPropagation()}>
+          <p>OLL - {id}</p>
           <div style={{ display: "flex" }}>
             <div
               style={{
@@ -525,7 +515,7 @@ const FloatingUserData = ({
             <div
               className="btn"
               onClick={(e) => {
-                setheight(e.clientY)
+                setheight(e.clientY);
                 setshowTemplate(!showTemplate);
               }}
             >
@@ -537,7 +527,11 @@ const FloatingUserData = ({
               Template
             </div>
             <div
-              style={showTemplate ? { display: "block",top: `${height + 30}px`, left:"38%" } : { display: "none" }}
+              style={
+                showTemplate
+                  ? { display: "block", top: `${height + 30}px`, left: "38%" }
+                  : { display: "none" }
+              }
               className="templateBox"
               onClick={(e) => {
                 e.stopPropagation();
@@ -782,6 +776,9 @@ const FloatingUserData = ({
                   </option>
                   <option style={{ fontSize: "1.6rem" }} value={"Offline"}>
                     Offline
+                  </option>
+                  <option style={{ fontSize: "1.6rem" }} value={"Trial"}>
+                    Trial
                   </option>
                 </select>
               </div>
