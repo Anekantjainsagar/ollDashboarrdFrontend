@@ -19,7 +19,7 @@ import { ImPhone } from "react-icons/im";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
 import times from "../Topbar/times";
-import copy from "copy-to-clipboard";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -94,8 +94,6 @@ const FloatingUserData = ({
   const [height, setheight] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
-
-  const user = usersData.find((user) => user._id === _id);
 
   const updateData = async (e) => {
     e.preventDefault();
@@ -491,33 +489,29 @@ const FloatingUserData = ({
             <a href={`tel:${phone}`}>
               <ImPhone size={30} color={"white"} className="iconStyle" />
             </a>
-            <AiOutlineMail
-              size={30}
-              color={"white"}
-              onClick={async () => {
-                await navigator.clipboard.writeText(email);
+            <CopyToClipboard
+              text={email}
+              onCopy={() => {
                 const notify = () => {
                   toast("Email copied successfully", { type: "success" });
                 };
                 notify();
                 window.open("https://mail.google.com/mail/u/0");
               }}
-              className="iconStyle"
-            />
-            <AiOutlineCopy
-              size={30}
-              onClick={async () => {
-                await navigator.clipboard.writeText(
-                  name + " " + phone + " " + email
-                );
+            >
+              <AiOutlineMail size={30} color={"white"} className="iconStyle" />
+            </CopyToClipboard>
+            <CopyToClipboard
+              text={`${name} ${phone} ${email}`}
+              onCopy={() => {
                 const notify = () => {
                   toast("Copied successfully", { type: "success" });
                 };
                 notify();
               }}
-              color={"white"}
-              className="iconStyle"
-            />
+            >
+              <AiOutlineCopy size={30} color={"white"} className="iconStyle" />
+            </CopyToClipboard>
             <div
               className="btn"
               onClick={(e) => {
@@ -915,33 +909,21 @@ const FloatingUserData = ({
         <div className="inqReports">
           <div className="header">
             <p className="head">Inquiry Reports</p>
-            <button
-              className="btn"
-              onClick={async () => {
+            <CopyToClipboard
+              text={`${name} ${phone} ${email} ${school} ${source} ${d.slice(
+                4,
+                21
+              )}`}
+              onCopy={() => {
                 print();
-                await navigator.clipboard.writeText(
-                  name +
-                    " " +
-                    phone +
-                    " " +
-                    email +
-                    " " +
-                    school +
-                    " " +
-                    course +
-                    " " +
-                    source +
-                    " " +
-                    d.slice(4, 21)
-                );
                 const notify = () => {
                   toast("Copied successfully", { type: "success" });
                 };
                 notify();
               }}
             >
-              SHARE
-            </button>
+              <button className="btn">SHARE</button>
+            </CopyToClipboard>
           </div>
           <div className="content">
             <div className="container1">
