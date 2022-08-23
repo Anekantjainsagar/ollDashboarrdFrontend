@@ -19,6 +19,7 @@ import { ImPhone } from "react-icons/im";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
 import times from "../Topbar/times";
+import copy from "copy-to-clipboard";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
