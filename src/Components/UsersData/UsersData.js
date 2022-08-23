@@ -50,6 +50,7 @@ const UsersData = ({
       <div className="usersData" ref={usersRef}>
         <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
         <UserHeading filter={filter} setfilter={setfilter} />
+        <div style={{ margin: "2.5rem 0" }}></div>
         <>
           {usersData?.length >= 0 ? (
             usersData.map((e, index) => {
