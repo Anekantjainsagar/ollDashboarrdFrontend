@@ -64,8 +64,14 @@ const User = (props) => {
   useOutsideAlerter(commentRef, showComments, setshowComments);
   useOutsideAlerter(topRef, sendToTop, setsendToTop);
   const [height, setheight] = useState();
+  const [windowHeight, setwindowHeight] = useState();
 
   const d = new Date(inqDate).toString();
+
+  useEffect(() => {
+    const { innerWidth: width, innerHeight: heightVal } = window;
+    setwindowHeight(heightVal);
+  }, []);
 
   function openModal(e, data) {
     setIsOpen(true);
@@ -205,7 +211,7 @@ const User = (props) => {
           >
             {status === "new" ? (
               <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-            ) : status === "follow" ? (
+            ) : status === "follow" || status === "offReady" ? (
               <BiUpArrowAlt
                 size={30}
                 color={"rgba(255, 161, 74, 1)"}
@@ -219,7 +225,7 @@ const User = (props) => {
             <p style={{ fontSize: "1.1rem" }}>
               {status === "new"
                 ? "URG"
-                : status === "follow"
+                : status === "follow" || status === "offReady"
                 ? "High"
                 : status === "noCourse" || status === "noBatch"
                 ? "Med."
@@ -264,6 +270,9 @@ const User = (props) => {
             <option className="started" value="started">
               Started
             </option>
+            <option className="offReady" value="offReady">
+              Offer Ready
+            </option>
             <option className="noPay" value="noPay">
               !Pay
             </option>
@@ -276,7 +285,6 @@ const User = (props) => {
           <div
             className="btn"
             onClick={(e) => {
-              console.log(e.clientY);
               setheight(e.clientY);
               setshowTemplate(!showTemplate);
               e.stopPropagation();
@@ -288,7 +296,7 @@ const User = (props) => {
               ref={templateRef}
               style={
                 showTemplate
-                  ? { display: "block", top: `${height + 35}px` }
+                  ? { display: "block", top: (height>windowHeight/2)?`${height-222}px`:`${height + 30}px` }
                   : { display: "none" }
               }
               className="templateBox"

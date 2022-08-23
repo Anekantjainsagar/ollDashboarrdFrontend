@@ -184,8 +184,13 @@
 }
 
 .noTeacher {
-  color: rgb(255, 119, 149);
-  background-color: rgb(207, 0, 28);
+  color: rgb(134, 0, 0);
+  background-color: rgb(238, 255, 0);
+}
+
+.offReady{
+  color: green;
+  background-color: rgb(82, 255, 47);
 }
 
 .noPay {

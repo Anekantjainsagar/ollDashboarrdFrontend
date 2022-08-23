@@ -304,7 +304,8 @@ const FloatingUserData = ({
             >
               {(statuses === undefined ? status : statuses) === "new" ? (
                 <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-              ) : (statuses === undefined ? status : statuses) === "follow" ? (
+              ) : (statuses === undefined ? status : statuses) === "follow" ||
+                (statuses === undefined ? status : statuses) === "offReady" ? (
                 <BiUpArrowAlt
                   size={30}
                   color={"rgba(255, 161, 74, 1)"}
@@ -319,7 +320,8 @@ const FloatingUserData = ({
               <p style={{ fontSize: "1.1rem" }}>
                 {(statuses === undefined ? status : statuses) === "new"
                   ? "URG"
-                  : (statuses === undefined ? status : statuses) === "follow"
+                  : (statuses === undefined ? status : statuses) === "follow" ||
+                    (statuses === undefined ? status : statuses) === "offReady"
                   ? "High"
                   : (statuses === undefined ? status : statuses) ===
                       "noCourse" ||
@@ -349,6 +351,9 @@ const FloatingUserData = ({
               </option>
               <option className="noCourseName" value="noCourse">
                 !Course
+              </option>
+              <option className="offReady" value="offReady">
+                Offer Ready
               </option>
               <option className="started" value="started">
                 Started

@@ -56,6 +56,7 @@ const UserHeadings = ({ filter, setfilter }) => {
             <option value="noPay">!Pay</option>
             <option value="noCourse">!Course</option>
             <option value="started">Started</option>
+            <option value="offReady">Offer Ready</option>
             <option value="noTeacher">!Teacher</option>
             <option value="noBatch">!Batch</option>
           </select>
