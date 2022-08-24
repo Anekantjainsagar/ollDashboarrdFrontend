@@ -10,7 +10,7 @@ import axios from "axios";
 import { BASE_URL } from "../../Utils/index";
 import UsersData from "../UsersData/UsersData";
 
-function Sales() {
+function Sales({sales}) {
   const [data, setdata] = useState();
   var [filterBySearch, setfilterBySearch] = useState();
   const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
@@ -109,8 +109,10 @@ function Sales() {
         getUserData={getUserData}
         filterBySearch={filterBySearch}
         setfilterBySearch={setfilterBySearch}
-      />
+        sales={sales}
+        />
       <UsersData
+        sales={sales}
         getUserData={getUserData}
         usersData={filteredData}
         filterBySearch={filterBySearch}

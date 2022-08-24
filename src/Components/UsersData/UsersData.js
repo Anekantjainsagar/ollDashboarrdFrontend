@@ -15,6 +15,7 @@ const UsersData = ({
   noOfUsers,
   loading,
   setdata,
+  sales
 }) => {
   const [templateMsg, settemplateMsg] = useState();
 

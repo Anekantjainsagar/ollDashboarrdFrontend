@@ -8,7 +8,6 @@ root.render(
   <React.StrictMode>
     <Router>
       <App />
-      {/* <DraggableApp /> */}
     </Router>
   </React.StrictMode>
 );
