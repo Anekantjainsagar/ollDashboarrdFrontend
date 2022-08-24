@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./css/Navbar.css";
-import "./css/Topbar.css";
-import "./css/usersData.css";
-import "./css/floatingData.css";
+import "../../css/Navbar.css";
+import "../../css/Topbar.css";
+import "../../css/usersData.css";
+import "../../css/floatingData.css";
 
-import Nav from "./Components/Nav";
-import Topbar from "./Components/Topbar/Topbar";
+import Nav from "../Nav";
+import Topbar from "../Topbar/Topbar";
 import axios from "axios";
-import { BASE_URL } from "./Utils";
-import UsersData from "./Components/UsersData/UsersData";
+import { BASE_URL } from "../../Utils/index";
+import UsersData from "../UsersData/UsersData";
 
 function Sales() {
   const [data, setdata] = useState();

@@ -179,7 +179,7 @@ const User = (props) => {
         {/* <p className="idValue">{props.noOfUsers - props.index}</p> */}
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
-        <p className="phoneValue">{(cCode ? cCode : "") + phone}</p>
+        <p className="phoneValue">{`${(cCode)?cCode:""}${phone}`}</p>
         <p className="classTypeValue">
           {(batchDetails?.type === "group"
             ? "Grp"
