@@ -1,31 +1,34 @@
 [
     {
-        "name":"Mr. abc",         
-        "email":"abc@gmail.com",
-        "phone":6261917559,
-        "age":28,
-        "school":"ABC",
-        "course":"Python courses",
-        "source":"Website",
-        "mode":"Online / Offline",
-        "type":"group / 1 to 1 / Trial",
-        "days":"MWF / TTF / SS",
-        "price":"50",
-        "address":"ABC",
-        "time":"09:00AM 10:00AM",
-        "sessionsCount":50,
-        "startDate":"2022-08-23T03:47:48.863Z",
-        "stage":"🥵 warm / 🥶 cold / 🥳 won / 🔥 hot",
-        "status":"noBatch / noPay / started / new / follow / noCourse / noTeacher",
-        "inqDate":"2022-08-23T03:47:48.863Z",
-        "comment":[
-            {msg: "Hello i am a comment", date: "2022-08-15T10:20:51.496Z", _id: "62fa1e034eecf8addd7b555c"},
-            {msg: "I am a comment", date: "2022-08-15T10:20:51.496Z", _id: "62fa1e034eecf8addd7b555c"}
+        "id": 1,
+        "name": "Mr. abc",
+        "email": "abc@gmail.com",
+        "phone": 6261917559,
+        "age": 28,
+        "school": "ABC",
+        "course": "Python courses",
+        "source": "Website",
+        "mode": "Online / Offline",
+        "type": "group / 1 to 1 / Trial",
+        "days": "MWF / TTF / SS",
+        "price": 50,
+        "address": "ABC",
+        "time": "09:00AM 10:00AM",
+        "sessionsCount": 50,
+        "startDate": "2022-08-23T03:47:48.863Z",
+        "stage": "🥵 warm / 🥶 cold / 🥳 won / 🔥 hot",
+        "status": "noBatch / noPay / started / new / follow / noCourse / noTeacher / offReady",
+        "inqDate": "2022-08-23T03:47:48.863Z",
+        "comment": [
+            {msg: "Hello i am a comment", date: "2022-08-15T10:20:51.496Z", _id: "62fa1e034eecf8addd7b555c"
+            },
+            {msg: "I am a comment", date: "2022-08-15T10:20:51.496Z", _id: "62fa1e034eecf8addd7b555c"
+            }
         ]
-    }
-    ,{
-        "name":"Mr. xyz",
-        "email":"xyz@gmail.com",
-        "phone":7692045606
+    },
+    {
+        "name": "Mr. xyz",
+        "email": "xyz@gmail.com",
+        "phone": 7692045606
     }
 ]

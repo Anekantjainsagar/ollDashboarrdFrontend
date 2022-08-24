@@ -159,7 +159,7 @@ const FloatingUserData = ({
     }
   };
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal(e, data) {
     setIsOpen(true);
