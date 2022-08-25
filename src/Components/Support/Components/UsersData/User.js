@@ -10,6 +10,7 @@ import { BASE_URL } from "../../../../Utils/index";
 import ShowModal from "./ShowModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import './index.css'
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -166,7 +167,7 @@ const User = (props) => {
         />
       </div>
       <div
-        className="user"
+        className="userOfOperation"
         onContextMenu={() => {
           setsendToTop(!sendToTop);
         }}
@@ -176,62 +177,8 @@ const User = (props) => {
         style={{ cursor: "pointer" }}
       >
         <p className="idValue">{id}</p>
-        {/* <p className="idValue">{props.noOfUsers - props.index}</p> */}
-        <p className="inquiryDateValue">{d.slice(4, 21)}</p>
-        <p className="nameValue">{name}</p>
-        <p className="phoneValue">{`${cCode ? cCode : ""}${phone}`}</p>
-        <p className="classTypeValue">
-          {(batchDetails?.type === "group"
-            ? "Grp"
-            : batchDetails?.type === "Trial"
-            ? "Try"
-            : "1-1") +
-            " " +
-            (batchDetails?.mode === "Online" ? "Onl." : "Off.")}
-        </p>
-        <p className="offerDetailsValue">{course}</p>
-        <FloatingUserData
-          data={props.data}
-          details={details}
-          setDetails={setDetails}
-          getUserData={props.getUserData}
-          templateMsg={props.templateMsg}
-          setdata={props.setdata}
-          usersData={props.usersData}
-        />
-        <p className="statusValue" style={{ display: "flex" }}>
-          <div
-            style={{
-              marginRight: "1rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-            }}
-          >
-            {status === "new" ? (
-              <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-            ) : status === "follow" || status === "offReady" ? (
-              <BiUpArrowAlt
-                size={30}
-                color={"rgba(255, 161, 74, 1)"}
-                style={{ transform: "rotate(-45deg)" }}
-              />
-            ) : status === "noCourse" || status === "noBatch" ? (
-              <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
-            ) : (
-              <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
-            )}
-            <p style={{ fontSize: "1.1rem" }}>
-              {status === "new"
-                ? "URG"
-                : status === "follow" || status === "offReady"
-                ? "High"
-                : status === "noCourse" || status === "noBatch"
-                ? "Med."
-                : "Low"}
-            </p>
-          </div>
+        <p className="raiseDateValue">{d.slice(4, 21)}</p>
+        <p className="typeValue" style={{ display: "flex" }}>
           <select
             onClick={(e) => e.stopPropagation()}
             ref={statusRef}
@@ -281,7 +228,98 @@ const User = (props) => {
             </option>
           </select>
         </p>
-        <p className="actionsValue">
+        <p className="issueDetailValue">
+          {course}
+          <br />
+          {(batchDetails?.type === "group"
+            ? "Grp"
+            : batchDetails?.type === "Trial"
+            ? "Try"
+            : "1-1") +
+            " " +
+            (batchDetails?.mode === "Online" ? "Onl." : "Off.")}
+        </p>
+        <div
+          className="priorityValue"
+          style={{
+            marginRight: "1rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          {status === "new" ? (
+            <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
+          ) : status === "follow" || status === "offReady" ? (
+            <BiUpArrowAlt
+              size={30}
+              color={"rgba(255, 161, 74, 1)"}
+              style={{ transform: "rotate(-45deg)" }}
+            />
+          ) : status === "noCourse" || status === "noBatch" ? (
+            <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
+          ) : (
+            <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
+          )}
+          <p style={{ fontSize: "1.1rem" }}>
+            {status === "new"
+              ? "URG"
+              : status === "follow" || status === "offReady"
+              ? "High"
+              : status === "noCourse" || status === "noBatch"
+              ? "Med."
+              : "Low"}
+          </p>
+        </div>
+        <p className="stageOperationsValue" onClick={(e) => e.stopPropagation()}>
+          <select
+            style={{ width: "73%" }}
+            ref={stageRef}
+            value={stage ? stage : stageValue}
+            className={stage ? stage : stageValue}
+            onChange={async (e) => {
+              e.stopPropagation();
+              setstage(e.target.value);
+              await axios
+                .put(`${BASE_URL}/setStage`, {
+                  id: _id,
+                  newStage: e.target.value,
+                })
+                .then((response) => {
+                  if (response.data.acknowledged === true) {
+                    props.getUserData();
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            <option className="hot" value="🔥 hot">
+              🔥 Hot
+            </option>
+            <option className="warm" value="🥵 warm">
+              🥵 Warm
+            </option>
+            <option className="cold" value="🥶 cold">
+              🥶 Cold
+            </option>
+            <option className="won" value="🥳 won">
+              🥳 Won
+            </option>
+          </select>
+        </p>
+        <FloatingUserData
+          data={props.data}
+          details={details}
+          setDetails={setDetails}
+          getUserData={props.getUserData}
+          templateMsg={props.templateMsg}
+          setdata={props.setdata}
+          usersData={props.usersData}
+        />
+        <p className="actionsOperationValue">
           <div
             className="btn"
             onClick={(e) => {
@@ -302,6 +340,7 @@ const User = (props) => {
                         height > windowHeight / 2
                           ? `${height - 222}px`
                           : `${height + 30}px`,
+                      left: "63%",
                     }
                   : { display: "none" }
               }
@@ -373,7 +412,7 @@ const User = (props) => {
               ref={commentRef}
               style={
                 showComments
-                  ? { display: "block", top: `${height + 35}px` }
+                  ? { display: "block", top: `${height + 32}px`, left: "64%" }
                   : { display: "none" }
               }
               className="commentBox"
@@ -415,45 +454,8 @@ const User = (props) => {
             </div>
           </div>
         </p>
-        <p className="sourceValue">{source}</p>
-        <p className="stageValue" onClick={(e) => e.stopPropagation()}>
-          <select
-            style={{ width: "73%" }}
-            ref={stageRef}
-            value={stage ? stage : stageValue}
-            className={stage ? stage : stageValue}
-            onChange={async (e) => {
-              e.stopPropagation();
-              setstage(e.target.value);
-              await axios
-                .put(`${BASE_URL}/setStage`, {
-                  id: _id,
-                  newStage: e.target.value,
-                })
-                .then((response) => {
-                  if (response.data.acknowledged === true) {
-                    props.getUserData();
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
-          >
-            <option className="hot" value="🔥 hot">
-              🔥 Hot
-            </option>
-            <option className="warm" value="🥵 warm">
-              🥵 Warm
-            </option>
-            <option className="cold" value="🥶 cold">
-              🥶 Cold
-            </option>
-            <option className="won" value="🥳 won">
-              🥳 Won
-            </option>
-          </select>
-        </p>
+        <p className="sourceOperationValue">{source}</p>
+        <p className="resolveDateValue">{d.slice(4, 21)}</p>
       </div>
       <div
         ref={topRef}

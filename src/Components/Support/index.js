@@ -13,7 +13,7 @@ import UsersData from "./Components/UsersData/UsersData";
 function Support({ sales }) {
   const [data, setdata] = useState();
   var [filterBySearch, setfilterBySearch] = useState();
-  const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
+  const [filter, setFilter] = useState({ stage: "", status: "", priority: "" });
   const [filteredData, setfilteredData] = useState(data);
   const [page, setpage] = useState(1);
   //Use tab for camelCase in states
@@ -80,12 +80,20 @@ function Support({ sales }) {
         }
       })
       .filter((e) => {
-        if (filter.class !== "") {
-          if (filter.class == "all") {
+        if (filter.priority !== "") {
+          if (filter.priority == "all") {
             return e;
+          } else if (filter.priority === "Urg") {
+            return e.status === "new";
+          } else if (filter.priority === "High") {
+            return e.status === "follow" || e.status === "offReady";
+          } else if (filter.priority === "Medium") {
+            return e.status === "noCourse" || e.status === "noBatch";
           } else {
             return (
-              e.batchDetails.type + " " + e.batchDetails.mode === filter.class
+              e.status === "noPay" ||
+              e.status === "noTeacher" ||
+              e.status === "started"
             );
           }
         } else {
