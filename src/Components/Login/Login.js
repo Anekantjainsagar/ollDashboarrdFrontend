@@ -45,6 +45,9 @@ const Login = ({ setsales }) => {
             );
           notify();
           console.log(res.data);
+          localStorage.setItem("token", res.data.token);
+          const token = localStorage.getItem("token");
+          console.log(token);
           if (res.data.data[0].type === "sales") {
             setTimeout(() => {
               if (res.status === 200) {
