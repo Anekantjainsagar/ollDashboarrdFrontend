@@ -55,7 +55,7 @@ const Login = ({ setsales }) => {
           } else {
             setTimeout(() => {
               if (res.status === 200) {
-                history("/support");
+                history("/oprations");
               }
             }, 500);
           }
@@ -86,7 +86,7 @@ const Login = ({ setsales }) => {
         <div className={styles.box}>
           <h1>Welcome Back &#9995;</h1>
           <input
-            className={styles.input}
+            className={styles.inputEmail}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             value={user.email}
             type="email"
@@ -94,26 +94,35 @@ const Login = ({ setsales }) => {
           />
           <div className={styles.inputBox}>
             <input
-              className={styles.input}
+              className={styles.inputPassword}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
               value={user.password}
-              type={(view)?"text":"password"}
+              type={view ? "text" : "password"}
               placeholder="Passoword"
-              style={{width:"88%"}}
             />
             {view ? (
               <AiOutlineEye
                 color="white"
                 size={25}
                 onClick={() => setView(!view)}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  position: "relative",
+                  zIndex: 10,
+                  right: "12%",
+                }}
               />
             ) : (
-              <AiOutlineEyeInvisible  
+              <AiOutlineEyeInvisible
                 color="white"
                 size={25}
                 onClick={() => setView(!view)}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  position: "relative",
+                  zIndex: 10,
+                  right: "12%",
+                }}
               />
             )}
           </div>

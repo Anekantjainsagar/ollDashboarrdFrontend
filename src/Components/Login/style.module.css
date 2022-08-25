@@ -19,7 +19,7 @@
 }
 
 .container .box {
-  width: 35%;
+  width: 22%;
   height: fit-content;
   border-radius: 1rem;
   padding: 0.4rem 1rem;
@@ -40,14 +40,14 @@
   margin-bottom: 0.75rem;
 }
 
-.inputBox{
-  width: 18vw;
+.inputBox {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.container .box .input {
+.container .box .inputEmail {
   margin: 1rem 0;
   background-color: #2b2b2b;
   font-size: 1.75rem;
@@ -56,7 +56,20 @@
   color: white;
   border: none;
   outline: none;
-  width: 18vw;
+  width: 75%;
+}
+
+.container .box .inputPassword {
+  margin: 1rem 0;
+  margin-left: 2.7rem;
+  background-color: #2b2b2b;
+  font-size: 1.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  color: white;
+  border: none;
+  outline: none;
+  width: 75%;
 }
 
 .container .box .btn {
