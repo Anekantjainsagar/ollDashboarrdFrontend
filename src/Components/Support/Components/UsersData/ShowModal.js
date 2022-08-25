@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
-import "../../css/Modal.css";
+import "../../../../css/Modal.css";
 import { css } from "glamor";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

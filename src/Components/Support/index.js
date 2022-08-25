@@ -8,7 +8,7 @@ import Nav from "./Components/Nav";
 import Topbar from "./Components/Topbar/Topbar";
 import axios from "axios";
 import { BASE_URL } from "../../Utils/index";
-import UsersData from "../UsersData/UsersData";
+import UsersData from "./Components/UsersData/UsersData";
 
 function Support({ sales }) {
   const [data, setdata] = useState();

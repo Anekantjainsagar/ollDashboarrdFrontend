@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "../../Utils/index";
+import { BASE_URL } from "../../../../Utils/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
 import ShowModal from "./ShowModal";
 import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
 import { BiUpArrowAlt } from "react-icons/bi";
@@ -28,15 +27,7 @@ function useOutsideAlerter(ref, show, setShow) {
   }, [ref, show, setShow]);
 }
 
-const FloatingUserData = ({
-  details,
-  setDetails,
-  data,
-  getUserData,
-  templateMsg,
-  setdata,
-  usersData,
-}) => {
+const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
   const {
     name,
     phone,
@@ -57,81 +48,14 @@ const FloatingUserData = ({
   const stageRef = useRef(null);
   const statusRef = useRef(null);
   const sideRef = useRef(null);
-  const [nameVal, setnameVal] = useState();
-  const [cCode, setcCode] = useState("+91");
-  const [number, setNumber] = useState();
-  const [userAge, setuserAge] = useState();
-  const [emailName, setemailName] = useState();
-  const [schoolName, setschoolName] = useState();
-  const [address, setaddress] = useState();
-  const [courseName, setCourseName] = useState();
-  const [NoSessions, setNoSessions] = useState();
-  const [price, setprice] = useState();
-  const [sourcePlatform, setsourcePlatform] = useState();
-  const [sourceTime, setsourceTime] = useState();
-  const [mode, setmode] = useState();
-  const [type, settype] = useState();
-  const [days, setdays] = useState();
-  const [stime, setstime] = useState(batchDetails?.time.split(" ")[0]);
-  const [etime, setetime] = useState(batchDetails?.time.split(" ")[1]);
   const [displayComment, setdisplayComment] = useState(true);
   const [comments, setcomments] = useState();
   const [stages, setstages] = useState();
   const [statuses, setstatuses] = useState();
-  const [searchTemplate, setsearchTemplate] = useState();
-  const [showTemplate, setshowTemplate] = useState(false);
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
-  const [height, setheight] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
-
-  const updateData = async (e) => {
-    e.preventDefault();
-
-    const obj = {
-      _id: _id,
-      name: nameVal === undefined ? name : nameVal,
-      phone: number === undefined ? phone : number,
-      email: emailName === undefined ? email : emailName,
-      age: userAge === undefined ? age : userAge,
-      school: schoolName === undefined ? school : schoolName,
-      course: courseName === undefined ? course : courseName,
-      source: sourcePlatform === undefined ? source : sourcePlatform,
-      mode: mode === undefined ? batchDetails?.mode : mode,
-      type: type === undefined ? batchDetails?.type : type,
-      address: address === undefined ? batchDetails?.address : address,
-      days: days === undefined ? batchDetails?.days : days,
-      status: statuses === undefined ? status : statuses,
-      stage: stages === undefined ? stage : stages,
-      startDate:
-        sourceTime === undefined ? batchDetails?.startDate : sourceTime,
-      time: stime + " " + etime,
-      sessionsCount:
-        NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
-      price: price === undefined ? batchDetails?.price : price,
-      cCode,
-    };
-    await axios.put(`${BASE_URL}/updateUser`, obj).then((res) => {
-      const notify = () =>
-        toast(
-          res.data.acknowledged
-            ? "Data updated successfully"
-            : "Internal sever error",
-          { type: res.data.acknowledged ? "success" : "error" }
-        ).configure({
-          bodyClassName: css({
-            backgroundColor: "blue",
-            height: "100%",
-            width: "100%",
-          }),
-        });
-      setTimeout(() => {
-        getUserData();
-      }, 100);
-      notify();
-    });
-  };
 
   const d = new Date(inqDate).toString();
 
@@ -389,7 +313,192 @@ const FloatingUserData = ({
             style={{ cursor: "pointer" }}
           />
         </div>
-        <div className="commentContainer">
+        <p
+          className="nameInput"
+          style={{
+            padding: 0,
+            backgroundColor: "transparent",
+            fontSize: "2.5rem",
+            fontWeight: "700",
+            margin: "1.8rem 0 0.75rem 0",
+          }}
+        >
+          {name}
+        </p>
+        <div className="inqDetailsContainer">
+          <p className="head" style={{ marginBottom: "1.25rem" }}>
+            Inquiry Details
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>Course :</p>
+            <p style={{ fontSize: "1.6rem", marginLeft: "1.9rem" }}>{course}</p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>Time :</p>
+            <div
+              style={{
+                marginLeft: "3.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "72%",
+              }}
+            >
+              <p style={{ fontSize: "1.6rem" }}>{batchDetails?.days}</p>
+              <p style={{ fontSize: "1.6rem" }}>
+                {batchDetails?.time.split(" ")[0]}
+                {" - "}
+                {batchDetails?.time.split(" ")[1]}
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            ></div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>Sessions :</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginLeft: "0.5rem",
+                width: "72%",
+              }}
+            >
+              <p style={{ fontSize: "1.6rem" }}>
+                {batchDetails?.sessionsCount}
+                {" Sessions"}
+              </p>
+              <p style={{ fontSize: "1.6rem" }}>
+                Rs.{batchDetails?.price}/hour
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            ></div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>Type :</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginLeft: "3.5rem",
+                width: "72%",
+              }}
+            >
+              <p style={{ fontSize: "1.6rem" }}>{batchDetails?.mode}</p>
+              <p style={{ fontSize: "1.6rem" }}>{batchDetails?.type}</p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            ></div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>Source :</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginLeft: "2rem",
+                width: "72%",
+              }}
+            >
+              <p style={{ fontSize: "1.6rem" }}>{source}</p>
+              <p style={{ fontSize: "1.6rem" }}>
+                {new Date(batchDetails?.startDate).toString().slice(4, 24)}
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+              }}
+            ></div>
+          </div>
+        </div>
+        <div className="inqReports">
+          <div className="header">
+            <p className="head">Issue Reports</p>
+            <CopyToClipboard
+              text={`${name} ${phone} ${email} ${school} ${source} ${d.slice(
+                4,
+                21
+              )}`}
+              onCopy={() => {
+                print();
+                const notify = () => {
+                  toast("Copied successfully", { type: "success" });
+                };
+                notify();
+              }}
+            >
+              <button className="btn">SHARE</button>
+            </CopyToClipboard>
+          </div>
+          <div className="content">
+            <div className="container1" style={{ margin: ".6rem 0" }}>
+              <p>Start Time : {d.slice(4, 21)}</p>
+              <p>Due Time : </p>
+            </div>
+            <div className="container2" style={{ margin: ".6rem 0" }}>
+              <p>End Time : </p>
+              <p>Assignee : Saman</p>
+            </div>
+          </div>
+        </div>
+        <div className="commentContainer" style={{ marginTop: "1.25rem" }}>
           <p>Comments</p>
           <input
             type="text"
@@ -453,36 +562,6 @@ const FloatingUserData = ({
             ) : null}
           </>
         ) : null}
-        <div className="inqReports">
-          <div className="header">
-            <p className="head">Inquiry Reports</p>
-            <CopyToClipboard
-              text={`${name} ${phone} ${email} ${school} ${source} ${d.slice(
-                4,
-                21
-              )}`}
-              onCopy={() => {
-                print();
-                const notify = () => {
-                  toast("Copied successfully", { type: "success" });
-                };
-                notify();
-              }}
-            >
-              <button className="btn">SHARE</button>
-            </CopyToClipboard>
-          </div>
-          <div className="content">
-            <div className="container1">
-              <p>Start Time : {d.slice(4, 21)}</p>
-              <p>Due Time : </p>
-            </div>
-            <div className="container2">
-              <p>End Time : </p>
-              <p>Assignee : Saman</p>
-            </div>
-          </div>
-        </div>
       </div>
     </>
   );

@@ -10,11 +10,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Login sales={sales} setsales={setsales} />} />
-      {sales === true ? (
         <Route path="/sales" element={<Sales />} />
-      ) : (
         <Route path="/support" element={<Support />} />
-      )}
     </Routes>
   );
 };
