@@ -192,22 +192,27 @@
   background-color: #b0ffc1;
 }
 
-.hot {
+.posted,
+.requested {
   color: #b90505;
   background-color: rgb(255, 163, 163);
 }
 
-.warm {
+.onBoarded {
   background-color: #ffb46e;
   color: #9b520e;
 }
 
-.cold {
+.notFound,
+.added,
+.courseReady,
+.verifying {
   color: #575757;
   background-color: #b6b6b6;
 }
 
-.won {
+.readyToTeach,
+.batchReady {
   color: #009c22;
   background-color: #9affb0;
 }

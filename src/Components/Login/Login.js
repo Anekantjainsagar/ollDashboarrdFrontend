@@ -5,12 +5,10 @@ import axios from "axios";
 import { BASE_URL } from "../../Utils/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = ({ setsales }) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
-  const history = useNavigate();
 
   useEffect(() => {
     setInterval(() => {

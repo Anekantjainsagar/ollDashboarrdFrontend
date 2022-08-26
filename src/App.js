@@ -35,7 +35,7 @@ const App = () => {
       history("/");
     }
     check();
-  }, [location.pathname, checkUser, sales]);
+  }, [location.pathname, sessionStorage.getItem("token"), sales]);
 
   return (
     <Routes>

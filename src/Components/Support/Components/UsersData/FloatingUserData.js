@@ -5,8 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowModal from "./ShowModal";
 import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
-import { BiUpArrowAlt } from "react-icons/bi";
-import { FaGripLines } from "react-icons/fa";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -46,12 +44,10 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
   } = data;
 
   const stageRef = useRef(null);
-  const statusRef = useRef(null);
   const sideRef = useRef(null);
   const [displayComment, setdisplayComment] = useState(true);
   const [comments, setcomments] = useState();
   const [stages, setstages] = useState();
-  const [statuses, setstatuses] = useState();
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
 
@@ -209,14 +205,14 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
           <p
             style={{
               fontSize: "1.5rem",
-              padding: "0.5rem 0.3rem",
+              padding: "0.3rem 0.3rem",
               width: "36%",
               margin: "auto",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               fontWeight: 700,
-              borderRadius: "0.5rem",
+              borderRadius: "1rem",
             }}
             value={status}
             className={status}

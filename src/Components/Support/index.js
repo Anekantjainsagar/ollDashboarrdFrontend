@@ -23,8 +23,15 @@ function Support({ sales }) {
     axios
       .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
       .then((res) => {
-        setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
+        const opretionData = res.data.users.filter((e) => {
+          return (
+            e.status === "noTeacher" ||
+            e.status === "noBatch" ||
+            e.status === "noCourse"
+          );
+        });
+        setdata(opretionData);
       })
       .catch((err) => {
         console.log(err);

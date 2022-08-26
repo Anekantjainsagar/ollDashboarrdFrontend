@@ -47,11 +47,45 @@ const UserHeadings = ({ filter, setfilter }) => {
               setfilter({ ...filter, stage: e.target.value });
             }}
           >
-            <option value="all">🙃 All</option>
-            <option value="🔥 hot">🔥 Hot</option>
-            <option value="🥵 warm">🥵 Warm</option>
-            <option value="🥶 cold">🥶 Cold</option>
-            <option value="🥳 won">🥳 Won</option>
+            <option className="new" value="all">
+              All
+            </option>
+            <option className="new" value="new">
+              New
+            </option>
+            <option className="posted" value="posted">
+              Posted
+            </option>
+            <option className="onBoarded" value="onBoarded">
+              Onboarded
+            </option>
+            <option className="notFound" value="notFound">
+              Not Found
+            </option>
+            <option className="readyToTeach" value="readyToTeach">
+              Ready to teach
+            </option>
+            <option className="requested" value="requested">
+              Requested
+            </option>
+            <option className="added" value="added">
+              Added
+            </option>
+            <option className="batchReady" value="batchReady">
+              Batch Ready
+            </option>
+            <option className="noTeacher" value="noTeacher">
+              No Teacher
+            </option>
+            <option className="verifying" value="verifying">
+              Verifying
+            </option>
+            <option className="courseReady" value="courseReady">
+              Course Ready
+            </option>
+            <option className="noBatch" value="noBatch">
+              No Batch
+            </option>
           </select>
         </p>
         <p className="actionsOperation">Actions</p>

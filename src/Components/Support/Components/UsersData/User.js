@@ -39,14 +39,12 @@ const User = (props) => {
     _id,
     id,
     status,
-    stage,
     inqDate,
     email,
     school,
   } = props.data;
 
   const stageRef = useRef(null);
-  const statusRef = useRef(null);
   const templateRef = useRef(null);
   const topRef = useRef(null);
   const commentRef = useRef(null);
@@ -54,8 +52,7 @@ const User = (props) => {
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
   const [comment, setcomment] = useState();
-  const [stageValue, setstage] = useState();
-  const [statusValue, setstatusValue] = useState();
+  const [stageValue, setstage] = useState("new");
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
   const [sendToTop, setsendToTop] = useState(false);
@@ -140,6 +137,8 @@ const User = (props) => {
         setloading(false);
       });
   };
+
+  console.log(stageValue);
 
   return (
     <>
@@ -240,38 +239,84 @@ const User = (props) => {
           <select
             style={{ width: "73%" }}
             ref={stageRef}
-            value={stage ? stage : stageValue}
-            className={stage ? stage : stageValue}
-            onChange={async (e) => {
+            value={stageValue}
+            className={stageValue}
+            onChange={(e) => {
               e.stopPropagation();
               setstage(e.target.value);
-              await axios
-                .put(`${BASE_URL}/setStage`, {
-                  id: _id,
-                  newStage: e.target.value,
-                })
-                .then((response) => {
-                  if (response.data.acknowledged === true) {
-                    props.getUserData();
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+              // await axios
+              //   .put(`${BASE_URL}/setStage`, {
+              //     id: _id,
+              //     newStage: e.target.value,
+              //   })
+              //   .then((response) => {
+              //     if (response.data.acknowledged === true) {
+              //       props.getUserData();
+              //     }
+              //   })
+              //   .catch((err) => {
+              //     console.log(err);
+              //   });
             }}
           >
-            <option className="hot" value="🔥 hot">
-              🔥 Hot
-            </option>
-            <option className="warm" value="🥵 warm">
-              🥵 Warm
-            </option>
-            <option className="cold" value="🥶 cold">
-              🥶 Cold
-            </option>
-            <option className="won" value="🥳 won">
-              🥳 Won
-            </option>
+            {status === "noTeacher" ? (
+              <>
+                <option className="new" value="new">
+                  New
+                </option>
+                <option className="posted" value="posted">
+                  Posted
+                </option>
+                <option className="onBoarded" value="onBoarded">
+                  Onboarded
+                </option>
+                <option className="notFound" value="notFound">
+                  Not Found
+                </option>
+                <option className="readyToTeach" value="readyToTeach">
+                  Ready to teach
+                </option>
+              </>
+            ) : status === "noBatch" ? (
+              <>
+                <option className="new" value="new">
+                  New
+                </option>
+                <option className="requested" value="requested">
+                  Requested
+                </option>
+                <option className="added" value="added">
+                  Added
+                </option>
+                <option className="batchReady" value="batchReady">
+                  Batch Ready
+                </option>
+                <option className="noTeacher" value="noTeacher">
+                  No Teacher
+                </option>
+              </>
+            ) : (
+              <>
+                <option className="new" value="new">
+                  New
+                </option>
+                <option className="posted" value="posted">
+                  Posted
+                </option>
+                <option className="onBoarded" value="onBoarded">
+                  Onboarded
+                </option>
+                <option className="verifying" value="verifying">
+                  Verifying
+                </option>
+                <option className="courseReady" value="courseReady">
+                  Course Ready
+                </option>
+                <option className="noBatch" value="noBatch">
+                  No Batch
+                </option>
+              </>
+            )}
           </select>
         </p>
         <FloatingUserData
