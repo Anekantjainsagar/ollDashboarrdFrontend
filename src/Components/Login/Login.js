@@ -23,7 +23,11 @@ const Login = ({ setsales }) => {
 
   const postData = async () => {
     if (!user.email || !user.password) {
-      console.log("Fill all the details");
+      const notify = () =>
+        toast("Fill all the details", {
+          type: "error",
+        });
+      notify();
     } else {
       await axios
         .post(`${BASE_URL}/login`, {
@@ -44,24 +48,8 @@ const Login = ({ setsales }) => {
               }
             );
           notify();
-          console.log(res.data);
-          localStorage.setItem("token", res.data.token);
-          const token = localStorage.getItem("token");
-          console.log(token);
-          if (res.data.data[0].type === "sales") {
-            setTimeout(() => {
-              if (res.status === 200) {
-                history("/sales");
-              }
-            }, 500);
-            setsales(true);
-          } else {
-            setTimeout(() => {
-              if (res.status === 200) {
-                history("/oprations");
-              }
-            }, 500);
-          }
+          sessionStorage.setItem("token", res.data.token);
+          setsales(res.data.data[0]);
         })
         .catch((err) => {
           console.log(err);

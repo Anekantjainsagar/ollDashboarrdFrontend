@@ -9,32 +9,7 @@ const UserHeadings = ({ filter, setfilter }) => {
       <div className="userOperationHeadings">
         <p className="idOperation">ID</p>
         <p className="raiseDate">Raise Date</p>
-        <p className="type">
-          Type
-          <AiOutlineFilter
-            style={{ marginLeft: "0.5rem" }}
-            size={20}
-            className="icon"
-          />
-          <select
-            className="filterSelector"
-            value={filter.status}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setfilter({ ...filter, status: e.target.value });
-            }}
-          >
-            <option value="all">All</option>
-            <option value="new">New</option>
-            <option value="follow">Fol. Up</option>
-            <option value="noPay">!Pay</option>
-            <option value="noCourse">!Course</option>
-            <option value="started">Started</option>
-            <option value="offReady">Offer Ready</option>
-            <option value="noTeacher">!Teacher</option>
-            <option value="noBatch">!Batch</option>
-          </select>
-        </p>
+        <p className="type">Type</p>
         <p className="issueDetail">Issue Details</p>
         <p className="priority">
           Priority

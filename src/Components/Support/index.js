@@ -13,7 +13,7 @@ import UsersData from "./Components/UsersData/UsersData";
 function Support({ sales }) {
   const [data, setdata] = useState();
   var [filterBySearch, setfilterBySearch] = useState();
-  const [filter, setFilter] = useState({ stage: "", status: "", priority: "" });
+  const [filter, setFilter] = useState({ stage: "", priority: "" });
   const [filteredData, setfilteredData] = useState(data);
   const [page, setpage] = useState(1);
   //Use tab for camelCase in states
@@ -63,17 +63,6 @@ function Support({ sales }) {
             return e;
           } else {
             return e.stage === filter.stage;
-          }
-        } else {
-          return e;
-        }
-      })
-      .filter((e) => {
-        if (filter.status !== "") {
-          if (filter.status == "all") {
-            return e;
-          } else {
-            return e.status === filter.status;
           }
         } else {
           return e;

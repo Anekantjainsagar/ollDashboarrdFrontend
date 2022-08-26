@@ -296,7 +296,7 @@ const User = (props) => {
               ref={templateRef}
               style={
                 showTemplate
-                  ? { display: "block", top: (height>windowHeight/2)?`${height-222}px`:`${height + 30}px` }
+                  ? { display: "block", top: (height>windowHeight/2)?`${height-225}px`:`${height + 30}px` }
                   : { display: "none" }
               }
               className="templateBox"

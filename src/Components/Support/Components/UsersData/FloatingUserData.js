@@ -205,7 +205,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
         }
       >
         <div className="header" onContextMenu={(e) => e.stopPropagation()}>
-          <p>OLL - {id}</p>
+          <p style={{ fontSize: "1.6rem" }}>OLL - {id}</p>
           <div style={{ display: "flex" }}>
             <div
               style={{
@@ -217,19 +217,19 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
               }}
             >
               {(statuses === undefined ? status : statuses) === "new" ? (
-                <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
+                <BiUpArrowAlt size={28} color={"rgba(242, 115, 115, 1)"} />
               ) : (statuses === undefined ? status : statuses) === "follow" ||
                 (statuses === undefined ? status : statuses) === "offReady" ? (
                 <BiUpArrowAlt
-                  size={30}
+                  size={28}
                   color={"rgba(255, 161, 74, 1)"}
                   style={{ transform: "rotate(-45deg)" }}
                 />
               ) : (statuses === undefined ? status : statuses) === "noCourse" ||
                 (statuses === undefined ? status : statuses) === "noBatch" ? (
-                <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
+                <FaGripLines size={28} color={"rgba(255, 245, 0, 1)"} />
               ) : (
-                <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
+                <FaGripLines size={28} color={"rgba(0, 255, 56, 1)"} />
               )}
               <p style={{ fontSize: "1.1rem" }}>
                 {(statuses === undefined ? status : statuses) === "new"
@@ -248,6 +248,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
               name=""
               id=""
               ref={statusRef}
+              style={{ fontSize: "1.5rem", padding: "0.2rem", width: "70%" }}
               className={statuses === undefined ? status : statuses}
               value={statuses === undefined ? status : statuses}
               onChange={(e) => {
@@ -281,7 +282,12 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
             </select>
           </div>
           <select
-            style={{ width: "19%" }}
+            style={{
+              fontSize: "1.5rem",
+              padding: "0.2rem",
+              width: "25%",
+              marginRight: "1rem",
+            }}
             name=""
             ref={stageRef}
             id=""

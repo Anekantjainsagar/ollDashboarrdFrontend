@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Nav = () => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
   const [logoutBtn, setlogoutBtn] = useState(false);
-  const history = useNavigate()
+  const history = useNavigate();
 
   useEffect(() => {
     setInterval(() => {
@@ -50,10 +50,8 @@ const Nav = () => {
           padding: "0.5rem 2rem",
         }}
         onClick={() => {
-          console.log("Hello world")
-          localStorage.clear();
-          console.log(localStorage.getItem("token"));
-          history("/")
+          sessionStorage.clear();
+          history("/");
         }}
       >
         Logout
