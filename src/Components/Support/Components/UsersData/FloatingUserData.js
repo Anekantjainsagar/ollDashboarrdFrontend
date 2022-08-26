@@ -205,82 +205,28 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
         }
       >
         <div className="header" onContextMenu={(e) => e.stopPropagation()}>
-          <p style={{ fontSize: "1.6rem" }}>OLL - {id}</p>
-          <div style={{ display: "flex" }}>
-            <div
-              style={{
-                marginRight: "1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-              }}
-            >
-              {(statuses === undefined ? status : statuses) === "new" ? (
-                <BiUpArrowAlt size={28} color={"rgba(242, 115, 115, 1)"} />
-              ) : (statuses === undefined ? status : statuses) === "follow" ||
-                (statuses === undefined ? status : statuses) === "offReady" ? (
-                <BiUpArrowAlt
-                  size={28}
-                  color={"rgba(255, 161, 74, 1)"}
-                  style={{ transform: "rotate(-45deg)" }}
-                />
-              ) : (statuses === undefined ? status : statuses) === "noCourse" ||
-                (statuses === undefined ? status : statuses) === "noBatch" ? (
-                <FaGripLines size={28} color={"rgba(255, 245, 0, 1)"} />
-              ) : (
-                <FaGripLines size={28} color={"rgba(0, 255, 56, 1)"} />
-              )}
-              <p style={{ fontSize: "1.1rem" }}>
-                {(statuses === undefined ? status : statuses) === "new"
-                  ? "URG"
-                  : (statuses === undefined ? status : statuses) === "follow" ||
-                    (statuses === undefined ? status : statuses) === "offReady"
-                  ? "High"
-                  : (statuses === undefined ? status : statuses) ===
-                      "noCourse" ||
-                    (statuses === undefined ? status : statuses) === "noBatch"
-                  ? "Med."
-                  : "Low"}
-              </p>
-            </div>
-            <select
-              name=""
-              id=""
-              ref={statusRef}
-              style={{ fontSize: "1.5rem", padding: "0.2rem", width: "70%" }}
-              className={statuses === undefined ? status : statuses}
-              value={statuses === undefined ? status : statuses}
-              onChange={(e) => {
-                setstatuses(e.target.value);
-              }}
-            >
-              <option className="new" value="new">
-                New
-              </option>
-              <option className="noTeacher" value="noTeacher">
-                !Teacher
-              </option>
-              <option className="follow" value="follow">
-                Fol. Up
-              </option>
-              <option className="noCourseName" value="noCourse">
-                !Course
-              </option>
-              <option className="offReady" value="offReady">
-                Offer Ready
-              </option>
-              <option className="started" value="started">
-                Started
-              </option>
-              <option className="noPay" value="noPay">
-                !Pay
-              </option>
-              <option className="noBatch" value="noBatch">
-                !Batch
-              </option>
-            </select>
-          </div>
+          <p style={{ fontSize: "1.6rem", color: "white" }}>OLL - {id}</p>
+          <p
+            style={{
+              fontSize: "1.5rem",
+              padding: "0.5rem 0.3rem",
+              width: "36%",
+              margin: "auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: 700,
+              borderRadius: "0.5rem",
+            }}
+            value={status}
+            className={status}
+          >
+            {status === "noCourse"
+              ? "! NO COURSE"
+              : status === "noTeacher"
+              ? "! NO TEACHER"
+              : "! NO BATCH"}
+          </p>
           <select
             style={{
               fontSize: "1.5rem",

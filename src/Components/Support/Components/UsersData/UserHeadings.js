@@ -30,7 +30,6 @@ const UserHeadings = ({ filter, setfilter }) => {
             <option value="Urg">Urgant</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
           </select>
         </p>
         <p className="stageOperation">

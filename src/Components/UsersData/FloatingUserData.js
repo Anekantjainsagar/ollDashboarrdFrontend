@@ -290,7 +290,7 @@ const FloatingUserData = ({
         }
       >
         <div className="header" onContextMenu={(e) => e.stopPropagation()}>
-          <p>OLL - {id}</p>
+          <p style={{ color: "white" }}>OLL - {id}</p>
           <div style={{ display: "flex" }}>
             <div
               style={{

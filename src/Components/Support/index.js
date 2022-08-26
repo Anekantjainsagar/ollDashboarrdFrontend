@@ -73,17 +73,11 @@ function Support({ sales }) {
           if (filter.priority == "all") {
             return e;
           } else if (filter.priority === "Urg") {
-            return e.status === "new";
+            return e.status === "noTeacher";
           } else if (filter.priority === "High") {
-            return e.status === "follow" || e.status === "offReady";
-          } else if (filter.priority === "Medium") {
-            return e.status === "noCourse" || e.status === "noBatch";
+            return e.status === "noCourse";
           } else {
-            return (
-              e.status === "noPay" ||
-              e.status === "noTeacher" ||
-              e.status === "started"
-            );
+            return e.status === "noBatch";
           }
         } else {
           return e;

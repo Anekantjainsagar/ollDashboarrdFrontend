@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import { BsWhatsapp } from "react-icons/bs";
+import { AiOutlineCopy } from "react-icons/ai";
 import { BiUpArrowAlt } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
@@ -10,7 +10,8 @@ import { BASE_URL } from "../../../../Utils/index";
 import ShowModal from "./ShowModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './index.css'
+import "./index.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -40,7 +41,8 @@ const User = (props) => {
     status,
     stage,
     inqDate,
-    cCode,
+    email,
+    school,
   } = props.data;
 
   const stageRef = useRef(null);
@@ -54,7 +56,6 @@ const User = (props) => {
   const [comment, setcomment] = useState();
   const [stageValue, setstage] = useState();
   const [statusValue, setstatusValue] = useState();
-  const [searchTemplate, setsearchTemplate] = useState();
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
   const [sendToTop, setsendToTop] = useState(false);
@@ -65,14 +66,8 @@ const User = (props) => {
   useOutsideAlerter(commentRef, showComments, setshowComments);
   useOutsideAlerter(topRef, sendToTop, setsendToTop);
   const [height, setheight] = useState();
-  const [windowHeight, setwindowHeight] = useState();
 
   const d = new Date(inqDate).toString();
-
-  useEffect(() => {
-    const { innerWidth: width, innerHeight: heightVal } = window;
-    setwindowHeight(heightVal);
-  }, []);
 
   function openModal(e, data) {
     setIsOpen(true);
@@ -178,55 +173,25 @@ const User = (props) => {
       >
         <p className="idValue">{id}</p>
         <p className="raiseDateValue">{d.slice(4, 21)}</p>
-        <p className="typeValue" style={{ display: "flex" }}>
-          <select
-            onClick={(e) => e.stopPropagation()}
-            ref={statusRef}
-            className={status ? status : statusValue}
-            value={status ? status : statusValue}
-            onChange={async (e) => {
-              setstatusValue(e.target.value);
-              await axios
-                .put(`${BASE_URL}/setStatus`, {
-                  id: _id,
-                  newStatus: e.target.value,
-                })
-                .then((response) => {
-                  console.log(response);
-                  if (response.data.acknowledged === true) {
-                    props.getUserData();
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+        <p className="typeValue">
+          <p
+            style={{
+              fontSize: "1.5rem",
+              padding: "0.5rem 0.3rem",
+              width: "95%",
+              margin: "auto",
+              fontWeight: 700,
+              borderRadius: "0.5rem",
             }}
+            value={status}
+            className={status}
           >
-            <option className="new" value="new">
-              New
-            </option>
-            <option className="follow" value="follow">
-              Fol. Up
-            </option>
-            <option className="noCourse" value="noCourse">
-              !Course
-            </option>
-            <option className="noTeacher" value="noTeacher">
-              !Teacher
-            </option>
-            <option className="started" value="started">
-              Started
-            </option>
-            <option className="offReady" value="offReady">
-              Offer Ready
-            </option>
-            <option className="noPay" value="noPay">
-              !Pay
-            </option>
-            <option className="noBatch" value="noBatch">
-              !Batch
-            </option>
-          </select>
+            {status === "noCourse"
+              ? "! NO COURSE"
+              : status === "noTeacher"
+              ? "! NO TEACHER"
+              : "! NO BATCH"}
+          </p>
         </p>
         <p className="issueDetailValue">
           {course}
@@ -249,30 +214,29 @@ const User = (props) => {
             flexDirection: "column",
           }}
         >
-          {status === "new" ? (
+          {status === "noTeacher" ? (
             <BiUpArrowAlt size={30} color={"rgba(242, 115, 115, 1)"} />
-          ) : status === "follow" || status === "offReady" ? (
+          ) : status === "noCourse" ? (
             <BiUpArrowAlt
               size={30}
               color={"rgba(255, 161, 74, 1)"}
               style={{ transform: "rotate(-45deg)" }}
             />
-          ) : status === "noCourse" || status === "noBatch" ? (
-            <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
           ) : (
-            <FaGripLines size={30} color={"rgba(0, 255, 56, 1)"} />
+            <FaGripLines size={30} color={"rgba(255, 245, 0, 1)"} />
           )}
           <p style={{ fontSize: "1.1rem" }}>
-            {status === "new"
+            {status === "noTeacher"
               ? "URG"
-              : status === "follow" || status === "offReady"
+              : status === "noCourse"
               ? "High"
-              : status === "noCourse" || status === "noBatch"
-              ? "Med."
-              : "Low"}
+              : "Med."}
           </p>
         </div>
-        <p className="stageOperationsValue" onClick={(e) => e.stopPropagation()}>
+        <p
+          className="stageOperationsValue"
+          onClick={(e) => e.stopPropagation()}
+        >
           <select
             style={{ width: "73%" }}
             ref={stageRef}
@@ -320,85 +284,32 @@ const User = (props) => {
           usersData={props.usersData}
         />
         <p className="actionsOperationValue">
-          <div
-            className="btn"
-            onClick={(e) => {
-              setheight(e.clientY);
-              setshowTemplate(!showTemplate);
-              e.stopPropagation();
+          <CopyToClipboard
+            text={`${name} ${phone} ${email} ${school} ${source} ${d.slice(
+              4,
+              21
+            )}`}
+            onCopy={() => {
+              const notify = () => {
+                toast("Copied successfully", { type: "success" });
+              };
+              notify();
             }}
           >
-            <BsWhatsapp size={21} color={"#0ac032"} />
-            Template
             <div
-              ref={templateRef}
-              style={
-                showTemplate
-                  ? {
-                      display: "block",
-                      top:
-                        height > windowHeight / 2
-                          ? `${height - 222}px`
-                          : `${height + 30}px`,
-                      left: "63%",
-                    }
-                  : { display: "none" }
-              }
-              className="templateBox"
+              className="btn"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
-              <p className="heading">Select a Template</p>
-              <div className="content">
-                {props.templateMsg
-                  ? props.templateMsg
-                      .filter((e) => {
-                        if (searchTemplate) {
-                          if (
-                            e.elementName.toLowerCase().includes(searchTemplate)
-                          ) {
-                            return e;
-                          }
-                        } else {
-                          return e;
-                        }
-                        return 0;
-                      })
-                      .map((template, i) => {
-                        return (
-                          <div key={i}>
-                            <p
-                              onClick={async () => {
-                                setshowTemplate(!showTemplate);
-                                openModal(template, props.data);
-                              }}
-                            >
-                              {template.elementName}
-                            </p>
-                            <div className="line"></div>
-                          </div>
-                        );
-                      })
-                  : null}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <input
-                  type="text"
-                  value={searchTemplate}
-                  onChange={(e) => setsearchTemplate(e.target.value)}
-                  placeholder="Search templates..."
-                  autoFocus={true}
-                />
-              </div>
+              <AiOutlineCopy
+                size={20}
+                style={{ paddingRight: "0.1rem" }}
+                color={"white"}
+              />
+              Copy
             </div>
-          </div>
+          </CopyToClipboard>
           <div
             className="btn"
             onClick={(e) => {
