@@ -203,74 +203,77 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
       >
         <div className="header" onContextMenu={(e) => e.stopPropagation()}>
           <p style={{ fontSize: "1.6rem", color: "white" }}>OLL - {id}</p>
-          <p
-            style={{
-              fontSize: "1.5rem",
-              padding: "0.3rem 0.3rem",
-              width: "36%",
-              margin: "auto",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: 700,
-              borderRadius: "1rem",
-            }}
-            value={status}
-            className={status}
-          >
-            {status === "noCourse"
-              ? "! NO COURSE"
-              : status === "noTeacher"
-              ? "! NO TEACHER"
-              : "! NO BATCH"}
-          </p>
-          <p
-            style={{
-              fontSize: "1.5rem",
-              padding: "0.3rem 0.3rem",
-              width: "32%",
-              margin: "auto",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: 700,
-              borderRadius: "1rem",
-              textTransform: "uppercase",
-            }}
-            value={oprationalStage}
-            className={oprationalStage}
-          >
-            {oprationalStage}
-          </p>
-          {/* <select
-            style={{
-              fontSize: "1.5rem",
-              padding: "0.2rem",
-              width: "25%",
-              marginRight: "1rem",
-            }}
-            name=""
-            ref={stageRef}
-            id=""
-            onChange={(e) => {
-              setstages(e.target.value);
-            }}
-            className={stages === undefined ? stage : stages}
-            value={stages === undefined ? stage : stages}
-          >
-            <option className="hot" value="🔥 hot">
-              🔥 Hot
-            </option>
-            <option className="warm" value="🥵 warm">
-              🥵 Warm
-            </option>
-            <option className="cold" value="🥶 cold">
-              🥶 Cold
-            </option>
-            <option className="won" value="🥳 won">
-              🥳 Won
-            </option>
-          </select> */}
+          <div style={{ width: "50%" }}>
+            <p
+              style={{
+                fontSize: "1.5rem",
+                padding: "0.3rem 0.3rem",
+                width: "100%",
+                margin: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontWeight: 700,
+                borderRadius: "1rem",
+              }}
+              value={status}
+              className={status}
+            >
+              {status === "noCourse"
+                ? "! NO COURSE"
+                : status === "noTeacher"
+                ? "! NO TEACHER"
+                : "! NO BATCH"}
+            </p>
+            <p
+              style={{
+                fontSize: "1.5rem",
+                padding: "0.3rem 0.3rem",
+                width: "100%",
+                margin: "auto",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "0.5rem",
+                alignItems: "center",
+                fontWeight: 700,
+                borderRadius: "1rem",
+                textTransform: "uppercase",
+              }}
+              value={oprationalStage}
+              className={oprationalStage}
+            >
+              {oprationalStage}
+            </p>
+            {/* <select
+              style={{
+                fontSize: "1.5rem",
+                padding: "0.2rem",
+                width: "25%",
+                marginRight: "1rem",
+              }}
+              name=""
+              ref={stageRef}
+              id=""
+              onChange={(e) => {
+                setstages(e.target.value);
+              }}
+              className={stages === undefined ? stage : stages}
+              value={stages === undefined ? stage : stages}
+            >
+              <option className="hot" value="🔥 hot">
+                🔥 Hot
+              </option>
+              <option className="warm" value="🥵 warm">
+                🥵 Warm
+              </option>
+              <option className="cold" value="🥶 cold">
+                🥶 Cold
+              </option>
+              <option className="won" value="🥳 won">
+                🥳 Won
+              </option>
+            </select> */}
+          </div>
           <AiOutlineClose
             size={18}
             color="white"

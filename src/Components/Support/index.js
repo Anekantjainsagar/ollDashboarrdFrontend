@@ -63,7 +63,7 @@ function Support({ sales }) {
           if (filter.stage == "all") {
             return e;
           } else {
-            return e.stage === filter.stage;
+            return e.oprationalStage === filter.stage;
           }
         } else {
           return e;
