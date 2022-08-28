@@ -19,23 +19,29 @@ const App = () => {
         token: sessionStorage.getItem("token"),
       })
       .then((res) => {
-        setcheck(res.data.message);
+        const obj = res.data.message;
+        if (Object.keys(obj)[0] === "_id") {
+          setcheck(res.data.message);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const token = sessionStorage?.getItem("token");
   useEffect(() => {
-    if (sessionStorage.getItem("token") !== null) {
+    if (token?.length > 0) {
       if (checkUser?._id == sales?._id) {
-        history(`/${sales?.type}`);
+        if (location.pathname == "/") {
+          history(`/${sales?.type}`);
+        }
       }
     } else {
       history("/");
     }
     check();
-  }, [location.pathname, sessionStorage.getItem("token"), sales]);
+  }, [location.pathname, token, sales, checkUser]);
 
   return (
     <Routes>

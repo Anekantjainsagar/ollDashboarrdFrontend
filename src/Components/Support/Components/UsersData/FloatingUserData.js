@@ -41,6 +41,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
     status,
     stage,
     inqDate,
+    oprationalStage,
   } = data;
 
   const stageRef = useRef(null);
@@ -223,7 +224,25 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
               ? "! NO TEACHER"
               : "! NO BATCH"}
           </p>
-          <select
+          <p
+            style={{
+              fontSize: "1.5rem",
+              padding: "0.3rem 0.3rem",
+              width: "32%",
+              margin: "auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: 700,
+              borderRadius: "1rem",
+              textTransform: "uppercase",
+            }}
+            value={oprationalStage}
+            className={oprationalStage}
+          >
+            {oprationalStage}
+          </p>
+          {/* <select
             style={{
               fontSize: "1.5rem",
               padding: "0.2rem",
@@ -251,7 +270,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
             <option className="won" value="🥳 won">
               🥳 Won
             </option>
-          </select>
+          </select> */}
           <AiOutlineClose
             size={18}
             color="white"

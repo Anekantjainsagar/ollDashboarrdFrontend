@@ -42,6 +42,7 @@ const User = (props) => {
     inqDate,
     email,
     school,
+    oprationalStage,
   } = props.data;
 
   const stageRef = useRef(null);
@@ -52,12 +53,12 @@ const User = (props) => {
   const [showComments, setshowComments] = useState(false);
   const [showTemplate, setshowTemplate] = useState(false);
   const [comment, setcomment] = useState();
-  const [stageValue, setstage] = useState("new");
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
   const [sendToTop, setsendToTop] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [loading, setloading] = useState(false);
+  const [type, setType] = useState("new");
   useOutsideAlerter(templateRef, showTemplate, setshowTemplate);
   useOutsideAlerter(commentRef, showComments, setshowComments);
   useOutsideAlerter(commentRef, showComments, setshowComments);
@@ -137,8 +138,6 @@ const User = (props) => {
         setloading(false);
       });
   };
-
-  console.log(stageValue);
 
   return (
     <>
@@ -239,24 +238,24 @@ const User = (props) => {
           <select
             style={{ width: "73%" }}
             ref={stageRef}
-            value={stageValue}
-            className={stageValue}
-            onChange={(e) => {
+            value={oprationalStage ? oprationalStage : type}
+            className={oprationalStage ? oprationalStage : type}
+            onChange={async (e) => {
               e.stopPropagation();
-              setstage(e.target.value);
-              // await axios
-              //   .put(`${BASE_URL}/setStage`, {
-              //     id: _id,
-              //     newStage: e.target.value,
-              //   })
-              //   .then((response) => {
-              //     if (response.data.acknowledged === true) {
-              //       props.getUserData();
-              //     }
-              //   })
-              //   .catch((err) => {
-              //     console.log(err);
-              //   });
+              setType(e.target.value);
+              await axios
+                .put(`${BASE_URL}/setOprationalStage`, {
+                  id: _id,
+                  newStage: e.target.value,
+                })
+                .then((response) => {
+                  if (response.data.acknowledged === true) {
+                    props.getUserData();
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }}
           >
             {status === "noTeacher" ? (

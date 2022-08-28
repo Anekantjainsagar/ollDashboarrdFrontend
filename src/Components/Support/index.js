@@ -21,16 +21,10 @@ function Support({ sales }) {
 
   const getUserData = () => {
     axios
-      .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
+      .get(`${BASE_URL}/getOprationalUsers?page=${page}&size=${page * 10}`)
       .then((res) => {
         setnoOfUsers(res.data.NoOfUsers - 1);
-        const opretionData = res.data.users.filter((e) => {
-          return (
-            e.status === "noTeacher" ||
-            e.status === "noBatch" ||
-            e.status === "noCourse"
-          );
-        });
+        const opretionData = res.data.users;
         setdata(opretionData);
       })
       .catch((err) => {
