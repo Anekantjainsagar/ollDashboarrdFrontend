@@ -55,6 +55,12 @@ const Login = ({ setsales }) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      postData();
+    }
+  };
+
   return (
     <>
       <div style={{ position: "absolute" }}>
@@ -72,7 +78,7 @@ const Login = ({ setsales }) => {
         <div className={styles.time}>
           <MdOutlineAccessTimeFilled size={25} color={"grey"} /> {time}
         </div>
-        <div className={styles.box}>
+        <div className={styles.box} onKeyPress={handleKeyPress}>
           <h1>Welcome Back &#9995;</h1>
           <input
             className={styles.inputEmail}
@@ -80,6 +86,7 @@ const Login = ({ setsales }) => {
             value={user.email}
             type="email"
             placeholder="Email"
+            onKeyPress={() => handleKeyPress}
           />
           <div className={styles.inputBox}>
             <input
@@ -88,6 +95,7 @@ const Login = ({ setsales }) => {
               value={user.password}
               type={view ? "text" : "password"}
               placeholder="Passoword"
+              onKeyPress={() => handleKeyPress}
             />
             {view ? (
               <AiOutlineEye

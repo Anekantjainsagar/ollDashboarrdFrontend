@@ -41,18 +41,12 @@ function Support({ sales }) {
       ?.filter((e) => {
         if (filterBySearch !== undefined && filterBySearch !== "") {
           if (isNaN(filterBySearch) === true) {
-            if (e.name.toLowerCase().includes(filterBySearch)) {
+            if (e.course.toLowerCase().includes(filterBySearch)) {
               return e;
             }
           } else {
             filterBySearch = filterBySearch.toString();
-            if (filterBySearch.length > e?.id.toString().length) {
-              if (e?.phone.toString().includes(filterBySearch)) {
-                return e;
-              }
-            } else if (e?.id.toString().includes(filterBySearch)) {
-              return e;
-            }
+            return e?.id.toString().includes(filterBySearch);
           }
         } else {
           return e;

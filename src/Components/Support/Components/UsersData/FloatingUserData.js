@@ -48,7 +48,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
   const sideRef = useRef(null);
   const [displayComment, setdisplayComment] = useState(true);
   const [comments, setcomments] = useState();
-  const [stages, setstages] = useState();
+  const [type, setType] = useState("new");
   const [clickedTemplate, setclickedTemplate] = useState();
   const [templateUser, settemplateUser] = useState();
 
@@ -207,7 +207,7 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
             <p
               style={{
                 fontSize: "1.5rem",
-                padding: "0.3rem 0.3rem",
+                padding: "0.5rem 0.3rem",
                 width: "100%",
                 margin: "auto",
                 display: "flex",
@@ -225,54 +225,88 @@ const FloatingUserData = ({ details, setDetails, data, getUserData }) => {
                 ? "! NO TEACHER"
                 : "! NO BATCH"}
             </p>
-            <p
-              style={{
-                fontSize: "1.5rem",
-                padding: "0.3rem 0.3rem",
-                width: "100%",
-                margin: "auto",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "0.5rem",
-                alignItems: "center",
-                fontWeight: 700,
-                borderRadius: "1rem",
-                textTransform: "uppercase",
-              }}
-              value={oprationalStage}
-              className={oprationalStage}
-            >
-              {oprationalStage}
-            </p>
-            {/* <select
-              style={{
-                fontSize: "1.5rem",
-                padding: "0.2rem",
-                width: "25%",
-                marginRight: "1rem",
-              }}
-              name=""
+            <select
+              style={{ width: "100%", marginTop: "0.75rem", textAlign:"center" }}
               ref={stageRef}
-              id=""
-              onChange={(e) => {
-                setstages(e.target.value);
+              value={oprationalStage ? oprationalStage : type}
+              className={oprationalStage ? oprationalStage : type}
+              onChange={async (e) => {
+                e.stopPropagation();
+                setType(e.target.value);
+                await axios
+                  .put(`${BASE_URL}/setOprationalStage`, {
+                    id: _id,
+                    newStage: e.target.value,
+                  })
+                  .then((response) => {
+                    if (response.data.acknowledged === true) {
+                      getUserData();
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
-              className={stages === undefined ? stage : stages}
-              value={stages === undefined ? stage : stages}
             >
-              <option className="hot" value="🔥 hot">
-                🔥 Hot
-              </option>
-              <option className="warm" value="🥵 warm">
-                🥵 Warm
-              </option>
-              <option className="cold" value="🥶 cold">
-                🥶 Cold
-              </option>
-              <option className="won" value="🥳 won">
-                🥳 Won
-              </option>
-            </select> */}
+              {status === "noTeacher" ? (
+                <>
+                  <option className="new" value="new">
+                    New
+                  </option>
+                  <option className="posted" value="posted">
+                    Posted
+                  </option>
+                  <option className="onBoarded" value="onBoarded">
+                    Onboarded
+                  </option>
+                  <option className="notFound" value="notFound">
+                    Not Found
+                  </option>
+                  <option className="readyToTeach" value="readyToTeach">
+                    Ready to teach
+                  </option>
+                </>
+              ) : status === "noBatch" ? (
+                <>
+                  <option className="new" value="new">
+                    New
+                  </option>
+                  <option className="requested" value="requested">
+                    Requested
+                  </option>
+                  <option className="added" value="added">
+                    Added
+                  </option>
+                  <option className="batchReady" value="batchReady">
+                    Batch Ready
+                  </option>
+                  <option className="noTeacher" value="noTeacher">
+                    No Teacher
+                  </option>
+                </>
+              ) : (
+                <>
+                  <option className="new" value="new">
+                    New
+                  </option>
+                  <option className="posted" value="posted">
+                    Posted
+                  </option>
+                  <option className="onBoarded" value="onBoarded">
+                    Onboarded
+                  </option>
+                  <option className="verifying" value="verifying">
+                    Verifying
+                  </option>
+                  <option className="courseReady" value="courseReady">
+                    Course Ready
+                  </option>
+                  <option className="noBatch" value="noBatch">
+                    No Batch
+                  </option>
+                </>
+              )}
+            </select>
           </div>
           <AiOutlineClose
             size={18}

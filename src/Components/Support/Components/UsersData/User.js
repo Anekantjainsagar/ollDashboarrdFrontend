@@ -151,7 +151,7 @@ const User = (props) => {
       <div style={{ position: "absolute" }}>
         <ToastContainer
           position="top-right"
-          autoClose={1000}
+          autoClose={500}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -329,10 +329,9 @@ const User = (props) => {
         />
         <p className="actionsOperationValue">
           <CopyToClipboard
-            text={`${name} ${phone} ${email} ${school} ${source} ${d.slice(
-              4,
-              21
-            )}`}
+            text={`${id} ${d.slice(4, 21)} ${oprationalStage} ${
+              course + (batchDetails?.mode + batchDetails?.type)
+            }`}
             onCopy={() => {
               const notify = () => {
                 toast("Copied successfully", { type: "success" });
@@ -409,7 +408,7 @@ const User = (props) => {
             </div>
           </div>
         </p>
-        <p className="sourceOperationValue">{source}</p>
+        <p className="sourceOperationValue">Saman</p>
         <p className="resolveDateValue">{d.slice(4, 21)}</p>
       </div>
       <div
