@@ -29,12 +29,13 @@ const App = () => {
       });
   };
 
-  const token = sessionStorage?.getItem("token");
+  const token = localStorage?.getItem("token");
+  console.log(location);
   useEffect(() => {
     if (token?.length > 0) {
       if (checkUser?._id == sales?._id) {
-        if (location.pathname == "/") {
-          history(`/${sales?.type}`);
+        if (location.pathname == "/" || location.pathname == "/undefined") {
+          history(`/${checkUser?.type}`);
         }
       }
     } else {
