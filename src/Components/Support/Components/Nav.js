@@ -50,7 +50,7 @@ const Nav = () => {
           padding: "0.5rem 2rem",
         }}
         onClick={() => {
-          sessionStorage.clear();
+          localStorage.clear();
           history("/");
         }}
       >

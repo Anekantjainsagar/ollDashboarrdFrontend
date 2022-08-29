@@ -114,11 +114,11 @@ const ShowModal = ({
               }),
             };
             fetch(
-              `https://live-server-11507.wati.io/api/v1/sendTemplateMessage?whatsappNumber=${
-                (templateUser.cCode === undefined
-                  ? "+91"
-                  : templateUser.cCode) + templateUser.phone
-              }`,
+              `https://live-server-11507.wati.io/api/v1/sendTemplateMessage?whatsappNumber=$
+                ${
+                  templateUser.cCode === undefined ? "+91" : templateUser.cCode
+                }${templateUser.phone}
+              `,
               options
             )
               .then((response) => response.json())
@@ -128,10 +128,10 @@ const ShowModal = ({
                   toast(
                     res.result
                       ? `Message send successfully to the ${
-                          (templateUser.cCode === undefined
+                          templateUser.cCode === undefined
                             ? "+91"
-                            : templateUser.cCode) + templateUser.phone
-                        }`
+                            : templateUser.cCode
+                        }${templateUser.phone}`
                       : res.info,
                     {
                       type: res.result ? "success" : "error",

@@ -46,7 +46,7 @@ const Login = ({ setsales }) => {
               }
             );
           notify();
-          sessionStorage.setItem("token", res.data.token);
+          localStorage.setItem("token", res.data.token);
           setsales(res.data.data[0]);
         })
         .catch((err) => {

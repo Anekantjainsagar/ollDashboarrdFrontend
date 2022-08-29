@@ -16,7 +16,7 @@ const App = () => {
   const check = async () => {
     await axios
       .post(`${BASE_URL}/salesCheck`, {
-        token: sessionStorage.getItem("token"),
+        token: localStorage.getItem("token"),
       })
       .then((res) => {
         const obj = res.data.message;
