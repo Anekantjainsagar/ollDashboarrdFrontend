@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import { BsWhatsapp } from "react-icons/bs";
-import { BiUpArrowAlt } from "react-icons/bi";
-import { FaGripLines } from "react-icons/fa";
-import { AiOutlineRight } from "react-icons/ai";
-import { ThreeDots } from "react-loader-spinner";
+import React, { useRef, useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import FloatingUserData from "./FloatingUserData";
+import { ThreeDots } from "react-loader-spinner";
+import { AiOutlineRight } from "react-icons/ai";
+import { BiUpArrowAlt } from "react-icons/bi";
+import { BsWhatsapp } from "react-icons/bs";
+import { FaGripLines } from "react-icons/fa";
 import { BASE_URL } from "../../Utils/index";
 import ShowModal from "./ShowModal";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function useOutsideAlerter(ref, show, setShow) {
@@ -69,7 +69,7 @@ const User = (props) => {
   const d = new Date(inqDate).toString();
 
   useEffect(() => {
-    const { innerWidth: width, innerHeight: heightVal } = window;
+    const { innerHeight: heightVal } = window;
     setwindowHeight(heightVal);
   }, []);
 
@@ -179,7 +179,7 @@ const User = (props) => {
         {/* <p className="idValue">{props.noOfUsers - props.index}</p> */}
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
-        <p className="phoneValue">{`${(cCode)?cCode:""}${phone}`}</p>
+        <p className="phoneValue">{`${cCode ? cCode : ""}${phone}`}</p>
         <p className="classTypeValue">
           {(batchDetails?.type === "group"
             ? "Grp"
@@ -296,7 +296,13 @@ const User = (props) => {
               ref={templateRef}
               style={
                 showTemplate
-                  ? { display: "block", top: (height>windowHeight/2)?`${height-225}px`:`${height + 30}px` }
+                  ? {
+                      display: "block",
+                      top:
+                        height > windowHeight / 2
+                          ? `${height - 225}px`
+                          : `${height + 30}px`,
+                    }
                   : { display: "none" }
               }
               className="templateBox"

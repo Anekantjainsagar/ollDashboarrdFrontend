@@ -30,18 +30,17 @@ const App = () => {
   };
 
   const token = localStorage?.getItem("token");
-  console.log(location);
   useEffect(() => {
     if (token?.length > 0) {
-      if (checkUser?._id == sales?._id) {
-        if (location.pathname == "/" || location.pathname == "/undefined") {
+      if (location.pathname == "/" || location.pathname == "/undefined") {
+        check();
+        if (checkUser?._id == sales?._id) {
           history(`/${checkUser?.type}`);
         }
       }
     } else {
       history("/");
     }
-    check();
   }, [location.pathname, token, sales, checkUser]);
 
   return (

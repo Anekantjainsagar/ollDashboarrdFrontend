@@ -19,6 +19,27 @@ function Sales({ sales }) {
   //Use tab for camelCase in states
   const [noOfUsers, setnoOfUsers] = useState();
 
+  const [templateMsg, settemplateMsg] = useState();
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzIyYzViYi1kYzQwLTRmODctYjZiMi1iMjMyOTQyMjBiOGUiLCJ1bmlxdWVfbmFtZSI6ImluZm9Ab2xsLmNvIiwibmFtZWlkIjoiaW5mb0BvbGwuY28iLCJlbWFpbCI6ImluZm9Ab2xsLmNvIiwiYXV0aF90aW1lIjoiMDgvMDEvMjAyMiAwNDowMDo1NiIsImRiX25hbWUiOiIxMTUwNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.k89dQ0gkjcZ3T8VYDz6FIbr4sisaSiSTvjLZ7FhLEAc",
+      },
+    };
+
+    fetch(
+      "https://live-server-11507.wati.io/api/v1/getMessageTemplates?pageSize=13&pageNumber=1",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        settemplateMsg(response.messageTemplates);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   const getUserData = () => {
     axios
       .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
@@ -33,7 +54,7 @@ function Sales({ sales }) {
 
   useEffect(() => {
     getUserData();
-  }, [page]);
+  }, [page, data]);
 
   useEffect(() => {
     var searchFilter = data
@@ -44,8 +65,8 @@ function Sales({ sales }) {
               return e;
             }
           } else {
-            filterBySearch = filterBySearch.toString();
-            if (filterBySearch.length > e?.id.toString().length) {
+            filterBySearch = filterBySearch;
+            if (filterBySearch.toString().length > e?.id.toString().length) {
               if (e?.phone.toString().includes(filterBySearch)) {
                 return e;
               }
@@ -122,6 +143,7 @@ function Sales({ sales }) {
         setfilter={setFilter}
         noOfUsers={noOfUsers}
         setdata={setdata}
+        templateMsg={templateMsg}
       />
     </div>
   );
