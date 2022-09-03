@@ -125,7 +125,7 @@ function Sales({ sales }) {
         boxSizing: "border-box",
       }}
     >
-      <Nav />
+      <Nav sales={sales} />
       <Topbar
         getUserData={getUserData}
         filterBySearch={filterBySearch}

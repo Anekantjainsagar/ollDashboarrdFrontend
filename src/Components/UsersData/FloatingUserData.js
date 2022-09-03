@@ -43,8 +43,7 @@ const FloatingUserData = ({
   data,
   getUserData,
   templateMsg,
-  setdata,
-  usersData,
+  sales,
 }) => {
   const {
     name,
@@ -61,6 +60,7 @@ const FloatingUserData = ({
     status,
     stage,
     inqDate,
+    oprationalStage,
   } = data;
 
   const stageRef = useRef(null);
@@ -94,7 +94,6 @@ const FloatingUserData = ({
   const [height, setheight] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
-
   const updateData = async (e) => {
     e.preventDefault();
 
@@ -150,6 +149,7 @@ const FloatingUserData = ({
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
           comment: comments,
+          user: sales?.name,
         });
         setcomments("");
         setTimeout(() => {
@@ -859,6 +859,7 @@ const FloatingUserData = ({
               axios.put(`${BASE_URL}/comment`, {
                 id: _id,
                 comment: comments,
+                user: sales?.name,
               });
               setcomments("");
               setTimeout(() => {
@@ -871,10 +872,11 @@ const FloatingUserData = ({
           <>
             {displayComment ? (
               <div className="commentsDisplay">
-                <img
-                  src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
-                  alt="this is a comment"
-                />
+                <h3>
+                  {comment[comment.length - 1].user
+                    ? comment[comment.length - 1].user
+                    : "Samantha"}
+                </h3>
                 <h6>{comment[comment.length - 1].msg}</h6>
                 <p>
                   {new Date(comment[comment.length - 1].date)
@@ -883,13 +885,10 @@ const FloatingUserData = ({
                 </p>
               </div>
             ) : (
-              comment.map(({ msg, date }, i) => {
+              comment.map(({ msg, date, user }, i) => {
                 return (
                   <div className="commentsDisplay" key={i}>
-                    <img
-                      src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
-                      alt="this is a comment"
-                    />
+                    <h3>{user ? user : "Samantha"}</h3>
                     <h6>{msg}</h6>
                     <p>{new Date(date).toString().slice(3, 21)}</p>
                   </div>

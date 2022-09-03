@@ -79,6 +79,7 @@ const User = (props) => {
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
           comment: comment,
+          user: props.sales?.name,
         });
         setcomment("");
         setTimeout(() => {
@@ -239,10 +240,33 @@ const User = (props) => {
             style={{ width: "73%" }}
             ref={stageRef}
             value={oprationalStage ? oprationalStage : type}
-            className={oprationalStage ? oprationalStage : type}
+            className={
+              stageRef?.current?.value === undefined
+                ? oprationalStage
+                : stageRef?.current?.value
+            }
             onChange={async (e) => {
               e.stopPropagation();
               setType(e.target.value);
+              if (
+                e.target.value === "noTeacher" ||
+                e.target.value === "noBatch"
+              ) {
+                await axios
+                  .put(`${BASE_URL}/setStatus`, {
+                    id: _id,
+                    newStatus: e.target.value,
+                  })
+                  .then((response) => {
+                    console.log(response);
+                    if (response.data.acknowledged === true) {
+                      props.getUserData();
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }
               await axios
                 .put(`${BASE_URL}/setOprationalStage`, {
                   id: _id,
@@ -324,6 +348,7 @@ const User = (props) => {
           setDetails={setDetails}
           getUserData={props.getUserData}
           templateMsg={props.templateMsg}
+          sales={props.sales}
           setdata={props.setdata}
           usersData={props.usersData}
         />
@@ -397,6 +422,7 @@ const User = (props) => {
                     axios.put(`${BASE_URL}/comment`, {
                       id: _id,
                       comment: comment,
+                      user: props.sales?.name,
                     });
                     setTimeout(() => {
                       props.getUserData();

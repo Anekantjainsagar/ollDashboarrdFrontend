@@ -15,6 +15,7 @@ const UsersData = ({
   noOfUsers,
   setdata,
   templateMsg,
+  sales,
 }) => {
   const usersRef = useRef(null);
   const userData = usersRef.current;
@@ -41,6 +42,7 @@ const UsersData = ({
                   index={index}
                   templateMsg={templateMsg}
                   setdata={setdata}
+                  sales={sales}
                   noOfUsers={noOfUsers}
                 />
               );

@@ -1,4 +1,4 @@
-import React, { useRef  } from "react";
+import React, { useRef } from "react";
 import User from "./User";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
@@ -15,12 +15,11 @@ const UsersData = ({
   noOfUsers,
   templateMsg,
   setdata,
-  sales
+  sales,
 }) => {
-  
   const usersRef = useRef(null);
   const userData = usersRef.current;
-  
+
   const scrollTop = () => {
     userData.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -44,6 +43,7 @@ const UsersData = ({
                   templateMsg={templateMsg}
                   setdata={setdata}
                   noOfUsers={noOfUsers}
+                  sales={sales}
                 />
               );
             })

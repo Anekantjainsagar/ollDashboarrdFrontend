@@ -20,6 +20,7 @@ const Login = ({ setsales }) => {
   const [view, setView] = useState(false);
 
   const postData = async () => {
+    localStorage.clear();
     if (!user.email || !user.password) {
       const notify = () =>
         toast("Fill all the details", {

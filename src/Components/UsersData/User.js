@@ -39,6 +39,7 @@ const User = (props) => {
     status,
     stage,
     inqDate,
+    oprationalStage,
     cCode,
   } = props.data;
 
@@ -85,6 +86,7 @@ const User = (props) => {
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
           comment: comment,
+          user: props.sales?.name,
         });
         setcomment("");
         setTimeout(() => {
@@ -196,6 +198,7 @@ const User = (props) => {
           setDetails={setDetails}
           getUserData={props.getUserData}
           templateMsg={props.templateMsg}
+          sales={props.sales}
           setdata={props.setdata}
           usersData={props.usersData}
         />
@@ -404,6 +407,7 @@ const User = (props) => {
                     axios.put(`${BASE_URL}/comment`, {
                       id: _id,
                       comment: comment,
+                      user: props.sales?.name,
                     });
                     setTimeout(() => {
                       props.getUserData();

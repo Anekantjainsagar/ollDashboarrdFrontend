@@ -110,7 +110,7 @@ function Support({ sales }) {
         boxSizing: "border-box",
       }}
     >
-      <Nav />
+      <Nav sales={sales} />
       <Topbar
         getUserData={getUserData}
         sales={sales}

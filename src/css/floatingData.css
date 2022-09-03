@@ -195,20 +195,19 @@
   align-items: center;
   justify-content: space-between;
   display: grid;
-  grid-template-columns: 13% 58% 22%;
+  grid-template-columns: 26% 45% 27%;
   padding: 0.5rem;
   border: 1px solid white;
   margin-top: 0.8rem;
   border-radius: 1rem;
 }
 
-.offerDetailContainer .commentsDisplay img {
-  width: 100%;
-  border-radius: 50%;
+.offerDetailContainer .commentsDisplay h3 {
+  font-size: 1.5rem;
 }
 
 .commentsDisplay h6 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   height: 100%;
   display: flex;

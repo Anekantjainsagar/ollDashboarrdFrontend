@@ -30,24 +30,30 @@ const App = () => {
   };
 
   const token = localStorage?.getItem("token");
-  useEffect(() => {
+
+  const checkLogin = async () => {
     if (token?.length > 0) {
-      if (location.pathname == "/" || location.pathname == "/undefined") {
-        check();
-        if (checkUser?._id == sales?._id) {
-          history(`/${checkUser?.type}`);
-        }
+      await check();
+      history("/");
+      if (Object.keys(checkUser)[0] === "_id") {
+        history(`/${checkUser?.type}`);
+      } else {
+        history("/");
       }
     } else {
       history("/");
     }
-  }, [location.pathname, token, sales, checkUser]);
+  };
+
+  useEffect(() => {
+    checkLogin();
+  }, [location.pathname, token]);
 
   return (
     <Routes>
       <Route path="/" element={<Login setsales={setsales} />} />
-      <Route path="/sales" element={<Sales />} />
-      <Route path="/Operations" element={<Support />} />
+      <Route path="/sales" element={<Sales sales={checkUser} />} />
+      <Route path="/Operations" element={<Support sales={checkUser} />} />
       <Route path="*" render={() => <Navigate to="/" />} />
       <Route path="/undefined" element={<Login setsales={setsales} />} />
     </Routes>

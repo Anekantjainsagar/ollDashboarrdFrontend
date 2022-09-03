@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({sales}) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
   const [logoutBtn, setlogoutBtn] = useState(false);
   const history = useNavigate();
@@ -25,7 +25,7 @@ const Nav = () => {
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
-          <p>Samantha</p>
+          <p>{sales?.name}</p>
           <img
             src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
             alt="Profile"
