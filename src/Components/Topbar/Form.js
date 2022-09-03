@@ -8,9 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
-const Form = ({ getUserData }) => {
+const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
-  const [height, setHeight] = useState()
+  const [height, setHeight] = useState();
   const [name, setName] = useState();
   const [phone, setphone] = useState();
   const [email, setemail] = useState();
@@ -59,6 +59,7 @@ const Form = ({ getUserData }) => {
       sessionsCount,
       stage: "🔥 hot",
       status: "new",
+      assignee: sales?.name,
     });
     console.log(res);
     if (res.status == 500) {
@@ -167,7 +168,7 @@ const Form = ({ getUserData }) => {
               <button
                 className="detailsBtn"
                 onClick={(e) => {
-                  setHeight(e.clientY)
+                  setHeight(e.clientY);
                   e.preventDefault();
                   setDetails(!details);
                 }}

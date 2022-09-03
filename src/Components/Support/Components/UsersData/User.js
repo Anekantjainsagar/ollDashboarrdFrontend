@@ -41,7 +41,7 @@ const User = (props) => {
     status,
     inqDate,
     email,
-    school,
+    assignee,
     oprationalStage,
   } = props.data;
 
@@ -434,7 +434,9 @@ const User = (props) => {
             </div>
           </div>
         </p>
-        <p className="sourceOperationValue">Saman</p>
+        <p className="sourceOperationValue">
+          {assignee ? assignee : "Samantha"}
+        </p>
         <p className="resolveDateValue">{d.slice(4, 21)}</p>
       </div>
       <div

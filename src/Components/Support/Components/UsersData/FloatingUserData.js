@@ -45,7 +45,7 @@ const FloatingUserData = ({
     _id,
     comment,
     status,
-    stage,
+    assignee,
     inqDate,
     oprationalStage,
   } = data;
@@ -509,7 +509,7 @@ const FloatingUserData = ({
             </div>
             <div className="container2" style={{ margin: ".6rem 0" }}>
               <p>End Time : </p>
-              <p>Assignee : Saman</p>
+              <p>Assignee : {assignee ? assignee : "Samantha"}</p>
             </div>
           </div>
         </div>

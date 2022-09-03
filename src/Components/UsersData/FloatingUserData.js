@@ -60,7 +60,7 @@ const FloatingUserData = ({
     status,
     stage,
     inqDate,
-    oprationalStage,
+    assignee,
   } = data;
 
   const stageRef = useRef(null);
@@ -931,7 +931,7 @@ const FloatingUserData = ({
             </div>
             <div className="container2">
               <p>End Time : </p>
-              <p>Assignee : Saman</p>
+              <p>Assignee : {assignee ? assignee : "Samantha"}</p>
             </div>
           </div>
         </div>
