@@ -78,6 +78,8 @@ const FloatingUserData = ({
     }
   };
 
+  const breakLine = <br />;
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal(e, data) {
@@ -373,7 +375,15 @@ const FloatingUserData = ({
                 width: "72%",
               }}
             >
-              <p style={{ fontSize: "1.6rem" }}>{batchDetails?.days}</p>
+              <p>
+                {batchDetails?.days.map((e) => {
+                  return (
+                    <p style={{ fontSize: "1.6rem" }}>
+                      {e.charAt(0).toUpperCase() + e.slice(1)}
+                    </p>
+                  );
+                })}
+              </p>
               <p style={{ fontSize: "1.6rem" }}>
                 {batchDetails?.time.split(" ")[0]}
                 {" - "}

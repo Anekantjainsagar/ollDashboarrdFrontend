@@ -36,6 +36,15 @@ function useOutsideAlerter(ref, show, setShow) {
     }
   }, [ref, show, setShow]);
 }
+const daysValue = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+];
 
 const FloatingUserData = ({
   details,
@@ -80,7 +89,7 @@ const FloatingUserData = ({
   const [sourceTime, setsourceTime] = useState();
   const [mode, setmode] = useState();
   const [type, settype] = useState();
-  const [days, setdays] = useState();
+  const [days, setdays] = useState([...batchDetails?.days]);
   const [stime, setstime] = useState(batchDetails?.time.split(" ")[0]);
   const [etime, setetime] = useState(batchDetails?.time.split(" ")[1]);
   const [displayComment, setdisplayComment] = useState(true);
@@ -109,7 +118,7 @@ const FloatingUserData = ({
       mode: mode === undefined ? batchDetails?.mode : mode,
       type: type === undefined ? batchDetails?.type : type,
       address: address === undefined ? batchDetails?.address : address,
-      days: days === undefined ? batchDetails?.days : days,
+      days: days.length > 0 ? days : batchDetails?.days,
       status: statuses === undefined ? status : statuses,
       stage: stages === undefined ? stage : stages,
       startDate:
@@ -633,30 +642,46 @@ const FloatingUserData = ({
                   flexDirection: "column",
                   alignSelf: "flex-start",
                 }}
-                value={days}
-                onChange={(e) => setdays(e.target.value)}
               >
                 <p style={{ fontSize: "1.7rem" }}>Days</p>
-                <select
-                  className="floatDataSelector"
-                  style={{
-                    width: "100%",
-                    fontSize: "1.6rem",
-                    textTransform: "capitalize",
-                  }}
-                  onChange={(e) => setdays(e.target.value)}
-                  value={days === undefined ? batchDetails?.days : days}
-                >
-                  <option style={{ fontSize: "1.6rem" }} value={"MWF"}>
-                    MWF
-                  </option>
-                  <option style={{ fontSize: "1.6rem" }} value={"TTF"}>
-                    TTF
-                  </option>
-                  <option style={{ fontSize: "1.6rem" }} value={"SS"}>
-                    SS
-                  </option>
-                </select>
+                {daysValue?.map((e, i) => {
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        margin: "0.75rem 0",
+                        paddingLeft: "0.15rem",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        id={e}
+                        value={e}
+                        checked={days?.includes(e)}
+                        onChange={(e) => {
+                          setdays([])
+                          if (e.target.checked === true) {
+                            if (days.includes(e.target.value) === false) {
+                              setdays([...days, e.target.value]);
+                            }
+                          } else if (e.target.checked === false) {
+                            let arr = [...days];
+                            const index = arr.indexOf(e.target.value);
+                            arr.splice(index, 1);
+                            setdays([...arr]);
+                          }
+                        }}
+                      />
+                      <label
+                        for={e}
+                        style={{ fontSize: "1.6rem", marginLeft: "0.5rem" }}
+                      >
+                        {" "}
+                        {e}
+                      </label>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div

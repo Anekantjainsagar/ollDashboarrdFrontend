@@ -20,7 +20,7 @@ const Form = ({ getUserData, sales }) => {
   const [source, setsource] = useState("Website");
   const [mode, setmode] = useState("Online");
   const [type, settype] = useState("group");
-  const [days, setdays] = useState("MWF");
+  const [days, setdays] = useState([]);
   const [address, setaddress] = useState();
   const [startDate, setstartDate] = useState();
   const [sessionsCount, setsessionsCount] = useState();

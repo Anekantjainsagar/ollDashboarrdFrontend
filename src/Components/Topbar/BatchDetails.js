@@ -18,6 +18,16 @@ function useOutsideAlerter(ref, show, setShow) {
   }, [ref, show, setShow]);
 }
 
+const daysValue = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+];
+
 const BatchDetails = ({
   details,
   setDetails,
@@ -154,58 +164,42 @@ const BatchDetails = ({
             <p style={{ marginLeft: "0.4rem" }}>Trial</p>
           </div>
         </div>
-        <div
-          className="selectMode"
-          name="days"
-          value={days}
-          onChange={(e) => setdays(e.target.value)}
-        >
+        <div className="selectMode">
           <p>Days</p>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="days"
-              value={"MWF"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>MWF</p>
-          </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="days"
-              value={"TTF"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>TTF</p>
-          </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="days"
-              value={"SS"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>SS</p>
-          </div>
+          {daysValue?.map((e, i) => {
+            return (
+              <div
+                key={i}
+                style={{
+                  margin: "0.75rem 0",
+                  paddingLeft: "0.15rem",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  id={e}
+                  name={e}
+                  value={e}
+                  onChange={async (e) => {
+                    if (days.includes(e.target.value) === false) {
+                      if (e.target.checked === true) {
+                        setdays([...days, e.target.value]);
+                      }
+                    } else if (e.target.checked === false) {
+                      let arr = [...days];
+                      const index = arr.indexOf(e.target.value);
+                      arr.splice(index, 1);
+                      setdays([...arr]);
+                    }
+                  }}
+                />
+                <label for={e} style={{ fontSize: "1.6rem" }}>
+                  {" "}
+                  {e}
+                </label>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="inputSections">
