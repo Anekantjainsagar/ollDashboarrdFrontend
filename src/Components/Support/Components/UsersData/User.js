@@ -267,6 +267,13 @@ const User = (props) => {
                     console.log(err);
                   });
               }
+              if (e.target.value !== "new") {
+                axios.put(`${BASE_URL}/comment`, {
+                  id: _id,
+                  comment: `New status for ${name} is ${e.target.value}`,
+                  user: props.sales?.name,
+                });
+              }
               await axios
                 .put(`${BASE_URL}/setOprationalStage`, {
                   id: _id,
