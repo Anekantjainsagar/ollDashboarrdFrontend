@@ -659,7 +659,6 @@ const FloatingUserData = ({
                         value={e}
                         checked={days?.includes(e)}
                         onChange={(e) => {
-                          setdays([])
                           if (e.target.checked === true) {
                             if (days.includes(e.target.value) === false) {
                               setdays([...days, e.target.value]);
