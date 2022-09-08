@@ -36,8 +36,6 @@ const App = () => {
       await check();
       if (Object.keys(checkUser)[0] === "_id") {
         history(`/${checkUser?.type}`);
-      } else {
-        history("/");
       }
     } else {
       history("/");
