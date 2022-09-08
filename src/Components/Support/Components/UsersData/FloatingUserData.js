@@ -78,8 +78,6 @@ const FloatingUserData = ({
     }
   };
 
-  const breakLine = <br />;
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal(e, data) {

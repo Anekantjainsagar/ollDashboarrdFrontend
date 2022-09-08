@@ -34,7 +34,6 @@ const App = () => {
   const checkLogin = async () => {
     if (token?.length > 0) {
       await check();
-      history("/");
       if (Object.keys(checkUser)[0] === "_id") {
         history(`/${checkUser?.type}`);
       } else {

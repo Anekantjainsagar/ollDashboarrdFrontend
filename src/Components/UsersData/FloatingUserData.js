@@ -89,9 +89,9 @@ const FloatingUserData = ({
   const [sourceTime, setsourceTime] = useState();
   const [mode, setmode] = useState();
   const [type, settype] = useState();
-  const [days, setdays] = useState([...batchDetails?.days]);
-  const [stime, setstime] = useState(batchDetails?.time.split(" ")[0]);
-  const [etime, setetime] = useState(batchDetails?.time.split(" ")[1]);
+  const [days, setdays] = useState([]);
+  const [stime, setstime] = useState();
+  const [etime, setetime] = useState();
   const [displayComment, setdisplayComment] = useState(true);
   const [comments, setcomments] = useState();
   const [stages, setstages] = useState();
@@ -118,12 +118,12 @@ const FloatingUserData = ({
       mode: mode === undefined ? batchDetails?.mode : mode,
       type: type === undefined ? batchDetails?.type : type,
       address: address === undefined ? batchDetails?.address : address,
-      days: days.length > 0 ? days : batchDetails?.days,
+      days: days.length == 0 ? batchDetails?.days : days,
       status: statuses === undefined ? status : statuses,
       stage: stages === undefined ? stage : stages,
       startDate:
         sourceTime === undefined ? batchDetails?.startDate : sourceTime,
-      time: stime + " " + etime,
+      time: stime===undefined?(batchDetails?.time):(stime + " "+ etime),
       sessionsCount:
         NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
       price: price === undefined ? batchDetails?.price : price,
@@ -143,6 +143,7 @@ const FloatingUserData = ({
             width: "100%",
           }),
         });
+      setDetails(false);
       setTimeout(() => {
         getUserData();
       }, 100);
@@ -657,8 +658,13 @@ const FloatingUserData = ({
                         type="checkbox"
                         id={e}
                         value={e}
-                        checked={days?.includes(e)}
+                        checked={
+                          days.length === 0
+                            ? batchDetails?.days.includes(e)
+                            : days.includes(e)
+                        }
                         onChange={(e) => {
+                          setdays([...batchDetails?.days]);
                           if (e.target.checked === true) {
                             if (days.includes(e.target.value) === false) {
                               setdays([...days, e.target.value]);
@@ -693,9 +699,12 @@ const FloatingUserData = ({
               <select
                 style={{ width: "100%", fontWeight: "500" }}
                 name="stime"
-                value={stime}
+                value={
+                  stime === undefined ? batchDetails?.time.split(" ")[0] : stime
+                }
                 className="valueSelector"
                 onChange={(e) => {
+                  setstime(batchDetails?.time.split(" ")[0]);
                   setstime(e.target.value);
                   var index = times.indexOf(e.target.value);
                   setetime(times[index + 2]);
@@ -712,11 +721,13 @@ const FloatingUserData = ({
               <select
                 style={{ width: "100%", margin: "1rem 0", fontWeight: "500" }}
                 name="etime"
-                value={etime}
+                value={
+                  etime === undefined ? batchDetails?.time.split(" ")[1] : etime
+                }
                 className="valueSelector"
                 onChange={(e) => {
+                  setstime(batchDetails?.time.split(" ")[1]);
                   setetime(e.target.value);
-                  console.log(e.target.value);
                 }}
               >
                 {times.map((time, i) => {
@@ -959,6 +970,54 @@ const FloatingUserData = ({
             </div>
           </div>
         </div>
+        <button
+          style={{
+            backgroundColor: "red",
+            padding: "0.5rem 1.75rem",
+            margin: "0 10.75rem",
+            border: "1px solid white",
+            borderRadius: "5rem",
+            outline: "none",
+            fontSize: "1.5rem",
+            color: "white",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            axios
+              .delete(`${BASE_URL}/deleteUser`, {
+                headers: {
+                  Authorization: "***",
+                },
+                data: {
+                  id: data._id,
+                },
+              })
+              .then((res) => {
+                if (res.data.acknowledged === true) {
+                  const notify = () =>
+                    toast("User deleted successfully", {
+                      type: "success",
+                    });
+                  notify();
+                  setTimeout(() => {
+                    getUserData()
+                  }, 1000);
+                  setDetails(false);
+                } else {
+                  const notify = () =>
+                    toast("Internal server error", {
+                      type: "error",
+                    });
+                  notify();
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          Delete Lead
+        </button>
       </div>
     </>
   );
