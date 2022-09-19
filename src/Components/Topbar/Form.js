@@ -7,6 +7,7 @@ import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import times from "./times";
 
 const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
@@ -25,18 +26,8 @@ const Form = ({ getUserData, sales }) => {
   const [startDate, setstartDate] = useState();
   const [sessionsCount, setsessionsCount] = useState();
   const [stime, setstime] = useState("09:00AM");
-  const [etime, setetime] = useState(
-    stime.slice(3, 5) == "30"
-      ? moment({
-          hour: Number(stime.slice(0, 2)),
-          minute: Number(stime.slice(3, 5)),
-        })
-          .add(60, "m")
-          .format("hh:mmA")
-      : moment({ hour: Number(stime.slice(0, 2)) })
-          .add(1, "hours")
-          .format("hh:mmA")
-  );
+  var index = times.indexOf(stime);
+  const [etime, setetime] = useState(times[index + 2]);
   const [price, setprice] = useState();
 
   const postData = async (e) => {
@@ -54,8 +45,10 @@ const Form = ({ getUserData, sales }) => {
       address,
       price,
       days,
-      startDate,
-      time: stime + " " + etime,
+      startDate:
+        startDate === undefined || startDate === null ? new Date() : startDate,
+      time:
+        stime + " " + etime === " " ? "09:00AM 10:00AM" : stime + " " + etime,
       sessionsCount,
       stage: "🔥 hot",
       status: "new",

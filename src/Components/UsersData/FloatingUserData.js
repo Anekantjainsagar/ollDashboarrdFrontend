@@ -123,7 +123,7 @@ const FloatingUserData = ({
       stage: stages === undefined ? stage : stages,
       startDate:
         sourceTime === undefined ? batchDetails?.startDate : sourceTime,
-      time: stime===undefined?(batchDetails?.time):(stime + " "+ etime),
+      time: stime === undefined ? batchDetails?.time : stime + " " + etime,
       sessionsCount:
         NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
       price: price === undefined ? batchDetails?.price : price,
@@ -1000,7 +1000,7 @@ const FloatingUserData = ({
                     });
                   notify();
                   setTimeout(() => {
-                    getUserData()
+                    getUserData();
                   }, 1000);
                   setDetails(false);
                 } else {

@@ -256,6 +256,9 @@ const User = (props) => {
                 .catch((err) => {
                   console.log(err);
                 });
+              if(e.target.value==="noTeacher"||e.target.value==="noBatch"||e.target.value==="noBatch"){
+                
+              }
             }}
           >
             <option className="new" value="new">
