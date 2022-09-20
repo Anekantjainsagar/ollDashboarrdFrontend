@@ -6,7 +6,6 @@ import axios from "axios";
 import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import moment from "moment";
 import times from "./times";
 
 const Form = ({ getUserData, sales }) => {
@@ -23,7 +22,10 @@ const Form = ({ getUserData, sales }) => {
   const [type, settype] = useState("group");
   const [days, setdays] = useState([]);
   const [address, setaddress] = useState();
-  const [startDate, setstartDate] = useState();
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  var date = curr.toISOString().substring(0, 10);
+  const [startDate, setstartDate] = useState(date);
   const [sessionsCount, setsessionsCount] = useState();
   const [stime, setstime] = useState("09:00AM");
   var index = times.indexOf(stime);
@@ -40,16 +42,23 @@ const Form = ({ getUserData, sales }) => {
       school,
       course,
       source,
-      mode,
-      type,
+      mode: mode === undefined || mode === "" ? "Online" : mode,
+      type: type === undefined || type === "" ? "group" : type,
       address,
-      price,
+      price: price === undefined || price === "" || price === null ? 0 : price,
       days,
       startDate:
-        startDate === undefined || startDate === null ? new Date() : startDate,
+        startDate === undefined || startDate === null || startDate === ""
+          ? date
+          : startDate,
       time:
         stime + " " + etime === " " ? "09:00AM 10:00AM" : stime + " " + etime,
-      sessionsCount,
+      sessionsCount:
+        sessionsCount === undefined ||
+        sessionsCount === "" ||
+        sessionsCount === null
+          ? 0
+          : sessionsCount,
       stage: "🔥 hot",
       status: "new",
       assignee: sales?.name,

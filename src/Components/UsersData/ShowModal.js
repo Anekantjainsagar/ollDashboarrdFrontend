@@ -91,7 +91,8 @@ const ShowModal = ({
           : null}
         <button
           className="btn"
-          onClick={() => {
+          onClick={(event) => {
+            event.stopPropagation();
             clickedTemplate.customParams.map((e, index) => {
               const test = document.querySelector(`.${e.elementName}`);
               console.log(test);

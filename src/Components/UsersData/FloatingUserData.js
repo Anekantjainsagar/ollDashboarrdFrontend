@@ -83,7 +83,7 @@ const FloatingUserData = ({
   const [schoolName, setschoolName] = useState(undefined);
   const [address, setaddress] = useState(undefined);
   const [courseName, setCourseName] = useState(undefined);
-  const [NoSessions, setNoSessions] = useState(undefined);
+  const [NoSessions, setNoSessions] = useState(batchDetails?.sessionsCount);
   const [price, setprice] = useState(undefined);
   const [sourcePlatform, setsourcePlatform] = useState(undefined);
   const [sourceTime, setsourceTime] = useState(undefined);
@@ -103,6 +103,12 @@ const FloatingUserData = ({
   const [height, setheight] = useState(undefined);
 
   useOutsideAlerter(sideRef, details, setDetails);
+
+  if (details) {
+    console.log("first")
+    console.log(data)
+  }
+
   const updateData = async (e) => {
     e.preventDefault();
 
@@ -750,7 +756,7 @@ const FloatingUserData = ({
                 style={{ width: "50%", marginRight: "1rem" }}
                 placeholder="Sessions"
                 value={
-                  NoSessions === undefined
+                  NoSessions == undefined
                     ? batchDetails?.sessionsCount
                     : NoSessions
                 }
