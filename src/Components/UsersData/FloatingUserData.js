@@ -104,11 +104,6 @@ const FloatingUserData = ({
 
   useOutsideAlerter(sideRef, details, setDetails);
 
-  if (details) {
-    console.log("first")
-    console.log(data)
-  }
-
   const updateData = async (e) => {
     e.preventDefault();
 
@@ -478,8 +473,14 @@ const FloatingUserData = ({
               type="number"
               style={{ width: "17%" }}
               placeholder="Age"
-              value={userAge === undefined ? age : userAge}
-              max={20}
+              value={
+                userAge === undefined
+                  ? age === undefined || age === null
+                    ? ""
+                    : age
+                  : userAge
+              }
+              max={100}
               min={1}
               onChange={(e) => setuserAge(e.target.value)}
             />
@@ -873,8 +874,8 @@ const FloatingUserData = ({
                 placeholder="Start date"
                 value={
                   sourceTime === undefined
-                    ? new Date(batchDetails?.startDate).toString().slice(4, 24)
-                    : new Date(sourceTime).toString().slice(4, 24)
+                    ? new Date(batchDetails?.startDate).toString().slice(4, 16)
+                    : new Date(sourceTime).toString().slice(4, 16)
                 }
                 onChange={(e) => {
                   setsourceTime(e.target.value);

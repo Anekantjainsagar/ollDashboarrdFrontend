@@ -23,7 +23,7 @@ const Form = ({ getUserData, sales }) => {
   const [days, setdays] = useState([]);
   const [address, setaddress] = useState();
   var curr = new Date();
-  curr.setDate(curr.getDate() + 3);
+  curr.setDate(curr.getDate());
   var date = curr.toISOString().substring(0, 10);
   const [startDate, setstartDate] = useState(date);
   const [sessionsCount, setsessionsCount] = useState();
@@ -37,11 +37,11 @@ const Form = ({ getUserData, sales }) => {
     const res = await axios.post(`${BASE_URL}/addUser`, {
       name,
       phone,
-      email,
-      age,
-      school,
-      course,
-      source,
+      email: email === undefined || email === "" ? "" : email,
+      age: age === undefined || age === "" ? "" : age,
+      school: school === undefined || school === "" ? "" : school,
+      course: course === undefined || course === "" ? "" : course,
+      source: source === undefined || source === "" ? "" : source,
       mode: mode === undefined || mode === "" ? "Online" : mode,
       type: type === undefined || type === "" ? "group" : type,
       address,
