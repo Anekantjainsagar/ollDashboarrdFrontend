@@ -92,6 +92,9 @@ const User = (props) => {
         setTimeout(() => {
           props.getUserData();
         }, 500);
+        setTimeout(() => {
+          sendMsgOnComment();
+        }, 5000);
       }
     }
   };
@@ -147,6 +150,38 @@ const User = (props) => {
       });
   };
 
+  const sendMsgOnComment = () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "text/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzIyYzViYi1kYzQwLTRmODctYjZiMi1iMjMyOTQyMjBiOGUiLCJ1bmlxdWVfbmFtZSI6ImluZm9Ab2xsLmNvIiwibmFtZWlkIjoiaW5mb0BvbGwuY28iLCJlbWFpbCI6ImluZm9Ab2xsLmNvIiwiYXV0aF90aW1lIjoiMDgvMDEvMjAyMiAwNDowMDo1NiIsImRiX25hbWUiOiIxMTUwNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.k89dQ0gkjcZ3T8VYDz6FIbr4sisaSiSTvjLZ7FhLEAc",
+      },
+      body: JSON.stringify({
+        parameters: [
+          { name: "name", value: name },
+          { name: "client_name", value: name },
+          { name: "id", value: id },
+          { name: "query_date", value: d.slice(4, 16) },
+          { name: "query_time", value: d.slice(16, 21) },
+          { name: "query_status", value: status },
+          { name: "comment", value: comment },
+        ],
+        broadcast_name: "test",
+        template_name: "query_update_to_ops",
+      }),
+    };
+
+    fetch(
+      "https://live-server-11507.wati.io/api/v1/sendTemplateMessage?whatsappNumber=7692045606",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <>
       <ShowModal
@@ -173,7 +208,7 @@ const User = (props) => {
           setsendToTop(!sendToTop);
         }}
         onClick={() => {
-          console.log(props.data)
+          console.log(props.data);
           setDetails(!details);
         }}
         style={{ cursor: "pointer" }}
@@ -249,7 +284,7 @@ const User = (props) => {
                   newStatus: e.target.value,
                 })
                 .then((response) => {
-                  console.log(response);
+                  // console.log(response);
                   if (response.data.acknowledged === true) {
                     props.getUserData();
                   }
@@ -257,9 +292,51 @@ const User = (props) => {
                 .catch((err) => {
                   console.log(err);
                 });
-              if(e.target.value==="noTeacher"||e.target.value==="noBatch"||e.target.value==="noBatch"){
-                
-              }
+
+              setTimeout(() => {
+                if (
+                  status !== "noTeacher" &&
+                  status !== "noBatch" &&
+                  status !== "noCourse"
+                ) {
+                  if (
+                    e.target.value === "noTeacher" ||
+                    e.target.value === "noBatch" ||
+                    e.target.value === "noCourse"
+                  ) {
+                    const options = {
+                      method: "POST",
+                      headers: {
+                        "content-type": "text/json",
+                        Authorization:
+                          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzIyYzViYi1kYzQwLTRmODctYjZiMi1iMjMyOTQyMjBiOGUiLCJ1bmlxdWVfbmFtZSI6ImluZm9Ab2xsLmNvIiwibmFtZWlkIjoiaW5mb0BvbGwuY28iLCJlbWFpbCI6ImluZm9Ab2xsLmNvIiwiYXV0aF90aW1lIjoiMDgvMDEvMjAyMiAwNDowMDo1NiIsImRiX25hbWUiOiIxMTUwNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.k89dQ0gkjcZ3T8VYDz6FIbr4sisaSiSTvjLZ7FhLEAc",
+                      },
+                      body: JSON.stringify({
+                        parameters: [
+                          { name: "name", value: name },
+                          { name: "client_name", value: name },
+                          { name: "id", value: id },
+                          { name: "query_date", value: d.slice(4, 16) },
+                          { name: "query_time", value: d.slice(16, 21) },
+                          {
+                            name: "query_status",
+                            value: e.target.value,
+                          },
+                        ],
+                        broadcast_name: "test",
+                        template_name: "query_add_to_ops",
+                      }),
+                    };
+                    fetch(
+                      "https://live-server-11507.wati.io/api/v1/sendTemplateMessage?whatsappNumber=7692045606",
+                      options
+                    )
+                      .then((response) => response.json())
+                      .then((response) => console.log(response))
+                      .catch((err) => console.error(err));
+                  }
+                }
+              }, 5000);
             }}
           >
             <option className="new" value="new">
@@ -417,6 +494,9 @@ const User = (props) => {
                       props.getUserData();
                     }, 1000);
                     setcomment("");
+                    setTimeout(() => {
+                      sendMsgOnComment();
+                    }, 5000);
                   }}
                 />
               </div>
