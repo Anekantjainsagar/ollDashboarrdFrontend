@@ -197,6 +197,17 @@ const FloatingUserData = ({
             ],
             whatsappNumber: "919899830458",
           },
+          {
+            customParams: [
+              { name: "client_name", value: name },
+              { name: "id", value: id },
+              { name: "query_date", value: d.slice(4, 16) },
+              { name: "query_time", value: d.slice(16, 21) },
+              { name: "query_status", value: status },
+              { name: "comment", value: comments },
+            ],
+            whatsappNumber: "919899830458",
+          },
         ],
         template_name: "query_update_to_ops",
         broadcast_name: "alert",
