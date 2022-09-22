@@ -206,7 +206,7 @@ const FloatingUserData = ({
               { name: "query_status", value: status },
               { name: "comment", value: comments },
             ],
-            whatsappNumber: "919899830458",
+            whatsappNumber: "917692045606",
           },
         ],
         template_name: "query_update_to_ops",
@@ -219,7 +219,9 @@ const FloatingUserData = ({
       options
     )
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+      })
       .catch((err) => console.error(err));
   };
 
