@@ -356,7 +356,7 @@ const User = (props) => {
                               { name: "id", value: id },
                               { name: "query_date", value: d.slice(4,16) },
                               { name: "query_time", value: d.slice(16,21) },
-                              { name: "query_status", value: status },
+                              { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "919993610583",
                           },
@@ -366,7 +366,7 @@ const User = (props) => {
                               { name: "id", value: id },
                               { name: "query_date", value: d.slice(4,16) },
                               { name: "query_time", value: d.slice(16,21) },
-                              { name: "query_status", value: status },
+                              { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "917895954610",
                           },
@@ -376,7 +376,7 @@ const User = (props) => {
                               { name: "id", value: id },
                               { name: "query_date", value: d.slice(4,16) },
                               { name: "query_time", value: d.slice(16,21) },
-                              { name: "query_status", value: status },
+                              { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "919899830458",
                           },
@@ -386,7 +386,7 @@ const User = (props) => {
                               { name: "id", value: id },
                               { name: "query_date", value: d.slice(4,16) },
                               { name: "query_time", value: d.slice(16,21) },
-                              { name: "query_status", value: status },
+                              { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "917692045606",
                           },
@@ -404,7 +404,7 @@ const User = (props) => {
                       .catch((err) => console.error(err));
                   }
                 }
-              }, 5000);
+              }, 4000);
             }}
           >
             <option className="new" value="new">
