@@ -260,9 +260,15 @@ const User = (props) => {
             ? "Grp"
             : batchDetails?.type === "Trial"
             ? "Try"
-            : "1-1") +
+            : batchDetails?.type === "1 to 1"
+            ? "1 to 1"
+            : "None") +
             " " +
-            (batchDetails?.mode === "Online" ? "Onl." : "Off.")}
+            (batchDetails?.mode === "Online"
+              ? "Onl."
+              : batchDetails?.mode === "Offline"
+              ? "Off."
+              : "None")}
         </p>
         <p className="offerDetailsValue">{course}</p>
         <FloatingUserData
@@ -354,8 +360,8 @@ const User = (props) => {
                             customParams: [
                               { name: "client_name", value: name },
                               { name: "id", value: id },
-                              { name: "query_date", value: d.slice(4,16) },
-                              { name: "query_time", value: d.slice(16,21) },
+                              { name: "query_date", value: d.slice(4, 16) },
+                              { name: "query_time", value: d.slice(16, 21) },
                               { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "919993610583",
@@ -364,8 +370,8 @@ const User = (props) => {
                             customParams: [
                               { name: "client_name", value: name },
                               { name: "id", value: id },
-                              { name: "query_date", value: d.slice(4,16) },
-                              { name: "query_time", value: d.slice(16,21) },
+                              { name: "query_date", value: d.slice(4, 16) },
+                              { name: "query_time", value: d.slice(16, 21) },
                               { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "917895954610",
@@ -374,8 +380,8 @@ const User = (props) => {
                             customParams: [
                               { name: "client_name", value: name },
                               { name: "id", value: id },
-                              { name: "query_date", value: d.slice(4,16) },
-                              { name: "query_time", value: d.slice(16,21) },
+                              { name: "query_date", value: d.slice(4, 16) },
+                              { name: "query_time", value: d.slice(16, 21) },
                               { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "919899830458",
@@ -384,8 +390,8 @@ const User = (props) => {
                             customParams: [
                               { name: "client_name", value: name },
                               { name: "id", value: id },
-                              { name: "query_date", value: d.slice(4,16) },
-                              { name: "query_time", value: d.slice(16,21) },
+                              { name: "query_date", value: d.slice(4, 16) },
+                              { name: "query_time", value: d.slice(16, 21) },
                               { name: "query_status", value: e.target.value },
                             ],
                             whatsappNumber: "917692045606",

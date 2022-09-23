@@ -92,6 +92,21 @@ const BatchDetails = ({
               style={{ color: "black", cursor: "pointer" }}
               type={"radio"}
               name="mode"
+              value={"none"}
+            />
+            <p style={{ marginLeft: "0.4rem" }}>None</p>
+          </div>
+          <div
+            style={{
+              margin: "0.75rem 0",
+              paddingLeft: "0.15rem",
+              display: "flex",
+            }}
+          >
+            <input
+              style={{ color: "black", cursor: "pointer" }}
+              type={"radio"}
+              name="mode"
               value={"Online"}
             />
             <p style={{ marginLeft: "0.4rem" }}>Onl.</p>
@@ -118,6 +133,21 @@ const BatchDetails = ({
           onChange={(e) => settype(e.target.value)}
         >
           <p>Type</p>
+          <div
+            style={{
+              margin: "0.75rem 0",
+              paddingLeft: "0.15rem",
+              display: "flex",
+            }}
+          >
+            <input
+              style={{ color: "black", cursor: "pointer" }}
+              type={"radio"}
+              name="type"
+              value={"none"}
+            />
+            <p style={{ marginLeft: "0.4rem" }}>None</p>
+          </div>
           <div
             style={{
               margin: "0.75rem 0",

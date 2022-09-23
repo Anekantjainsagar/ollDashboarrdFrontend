@@ -18,8 +18,8 @@ const Form = ({ getUserData, sales }) => {
   const [school, setschool] = useState();
   const [course, setcourse] = useState();
   const [source, setsource] = useState("Website");
-  const [mode, setmode] = useState("Online");
-  const [type, settype] = useState("group");
+  const [mode, setmode] = useState("none");
+  const [type, settype] = useState("none");
   const [days, setdays] = useState([]);
   const [address, setaddress] = useState();
   var curr = new Date();
@@ -42,8 +42,8 @@ const Form = ({ getUserData, sales }) => {
       school: school === undefined || school === "" ? "" : school,
       course: course === undefined || course === "" ? "" : course,
       source: source === undefined || source === "" ? "" : source,
-      mode: mode === undefined || mode === "" ? "Online" : mode,
-      type: type === undefined || type === "" ? "group" : type,
+      mode: mode === undefined || mode === "" ? "none" : mode,
+      type: type === undefined || type === "" ? "none" : type,
       address,
       price: price === undefined || price === "" || price === null ? 0 : price,
       days,

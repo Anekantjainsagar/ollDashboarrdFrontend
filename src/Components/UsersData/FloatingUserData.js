@@ -887,6 +887,9 @@ const FloatingUserData = ({
                   onChange={(e) => setmode(e.target.value)}
                   value={mode === undefined ? batchDetails?.mode : mode}
                 >
+                  <option style={{ fontSize: "1.6rem" }} value={"none"}>
+                    None
+                  </option>
                   <option style={{ fontSize: "1.6rem" }} value={"Online"}>
                     Online
                   </option>
@@ -915,6 +918,9 @@ const FloatingUserData = ({
                   onChange={(e) => settype(e.target.value)}
                   value={type === undefined ? batchDetails?.type : type}
                 >
+                  <option style={{ fontSize: "1.6rem" }} value={"none"}>
+                    None
+                  </option>
                   <option style={{ fontSize: "1.6rem" }} value={"1 to 1"}>
                     1 to 1
                   </option>
