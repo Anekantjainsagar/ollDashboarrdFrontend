@@ -1001,18 +1001,20 @@ const FloatingUserData = ({
             size={19}
             className="icon"
             onClick={() => {
-              axios.put(`${BASE_URL}/comment`, {
-                id: _id,
-                comment: comments,
-                user: sales?.name,
-              });
-              setcomments("");
-              setTimeout(() => {
-                getUserData();
-              }, 500);
-              setTimeout(() => {
-                sendMsgOnComment();
-              }, 5000);
+              if (comments.length > 0) {
+                axios.put(`${BASE_URL}/comment`, {
+                  id: _id,
+                  comment: comments,
+                  user: sales?.name,
+                });
+                setcomments("");
+                setTimeout(() => {
+                  getUserData();
+                }, 500);
+                setTimeout(() => {
+                  sendMsgOnComment();
+                }, 5000);
+              }
             }}
           />
         </div>

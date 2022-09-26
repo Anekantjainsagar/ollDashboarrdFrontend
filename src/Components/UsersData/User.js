@@ -580,18 +580,20 @@ const User = (props) => {
                   size={19}
                   className="icon"
                   onClick={() => {
-                    axios.put(`${BASE_URL}/comment`, {
-                      id: _id,
-                      comment: comment,
-                      user: props.sales?.name,
-                    });
-                    setTimeout(() => {
-                      props.getUserData();
-                    }, 1000);
-                    setcomment("");
-                    setTimeout(() => {
-                      sendMsgOnComment();
-                    }, 5000);
+                    if (comment.length > 0) {
+                      axios.put(`${BASE_URL}/comment`, {
+                        id: _id,
+                        comment: comment,
+                        user: props.sales?.name,
+                      });
+                      setTimeout(() => {
+                        props.getUserData();
+                      }, 1000);
+                      setcomment("");
+                      setTimeout(() => {
+                        sendMsgOnComment();
+                      }, 5000);
+                    }
                   }}
                 />
               </div>
