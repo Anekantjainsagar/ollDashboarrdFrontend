@@ -124,10 +124,7 @@ const FloatingUserData = ({
       stage: stages === undefined ? stage : stages,
       startDate:
         sourceTime === undefined ? batchDetails?.startDate : sourceTime,
-      time:
-        stime === undefined
-          ? batchDetails?.time
-          : stime + "12:00AM 01:00AM" + etime,
+      time: stime === undefined ? batchDetails?.time : stime + " " + etime,
       sessionsCount:
         NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
       price: price === undefined ? batchDetails?.price : price,
@@ -792,7 +789,11 @@ const FloatingUserData = ({
               }}
             >
               <select
-                style={{ width: "100%", fontWeight: "500" }}
+                style={{
+                  width: "100%",
+                  fontWeight: "500",
+                  textAlign: "center",
+                }}
                 name="stime"
                 value={
                   stime === undefined ? batchDetails?.time.split(" ")[0] : stime
@@ -801,8 +802,11 @@ const FloatingUserData = ({
                 onChange={(e) => {
                   setstime(batchDetails?.time.split(" ")[0]);
                   setstime(e.target.value);
-                  var index = times.indexOf(e.target.value);
-                  setetime(times[index + 2]);
+                  var index =
+                    e.target.value === "--"
+                      ? times.indexOf(e.target.value)
+                      : times.indexOf(e.target.value) + 2;
+                  setetime(times[index]);
                 }}
               >
                 {times.map((time, i) => {
@@ -814,7 +818,12 @@ const FloatingUserData = ({
                 })}
               </select>
               <select
-                style={{ width: "100%", margin: "1rem 0", fontWeight: "500" }}
+                style={{
+                  width: "100%",
+                  margin: "1rem 0",
+                  fontWeight: "500",
+                  textAlign: "center",
+                }}
                 name="etime"
                 value={
                   etime === undefined ? batchDetails?.time.split(" ")[1] : etime

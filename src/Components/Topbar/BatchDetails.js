@@ -261,8 +261,11 @@ const BatchDetails = ({
                 className="valueSelector"
                 onChange={(e) => {
                   setstime(e.target.value);
-                  var index = times.indexOf(e.target.value);
-                  setetime(times[index + 2]);
+                  var index =
+                    e.target.value === "--"
+                      ? times.indexOf(e.target.value)
+                      : times.indexOf(e.target.value) + 2;
+                  setetime(times[index]);
                 }}
               >
                 {times.map((time, index) => {

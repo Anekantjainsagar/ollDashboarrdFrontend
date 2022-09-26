@@ -27,9 +27,9 @@ const Form = ({ getUserData, sales }) => {
   var date = curr.toISOString().substring(0, 10);
   const [startDate, setstartDate] = useState(date);
   const [sessionsCount, setsessionsCount] = useState();
-  const [stime, setstime] = useState("12:00AM");
-  var index = times.indexOf(stime);
-  const [etime, setetime] = useState(times[index + 2]);
+  const [stime, setstime] = useState("--");
+  var index = stime === "--" ? times.indexOf(stime) : times.indexOf(stime) + 2;
+  const [etime, setetime] = useState(times[index]);
   const [price, setprice] = useState();
 
   const postData = async (e) => {
@@ -51,8 +51,7 @@ const Form = ({ getUserData, sales }) => {
         startDate === undefined || startDate === null || startDate === ""
           ? date
           : startDate,
-      time:
-        stime + " " + etime === " " ? "12:00AM 01:00AM" : stime + " " + etime,
+      time: stime + " " + etime === " " ? "-- --" : stime + " " + etime,
       sessionsCount:
         sessionsCount === undefined ||
         sessionsCount === "" ||
