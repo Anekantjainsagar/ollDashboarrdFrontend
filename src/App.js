@@ -51,6 +51,7 @@ const App = () => {
       <Route path="/" element={<Login setsales={setsales} />} />
       <Route path="/sales" element={<Sales sales={checkUser} />} />
       <Route path="/Operations" element={<Support sales={checkUser} />} />
+      <Route path="/training" element={<Support sales={checkUser} />} />
       <Route path="*" render={() => <Navigate to="/" />} />
       <Route path="/undefined" element={<Login setsales={setsales} />} />
     </Routes>

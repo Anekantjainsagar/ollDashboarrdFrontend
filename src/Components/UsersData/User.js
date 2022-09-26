@@ -82,9 +82,9 @@ const User = (props) => {
 
   const handleKeyPress = (e) => {
     if (
-      comment.length > 0 ||
-      comment !== " " ||
-      comment !== "  " ||
+      comment.length > 0 &&
+      comment !== " " &&
+      comment !== "  " &&
       comment !== "   "
     ) {
       if (e.key === "Enter") {
@@ -586,9 +586,9 @@ const User = (props) => {
                   className="icon"
                   onClick={() => {
                     if (
-                      comment.length > 0 ||
-                      comment !== " " ||
-                      comment !== "  " ||
+                      comment.length > 0 &&
+                      comment !== " " &&
+                      comment !== "  " &&
                       comment !== "   "
                     ) {
                       axios.put(`${BASE_URL}/comment`, {

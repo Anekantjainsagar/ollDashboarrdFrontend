@@ -238,9 +238,9 @@ const FloatingUserData = ({
 
   const handleKeyPress = (e) => {
     if (
-      comments?.length > 0 ||
-      comments !== " " ||
-      comments !== "  " ||
+      comments?.length > 0 &&
+      comments !== " " &&
+      comments !== "  " &&
       comments !== "   "
     ) {
       if (e.key === "Enter") {
@@ -1007,9 +1007,9 @@ const FloatingUserData = ({
             className="icon"
             onClick={() => {
               if (
-                comments.length > 0 ||
-                comments !== " " ||
-                comments !== "  " ||
+                comments.length > 0 &&
+                comments !== " " &&
+                comments !== "  " &&
                 comments !== "   "
               ) {
                 axios.put(`${BASE_URL}/comment`, {
