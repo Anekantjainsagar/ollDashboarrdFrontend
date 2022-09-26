@@ -124,7 +124,10 @@ const FloatingUserData = ({
       stage: stages === undefined ? stage : stages,
       startDate:
         sourceTime === undefined ? batchDetails?.startDate : sourceTime,
-      time: stime === undefined ? batchDetails?.time : stime + " " + etime,
+      time:
+        stime === undefined
+          ? batchDetails?.time
+          : stime + "12:00AM 01:00AM" + etime,
       sessionsCount:
         NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
       price: price === undefined ? batchDetails?.price : price,
@@ -207,6 +210,17 @@ const FloatingUserData = ({
               { name: "comment", value: comments },
             ],
             whatsappNumber: "917692045606",
+          },
+          {
+            customParams: [
+              { name: "client_name", value: name },
+              { name: "id", value: id },
+              { name: "query_date", value: d.slice(4, 16) },
+              { name: "query_time", value: d.slice(16, 21) },
+              { name: "query_status", value: status },
+              { name: "comment", value: comments },
+            ],
+            whatsappNumber: "919699188188",
           },
         ],
         template_name: "query_update_to_ops",
