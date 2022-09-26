@@ -353,16 +353,8 @@ const User = (props) => {
                 });
 
               setTimeout(() => {
-                if (
-                  status !== "noTeacher" &&
-                  status !== "noBatch" &&
-                  status !== "noCourse"
-                ) {
-                  if (
-                    e.target.value === "noTeacher" ||
-                    e.target.value === "noBatch" ||
-                    e.target.value === "noCourse"
-                  ) {
+                if (status !== "noBatch") {
+                  if (e.target.value === "noBatch") {
                     const options = {
                       method: "POST",
                       headers: {

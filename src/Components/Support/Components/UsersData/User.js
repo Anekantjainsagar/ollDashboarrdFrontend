@@ -74,7 +74,12 @@ const User = (props) => {
   }
 
   const handleKeyPress = (e) => {
-    if (comment.length > 0) {
+    if (
+      comment.length > 0 &&
+      comment !== " " &&
+      comment !== "  " &&
+      comment !== "   "
+    ) {
       if (e.key === "Enter") {
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
@@ -426,15 +431,22 @@ const User = (props) => {
                   size={19}
                   className="icon"
                   onClick={() => {
-                    axios.put(`${BASE_URL}/comment`, {
-                      id: _id,
-                      comment: comment,
-                      user: props.sales?.name,
-                    });
-                    setTimeout(() => {
-                      props.getUserData();
-                    }, 1000);
-                    setcomment("");
+                    if (
+                      comment.length > 0 &&
+                      comment !== " " &&
+                      comment !== "  " &&
+                      comment !== "   "
+                    ) {
+                      axios.put(`${BASE_URL}/comment`, {
+                        id: _id,
+                        comment: comment,
+                        user: props.sales?.name,
+                      });
+                      setTimeout(() => {
+                        props.getUserData();
+                      }, 1000);
+                      setcomment("");
+                    }
                   }}
                 />
               </div>

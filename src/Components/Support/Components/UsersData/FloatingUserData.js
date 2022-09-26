@@ -63,7 +63,12 @@ const FloatingUserData = ({
   const d = new Date(inqDate).toString();
 
   const handleKeyPress = (e) => {
-    if (comments?.length > 0) {
+    if (
+      comments.length > 0 &&
+      comments !== " " &&
+      comments !== "  " &&
+      comments !== "   "
+    ) {
       if (e.key === "Enter") {
         axios.put(`${BASE_URL}/comment`, {
           id: _id,
@@ -535,15 +540,22 @@ const FloatingUserData = ({
             size={19}
             className="icon"
             onClick={() => {
-              axios.put(`${BASE_URL}/comment`, {
-                id: _id,
-                comment: comments,
-                user: sales?.name,
-              });
-              setcomments("");
-              setTimeout(() => {
-                getUserData();
-              }, 500);
+              if (
+                comment.length > 0 &&
+                comment !== " " &&
+                comment !== "  " &&
+                comment !== "   "
+              ) {
+                axios.put(`${BASE_URL}/comment`, {
+                  id: _id,
+                  comment: comments,
+                  user: sales?.name,
+                });
+                setcomments("");
+                setTimeout(() => {
+                  getUserData();
+                }, 500);
+              }
             }}
           />
         </div>

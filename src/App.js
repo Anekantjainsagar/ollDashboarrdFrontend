@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Sales from "./Components/Sales/index";
 import Login from "./Components/Login/Login";
 import Support from "./Components/Support/index";
+import Training from './Components/Training/index'
 import axios from "axios";
 import { BASE_URL } from "./Utils";
 
@@ -51,7 +52,7 @@ const App = () => {
       <Route path="/" element={<Login setsales={setsales} />} />
       <Route path="/sales" element={<Sales sales={checkUser} />} />
       <Route path="/Operations" element={<Support sales={checkUser} />} />
-      <Route path="/training" element={<Support sales={checkUser} />} />
+      <Route path="/training" element={<Training sales={checkUser} />} />
       <Route path="*" render={() => <Navigate to="/" />} />
       <Route path="/undefined" element={<Login setsales={setsales} />} />
     </Routes>
