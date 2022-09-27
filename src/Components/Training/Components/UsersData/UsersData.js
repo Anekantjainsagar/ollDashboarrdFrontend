@@ -4,6 +4,7 @@ import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
 import { FaArrowCircleUp } from "react-icons/fa";
 import Pagination from "./Pagination";
+import "./index.css";
 
 const UsersData = ({
   usersData,

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import User from "./User";
+import "./index.css";
 import UserHeading from "./UserHeadings";
 import { ThreeDots } from "react-loader-spinner";
 import { FaArrowCircleUp } from "react-icons/fa";
@@ -26,7 +27,11 @@ const UsersData = ({
 
   return (
     <>
-      <div className="usersDataOfOperation" ref={usersRef}>
+      <div
+        className="usersDataOfOperation"
+        ref={usersRef}
+        style={{ height: "76vh" }}
+      >
         <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
         <UserHeading filter={filter} setfilter={setfilter} />
         <div style={{ margin: "2.5rem 0" }}></div>

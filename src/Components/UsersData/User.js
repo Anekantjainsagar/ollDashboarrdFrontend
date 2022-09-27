@@ -3,12 +3,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import FloatingUserData from "./FloatingUserData";
 import { ThreeDots } from "react-loader-spinner";
-import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineCopy } from "react-icons/ai";
 import { BiUpArrowAlt } from "react-icons/bi";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaGripLines } from "react-icons/fa";
 import { BASE_URL } from "../../Utils/index";
 import ShowModal from "./ShowModal";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-toastify/dist/ReactToastify.css";
 
 function useOutsideAlerter(ref, show, setShow) {
@@ -39,7 +40,7 @@ const User = (props) => {
     status,
     stage,
     inqDate,
-    oprationalStage,
+    email,
     cCode,
   } = props.data;
 
@@ -79,30 +80,6 @@ const User = (props) => {
     setclickedTemplate(e);
     settemplateUser(data);
   }
-
-  const handleKeyPress = (e) => {
-    if (
-      comment.length > 0 &&
-      comment !== " " &&
-      comment !== "  " &&
-      comment !== "   "
-    ) {
-      if (e.key === "Enter") {
-        axios.put(`${BASE_URL}/comment`, {
-          id: _id,
-          comment: comment,
-          user: props.sales?.name,
-        });
-        setcomment("");
-        setTimeout(() => {
-          props.getUserData();
-        }, 500);
-        setTimeout(() => {
-          sendMsgOnComment();
-        }, 5000);
-      }
-    }
-  };
 
   const sendToTopFunction = (e) => {
     var data = e;
@@ -153,86 +130,6 @@ const User = (props) => {
         console.log(err);
         setloading(false);
       });
-  };
-
-  const sendMsgOnComment = () => {
-    const options = {
-      method: "POST",
-      headers: {
-        "content-type": "text/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzIyYzViYi1kYzQwLTRmODctYjZiMi1iMjMyOTQyMjBiOGUiLCJ1bmlxdWVfbmFtZSI6ImluZm9Ab2xsLmNvIiwibmFtZWlkIjoiaW5mb0BvbGwuY28iLCJlbWFpbCI6ImluZm9Ab2xsLmNvIiwiYXV0aF90aW1lIjoiMDgvMDEvMjAyMiAwNDowMDo1NiIsImRiX25hbWUiOiIxMTUwNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjI1MzQwMjMwMDgwMCwiaXNzIjoiQ2xhcmVfQUkiLCJhdWQiOiJDbGFyZV9BSSJ9.k89dQ0gkjcZ3T8VYDz6FIbr4sisaSiSTvjLZ7FhLEAc",
-      },
-      body: JSON.stringify({
-        receivers: [
-          {
-            customParams: [
-              { name: "client_name", value: name },
-              { name: "id", value: id },
-              { name: "query_date", value: d.slice(4, 16) },
-              { name: "query_time", value: d.slice(16, 21) },
-              { name: "query_status", value: status },
-              { name: "comment", value: comment },
-            ],
-            whatsappNumber: "919993610583",
-          },
-          {
-            customParams: [
-              { name: "client_name", value: name },
-              { name: "id", value: id },
-              { name: "query_date", value: d.slice(4, 16) },
-              { name: "query_time", value: d.slice(16, 21) },
-              { name: "query_status", value: status },
-              { name: "comment", value: comment },
-            ],
-            whatsappNumber: "917895954610",
-          },
-          {
-            customParams: [
-              { name: "client_name", value: name },
-              { name: "id", value: id },
-              { name: "query_date", value: d.slice(4, 16) },
-              { name: "query_time", value: d.slice(16, 21) },
-              { name: "query_status", value: status },
-              { name: "comment", value: comment },
-            ],
-            whatsappNumber: "919899830458",
-          },
-          {
-            customParams: [
-              { name: "client_name", value: name },
-              { name: "id", value: id },
-              { name: "query_date", value: d.slice(4, 16) },
-              { name: "query_time", value: d.slice(16, 21) },
-              { name: "query_status", value: status },
-              { name: "comment", value: comment },
-            ],
-            whatsappNumber: "917692045606",
-          },
-          {
-            customParams: [
-              { name: "client_name", value: name },
-              { name: "id", value: id },
-              { name: "query_date", value: d.slice(4, 16) },
-              { name: "query_time", value: d.slice(16, 21) },
-              { name: "query_status", value: status },
-              { name: "comment", value: comment },
-            ],
-            whatsappNumber: "919699188188",
-          },
-        ],
-        template_name: "query_update_to_ops",
-        broadcast_name: "alert",
-      }),
-    };
-
-    fetch(
-      "https://live-server-11507.wati.io/api/v1/sendTemplateMessages",
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
   };
 
   return (
@@ -536,71 +433,29 @@ const User = (props) => {
               </div>
             </div>
           </div>
-          <div
-            className="btn"
-            onClick={(e) => {
-              setheight(e.clientY);
-              setshowComments(!showComments);
-              e.stopPropagation();
+          <CopyToClipboard
+            text={`${id} ${name} ${cCode + phone} ${email} ${course}`}
+            onCopy={() => {
+              const notify = () => {
+                toast("Copied successfully", { type: "success" });
+              };
+              notify();
             }}
           >
-            Comment
             <div
-              ref={commentRef}
-              style={
-                showComments
-                  ? { display: "block", top: `${height + 35}px` }
-                  : { display: "none" }
-              }
-              className="commentBox"
+              className="btn"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <input
-                  type="text"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => setcomment(e.target.value)}
-                  placeholder="Comment.."
-                  autoFocus={true}
-                  onKeyPress={handleKeyPress}
-                />
-                <AiOutlineRight
-                  size={19}
-                  className="icon"
-                  onClick={() => {
-                    if (
-                      comment.length > 0 &&
-                      comment !== " " &&
-                      comment !== "  " &&
-                      comment !== "   "
-                    ) {
-                      axios.put(`${BASE_URL}/comment`, {
-                        id: _id,
-                        comment: comment,
-                        user: props.sales?.name,
-                      });
-                      setTimeout(() => {
-                        props.getUserData();
-                      }, 1000);
-                      setcomment("");
-                      setTimeout(() => {
-                        sendMsgOnComment();
-                      }, 5000);
-                    }
-                  }}
-                />
-              </div>
+              <AiOutlineCopy
+                size={20}
+                style={{ paddingRight: "0.1rem" }}
+                color={"white"}
+              />
+              Copy
             </div>
-          </div>
+          </CopyToClipboard>
         </p>
         <p className="sourceValue">{source}</p>
         <p className="stageValue" onClick={(e) => e.stopPropagation()}>

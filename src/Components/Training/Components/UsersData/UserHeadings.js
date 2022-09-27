@@ -89,7 +89,7 @@ const UserHeadings = ({ filter, setfilter }) => {
           </select>
         </p>
         <p className="actionsOperation">Actions</p>
-        <p className="sourceOperation">Source</p>
+        <p className="sourceOperation">Assignee</p>
         <p className="resolveDate">Resolving Date</p>
       </div>
     </>
