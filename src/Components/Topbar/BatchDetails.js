@@ -50,6 +50,8 @@ const BatchDetails = ({
   price,
   setprice,
   height,
+  totalPrice,
+  settotalPrice,
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
@@ -66,6 +68,29 @@ const BatchDetails = ({
     >
       <div className="header">
         <p>Batch Detail</p>
+        <button
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            if (sessionsCount && price) {
+              console.log("total price setted");
+              settotalPrice(sessionsCount * price);
+            }
+            if (totalPrice && sessionsCount) {
+              console.log("price setted");
+              setprice(totalPrice / sessionsCount);
+            }
+            if (totalPrice && price) {
+              console.log("sessions setted");
+              setsessionsCount(parseInt(totalPrice / price));
+            }
+            setTimeout(() => {
+              setDetails(!details);
+            }, 500);
+          }}
+        >
+          Save
+        </button>
         <AiOutlineClose
           size={18}
           color="white"
@@ -324,6 +349,16 @@ const BatchDetails = ({
               value={price}
               className="price"
               onChange={(e) => setprice(e.target.value)}
+            />
+          </div>
+          <div style={{ margin: "0.75rem 0" }}>
+            <p>Total Price</p>
+            <input
+              type="number"
+              name="totalPrice"
+              value={totalPrice}
+              className="price"
+              onChange={(e) => settotalPrice(e.target.value)}
             />
           </div>
         </div>

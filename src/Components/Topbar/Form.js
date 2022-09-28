@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../Utils/index";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosAdd } from "react-icons/io";
 import BatchDetails from "./BatchDetails";
 import axios from "axios";
@@ -31,6 +31,7 @@ const Form = ({ getUserData, sales }) => {
   var index = stime === "--" ? times.indexOf(stime) : times.indexOf(stime) + 2;
   const [etime, setetime] = useState(times[index]);
   const [price, setprice] = useState();
+  const [totalPrice, settotalPrice] = useState();
 
   const postData = async (e) => {
     e.preventDefault();
@@ -61,6 +62,7 @@ const Form = ({ getUserData, sales }) => {
       stage: "🔥 hot",
       status: "new",
       assignee: sales?.name,
+      totalPrice
     });
     console.log(res);
     if (res.status == 500) {
@@ -84,6 +86,7 @@ const Form = ({ getUserData, sales }) => {
       setstime("");
       setetime("");
       setaddress("");
+      settotalPrice("")
     }
     setTimeout(() => {
       getUserData();
@@ -177,6 +180,8 @@ const Form = ({ getUserData, sales }) => {
                 Batch Details
               </button>
               <BatchDetails
+                totalPrice={totalPrice}
+                settotalPrice={settotalPrice}
                 details={details}
                 setDetails={setDetails}
                 mode={mode}

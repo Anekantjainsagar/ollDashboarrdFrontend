@@ -11,6 +11,7 @@ import {
   AiOutlineMail,
   AiOutlineCopy,
   AiOutlineRight,
+  AiFillDelete,
 } from "react-icons/ai";
 import { BiUpArrowAlt } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
@@ -70,6 +71,7 @@ const FloatingUserData = ({
     stage,
     inqDate,
     assignee,
+    totalPrice,
   } = data;
 
   const stageRef = useRef(null);
@@ -101,6 +103,8 @@ const FloatingUserData = ({
   const [clickedTemplate, setclickedTemplate] = useState(undefined);
   const [templateUser, settemplateUser] = useState(undefined);
   const [height, setheight] = useState(undefined);
+  const [cmntDeleteDisplay, setCmntDeleteDisplay] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useOutsideAlerter(sideRef, details, setDetails);
 
@@ -129,6 +133,7 @@ const FloatingUserData = ({
         NoSessions === undefined ? batchDetails?.sessionsCount : NoSessions,
       price: price === undefined ? batchDetails?.price : price,
       cCode,
+      totalPrice: batchDetails?.sessionsCount * batchDetails?.price,
     };
     await axios.put(`${BASE_URL}/updateUser`, obj).then((res) => {
       const notify = () =>
@@ -260,7 +265,25 @@ const FloatingUserData = ({
     }
   };
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const deleteComment = (id) => {
+    console.log(id);
+    axios
+      .delete(`${BASE_URL}/deleteComment`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+          userId: _id,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   function openModal(e, data) {
     setIsOpen(true);
@@ -305,7 +328,9 @@ const FloatingUserData = ({
       .text(
         40,
         60,
-        `Inquiry date : ${new Date(inqDate).toString().slice(0, 24)}`,
+        `Inquiry date : ${new Date(batchDetails?.startDate)
+          .toString()
+          .slice(0, 24)}`,
         {
           halign: "center",
           valign: "middle",
@@ -977,20 +1002,19 @@ const FloatingUserData = ({
                 }}
               />
               <input
-                type="text"
+                type="date"
                 style={{ width: "50%", textAlign: "center" }}
-                placeholder="Start date"
-                value={
-                  sourceTime === undefined
-                    ? new Date(batchDetails?.startDate).toString().slice(4, 16)
-                    : new Date(sourceTime).toString().slice(4, 16)
-                }
+                value={batchDetails?.startDate?.slice(0, 10)}
                 onChange={(e) => {
                   setsourceTime(e.target.value);
                 }}
               />
             </div>
           </div>
+          <p style={{ fontSize: "1.6rem", textAlign: "center" }}>
+            Total price is :{" "}
+            {batchDetails?.sessionsCount * batchDetails?.price}
+          </p>
         </div>
         <div className="commentContainer">
           <p>Comments</p>
@@ -1031,27 +1055,54 @@ const FloatingUserData = ({
         {comment.length > 0 ? (
           <>
             {displayComment ? (
-              <div className="commentsDisplay">
-                <h3>
-                  {comment[comment.length - 1].user
-                    ? comment[comment.length - 1].user
-                    : "Samantha"}
-                </h3>
-                <h6>{comment[comment.length - 1].msg}</h6>
-                <p>
-                  {new Date(comment[comment.length - 1].date)
-                    .toString()
-                    .slice(3, 21)}
-                </p>
-              </div>
+              <>
+                <div
+                  className="commentsDisplay"
+                  onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
+                >
+                  <h3>
+                    {comment[comment.length - 1].user
+                      ? comment[comment.length - 1].user
+                      : "Samantha"}
+                  </h3>
+                  <h6>{comment[comment.length - 1].msg}</h6>
+                  <p>
+                    {new Date(comment[comment.length - 1].date)
+                      .toString()
+                      .slice(3, 21)}
+                  </p>
+                </div>
+                {cmntDeleteDisplay ? (
+                  <AiFillDelete
+                    size={20}
+                    style={{ paddingTop: "0.35rem", margin: "0 50%" }}
+                    onClick={() =>
+                      deleteComment(comment[comment.length - 1]._id)
+                    }
+                  />
+                ) : null}
+              </>
             ) : (
-              comment.map(({ msg, date, user }, i) => {
+              comment.map(({ msg, date, user, _id }, i) => {
                 return (
-                  <div className="commentsDisplay" key={i}>
-                    <h3>{user ? user : "Samantha"}</h3>
-                    <h6>{msg}</h6>
-                    <p>{new Date(date).toString().slice(3, 21)}</p>
-                  </div>
+                  <>
+                    <div
+                      className="commentsDisplay"
+                      key={i}
+                      onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
+                    >
+                      <h3>{user ? user : "Samantha"}</h3>
+                      <h6>{msg}</h6>
+                      <p>{new Date(date).toString().slice(3, 21)}</p>
+                    </div>
+                    {cmntDeleteDisplay ? (
+                      <AiFillDelete
+                        size={20}
+                        style={{ paddingTop: "0.35rem", margin: "0 50%" }}
+                        onClick={() => deleteComment(_id)}
+                      />
+                    ) : null}
+                  </>
                 );
               })
             )}
@@ -1114,7 +1165,7 @@ const FloatingUserData = ({
                   Authorization: "***",
                 },
                 data: {
-                  id: data._id,
+                  id: _id,
                 },
               })
               .then((res) => {

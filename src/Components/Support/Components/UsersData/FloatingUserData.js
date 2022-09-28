@@ -4,7 +4,7 @@ import { BASE_URL } from "../../../../Utils/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowModal from "./ShowModal";
-import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineRight, AiFillDelete } from "react-icons/ai";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -56,6 +56,7 @@ const FloatingUserData = ({
   const [comments, setcomments] = useState();
   const [type, setType] = useState("new");
   const [clickedTemplate, setclickedTemplate] = useState();
+  const [cmntDeleteDisplay, setCmntDeleteDisplay] = useState(false);
   const [templateUser, settemplateUser] = useState();
 
   useOutsideAlerter(sideRef, details, setDetails);
@@ -90,6 +91,26 @@ const FloatingUserData = ({
     setclickedTemplate(e);
     settemplateUser(data);
   }
+
+  const deleteComment = (id) => {
+    axios
+      .delete(`${BASE_URL}/deleteComment`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+          userId: _id,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getUserData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const print = () => {
     const { name, phone, course, batchDetails, source, id, inqDate, cCode } =
@@ -562,27 +583,54 @@ const FloatingUserData = ({
         {comment.length > 0 ? (
           <>
             {displayComment ? (
-              <div className="commentsDisplay">
-                <h3>
-                  {comment[comment.length - 1].user
-                    ? comment[comment.length - 1].user
-                    : "Samantha"}
-                </h3>
-                <h6>{comment[comment.length - 1].msg}</h6>
-                <p>
-                  {new Date(comment[comment.length - 1].date)
-                    .toString()
-                    .slice(3, 21)}
-                </p>
-              </div>
+              <>
+                <div
+                  className="commentsDisplay"
+                  onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
+                >
+                  <h3>
+                    {comment[comment.length - 1].user
+                      ? comment[comment.length - 1].user
+                      : "Samantha"}
+                  </h3>
+                  <h6>{comment[comment.length - 1].msg}</h6>
+                  <p>
+                    {new Date(comment[comment.length - 1].date)
+                      .toString()
+                      .slice(3, 21)}
+                  </p>
+                </div>
+                {cmntDeleteDisplay ? (
+                  <AiFillDelete
+                    size={20}
+                    style={{ paddingTop: "0.35rem", margin: "0 50%" }}
+                    onClick={() =>
+                      deleteComment(comment[comment.length - 1]._id)
+                    }
+                  />
+                ) : null}
+              </>
             ) : (
-              comment.map(({ msg, date, user }, i) => {
+              comment.map(({ msg, date, user, _id }, i) => {
                 return (
-                  <div className="commentsDisplay" key={i}>
-                    <h3>{user ? user : "Samantha"}</h3>
-                    <h6>{msg}</h6>
-                    <p>{new Date(date).toString().slice(3, 21)}</p>
-                  </div>
+                  <>
+                    <div
+                      className="commentsDisplay"
+                      key={i}
+                      onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
+                    >
+                      <h3>{user ? user : "Samantha"}</h3>
+                      <h6>{msg}</h6>
+                      <p>{new Date(date).toString().slice(3, 21)}</p>
+                    </div>
+                    {cmntDeleteDisplay ? (
+                      <AiFillDelete
+                        size={20}
+                        style={{ paddingTop: "0.35rem", margin: "0 50%" }}
+                        onClick={() => deleteComment(_id)}
+                      />
+                    ) : null}
+                  </>
                 );
               })
             )}

@@ -18,6 +18,12 @@
   background: rgba(129, 129, 129, 1);
 }
 
+.totalPrice::-webkit-outer-spin-button,
+.totalPrice::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .offerDetailContainer::-webkit-scrollbar-thumb {
   background: rgba(217, 217, 217, 1);
   border-radius: 2rem;
