@@ -16,7 +16,7 @@ const App = () => {
 
   const check = async () => {
     await axios
-      .post(`${BASE_URL}/salesCheck`, {
+      .post(`${BASE_URL}/salesCheck`, { 
         token: localStorage.getItem("token"),
       })
       .then((res) => {
