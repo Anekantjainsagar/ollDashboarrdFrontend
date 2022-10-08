@@ -1165,7 +1165,7 @@ const FloatingUserData = ({
                   Authorization: "***",
                 },
                 data: {
-                  id: _id,
+                  _id: _id,
                 },
               })
               .then((res) => {

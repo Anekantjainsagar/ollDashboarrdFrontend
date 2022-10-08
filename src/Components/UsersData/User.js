@@ -90,7 +90,7 @@ const User = (props) => {
           Authorization: "***",
         },
         data: {
-          id: data._id,
+          _id: data._id,
         },
       })
       .then((res) => {
