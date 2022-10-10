@@ -495,6 +495,21 @@ const FloatingUserData = ({
               }}
             ></div>
           </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              margin: "0.6rem 0",
+            }}
+          >
+            <p style={{ fontSize: "1.6rem" }}>
+              Address :
+            </p>
+            <p style={{ fontSize: "1.6rem", paddingLeft:"3rem"}}>
+              {batchDetails?.address}
+            </p>
+          </div>
         </div>
         <div className="inqReports">
           <div className="header">
