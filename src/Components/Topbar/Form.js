@@ -35,78 +35,92 @@ const Form = ({ getUserData, sales }) => {
 
   const postData = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`${BASE_URL}/addUser`, {
-      name,
-      phone,
-      email: email === undefined || email === "" ? "" : email,
-      age: age === undefined || age === "" ? "" : age,
-      school: school === undefined || school === "" ? "" : school,
-      course: course === undefined || course === "" ? "" : course,
-      source: source === undefined || source === "" ? "" : source,
-      mode: mode === undefined || mode === "" ? "none" : mode,
-      type: type === undefined || type === "" ? "none" : type,
-      address,
-      price: price === undefined || price === "" || price === null ? 0 : price,
-      days,
-      startDate:
-        startDate === undefined || startDate === null || startDate === ""
-          ? date
-          : startDate,
-      time: stime + " " + etime === " " ? "-- --" : stime + " " + etime,
-      sessionsCount:
-        sessionsCount === undefined ||
-        sessionsCount === "" ||
-        sessionsCount === null
-          ? 0
-          : sessionsCount,
-      stage: "🔥 hot",
-      status: "new",
-      assignee: sales?.name,
-      totalPrice
-    });
-    console.log(res);
-    if (res.status == 500) {
-      alert("Internal server error");
-    }
 
-    if (res.data.message === "User Saved Successfully") {
-      setemail("");
-      setName("");
-      setprice("");
-      setschool("");
-      setcourse("");
-      setmode("");
-      settype("");
-      setdays("");
-      setsource("");
-      setstartDate("");
-      setphone("");
-      setage("");
-      setsessionsCount("");
-      setstime("");
-      setetime("");
-      setaddress("");
-      settotalPrice("")
-    }
-    setTimeout(() => {
-      getUserData();
-    }, 500);
-
-    const notify = () =>
-      toast(res.data.message, {
-        type: res.data.success
-          ? "success"
-          : res.data.message === "User Saved Successfully"
-          ? "success"
-          : "error",
-      }).configure({
-        bodyClassName: css({
-          backgroundColor: "blue",
-          height: "100%",
-          width: "100%",
-        }),
+    if (source === undefined || source === "" || source.length < 0) {
+      const notifyBySource = () =>
+        toast("Source is required", {
+          type: "error",
+        }).configure({
+          bodyClassName: css({
+            backgroundColor: "blue",
+            height: "100%",
+            width: "100%",
+          }),
+        });
+      notifyBySource();
+    } else {
+      const res = await axios.post(`${BASE_URL}/addUser`, {
+        name,
+        phone,
+        email: email === undefined || email === "" ? "" : email,
+        age: age === undefined || age === "" ? "" : age,
+        school: school === undefined || school === "" ? "" : school,
+        course: course === undefined || course === "" ? "" : course,
+        source: source === undefined || source === "" ? "" : source,
+        mode: mode === undefined || mode === "" ? "none" : mode,
+        type: type === undefined || type === "" ? "none" : type,
+        address,
+        price: price === undefined || price === "" || price === null ? 0 : price,
+        days,
+        startDate:
+          startDate === undefined || startDate === null || startDate === ""
+            ? date
+            : startDate,
+        time: stime + " " + etime === " " ? "-- --" : stime + " " + etime,
+        sessionsCount:
+          sessionsCount === undefined ||
+          sessionsCount === "" ||
+          sessionsCount === null
+            ? 0
+            : sessionsCount,
+        stage: "🔥 hot",
+        status: "new",
+        assignee: sales?.name,
+        totalPrice,
       });
-    notify();
+      if (res.status == 500) {
+        alert("Internal server error");
+      }
+
+      if (res.data.message === "User Saved Successfully") {
+        setemail("");
+        setName("");
+        setprice("");
+        setschool("");
+        setcourse("");
+        setmode("");
+        settype("");
+        setdays("");
+        setsource("");
+        setstartDate("");
+        setphone("");
+        setage("");
+        setsessionsCount("");
+        setstime("");
+        setetime("");
+        setaddress("");
+        settotalPrice("");
+      }
+      setTimeout(() => {
+        getUserData();
+      }, 500);
+
+      const notify = () =>
+        toast(res.data.message, {
+          type: res.data.success
+            ? "success"
+            : res.data.message === "User Saved Successfully"
+            ? "success"
+            : "error",
+        }).configure({
+          bodyClassName: css({
+            backgroundColor: "blue",
+            height: "100%",
+            width: "100%",
+          }),
+        });
+      notify();
+    }
   };
 
   return (

@@ -37,6 +37,7 @@ function useOutsideAlerter(ref, show, setShow) {
     }
   }, [ref, show, setShow]);
 }
+
 const daysValue = [
   "monday",
   "tuesday",
@@ -826,7 +827,7 @@ const FloatingUserData = ({
                 }}
                 name="stime"
                 value={
-                  stime === undefined ? batchDetails?.time.split(" ")[0] : stime
+                  stime === undefined ? batchDetails?.time?.split(" ")[0] : stime
                 }
                 className="valueSelector"
                 onChange={(e) => {
@@ -856,7 +857,7 @@ const FloatingUserData = ({
                 }}
                 name="etime"
                 value={
-                  etime === undefined ? batchDetails?.time.split(" ")[1] : etime
+                  etime === undefined ? batchDetails?.time?.split(" ")[1] : etime
                 }
                 className="valueSelector"
                 onChange={(e) => {
@@ -990,7 +991,7 @@ const FloatingUserData = ({
           <div>
             <p>Source :</p>
             <div
-              style={{ display: "flex", justifyContent: "end", width: "78%" }}
+              style={{ display: "flex", justifyContent: "start", width: "75%" }}
             >
               <input
                 type="text"
@@ -1001,6 +1002,13 @@ const FloatingUserData = ({
                   setsourcePlatform(e.target.value);
                 }}
               />
+            </div>
+          </div>
+          <div>
+            <p>Start Date :</p>
+            <div
+              style={{ display: "flex", justifyContent: "start", width: "75%" }}
+            >
               <input
                 type="date"
                 style={{ width: "50%", textAlign: "center" }}
@@ -1012,8 +1020,7 @@ const FloatingUserData = ({
             </div>
           </div>
           <p style={{ fontSize: "1.6rem", textAlign: "center" }}>
-            Total price is :{" "}
-            {batchDetails?.sessionsCount * batchDetails?.price}
+            Total price is : {batchDetails?.sessionsCount * batchDetails?.price}
           </p>
         </div>
         <div className="commentContainer">
@@ -1137,7 +1144,7 @@ const FloatingUserData = ({
           </div>
           <div className="content">
             <div className="container1">
-              <p>Start Time : {d.slice(4, 21)}</p>
+              <p>Inquiry Date : {d.slice(4, 21)}</p>
               <p>Due Time : </p>
             </div>
             <div className="container2">

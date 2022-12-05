@@ -65,6 +65,7 @@ function Sales({ sales }) {
               return e;
             }
           } else {
+            
             filterBySearch = filterBySearch;
             if (filterBySearch.toString().length > e?.id.toString().length) {
               if (e?.phone.toString().includes(filterBySearch)) {
