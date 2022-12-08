@@ -775,12 +775,16 @@ const FloatingUserData = ({
                       style={{
                         margin: "0.75rem 0",
                         paddingLeft: "0.15rem",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
                       <input
                         type="checkbox"
                         id={e}
                         value={e}
+                        style={{ width: "fit-content" }}
                         checked={
                           days.length === 0
                             ? batchDetails?.days.includes(e)
@@ -827,7 +831,9 @@ const FloatingUserData = ({
                 }}
                 name="stime"
                 value={
-                  stime === undefined ? batchDetails?.time?.split(" ")[0] : stime
+                  stime === undefined
+                    ? batchDetails?.time?.split(" ")[0]
+                    : stime
                 }
                 className="valueSelector"
                 onChange={(e) => {
@@ -857,7 +863,9 @@ const FloatingUserData = ({
                 }}
                 name="etime"
                 value={
-                  etime === undefined ? batchDetails?.time?.split(" ")[1] : etime
+                  etime === undefined
+                    ? batchDetails?.time?.split(" ")[1]
+                    : etime
                 }
                 className="valueSelector"
                 onChange={(e) => {

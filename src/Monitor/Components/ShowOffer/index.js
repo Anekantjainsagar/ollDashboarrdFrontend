@@ -14,7 +14,7 @@ const ShowOffer = ({ setIsOpen, modalIsOpen, getOffers, offers }) => {
       left: "50%",
       right: "auto",
       width: "25%",
-      height: "68%",
+      height: "55%",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
@@ -74,15 +74,6 @@ const ShowOffer = ({ setIsOpen, modalIsOpen, getOffers, offers }) => {
     }
   }, [offer.classes]);
 
-  const onChange = (e) => {
-    const newState = pricing.map((element) => {
-      return element?.name === e.target.name
-        ? { name: element.name, value: e.target.value }
-        : element;
-    });
-    setPricing([...newState]);
-  };
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -108,7 +99,16 @@ const ShowOffer = ({ setIsOpen, modalIsOpen, getOffers, offers }) => {
         id="modal"
         onClick={(e) => e.stopPropagation()}
       >
-        <form encType="multipart/form-data">
+        <form
+          encType="multipart/form-data"
+          style={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div className={styles.header}>
             <h1>Offer Details</h1>
             <AiOutlineClose
@@ -436,15 +436,6 @@ const ShowOffer = ({ setIsOpen, modalIsOpen, getOffers, offers }) => {
               Circular - {offers?.circular}
             </p>
           </div>
-          <button
-            className={styles.btn}
-            onClick={(e) => {
-              e.preventDefault();
-              addNewOffer();
-            }}
-          >
-            Add
-          </button>
         </form>
       </Modal>
     </>

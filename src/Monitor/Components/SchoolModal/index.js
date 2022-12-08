@@ -136,7 +136,16 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
         id="modal"
         onClick={(e) => e.stopPropagation()}
       >
-        <form encType="multipart/form-data">
+        <form
+          encType="multipart/form-data"
+          style={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div className={styles.header}>
             <h1>School Details</h1>
             <button className={styles.import}>Import</button>

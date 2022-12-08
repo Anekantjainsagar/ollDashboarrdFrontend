@@ -111,10 +111,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="mode"
               value={"none"}
@@ -126,10 +131,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="mode"
               value={"Online"}
@@ -141,10 +151,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="mode"
               value={"Offline"}
@@ -163,10 +178,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="type"
               value={"none"}
@@ -178,10 +198,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="type"
               value={"1 to 1"}
@@ -193,10 +218,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               value="group"
               name="type"
@@ -208,10 +238,15 @@ const BatchDetails = ({
               margin: "0.75rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="type"
               value={"Trial"}
@@ -226,12 +261,16 @@ const BatchDetails = ({
               <div
                 key={i}
                 style={{
-                  margin: "0.75rem 0",
+                  margin: "0.5rem 0",
                   paddingLeft: "0.15rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "start",
                 }}
               >
                 <input
                   type="checkbox"
+                  style={{ width: "fit-content", marginRight: "0.5rem" }}
                   id={e}
                   name={e}
                   value={e}
@@ -248,10 +287,7 @@ const BatchDetails = ({
                     }
                   }}
                 />
-                <label for={e} style={{ fontSize: "1.6rem" }}>
-                  {" "}
-                  {e}
-                </label>
+                <p style={{ fontSize: "1.6rem" }}>{e}</p>
               </div>
             );
           })}

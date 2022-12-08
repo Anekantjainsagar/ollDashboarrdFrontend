@@ -18,7 +18,7 @@ const AddOffer = ({ setIsOpen, modalIsOpen, getOffers }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      overflow: "scroll",
+      overflow: "hidden",
       padding: "1rem 2rem",
       borderRadius: "1rem",
       backgroundColor: "#000",
@@ -108,7 +108,16 @@ const AddOffer = ({ setIsOpen, modalIsOpen, getOffers }) => {
         id="modal"
         onClick={(e) => e.stopPropagation()}
       >
-        <form encType="multipart/form-data">
+        <form
+          encType="multipart/form-data"
+          style={{
+            display: "flex",
+            width:"100%",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div className={styles.header}>
             <h1>Offer Details</h1>
             <AiOutlineClose
