@@ -1,0 +1,106 @@
+.bar {
+  display: grid;
+  grid-template-columns: 6% 12.5% 15% 8% 12% 11% 13% 13% 8%;
+  padding: 1.25rem 0;
+  background-color: rgb(20, 20, 20);
+  align-items: center;
+  border-radius: 1rem;
+  margin: 0.75rem 0;
+}
+
+.id,
+.name,
+.phone,
+.inqDate,
+.offerDetails,
+.status,
+.cmnt,
+.type,
+.handler {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.status select {
+  border: none;
+  padding: 0.45rem 0.5rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.status select option {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.45rem 0.5rem;
+}
+
+.New {
+  background-color: lightblue;
+  color: blue;
+}
+
+.MeetingSet {
+  background-color: rgb(255, 255, 95);
+  color: rgb(207, 135, 0);
+}
+
+.FollowUp {
+  color: darkred;
+  background-color: rgb(255, 109, 109);
+}
+
+.MouSigned,
+.ParentOnta,
+.Circular {
+  background-color: rgb(255, 195, 117);
+  color: rgb(175, 99, 0);
+}
+
+.Started,
+.NoPay {
+  color: green;
+  background-color: lightgreen;
+}
+
+.cmnt div {
+  width: 100%;
+  align-items: center;
+  padding: 0 0.5rem;
+  justify-content: space-between;
+}
+
+.cmnt div input {
+  width: 78%;
+}
+
+.cmnt div .icon {
+  background-color: green;
+  border-radius: 2rem;
+  padding: 0.3rem;
+}
+
+select {
+  width: 85%;
+  outline: none;
+  align-self: center;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-radius: 1rem;
+  text-transform: uppercase;
+}
+
+select option {
+  outline: none;
+  font-weight: 700;
+  border: none;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  border-radius: 2rem;
+  margin: 0.2rem 0;
+}

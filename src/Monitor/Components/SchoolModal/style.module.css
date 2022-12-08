@@ -1,0 +1,139 @@
+.header {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.header button {
+  font-size: 1.6rem;
+  padding: 0.15rem 1rem;
+}
+
+.firstLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.mInput {
+  background-color: rgb(51, 51, 51);
+  font-size: 1.6rem;
+  outline: none;
+  width: 29%;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.firstLine input[type="file"] {
+  font-size: 1.6rem;
+  color: white;
+  width: 29%;
+  display: inline-block;
+}
+
+.secondLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.thirdLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.fourthLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.fifthLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.saveBtn {
+  background-color: rgba(0, 165, 16, 1);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+.saveBtn:hover {
+  border: 1px solid white;
+}
+
+.principal {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  color: white;
+  justify-content: space-between;
+}
+
+.principal .head {
+  width: 23%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.principal .head p {
+  font-size: 1.7rem;
+}
+
+.principal .head .icon {
+  padding: 0.1rem;
+  margin-top: 0.25rem;
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+}
+
+.principal input[type="text"] {
+  background-color: rgb(51, 51, 51);
+  font-size: 1.6rem;
+  outline: none;
+  width: 17%;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+}

@@ -1,0 +1,60 @@
+.mainPanel {
+  width: 89vw;
+  color: white;
+  padding: 2rem;
+}
+
+.mainHead {
+  font-size: 2.15rem;
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+.usersDisplay {
+  margin-top: 1rem;
+}
+
+.usersDisplayContainer {
+  height: 34vh;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0.1rem;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.blocks {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.loadBtn {
+  background-color: #00a510;
+  padding: 0.4rem 0;
+  color: white;
+  border-radius: 1rem;
+  outline: none;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.loadBtn:hover {
+  border: 1px solid #00a510;
+  background-color: transparent;
+  color: #00a510;
+}

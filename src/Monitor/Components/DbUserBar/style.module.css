@@ -1,0 +1,27 @@
+.headings {
+  display: grid;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1rem;
+  grid-template-columns: 4% 5% 18% 10% 10% 13% 14% 13% 14%;
+  color: white;
+  background-color: rgb(31, 31, 31);
+  align-items: center;
+  margin: 0.75rem 0.75rem;
+}
+
+.headings p{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.checkBox,
+.school,
+.location,
+.trustee,
+.type,
+.board,
+.principal,
+.coordinator {
+  font-size: 1.5rem;
+  text-align: center;
+}

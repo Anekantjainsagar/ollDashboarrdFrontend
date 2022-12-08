@@ -1,0 +1,25 @@
+.Sidebar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  margin: 3rem 1rem;
+  width: 11vw;
+}
+
+.option {
+  cursor: pointer;
+  font-size: 1.7rem;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+}
+
+.optionSelected {
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 1.7rem;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background-color: rgb(39, 39, 39);
+}

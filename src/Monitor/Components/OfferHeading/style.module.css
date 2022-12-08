@@ -1,0 +1,33 @@
+.bar {
+  display: grid;
+  padding: 0.5rem 2rem;
+  grid-template-columns: 4% 25% 11% 11% 11% 14% 14%;
+  align-items: center;
+  color: white;
+}
+
+.checkBox,
+.course,
+.typeDrop,
+.duration,
+.type,
+.resources,
+.actions {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.course {
+  height: 100%;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1.6rem;
+  padding: 0.05rem 0.75rem;
+  text-align: center;
+  color: white;
+  border: none;
+  border: 0.1rem solid rgb(34, 34, 34);
+  width: 65%;
+  margin: auto;
+  background-color: rgb(26, 26, 26);
+}

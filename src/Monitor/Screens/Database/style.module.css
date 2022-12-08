@@ -1,0 +1,11 @@
+.dbDisplay {
+  overflow-y: scroll;
+  height: 78vh;
+}
+
+.home {
+  background-color: black;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}

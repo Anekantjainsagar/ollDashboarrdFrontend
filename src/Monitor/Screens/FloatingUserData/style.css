@@ -1,0 +1,27 @@
+.New {
+  background-color: lightblue;
+  color: blue;
+}
+
+.MeetingSet {
+  background-color: rgb(255, 255, 95);
+  color: rgb(207, 135, 0);
+}
+
+.FollowUp {
+  color: darkred;
+  background-color: rgb(255, 109, 109);
+}
+
+.MouSigned,
+.ParentOnta,
+.Circular {
+  background-color: rgb(255, 195, 117);
+  color: rgb(175, 99, 0);
+}
+
+.Started,
+.NoPay {
+  color: green;
+  background-color: lightgreen;
+}

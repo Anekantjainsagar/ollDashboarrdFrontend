@@ -1,0 +1,52 @@
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 88vw;
+  padding: 2rem;
+  color: white;
+}
+
+.head h1 {
+  font-size: 2.35rem;
+  font-weight: 700;
+}
+
+.rSection {
+  display: flex;
+  align-items: center;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioSection {
+  display: flex;
+  align-items: center;
+}
+
+.radioSection p {
+  font-size: 1.4rem;
+  margin-left: 0.5rem;
+}
+
+.rSection button {
+  font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.btns {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  font-size: 1.76rem;
+  padding: 0.15rem 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
