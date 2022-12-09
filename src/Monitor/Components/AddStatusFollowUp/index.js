@@ -24,6 +24,7 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
     setIsOpen(false);
   }
 
+  const [comment, setComment] = useState();
   const [follows, setFollows] = useState({
     name: user?.schoolName,
     time: "",
@@ -33,10 +34,9 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
   const addfollows = () => {
     if (follows.name && follows.time) {
       axios
-        .post(`${MONITOR_BACKEND}/addFollowUP`, follows)
+        .post(`${MONITOR_BACKEND}/addFollowUP`, { ...follows, comment })
         .then((res) => {
-          console.log(res);
-          if (res.data.follow?.name.length > 0) {
+          if (res.data) {
             getFollowUps();
             setFollows({
               name: "",
@@ -44,6 +44,7 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
               startDate: "",
             });
             closeModal();
+            setComment("");
           }
         })
         .catch((err) => {
@@ -62,7 +63,16 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
         id="modal"
         onClick={(e) => e.stopPropagation()}
       >
-        <form encType="multipart/form-data">
+        <form
+          encType="multipart/form-data"
+          style={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div className={styles.header}>
             <h1>{user?.schoolName}</h1>
             <AiOutlineClose
@@ -108,13 +118,17 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
               >
                 <div
                   className={styles.time}
-                  style={{ display: "flex", marginTop: "0.75rem" }}
+                  style={{
+                    display: "flex",
+                    marginTop: "0.75rem",
+                  }}
                 >
-                  <p style={{ margin: 0, paddingRight: "0.5rem" }}>Time : </p>
+                  <p style={{ margin: 0, paddingRight: "0.4rem" }}>Time : </p>
                   <select
                     name=""
                     id=""
                     value={follows.time}
+                    style={{ width: "60%" }}
                     onChange={(e) =>
                       setFollows({ ...follows, time: e.target.value })
                     }
@@ -126,6 +140,12 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
                 </div>
               </div>
             </div>
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
             <button
               className={styles.btn}
               onClick={(e) => {

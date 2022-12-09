@@ -409,9 +409,9 @@ const FloatingUserData = ({
                 })}
               </p>
               <p style={{ fontSize: "1.6rem" }}>
-                {batchDetails?.time.split(" ")[0]}
+                {batchDetails?.time?.split(" ")[0]}
                 {" - "}
-                {batchDetails?.time.split(" ")[1]}
+                {batchDetails?.time?.split(" ")[1]}
               </p>
             </div>
             <div

@@ -39,11 +39,7 @@ const RightSection = ({
         offers={offers}
       />
       <div className={styles.usersDisplay}>
-        <UserHeading
-          filter={filter}
-          setFilter={setFilter}
-          agents={agents}
-        />
+        <UserHeading filter={filter} setFilter={setFilter} agents={agents} />
         <div className={styles.usersDisplayContainer}>
           {filteredUsers.map((user, i) => {
             return (

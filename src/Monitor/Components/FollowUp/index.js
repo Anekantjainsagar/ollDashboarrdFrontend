@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
-import { AiOutlinePlus } from "react-icons/ai";
 import Bar from "./Bar/index";
 import AddStatusfollows from "../AddStatusFollowUp";
 
@@ -21,16 +20,20 @@ const FollowUp = ({ followUp, getFollowUps }) => {
       <div className={styles.follow}>
         <div className={styles.header}>
           <h1>Follow Up</h1>
-          <AiOutlinePlus
-            className={styles.plus}
-            size={27}
-            onClick={() => openFollowModal()}
-          />
         </div>
         <div className={styles.data}>
-          {followUp?.map((follow) => {
-            return <Bar follow={follow} />;
-          })}
+          {followUp
+            ?.filter((follow) => {
+              if (
+                new Date(Date.now()).toString().slice(4, 16) ===
+                new Date(follow.startDate).toString().slice(4, 16)
+              ) {
+                return follow;
+              }
+            })
+            .map((follow) => {
+              return <Bar follow={follow} />;
+            })}
         </div>
       </div>
     </>

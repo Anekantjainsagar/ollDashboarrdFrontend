@@ -18,7 +18,7 @@ const AddOffer = ({ setIsOpen, modalIsOpen, getOffers }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      overflow: "hidden",
+      overflow: "scroll",
       padding: "1rem 2rem",
       borderRadius: "1rem",
       backgroundColor: "#000",
@@ -112,7 +112,7 @@ const AddOffer = ({ setIsOpen, modalIsOpen, getOffers }) => {
           encType="multipart/form-data"
           style={{
             display: "flex",
-            width:"100%",
+            width: "100%",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",

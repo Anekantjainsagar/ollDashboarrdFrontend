@@ -26,6 +26,7 @@ const AddStatusMeeting = ({ setIsOpen, modalIsOpen, user, getMeetings }) => {
 
   const { schoolName, address, phone } = user;
 
+  const [comment, setComment] = useState("");
   const [meeting, setMeeting] = useState({
     name: schoolName,
     type: "",
@@ -39,7 +40,11 @@ const AddStatusMeeting = ({ setIsOpen, modalIsOpen, user, getMeetings }) => {
   const addMeeting = () => {
     if (meeting.name && meeting.location) {
       axios
-        .post(`${MONITOR_BACKEND}/addMeeting`, { ...meeting, phone: phone })
+        .post(`${MONITOR_BACKEND}/addMeeting`, {
+          ...meeting,
+          phone: phone,
+          comment,
+        })
         .then((res) => {
           if (res.data) {
             getMeetings();
@@ -172,6 +177,12 @@ const AddStatusMeeting = ({ setIsOpen, modalIsOpen, user, getMeetings }) => {
                 placeholder="Enter the meet link"
               />
             </div>
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
             <button
               className={styles.btn}
               onClick={(e) => {

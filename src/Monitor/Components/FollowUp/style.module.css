@@ -30,18 +30,23 @@
 }
 
 .bar {
+  border-radius: 1rem;
   background-color: rgb(41, 41, 41);
   margin: 0.75rem 0;
-  color: white;
   padding: 0.75rem 0;
+}
+
+.bar .barStyle {
+  color: white;
   display: grid;
   align-items: center;
-  border-radius: 1rem;
-  grid-template-columns: 20% 35% 45%;
+  grid-template-columns: 15% 15% 30% 40%;
+  padding: 0.5rem 0;
 }
 
 .bar .time,
-.bar .title {
+.bar .title,
+.bar .date {
   text-align: center;
   font-size: 1.6rem;
 }

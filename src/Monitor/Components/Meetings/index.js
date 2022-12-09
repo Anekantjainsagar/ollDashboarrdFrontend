@@ -31,6 +31,7 @@ const Meetings = ({ meetings, getMeetings }) => {
     x: "",
     y: "",
   });
+  const [comment, setComment] = useState();
   const [meeting, setMeeting] = useState({
     name: "",
     type: "",
@@ -44,7 +45,7 @@ const Meetings = ({ meetings, getMeetings }) => {
   const addMeeting = () => {
     if (meeting.name && meeting.location) {
       axios
-        .post(`${MONITOR_BACKEND}/addMeeting`, meeting)
+        .post(`${MONITOR_BACKEND}/addMeeting`, { ...meeting, comment })
         .then((res) => {
           console.log(res);
           getMeetings();
@@ -69,14 +70,6 @@ const Meetings = ({ meetings, getMeetings }) => {
     <div className={styles.meetings}>
       <div className={styles.header}>
         <h1>Meetings</h1>
-        <AiOutlinePlus
-          className={styles.plus}
-          size={27}
-          onClick={(e) => {
-            setMeetLocation({ x: e.clientX, y: e.clientY });
-            setShowAddMeet(!showAddMeet);
-          }}
-        />
       </div>
       <div
         className={styles.addMeet}
@@ -183,6 +176,12 @@ const Meetings = ({ meetings, getMeetings }) => {
             onChange={(e) => setMeeting({ ...meeting, link: e.target.value })}
           />
         </div>
+        <input
+          type="text"
+          placeholder="Add a comment..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
         <button
           className={styles.btn}
           onClick={(e) => {

@@ -219,7 +219,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                 ? {
                     display: "block",
                     top: `${offerLocation.y + 22}px`,
-                    left: "410px",
+                    left: "475px",
                   }
                 : { display: "none" }
             }
@@ -306,7 +306,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                 ? {
                     display: "block",
                     top: `${handlerLocation.y + 22}px`,
-                    left: "800px",
+                    left: "932px",
                   }
                 : { display: "none" }
             }

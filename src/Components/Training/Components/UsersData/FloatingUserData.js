@@ -388,9 +388,9 @@ const FloatingUserData = ({
                 })}
               </p>
               <p style={{ fontSize: "1.6rem" }}>
-                {batchDetails?.time.split(" ")[0]}
+                {batchDetails?.time?.split(" ")[0]}
                 {" - "}
-                {batchDetails?.time.split(" ")[1]}
+                {batchDetails?.time?.split(" ")[1]}
               </p>
             </div>
             <div
@@ -503,10 +503,8 @@ const FloatingUserData = ({
               margin: "0.6rem 0",
             }}
           >
-            <p style={{ fontSize: "1.6rem" }}>
-              Address :
-            </p>
-            <p style={{ fontSize: "1.6rem", paddingLeft:"3rem"}}>
+            <p style={{ fontSize: "1.6rem" }}>Address :</p>
+            <p style={{ fontSize: "1.6rem", paddingLeft: "3rem" }}>
               {batchDetails?.address}
             </p>
           </div>

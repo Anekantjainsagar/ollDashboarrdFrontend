@@ -81,22 +81,20 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
               axios
                 .put(`${MONITOR_BACKEND}/addLogo`, formData)
                 .then((response) => {
-                  console.log(response);
                   if (response.data.data.modifiedCount > 0) {
                     closeModal();
+                    getSchools();
                     const notify = () =>
-                      toast("School Saved Successfully", {
+                    toast("School Saved Successfully", {
                         type: "success",
                       });
-                    setTimeout(() => {
-                      getSchools();
-                    }, 500);
                     notify();
                   }
                 })
                 .catch((err) => {
                   console.log(err);
                 });
+                getSchools();
             }
             closeModal();
             const notify = () =>
