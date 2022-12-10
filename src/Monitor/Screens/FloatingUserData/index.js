@@ -87,6 +87,7 @@ const FloatingUserData = ({
     setFollowUpModal(true);
   }
 
+  const [programKaCosting, setprogramKaCosting] = useState();
   const [expenseShow, setExpenseShow] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -200,6 +201,18 @@ const FloatingUserData = ({
     }
   }, [offer.classes]);
 
+  let expense;
+  let revenue = 0;
+  let margin;
+  let pg;
+
+  useEffect(() => {
+    const pg = programs.find((program) =>
+      program.schoolID.toLowerCase().includes(user?._id.toLowerCase())
+    );
+    setprogramKaCosting(pg);
+  }, []);
+
   return (
     <>
       <AddStatusfollows
@@ -208,6 +221,7 @@ const FloatingUserData = ({
         setIsOpen={setFollowUpModal}
         user={user}
         getFollowUps={getFollowUps}
+        getUsers={getUsers}
       />
       <AddStatusMeeting
         modalIsOpen={modalIsOpen}
@@ -1060,7 +1074,70 @@ const FloatingUserData = ({
                   );
                 });
               })}
-
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "auto",
+                padding: "0.35rem 0",
+              }}
+            >
+              <p>Total Expenses :- </p>
+              <p>
+                {" "}
+                Rs.{" "}
+                {
+                  (expense =
+                    parseInt(programKaCosting?.costing?.commission) +
+                    parseInt(programKaCosting?.costing?.educator) +
+                    parseInt(programKaCosting?.costing?.kitCosting) +
+                    parseInt(programKaCosting?.costing?.other) +
+                    parseInt(programKaCosting?.costing?.noOfBatches) +
+                    parseInt(programKaCosting?.costing?.partner) +
+                    parseInt(programKaCosting?.costing?.taxes))
+                }
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "auto",
+                padding: "0.35rem 0",
+              }}
+            >
+              <p>Revenue :- </p>
+              <p>
+                {" "}
+                Rs.{" "}
+                {programs
+                  ?.find((program) => {
+                    return program?.schoolID
+                      ?.toLowerCase()
+                      .includes(user?._id?.toLowerCase());
+                  })
+                  ?.pricing?.forEach((e) => {
+                    revenue =
+                      parseInt(revenue) +
+                      parseInt(parseInt(e?.students) * parseInt(e?.value));
+                  })}
+                {revenue}
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "auto",
+                padding: "0.35rem 0",
+              }}
+            >
+              <p>Margin :- </p>
+              <p> Rs. {(margin = revenue - expense)}</p>
+            </div>
             <div
               style={{
                 display: "flex",

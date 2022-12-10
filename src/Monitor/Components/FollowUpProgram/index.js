@@ -10,15 +10,16 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
   const addNewProgram = () => {
     if (offer.name.length > 0) {
       axios
-        .post(`${MONITOR_BACKEND}/addProgram`, {
+        .put(`${MONITOR_BACKEND}/updateProgram`, {
           ...offer,
           pricing,
           school: user?.schoolName,
           costing,
+          id: program?._id,
         })
         .then((response) => {
           const notify = () => {
-            toast("Program added Successfully", {
+            toast("Program Updated Successfully", {
               type: "success",
             });
           };
@@ -26,25 +27,6 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
             setShowUserData(false);
             getPrograms();
             notify();
-            setOffer({
-              name: "",
-              classes: [""],
-              model: "",
-              payment: "",
-              mode: "",
-              terms: "",
-            });
-            setPricing([]);
-            setCosting({
-              commission: "",
-              kitCosting: "",
-              partner: "",
-              noOfBatches: "",
-              educator: "",
-              taxes: "",
-              other: "",
-              total: "",
-            });
           }
         })
         .catch((err) => {
@@ -105,7 +87,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
     setProgram(pg);
     setOffer({
       name: pg?.school,
-      classes: [...pg.pricing.map((e) => e.name)],
+      classes: pg ? [...pg?.pricing.map((e) => e.name)] : null,
       model: pg?.model,
       payment: pg?.payment,
       mode: pg?.mode,
@@ -244,6 +226,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   id=""
+                  checked={offer?.classes?.includes("1")}
                   name="1"
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
@@ -265,6 +248,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   id=""
+                  checked={offer?.classes?.includes("2")}
                   name="2"
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
@@ -286,6 +270,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="3"
+                  checked={offer?.classes?.includes("3")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -307,6 +292,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="4"
+                  checked={offer?.classes?.includes("4")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -328,6 +314,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="5"
+                  checked={offer?.classes?.includes("5")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -349,6 +336,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="6"
+                  checked={offer?.classes?.includes("6")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -372,6 +360,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="7"
+                  checked={offer?.classes?.includes("7")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -393,6 +382,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="8"
+                  checked={offer?.classes?.includes("8")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -414,6 +404,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="9"
+                  checked={offer?.classes?.includes("9")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -435,6 +426,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="10"
+                  checked={offer?.classes?.includes("10")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -456,6 +448,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="11"
+                  checked={offer?.classes?.includes("11")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -477,6 +470,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 <input
                   type="checkbox"
                   name="12"
+                  checked={offer?.classes?.includes("12")}
                   onChange={(e) => {
                     if (offer.classes.includes(e.target.name) === false) {
                       setOffer({
@@ -505,7 +499,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
             }
           >
             <p>Pricing</p>
-            {offer.classes?.length > 0 || !offer.classes.includes("")
+            {offer?.classes?.length > 0 || !offer?.classes?.includes("")
               ? pricing?.map((e) => {
                   return (
                     <div
@@ -526,12 +520,14 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                         placeholder="No. of students"
                         style={{ width: "42%" }}
                         value={e.students}
+                        name={e.name}
                         onChange={(e) => onChangeStudents(e)}
                       />
                       <input
                         type="number"
                         style={{ width: "35%" }}
                         placeholder="Price"
+                        name={e.name}
                         value={e.value}
                         onChange={(e) => onChangePrice(e)}
                       />
@@ -579,49 +575,49 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
             style={expenseShow ? { display: "block" } : { display: "none" }}
           >
             <CostBlock
-              value={costing.commission}
+              value={costing?.commission}
               placeholder="Commission"
               onChange={(e) =>
                 setCosting({ ...costing, commission: e.target.value })
               }
             />
             <CostBlock
-              value={costing.kitCosting}
+              value={costing?.kitCosting}
               placeholder="Kit Costing"
               onChange={(e) =>
                 setCosting({ ...costing, kitCosting: e.target.value })
               }
             />
             <CostBlock
-              value={costing.partner}
+              value={costing?.partner}
               placeholder="Partner"
               onChange={(e) =>
                 setCosting({ ...costing, partner: e.target.value })
               }
             />
             <CostBlock
-              value={costing.noOfBatches}
+              value={costing?.noOfBatches}
               placeholder="No. Of Batches"
               onChange={(e) =>
                 setCosting({ ...costing, noOfBatches: e.target.value })
               }
             />
             <CostBlock
-              value={costing.educator}
+              value={costing?.educator}
               placeholder="Educator"
               onChange={(e) =>
                 setCosting({ ...costing, educator: e.target.value })
               }
             />
             <CostBlock
-              value={costing.taxes}
+              value={costing?.taxes}
               placeholder="Taxes"
               onChange={(e) =>
                 setCosting({ ...costing, taxes: e.target.value })
               }
             />
             <CostBlock
-              value={costing.other}
+              value={costing?.other}
               placeholder="Other"
               onChange={(e) =>
                 setCosting({ ...costing, other: e.target.value })
@@ -643,12 +639,12 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
                 {
                   (expense =
                     parseInt(costing?.commission) +
-                    parseInt(costing.educator) +
-                    parseInt(costing.kitCosting) +
-                    parseInt(costing.other) +
-                    parseInt(costing.noOfBatches) +
-                    parseInt(costing.partner) +
-                    parseInt(costing.taxes))
+                    parseInt(costing?.educator) +
+                    parseInt(costing?.kitCosting) +
+                    parseInt(costing?.other) +
+                    parseInt(costing?.noOfBatches) +
+                    parseInt(costing?.partner) +
+                    parseInt(costing?.taxes))
                 }
               </p>
             </div>

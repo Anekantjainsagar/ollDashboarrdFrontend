@@ -7,6 +7,9 @@ import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import times from "./times";
+import testData from "./testData";
+import styles from "./style.module.css";
+import AddDataModal from "./AddDataModal";
 
 const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
@@ -32,6 +35,15 @@ const Form = ({ getUserData, sales }) => {
   const [etime, setetime] = useState(times[index]);
   const [price, setprice] = useState();
   const [totalPrice, settotalPrice] = useState();
+
+  const [dataSaved, setDataSaved] = useState(false);
+  const [dataLocation, setDataLocation] = useState({ x: "", y: "" });
+  const [searchData, setSearchData] = useState("");
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
 
   const postData = async (e) => {
     e.preventDefault();
@@ -60,7 +72,8 @@ const Form = ({ getUserData, sales }) => {
         mode: mode === undefined || mode === "" ? "none" : mode,
         type: type === undefined || type === "" ? "none" : type,
         address,
-        price: price === undefined || price === "" || price === null ? 0 : price,
+        price:
+          price === undefined || price === "" || price === null ? 0 : price,
         days,
         startDate:
           startDate === undefined || startDate === null || startDate === ""
@@ -125,6 +138,12 @@ const Form = ({ getUserData, sales }) => {
 
   return (
     <>
+      <AddDataModal
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        setIsOpen={setIsOpen}
+        setDataSaved={setDataSaved}
+      />
       <div className="inputUserContainer">
         <form action="">
           <div className="inputSection">
@@ -132,12 +151,63 @@ const Form = ({ getUserData, sales }) => {
               <input
                 type="text"
                 name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
                 placeholder="Name *"
                 required
                 className="input"
+                disabled={dataSaved}
+                value={name?.length > 0 ? name : searchData}
+                onClick={(e) => setDataLocation({ x: e.clientX, y: e.clientY })}
+                onChange={(e) => {
+                  setSearchData(e.target.value);
+                  setDataSaved(false);
+                }}
               />
+              <div
+                style={
+                  searchData?.length > 0 && dataSaved === false
+                    ? { display: "block", top: `${dataLocation.y + 20}px` }
+                    : { display: "none" }
+                }
+                className={styles.selectSchool}
+              >
+                {testData
+                  ?.filter((data) =>
+                    data.name.toLowerCase().includes(searchData.toLowerCase())
+                  )
+                  .map((e, i) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setDataSaved(true);
+                          setName(e.name);
+                          setage(e.age);
+                          setphone(e.phone);
+                          setemail(e.email);
+                          setschool(e.school);
+                        }}
+                        key={i}
+                      >
+                        <p style={{ paddingBottom: "0.25rem" }}>{e.name}</p>
+                        <p>{e.phone}</p>
+                      </div>
+                    );
+                  })}
+                <button
+                  className={styles.btn}
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    marginBottom: "0.5rem",
+                  }}
+                  onClick={() => {
+                    setDataSaved(true);
+                    setSearchData("");
+                    setIsOpen(true);
+                  }}
+                >
+                  Add New
+                </button>
+              </div>
               <input
                 type="number"
                 name="phone"

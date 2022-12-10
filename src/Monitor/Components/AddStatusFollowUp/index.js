@@ -6,7 +6,13 @@ import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import times from "../BatchDetails/times";
 
-const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
+const AddStatusfollows = ({
+  setIsOpen,
+  modalIsOpen,
+  user,
+  getFollowUps,
+  getUsers,
+}) => {
   const customStyles = {
     content: {
       top: "50%",
@@ -34,17 +40,28 @@ const AddStatusfollows = ({ setIsOpen, modalIsOpen, user, getFollowUps }) => {
   const addfollows = () => {
     if (follows.name && follows.time) {
       axios
-        .post(`${MONITOR_BACKEND}/addFollowUP`, { ...follows, comment })
+        .post(`${MONITOR_BACKEND}/addFollowUP`, follows)
         .then((res) => {
           if (res.data) {
             getFollowUps();
             setFollows({
-              name: "",
               time: "",
               startDate: "",
             });
-            closeModal();
-            setComment("");
+            axios
+              .put(`${MONITOR_BACKEND}/addComment`, {
+                comment: `Follow Up : ${comment}`,
+                id: user?._id,
+              })
+              .then((res) => {
+                if (res) {
+                  getUsers();
+                  setComment("");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           }
         })
         .catch((err) => {

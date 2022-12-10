@@ -38,7 +38,7 @@ const MeetingAndFollow = ({ getMeetings, user, getUsers, getFollowUps }) => {
             });
             axios
               .put(`${MONITOR_BACKEND}/addComment`, {
-                comment: follows?.comment,
+                comment: `Follow Up : ${follows?.comment}`,
                 id: user?._id,
               })
               .then((res) => {
@@ -75,7 +75,7 @@ const MeetingAndFollow = ({ getMeetings, user, getUsers, getFollowUps }) => {
             });
             axios
               .put(`${MONITOR_BACKEND}/addComment`, {
-                comment: meeting?.comment,
+                comment: `Meeting : ${meeting?.comment}`,
                 id: user?._id,
               })
               .then((res) => {

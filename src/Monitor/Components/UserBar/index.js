@@ -59,6 +59,7 @@ const UserBar = ({
         setIsOpen={setFollowUpModal}
         user={user}
         getFollowUps={getFollowUps}
+        getUsers={getUsers}
       />
       <div
         className={styles.bar}
