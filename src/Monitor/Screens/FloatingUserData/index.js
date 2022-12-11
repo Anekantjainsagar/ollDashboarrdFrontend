@@ -1299,6 +1299,33 @@ const FloatingUserData = ({
             </div>
           </div>
         </div>
+        <button
+          className={styles.import}
+          style={{ backgroundColor: "red" }}
+          onClick={(e) => {
+            e.preventDefault();
+            axios
+              .delete(`${MONITOR_BACKEND}/deleteUser`, {
+                headers: {
+                  Authorization: "***",
+                },
+                data: {
+                  id: _id,
+                },
+              })
+              .then((res) => {
+                if (res.data.deletedCount > 0) {
+                  setShowUserData(false);
+                  getUsers();
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          Delete User
+        </button>
       </div>
     </>
   );

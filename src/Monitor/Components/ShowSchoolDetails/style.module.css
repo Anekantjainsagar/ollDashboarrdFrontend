@@ -4,6 +4,7 @@
   align-items: center;
   margin-bottom: 0.5rem;
   justify-content: space-between;
+  width: 100%;
 }
 
 .header h1 {
@@ -143,7 +144,7 @@ p {
   color: white;
 }
 
-.firstLine img{
+.firstLine img {
   width: 10%;
   border-radius: 50%;
 }

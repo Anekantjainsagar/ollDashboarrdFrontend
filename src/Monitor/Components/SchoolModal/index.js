@@ -84,8 +84,42 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
                   if (response.data.data.modifiedCount > 0) {
                     closeModal();
                     getSchools();
+                    setSchool({
+                      name: "",
+                      website: "",
+                      address: "",
+                      city: "",
+                      state: "",
+                      email: "",
+                      phone: "",
+                      schoolLink: "",
+                      board: "",
+                      type: "",
+                      noOfStudents: "",
+                      schoolFee: "",
+                      category: "",
+                      principal: {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        role: "",
+                      },
+                      trustee: {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        role: "",
+                      },
+                      coordinator: {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        role: "",
+                      },
+                    });
+                    console.log(school);
                     const notify = () =>
-                    toast("School Saved Successfully", {
+                      toast("School Saved Successfully", {
                         type: "success",
                       });
                     notify();
@@ -94,13 +128,46 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
                 .catch((err) => {
                   console.log(err);
                 });
-                getSchools();
+              getSchools();
             }
             closeModal();
             const notify = () =>
               toast("School Saved Successfully", {
                 type: "success",
               });
+            setSchool({
+              name: "",
+              website: "",
+              address: "",
+              city: "",
+              state: "",
+              email: "",
+              phone: "",
+              schoolLink: "",
+              board: "",
+              type: "",
+              noOfStudents: "",
+              schoolFee: "",
+              category: "",
+              principal: {
+                name: "",
+                email: "",
+                phone: "",
+                role: "",
+              },
+              trustee: {
+                name: "",
+                email: "",
+                phone: "",
+                role: "",
+              },
+              coordinator: {
+                name: "",
+                email: "",
+                phone: "",
+                role: "",
+              },
+            });
             setTimeout(() => {
               getSchools();
             }, 500);

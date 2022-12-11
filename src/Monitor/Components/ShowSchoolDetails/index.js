@@ -28,6 +28,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
   }
 
   const {
+    _id,
     name,
     website,
     address,
@@ -207,7 +208,33 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
         >
           <div className={styles.header}>
             <h1>School Details</h1>
-            <button className={styles.import}>Import</button>
+            <button
+              className={styles.import}
+              style={{ backgroundColor: "red" }}
+              onClick={(e) => {
+                e.preventDefault();
+                axios
+                  .delete(`${MONITOR_BACKEND}/deleteSchool`, {
+                    headers: {
+                      Authorization: "***",
+                    },
+                    data: {
+                      id: _id,
+                    },
+                  })
+                  .then((res) => {
+                    if (res.data.deletedCount > 0) {
+                      closeModal();
+                      getSchools();
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }}
+            >
+              Delete School
+            </button>
             <AiOutlineClose
               size={20}
               style={{ cursor: "pointer" }}
