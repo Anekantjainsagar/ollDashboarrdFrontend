@@ -171,7 +171,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {schools
               ?.filter((school) =>
-                school.name.toLowerCase().includes(selectSchool)
+                school.name.toLowerCase().includes(selectSchool.toLowerCase())
               )
               .map((e, i) => {
                 return (
