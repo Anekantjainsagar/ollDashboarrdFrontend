@@ -2,15 +2,12 @@ import React from "react";
 import SearchSection from "./SearchSection";
 import Form from "./Form";
 
-const Topbar = ({ getUserData, filterBySearch, setfilterBySearch }) => {
+const Topbar = ({ getRequirements, filter, setFilter }) => {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Form />
-        <SearchSection
-          filterBySearch={filterBySearch}
-          setfilterBySearch={setfilterBySearch}
-        />
+        <Form getRequirements={getRequirements} />
+        <SearchSection filter={filter} setFilter={setFilter} />
       </div>
     </>
   );

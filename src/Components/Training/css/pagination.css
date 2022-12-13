@@ -1,0 +1,22 @@
+.div{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.div button{
+  background-color: transparent;
+  color: white;
+  font-size: 1.6rem;
+  padding: 0.25rem 1rem;
+  border-radius: 5rem;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.div button:hover{
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}

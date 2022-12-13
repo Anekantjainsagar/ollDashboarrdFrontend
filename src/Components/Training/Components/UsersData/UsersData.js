@@ -7,8 +7,9 @@ import Pagination from "./Pagination";
 import "./index.css";
 
 const UsersData = ({
+  getRequirements,
+  requirementsData,
   usersData,
-  getUserData,
   filter,
   setfilter,
   page,
@@ -16,7 +17,9 @@ const UsersData = ({
   noOfUsers,
   setdata,
   templateMsg,
+  getUserData,
   sales,
+  filteredData,
 }) => {
   const usersRef = useRef(null);
   const userData = usersRef.current;
@@ -30,14 +33,14 @@ const UsersData = ({
       <div className="usersDataOfOperation" ref={usersRef}>
         <FaArrowCircleUp className="scrollTop" size={20} onClick={scrollTop} />
         <UserHeading filter={filter} setfilter={setfilter} />
-        <div style={{ margin: "2.5rem 0" }}></div>
+        <div style={{ margin: "2rem 0" }}></div>
         <>
-          {usersData?.length >= 0 ? (
-            usersData.map((e, index) => {
+          {filteredData?.length >= 0 ? (
+            filteredData?.map((e, index) => {
               return (
                 <User
-                  getUserData={getUserData}
-                  usersData={usersData}
+                  getRequirements={getRequirements}
+                  requirementsData={requirementsData}
                   data={e}
                   key={index}
                   index={index}

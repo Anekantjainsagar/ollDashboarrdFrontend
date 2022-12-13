@@ -171,7 +171,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {schools
               ?.filter((school) =>
-                school.name.toLowerCase().includes(selectSchool.toLowerCase())
+                school.name?.toLowerCase().includes(selectSchool?.toLowerCase())
               )
               .map((e, i) => {
                 return (
@@ -226,7 +226,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {offers
               ?.filter((offer) =>
-                offer.name.toLowerCase().includes(selectOffer?.toLowerCase())
+                offer.name?.toLowerCase().includes(selectOffer?.toLowerCase())
               )
               .map((e, i) => {
                 return (
@@ -313,7 +313,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {agents
               ?.filter((agent) =>
-                agent.name.toLowerCase().includes(selectHandler?.toLowerCase())
+                agent.name?.toLowerCase().includes(selectHandler?.toLowerCase())
               )
               .map((e, i) => {
                 return (

@@ -16,6 +16,7 @@ import Programs from "./Monitor/Screens/Programs";
 import Sidebar from "./Monitor/Components/Sidebar";
 import MONITOR_BACKEND from "./Monitor/Utils";
 import styles from "./style.module.css";
+import OnboardingForm from "./Components/Training/Components/UsersData/OnboardingForm";
 
 const App = () => {
   const history = useNavigate();
@@ -265,14 +266,16 @@ const App = () => {
     getPrograms();
   }, [page]);
 
-  const webLocation = useLocation();
-
   return (
     <Routes>
       <Route path="/" element={<Login setsales={setsales} />} />
       <Route path="/sales" element={<Sales sales={checkUser} />} />
       <Route path="/Operations" element={<Support sales={checkUser} />} />
       <Route path="/training" element={<Training sales={checkUser} />} />
+      <Route
+        path="/training/teacherOnboarding/:id"
+        element={<OnboardingForm />}
+      />
       <Route path="/b2b" element={<Home />} />
       <Route
         path="/db"

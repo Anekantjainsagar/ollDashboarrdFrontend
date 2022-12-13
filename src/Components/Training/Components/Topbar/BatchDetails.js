@@ -31,25 +31,11 @@ const daysValue = [
 const BatchDetails = ({
   details,
   setDetails,
-  mode,
-  setmode,
-  type,
-  settype,
-  address,
-  setaddress,
-  days,
-  setdays,
-  startDate,
-  setstartDate,
-  stime,
-  setstime,
-  sessionsCount,
-  setsessionsCount,
-  etime,
-  setetime,
-  price,
-  setprice,
+  requirements,
+  setRequirements,
   height,
+  eTime,
+  setEtime,
 }) => {
   const ref = useRef(null);
   useOutsideAlerter(ref, details, setDetails);
@@ -60,7 +46,7 @@ const BatchDetails = ({
       className="detailsBtnContainer"
       style={
         details === true
-          ? { display: "block", top: `${height + 30}px`, left: "22.5%" }
+          ? { display: "block", top: `${height + 30}px`, left: "13%" }
           : { display: "none" }
       }
     >
@@ -76,87 +62,46 @@ const BatchDetails = ({
       <div className="selectModes">
         <div
           className="selectMode"
-          name="mode"
-          value={mode}
-          onChange={(e) => setmode(e.target.value)}
-        >
-          <p>Mode</p>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="mode"
-              value={"none"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>None</p>
-          </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="mode"
-              value={"Online"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>Onl.</p>
-          </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="mode"
-              value={"Offline"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>Off.</p>
-          </div>
-        </div>
-        <div
-          className="selectMode"
-          value={type}
-          onChange={(e) => settype(e.target.value)}
+          value={requirements.type}
+          onChange={(e) =>
+            setRequirements({ ...requirements, type: e.target.value })
+          }
         >
           <p>Type</p>
           <div
             style={{
-              margin: "0.75rem 0",
+              margin: "0.25rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="type"
-              value={"none"}
+              value={"None"}
             />
             <p style={{ marginLeft: "0.4rem" }}>None</p>
           </div>
           <div
             style={{
-              margin: "0.75rem 0",
+              margin: "0.25rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
               name="type"
               value={"1 to 1"}
@@ -165,33 +110,23 @@ const BatchDetails = ({
           </div>
           <div
             style={{
-              margin: "0.75rem 0",
+              margin: "0.25rem 0",
               paddingLeft: "0.15rem",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <input
-              style={{ color: "black", cursor: "pointer" }}
+              style={{
+                color: "black",
+                cursor: "pointer",
+                width: "fit-content",
+              }}
               type={"radio"}
-              value="group"
+              value="Group"
               name="type"
             />
             <p style={{ marginLeft: "0.4rem" }}>Group</p>
-          </div>
-          <div
-            style={{
-              margin: "0.75rem 0",
-              paddingLeft: "0.15rem",
-              display: "flex",
-            }}
-          >
-            <input
-              style={{ color: "black", cursor: "pointer" }}
-              type={"radio"}
-              name="type"
-              value={"Trial"}
-            />
-            <p style={{ marginLeft: "0.4rem" }}>Trial</p>
           </div>
         </div>
         <div className="selectMode">
@@ -201,25 +136,28 @@ const BatchDetails = ({
               <div
                 key={i}
                 style={{
-                  margin: "0.75rem 0",
-                  paddingLeft: "0.15rem",
+                  margin: "0.3rem 0",
                 }}
               >
                 <input
                   type="checkbox"
+                  style={{ width: "fit-content" }}
                   id={e}
                   name={e}
                   value={e}
                   onChange={async (e) => {
-                    if (days.includes(e.target.value) === false) {
+                    if (requirements?.days.includes(e.target.value) === false) {
                       if (e.target.checked === true) {
-                        setdays([...days, e.target.value]);
+                        setRequirements({
+                          ...requirements,
+                          days: [...requirements?.days, e.target.value],
+                        });
                       }
                     } else if (e.target.checked === false) {
-                      let arr = [...days];
+                      let arr = [...requirements?.days];
                       const index = arr.indexOf(e.target.value);
                       arr.splice(index, 1);
-                      setdays([...arr]);
+                      setRequirements({ ...requirements, days: [...arr] });
                     }
                   }}
                 />
@@ -234,18 +172,34 @@ const BatchDetails = ({
       </div>
       <div className="inputSections">
         <div className="inputSection">
-          <div style={{ margin: "0.75rem 0" }}>
+          <div style={{ margin: "1.05rem 0 0.5rem 0" }}>
             <p>Start Date</p>
             <input
               type="date"
               name="startDate"
-              value={startDate}
-              d
-              onChange={(e) => setstartDate(e.target.value)}
+              style={{ width: "100%" }}
+              value={requirements.startDate}
+              onChange={(e) =>
+                setRequirements({ ...requirements, startDate: e.target.value })
+              }
             />
           </div>
+          <div>
+            <p>Location</p>
+            <input
+              type="text"
+              style={{ width: "100%" }}
+              name="address"
+              placeholder="Location"
+              value={requirements.location}
+              onChange={(e) =>
+                setRequirements({ ...requirements, location: e.target.value })
+              }
+            />
+          </div>
+        </div>
+        <div className="inputSection">
           <div style={{ margin: "0.75rem 0" }}>
-            <p>Class Timings</p>
             <div
               style={{
                 display: "flex",
@@ -253,37 +207,19 @@ const BatchDetails = ({
                 flexDirection: "column",
               }}
             >
-              <p className="valueSelectorHead">Start Time</p>
+              <p className="valueSelectorHead"> Class Start Time</p>
               <select
                 style={{ width: "100%" }}
                 name="stime"
-                value={stime}
+                value={requirements.sTime}
                 className="valueSelector"
                 onChange={(e) => {
-                  setstime(e.target.value);
+                  setRequirements({ ...requirements, sTime: e.target.value });
                   var index =
                     e.target.value === "--"
                       ? times.indexOf(e.target.value)
                       : times.indexOf(e.target.value) + 2;
-                  setetime(times[index]);
-                }}
-              >
-                {times.map((time, index) => {
-                  return (
-                    <option key={index} value={time}>
-                      {time}
-                    </option>
-                  );
-                })}
-              </select>
-              <p className="valueSelectorHead">End Time</p>
-              <select
-                style={{ width: "100%" }}
-                name="etime"
-                value={etime}
-                className="valueSelector"
-                onChange={(e) => {
-                  setetime(e.target.value);
+                  setEtime(times[index]);
                 }}
               >
                 {times.map((time, index) => {
@@ -295,36 +231,33 @@ const BatchDetails = ({
                 })}
               </select>
             </div>
-          </div>
-        </div>
-        <div className="inputSection">
-          <div style={{ margin: "0.75rem 0" }}>
-            <p>No. Sessions</p>
-            <input
-              type="number"
-              name="sessionsCount"
-              value={sessionsCount}
-              onChange={(e) => setsessionsCount(e.target.value)}
-            />
-          </div>
-          <div style={{ margin: "0.75rem 0" }}>
-            <p>Adress (opt)</p>
-            <input
-              type="text"
-              name="address"
-              value={address}
-              onChange={(e) => setaddress(e.target.value)}
-            />
-          </div>
-          <div style={{ margin: "0.75rem 0" }}>
-            <p>Price per hour</p>
-            <input
-              type="number"
-              name="price"
-              value={price}
-              className="price"
-              onChange={(e) => setprice(e.target.value)}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "column",
+                marginTop: "0.6rem",
+              }}
+            >
+              <p className="valueSelectorHead">Class End Time</p>
+              <select
+                style={{ width: "100%" }}
+                name="etime"
+                value={eTime}
+                className="valueSelector"
+                onChange={(e) => {
+                  setEtime(e.target.value);
+                }}
+              >
+                {times.map((time, index) => {
+                  return (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
         </div>
       </div>

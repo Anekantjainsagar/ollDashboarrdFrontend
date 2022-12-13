@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
+const SearchSection = ({ filter, setFilter }) => {
   return (
     <>
       <div className="topbarSearch">
@@ -12,7 +12,7 @@ const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
             justifyContent: "space-between",
           }}
         >
-          {filterBySearch?.length > 0 ? (
+          {filter?.value?.length > 0 ? (
             <AiOutlineClose
               color="white"
               size={20}
@@ -23,25 +23,20 @@ const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
                 cursor: "pointer",
               }}
               onClick={() => {
-                setfilterBySearch("");
+                setFilter({ ...filter, value: "" });
               }}
             />
           ) : null}
           <input
             type="text"
             placeholder="Search"
-            value={filterBySearch}
+            value={filter?.value}
             style={{
               width: "100%",
             }}
-            onChange={(e) => setfilterBySearch(e.target.value)}
+            onChange={(e) => setFilter({ ...filter, value: e.target.value })}
           />
         </div>
-        <select name="" id="">
-          <option value="Type">Type</option>
-          <option value="sales">Sales</option>
-          <option value="support">Support</option>
-        </select>
       </div>
     </>
   );

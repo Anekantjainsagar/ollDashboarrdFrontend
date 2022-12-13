@@ -1,0 +1,69 @@
+#modal .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#modal .header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+#modal .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modal .body .msg {
+  padding: 1.25rem 1rem 0.75rem 1rem;
+  font-size: 1.75rem;
+  color: rgb(204, 204, 204);
+  font-weight: 500;
+  text-align: center;
+}
+
+#modal .body .input {
+  display: flex;
+  width: 85%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+}
+
+#modal .body .input .heading {
+  color: rgb(204, 204, 204);
+  font-size: 1.9rem;
+}
+
+#modal .body .input input {
+  border-bottom: 0.1px solid rgb(204, 204, 204);
+  color: rgb(204, 204, 204);
+  outline: none;
+  padding: 0.3rem;
+  border-left: 0;
+  border-top: 0;
+  font-size: 1.75rem;
+  background-color: transparent;
+  border-right: 0;
+  text-align: center;
+}
+
+#modal .body .btn {
+  padding: 0.4rem 1.5rem;
+  font-size: 1.75rem;
+  outline: none;
+  border-radius: 1rem;
+  border: 1px solid black;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+  transition: all 0.5s ease-in-out;
+  border: 1px solid transparent;
+}
+
+#modal .body .btn:hover {
+  color: white;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid white;
+}
