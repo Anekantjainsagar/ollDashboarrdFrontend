@@ -36,6 +36,9 @@ const User = (props) => {
         modalIsOpen={modalIsOpen}
         openModal={openModal}
         setIsOpen={setIsOpen}
+        requirement={props.data}
+        applicants={props.applicants}
+        getApplicants={props.getApplicants}
       />
       <div style={{ position: "absolute" }}>
         <ToastContainer
@@ -60,6 +63,15 @@ const User = (props) => {
         <p>{course}</p>
         <p>{model + " " + type}</p>
         <p>{location}</p>
+        <p
+          style={{ textDecoration: "underline" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            openModal();
+          }}
+        >
+          App-Sho-Onb
+        </p>
         <p
           className="stageOperationsValue"
           onClick={(e) => e.stopPropagation()}

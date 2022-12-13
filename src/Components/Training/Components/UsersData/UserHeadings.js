@@ -6,13 +6,13 @@ import "./index.css";
 const UserHeadings = ({ filter, setfilter }) => {
   return (
     <>
-      <div className="userOperationHeadings">
+      <div className="userOperationHeadings" style={{ zIndex: 0 }}>
         <p>RID</p>
         <p>Raise Date</p>
         <p>Course</p>
         <p>Mode</p>
         <p>Location</p>
-        <p></p>
+        <p>App-Sho-Onb</p>
         <p>
           Stage
           <AiOutlineFilter

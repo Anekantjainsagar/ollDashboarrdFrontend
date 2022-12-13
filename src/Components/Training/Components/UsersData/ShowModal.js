@@ -6,13 +6,23 @@ import { css } from "glamor";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ShowModal = ({ setIsOpen, modalIsOpen }) => {
+import Shortlisted from "./ShowingApplications/Shortlisted/index";
+import Applicants from "./ShowingApplications/Applicants/index";
+import Onboarded from "./ShowingApplications/Onboarded/index";
+
+const ShowModal = ({
+  setIsOpen,
+  modalIsOpen,
+  requirement,
+  applicants,
+  getApplicants,
+}) => {
   const customStyles = {
     content: {
       top: "50%",
       left: "50%",
       right: "auto",
-      width: "40%",
+      width: "80%",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
@@ -37,7 +47,7 @@ const ShowModal = ({ setIsOpen, modalIsOpen }) => {
       onClick={(e) => e.stopPropagation()}
     >
       <div className="header">
-        <h2>{"clickedTemplate.elementName"}</h2>
+        <h2>{requirement?.course}</h2>
         <AiOutlineClose
           onClick={closeModal}
           color={"#fff"}
@@ -45,6 +55,9 @@ const ShowModal = ({ setIsOpen, modalIsOpen }) => {
           size={20}
         />
       </div>
+      <Applicants applicants={applicants} />
+      <Shortlisted />
+      <Onboarded />
     </Modal>
   );
 };

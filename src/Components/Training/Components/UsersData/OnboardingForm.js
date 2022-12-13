@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const OnboardingForm = () => {
-  // const api = "http://localhost:8000/api/training";
   const api = "https://crm.oll.co/api/training";
   const [requirement, setRequirement] = useState();
   const [form, setForm] = useState({
@@ -21,6 +20,7 @@ const OnboardingForm = () => {
     preferredTime: "",
     preferredDate: "",
     link: "",
+    courseId: requirement?._id,
   });
 
   const { innerWidth } = window;
@@ -59,15 +59,15 @@ const OnboardingForm = () => {
               link: "",
             });
             const notify = () =>
-              toast("Data updated successfully", { type: "success" }).configure(
-                {
-                  bodyClassName: css({
-                    backgroundColor: "blue",
-                    height: "100%",
-                    width: "100%",
-                  }),
-                }
-              );
+              toast(`Applied for ${requirement?.course} post successfully`, {
+                type: "success",
+              }).configure({
+                bodyClassName: css({
+                  backgroundColor: "blue",
+                  height: "100%",
+                  width: "100%",
+                }),
+              });
             notify();
           } else {
             const notify = () =>

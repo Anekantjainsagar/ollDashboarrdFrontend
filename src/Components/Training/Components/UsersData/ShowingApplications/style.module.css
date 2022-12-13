@@ -1,0 +1,42 @@
+.mainBox {
+  margin: 1rem 0 0 0;
+  padding: 0.25rem 0.5rem;
+}
+
+.mainBox h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: 15% 13% 16% 13% 10% 16% 17%;
+  margin-top: 1rem;
+}
+
+.heading p {
+  font-size: 1.55rem;
+  text-align: center;
+}
+
+.usersDisplay {
+  height: 20vh;
+  overflow: scroll;
+}
+
+.user {
+  display: grid;
+  grid-template-columns: 15% 13% 16% 13% 10% 16% 17%;
+  padding: 0.8rem 0;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  background-color: rgb(32, 32, 32);
+  overflow-wrap: break-word;
+  align-items: center;
+}
+
+.user p {
+  font-size: 1.55rem;
+  text-align: center;
+}

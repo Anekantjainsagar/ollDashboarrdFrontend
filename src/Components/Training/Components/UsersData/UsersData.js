@@ -20,6 +20,8 @@ const UsersData = ({
   getUserData,
   sales,
   filteredData,
+  applicants,
+  getApplicants,
 }) => {
   const usersRef = useRef(null);
   const userData = usersRef.current;
@@ -48,6 +50,8 @@ const UsersData = ({
                   setdata={setdata}
                   sales={sales}
                   noOfUsers={noOfUsers}
+                  applicants={applicants}
+                  getApplicants={getApplicants}
                 />
               );
             })

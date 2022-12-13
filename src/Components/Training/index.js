@@ -19,6 +19,7 @@ function Training({ sales }) {
   //Use tab for camelCase in states
   const [noOfUsers, setnoOfUsers] = useState();
   const [requirementsData, setRequirementsData] = useState([]);
+  const [applicants, setApplicants] = useState([]);
   const [filteredData, setfilteredData] = useState(requirementsData);
 
   const getRequirements = () => {
@@ -32,25 +33,38 @@ function Training({ sales }) {
       });
   };
 
+  const getApplicants = () => {
+    axios
+      .get(`${TRAINING_BACKEND}/getApplicants`)
+      .then((res) => {
+        setApplicants(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    getApplicants();
     getRequirements();
   }, []);
 
   useEffect(() => {
-    var searchFilter = requirementsData.filter((e) => {
-      if (filter.stage == "all") {
-        return e;
-      } else {
-        return e.stage.toLowerCase().includes(filter.stage.toLowerCase());
-      }
-    });
-    // ?.filter((e) => {
-    //   if (filter.stage === "") {
-    //     return e;
-    //   } else {
-    //     return e.course.toLowerCase().includes(filter.value.toLowerCase());
-    //   }
-    // });
+    var searchFilter = requirementsData
+      .filter((e) => {
+        if (filter.stage == "all") {
+          return e;
+        } else {
+          return e.stage.toLowerCase().includes(filter.stage.toLowerCase());
+        }
+      })
+      ?.filter((e) => {
+        if (filter.stage === "") {
+          return e;
+        } else {
+          return e.course.toLowerCase().includes(filter.value.toLowerCase());
+        }
+      });
     setfilteredData(searchFilter);
   }, [filter, requirementsData]);
 
@@ -81,6 +95,8 @@ function Training({ sales }) {
         setpage={setpage}
         setfilter={setFilter}
         noOfUsers={noOfUsers}
+        applicants={applicants}
+        getApplicants={getApplicants}
       />
     </div>
   );
