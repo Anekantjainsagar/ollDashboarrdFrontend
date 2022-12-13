@@ -1,7 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { AiOutlineRight } from "react-icons/ai";
-import { ThreeDots } from "react-loader-spinner";
 import FloatingUserData from "./FloatingUserData";
 import TRAINING_BACKEND from "../../utils";
 import ShowModal from "./ShowModal";

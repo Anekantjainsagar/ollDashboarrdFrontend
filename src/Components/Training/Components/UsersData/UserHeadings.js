@@ -12,6 +12,7 @@ const UserHeadings = ({ filter, setfilter }) => {
         <p>Course</p>
         <p>Mode</p>
         <p>Location</p>
+        <p></p>
         <p>
           Stage
           <AiOutlineFilter

@@ -37,21 +37,20 @@ function Training({ sales }) {
   }, []);
 
   useEffect(() => {
-    var searchFilter = requirementsData
-      ?.filter((e) => {
-        if (filter.stage == "all") {
-          return e;
-        } else {
-          return e.stage.toLowerCase().includes(filter.stage.toLowerCase());
-        }
-      })
-      ?.filter((e) => {
-        if (filter.stage === "") {
-          return e;
-        } else {
-          return e.course.toLowerCase().includes(filter.value.toLowerCase());
-        }
-      });
+    var searchFilter = requirementsData.filter((e) => {
+      if (filter.stage == "all") {
+        return e;
+      } else {
+        return e.stage.toLowerCase().includes(filter.stage.toLowerCase());
+      }
+    });
+    // ?.filter((e) => {
+    //   if (filter.stage === "") {
+    //     return e;
+    //   } else {
+    //     return e.course.toLowerCase().includes(filter.value.toLowerCase());
+    //   }
+    // });
     setfilteredData(searchFilter);
   }, [filter, requirementsData]);
 
