@@ -8,8 +8,8 @@ const User = ({ data, getApplicants }) => {
   const [reason, setReason] = useState("");
   const [showRejection, setShowRejection] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [payment, setPayment] = useState({ level: "", amount: "" });
-  const [contract, setContract] = useState("");
+  const [payment, setPayment] = useState({ level: "1", amount: "" });
+  const [contract, setContract] = useState("Signed");
   return (
     <>
       <div className={styles.user}>
@@ -136,32 +136,54 @@ const User = ({ data, getApplicants }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-evenly",
+            width: "100%",
           }}
         >
-          <input
-            type="number"
-            style={{ width: "47%" }}
+          <select
+            style={{
+              width: "50%",
+              textAlign: "center",
+              margin: "0.5rem 0",
+            }}
             value={payment?.level}
-            placeholder="Enter the level"
-            onChange={(e) => setPayment({ ...payment, level: e.target.value })}
-          />
-          <input
-            type="number"
-            style={{ width: "47%" }}
-            value={payment?.amount}
-            placeholder="Amount"
-            onChange={(e) => setPayment({ ...payment, amount: e.target.value })}
-          />
+            onChange={(e) => {
+              if (e.target.value == "1") {
+                setPayment({ amount: "400", level: e.target.value });
+              }
+              if (e.target.value == "2") {
+                setPayment({ amount: "700", level: e.target.value });
+              }
+              if (e.target.value == "3") {
+                setPayment({ amount: "1000", level: e.target.value });
+              }
+              if (e.target.value == "4") {
+                setPayment({ amount: "1500", level: e.target.value });
+              }
+            }}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <p
+            style={{
+              width: "40%",
+              textAlign: "center",
+            }}
+          >
+            Rs. {payment?.amount ? payment?.amount : 0}
+          </p>
         </div>
-        <input
-          type="text"
-          style={{ width: "95%" }}
-          value={contract}
-          placeholder="Signed contract"
-          onChange={(e) => setContract(e.target.value)}
-        />
+        <select value={contract} onChange={(e) => setContract(e.target.value)}>
+          <option value="Signed">Signed</option>
+          <option value="UnSigned">UnSigned</option>
+        </select>
         <button
-          style={{ textAlign: "center", padding: "0.3rem 1.25rem" }}
+          style={{
+            textAlign: "center",
+            padding: "0.3rem 1.25rem",
+          }}
           onClick={(e) => {
             e.preventDefault();
             if (
@@ -181,7 +203,7 @@ const User = ({ data, getApplicants }) => {
                 })
                 .catch((err) => {
                   console.log(err);
-                }); 
+                });
             }
           }}
         >

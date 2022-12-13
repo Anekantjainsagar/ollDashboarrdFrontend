@@ -128,7 +128,10 @@ const User = (props) => {
             </option>
           </select>
         </p>
-        <p className="actionsOperationValue">
+        <p
+          className="actionsOperationValue"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div
             style={{
               display: "flex",
