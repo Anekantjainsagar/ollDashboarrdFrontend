@@ -43,13 +43,15 @@ const App = () => {
   const token = localStorage?.getItem("token");
 
   const checkLogin = async () => {
-    if (token?.length > 0) {
-      await check();
-      if (Object.keys(checkUser)[0] === "_id") {
-        history(`/${checkUser?.type}`);
+    if (!window?.location?.href.includes("training/teacherOnboarding")) {
+      if (token?.length > 0) {
+        await check();
+        if (Object.keys(checkUser)[0] === "_id") {
+          history(`/${checkUser?.type}`);
+        }
+      } else {
+        history("/");
       }
-    } else {
-      history("/");
     }
   };
 
