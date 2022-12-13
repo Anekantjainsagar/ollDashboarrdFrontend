@@ -5,6 +5,7 @@ import "../../../../css/Modal.css";
 import { css } from "glamor";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoRefreshOutline } from "react-icons/io5";
 
 import Shortlisted from "./ShowingApplications/Shortlisted/index";
 import Applicants from "./ShowingApplications/Applicants/index";
@@ -48,6 +49,27 @@ const ShowModal = ({
     >
       <div className="header">
         <h2>{requirement?.course}</h2>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid white",
+            padding: "0.35rem 1.2rem",
+            borderRadius: "1rem",
+            cursor: "pointer",
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            getApplicants();
+          }}
+        >
+          <p>Refresh</p>
+          <IoRefreshOutline
+            color="white"
+            size={20}
+            style={{ paddingLeft: "0.25rem" }}
+          />
+        </div>
         <AiOutlineClose
           onClick={closeModal}
           color={"#fff"}
@@ -55,9 +77,9 @@ const ShowModal = ({
           size={20}
         />
       </div>
-      <Applicants applicants={applicants} />
-      <Shortlisted />
-      <Onboarded />
+      <Applicants applicants={applicants} id={requirement?._id} />
+      <Shortlisted applicants={applicants} id={requirement?._id} />
+      <Onboarded applicants={applicants} id={requirement?._id} />
     </Modal>
   );
 };

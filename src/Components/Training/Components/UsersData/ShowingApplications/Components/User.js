@@ -1,8 +1,8 @@
 import React from "react";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import styles from "../style.module.css";
 
 const User = ({ data }) => {
-  console.log(data)
   return (
     <div className={styles.user}>
       <p>{data?.name}</p>
@@ -10,15 +10,26 @@ const User = ({ data }) => {
       <p>{data?.email}</p>
       <p>{data?.location}</p>
       <p
-        style={{ textDecoration: "underline" }}
-        onClick={(e) => {
-          window.open(data?.resume);
+        style={{ textDecoration: "underline", cursor: "pointer" }}
+        onClick={() => {
+          window.open(
+            `http://${data?.workProfileLink}`,
+            "_blank",
+            "noopener,noreferrer"
+          );
         }}
       >
         Resume
       </p>
-      <p>Interview</p>
-      <p>Actions</p>
+      <p>{new Date(data?.date).toString().slice(4, 16) + " " + data?.time}</p>
+      <p className={styles.actions}>
+        <button className={styles.right}>
+          <AiOutlineCheck size={22} />
+        </button>
+        <button className={styles.wrong}>
+          <AiOutlineClose size={22} />
+        </button>
+      </p>
     </div>
   );
 };

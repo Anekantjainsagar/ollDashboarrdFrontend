@@ -7,7 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const OnboardingForm = () => {
-  const api = "https://crm.oll.co/api/training";
+  // const api = "https://crm.oll.co/api/training";
+  const api = "http://localhost:8000/api/training";
   const [requirement, setRequirement] = useState();
   const [form, setForm] = useState({
     name: "",
@@ -20,7 +21,6 @@ const OnboardingForm = () => {
     preferredTime: "",
     preferredDate: "",
     link: "",
-    courseId: requirement?._id,
   });
 
   const { innerWidth } = window;
@@ -42,7 +42,10 @@ const OnboardingForm = () => {
       form.phone.length > 0
     ) {
       axios
-        .post(`${api}/applyForEducator`, { ...form })
+        .post(`${api}/applyForEducator`, {
+          ...form,
+          courseId: requirement?._id,
+        })
         .then((res) => {
           console.log(res);
           if (res?.data?._id?.length > 0) {

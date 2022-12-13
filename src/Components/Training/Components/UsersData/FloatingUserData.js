@@ -12,7 +12,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import TRAINING_BACKEND from "../../utils";
 import times from "../../../../Components/Topbar/times";
 import { css } from "glamor";
-import { useLocation } from "react-router-dom";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -279,10 +278,10 @@ const FloatingUserData = ({
             Recruitment Form :
           </p>
           <CopyToClipboard
-            text={`${window.location.href}/teacherOnboarding/${data?._id}`}
+            text={`${window.location.href}teacherOnboarding/${data?._id}`}
             onCopy={() => {
               window.open(
-                `${window.location.href}/teacherOnboarding/${data?._id}`
+                `${window.location.href}teacherOnboarding/${data?._id}`
               );
             }}
           >
