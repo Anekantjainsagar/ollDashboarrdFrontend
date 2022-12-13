@@ -60,3 +60,30 @@ p .right {
   justify-content: center;
   background-color: #848484;
 }
+
+.OnboardedHeading {
+  display: grid;
+  grid-template-columns: 13% 12% 22% 13% 10% 12% 15%;
+  margin-top: 1rem;
+}
+
+.OnboardedHeading p {
+  font-size: 1.55rem;
+  text-align: center;
+}
+
+.OnboardedUser {
+  display: grid;
+  grid-template-columns: 13% 12% 22% 13% 10% 12% 15%;
+  padding: 0.8rem 0;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  background-color: rgb(32, 32, 32);
+  overflow-wrap: break-word;
+  align-items: center;
+}
+
+.OnboardedUser p {
+  font-size: 1.55rem;
+  text-align: center;
+}

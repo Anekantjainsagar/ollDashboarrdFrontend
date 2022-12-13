@@ -70,7 +70,23 @@ const User = (props) => {
             openModal();
           }}
         >
-          App-Sho-Onb
+          {
+            props.applicants?.filter(
+              (e) => e.status === "Applicants" && e.courseId === _id
+            )?.length
+          }
+          -
+          {
+            props.applicants?.filter(
+              (e) => e.status === "Shortlisted" && e.courseId === _id
+            )?.length
+          }
+          -
+          {
+            props.applicants?.filter(
+              (e) => e.status === "Onboarded" && e.courseId === _id
+            )?.length
+          }
         </p>
         <p
           className="stageOperationsValue"

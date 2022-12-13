@@ -7,8 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const OnboardingForm = () => {
-  // const api = "https://crm.oll.co/api/training";
-  const api = "http://localhost:8000/api/training";
+  const api = "https://crm.oll.co/api/training";
+  // const api = "http://localhost:8000/api/training";
   const [requirement, setRequirement] = useState();
   const [form, setForm] = useState({
     name: "",

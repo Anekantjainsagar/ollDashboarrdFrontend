@@ -77,9 +77,21 @@ const ShowModal = ({
           size={20}
         />
       </div>
-      <Applicants applicants={applicants} id={requirement?._id} />
-      <Shortlisted applicants={applicants} id={requirement?._id} />
-      <Onboarded applicants={applicants} id={requirement?._id} />
+      <Applicants
+        applicants={applicants}
+        id={requirement?._id}
+        getApplicants={getApplicants}
+      />
+      <Shortlisted
+        applicants={applicants}
+        id={requirement?._id}
+        getApplicants={getApplicants}
+      />
+      <Onboarded
+        applicants={applicants}
+        id={requirement?._id}
+        getApplicants={getApplicants}
+      />
     </Modal>
   );
 };

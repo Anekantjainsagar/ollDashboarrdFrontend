@@ -278,10 +278,10 @@ const FloatingUserData = ({
             Recruitment Form :
           </p>
           <CopyToClipboard
-            text={`${window.location.href}teacherOnboarding/${data?._id}`}
+            text={`${window.location.href}/teacherOnboarding/${data?._id}`}
             onCopy={() => {
               window.open(
-                `${window.location.href}teacherOnboarding/${data?._id}`
+                `${window.location.href}/teacherOnboarding/${data?._id}`
               );
             }}
           >

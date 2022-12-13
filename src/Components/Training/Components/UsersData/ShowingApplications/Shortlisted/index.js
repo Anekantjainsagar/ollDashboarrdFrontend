@@ -3,7 +3,7 @@ import Heading from "../Components/Heading";
 import User from "../Components/User";
 import styles from "../style.module.css";
 
-const Shortlisted = ({ applicants,id }) => {
+const Shortlisted = ({ applicants, id, getApplicants }) => {
   return (
     <div className={styles.mainBox}>
       <h1>Shortlisted : </h1>
@@ -11,8 +11,9 @@ const Shortlisted = ({ applicants,id }) => {
       <div className={styles.usersDisplay}>
         {applicants
           ?.filter((e) => e.courseId === id)
+          .filter((e) => e.status === "Shortlisted")
           .map((app) => {
-            return <User data={app} />;
+            return <User data={app} getApplicants={getApplicants} />;
           })}
       </div>
     </div>
