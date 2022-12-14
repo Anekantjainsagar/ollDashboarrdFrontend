@@ -133,52 +133,78 @@ const User = ({ data, getApplicants }) => {
       >
         <div
           style={{
+            width: "100%",
+            paddingLeft: "2rem",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-evenly",
-            width: "100%",
+            justifyContent: "space-between",
           }}
         >
-          <select
+          <p>Level</p>
+          <div
             style={{
-              width: "50%",
-              textAlign: "center",
-              margin: "0.5rem 0",
-            }}
-            value={payment?.level}
-            onChange={(e) => {
-              if (e.target.value == "1") {
-                setPayment({ amount: "400", level: e.target.value });
-              }
-              if (e.target.value == "2") {
-                setPayment({ amount: "700", level: e.target.value });
-              }
-              if (e.target.value == "3") {
-                setPayment({ amount: "1000", level: e.target.value });
-              }
-              if (e.target.value == "4") {
-                setPayment({ amount: "1500", level: e.target.value });
-              }
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              width: "75%",
             }}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-          <p
-            style={{
-              width: "40%",
-              textAlign: "center",
-            }}
-          >
-            Rs. {payment?.amount ? payment?.amount : 0}
-          </p>
+            <select
+              style={{
+                width: "50%",
+                textAlign: "center",
+                margin: "0.5rem 0",
+              }}
+              value={payment?.level}
+              onChange={(e) => {
+                if (e.target.value == "1") {
+                  setPayment({ amount: "400", level: e.target.value });
+                }
+                if (e.target.value == "2") {
+                  setPayment({ amount: "700", level: e.target.value });
+                }
+                if (e.target.value == "3") {
+                  setPayment({ amount: "1000", level: e.target.value });
+                }
+                if (e.target.value == "4") {
+                  setPayment({ amount: "1500", level: e.target.value });
+                }
+              }}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <p
+              style={{
+                width: "40%",
+                textAlign: "center",
+              }}
+            >
+              Rs. {payment?.amount ? payment?.amount : 0}
+            </p>
+          </div>
         </div>
-        <select value={contract} onChange={(e) => setContract(e.target.value)}>
-          <option value="Signed">Signed</option>
-          <option value="UnSigned">UnSigned</option>
-        </select>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingLeft: "2rem",
+          }}
+        >
+          <p>Contract</p>
+          <select
+            value={contract}
+            style={{ width: "65%", marginRight: "2rem" }}
+            onChange={(e) => setContract(e.target.value)}
+          >
+            <option value="Signed">Signed</option>
+            <option value="UnSigned">UnSigned</option>
+          </select>
+        </div>
         <button
           style={{
             textAlign: "center",
