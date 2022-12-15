@@ -96,6 +96,13 @@ const FloatingUserData = ({
 
   useOutsideAlerter(ref, showUserData, setShowUserData);
 
+  console.log({
+    ...offer,
+    pricing,
+    school: user?.schoolName,
+    costing,
+    schoolID: user?._id,
+  });
   const addNewProgram = () => {
     if (offer.name.length > 0) {
       axios
@@ -113,6 +120,21 @@ const FloatingUserData = ({
             });
           };
           if (response?.data) {
+            pricing.map((e) => {
+              axios
+                .post(`${MONITOR_BACKEND}/addReport`, {
+                  className: e.name,
+                  noOfStudents: e.students,
+                  price: e.value,
+                  school: user?._id,
+                  offer: user?.offer,
+                  programId: response?.data?.program?._id,
+                  division: 1,
+                })
+                .then((res) => {
+                  console.log(res);
+                });
+            });
             setShowUserData(false);
             getPrograms();
             notify();
@@ -1060,19 +1082,42 @@ const FloatingUserData = ({
                   .includes(schoolName.toLowerCase());
               })
               .map((program) => {
-                return program.pricing.map((price) => {
-                  return (
-                    <div className={styles.programBar}>
-                      <p>Std {price.name} : B1</p>
-                      <p>
-                        <IoPeopleSharp size={18} />
-                        {price.students}
-                      </p>
-                      <p>Rs. {price.value}</p>
-                      <p>Upcoming</p>
-                    </div>
-                  );
-                });
+                return program.pricing
+                  .sort((a, b) => a.name - b.name)
+                  .map((price) => {
+                    return (
+                      <div className={styles.programBar}>
+                        <p>
+                          Std {price.name} : Div{" "}
+                          {(price?.division ? price?.division : 1) === 1
+                            ? "A"
+                            : (price?.division ? price?.division : 2) === 2
+                            ? "B"
+                            : (price?.division ? price?.division : 3) === 3
+                            ? "C"
+                            : (price?.division ? price?.division : 4) === 4
+                            ? "D"
+                            : (price?.division ? price?.division : 5) === 5
+                            ? "price"
+                            : (price?.division ? price?.division : 6) === 6
+                            ? "F"
+                            : (price?.division ? price?.division : 7) === 7
+                            ? "G"
+                            : (price?.division ? price?.division : 8) === 8
+                            ? "H"
+                            : (price?.division ? price?.division : 9) === 9
+                            ? "I"
+                            : "J"}
+                        </p>
+                        <p>
+                          <IoPeopleSharp size={18} />
+                          {price.students}
+                        </p>
+                        <p>Rs. {price.value}</p>
+                        <p>Upcoming</p>
+                      </div>
+                    );
+                  });
               })}
             <div
               style={{

@@ -9,6 +9,7 @@ const Heading = () => {
       <p>Email</p>
       <p>Location</p>
       <p>Resume</p>
+      <p>Meeting</p>
       <p>Interview</p>
       <p>Actions</p>
     </div>

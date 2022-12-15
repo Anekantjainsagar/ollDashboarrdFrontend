@@ -17,6 +17,8 @@ import Sidebar from "./Monitor/Components/Sidebar";
 import MONITOR_BACKEND from "./Monitor/Utils";
 import styles from "./style.module.css";
 import OnboardingForm from "./Components/Training/Components/UsersData/OnboardingForm";
+import ProgramReport from "./Monitor/Screens/ProgramReport";
+import ProgramReportDetails from "./Monitor/Screens/ProgramReportDetails";
 
 const App = () => {
   const history = useNavigate();
@@ -74,6 +76,7 @@ const App = () => {
     handler: "all",
     stage: "all",
   });
+  const [reports, setReports] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [dbFilters, setDbFilters] = useState({
     name: "",
@@ -157,6 +160,17 @@ const App = () => {
       .get(`${MONITOR_BACKEND}/getPrograms`)
       .then((response) => {
         setPrograms(response.data.programs?.reverse());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getReports = () => {
+    axios
+      .get(`${MONITOR_BACKEND}/getReports`)
+      .then((response) => {
+        setReports(response.data.reports);
       })
       .catch((err) => {
         console.log(err);
@@ -265,8 +279,9 @@ const App = () => {
     getFollowUps();
     getOffers();
     getAgents();
+    getReports();
     getPrograms();
-  }, [page]);
+  }, [page, location.pathname]);
 
   return (
     <Routes>
@@ -300,6 +315,26 @@ const App = () => {
         element={<Agents getAgents={getAgents} agents={agents} />}
       />
       <Route path="/programs" element={<Programs programs={programs} />} />
+      <Route
+        path="/programs/report/:id"
+        element={
+          <ProgramReport
+            programs={programs}
+            reports={reports}
+            getReports={getReports}
+          />
+        }
+      />
+      <Route
+        path="/programs/reportDetails/:id"
+        element={
+          <ProgramReportDetails
+            programs={programs}
+            reports={reports}
+            getReports={getReports}
+          />
+        }
+      />
       <Route path="*" render={() => <Navigate to="/" />} />
       <Route path="/undefined" element={<Login setsales={setsales} />} />
     </Routes>

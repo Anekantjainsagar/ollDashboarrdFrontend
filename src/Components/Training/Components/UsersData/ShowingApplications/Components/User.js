@@ -33,6 +33,18 @@ const User = ({ data, getApplicants }) => {
         >
           Resume
         </p>
+        <p
+          style={{ textDecoration: "underline", cursor: "pointer" }}
+          onClick={() => {
+            window.open(
+              `https://meet.new/`,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }}
+        >
+          Link
+        </p>
         <p>{new Date(data?.date).toString().slice(4, 16) + " " + data?.time}</p>
         <p className={styles.actions}>
           <button

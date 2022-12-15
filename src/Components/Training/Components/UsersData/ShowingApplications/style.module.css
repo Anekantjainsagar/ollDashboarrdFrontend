@@ -10,7 +10,7 @@
 
 .heading {
   display: grid;
-  grid-template-columns: 13% 12% 22% 13% 10% 16% 17%;
+  grid-template-columns: 12% 10% 20% 12% 10% 10% 15% 12%;
   margin-top: 1rem;
 }
 
@@ -26,7 +26,7 @@
 
 .user {
   display: grid;
-  grid-template-columns: 13% 12% 22% 13% 10% 16% 17%;
+  grid-template-columns: 12% 10% 20% 12% 10% 10% 15% 12%;
   padding: 0.8rem 0;
   border-radius: 1rem;
   margin: 1rem 0;
