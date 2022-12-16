@@ -158,7 +158,6 @@ const User = (props) => {
           setsendToTop(!sendToTop);
         }}
         onClick={() => {
-          console.log(props.data);
           setDetails(!details);
         }}
         style={{ cursor: "pointer" }}

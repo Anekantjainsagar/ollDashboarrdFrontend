@@ -117,7 +117,6 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
                         role: "",
                       },
                     });
-                    console.log(school);
                     const notify = () =>
                       toast("School Saved Successfully", {
                         type: "success",

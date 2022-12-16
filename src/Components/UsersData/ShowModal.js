@@ -95,7 +95,6 @@ const ShowModal = ({
             event.stopPropagation();
             clickedTemplate.customParams.map((e, index) => {
               const test = document.querySelector(`.${e.elementName}`);
-              console.log(test);
               return 0;
             });
             const options = {

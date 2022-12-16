@@ -40,7 +40,7 @@
   color: white;
   display: grid;
   align-items: center;
-  grid-template-columns: 15% 15% 30% 40%;
+  grid-template-columns: 15% 12% 25% 38% 10%;
   padding: 0.5rem 0;
 }
 

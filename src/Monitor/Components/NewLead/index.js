@@ -32,6 +32,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
   const [offerLocation, setofferLocation] = useState({ x: "", y: "" });
   const [offerSaved, setofferSaved] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [schoolKaId, setSchoolKaId] = useState("");
 
   function openModal() {
     setIsOpen(true);
@@ -46,6 +47,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           phone,
           status: "New",
           schoolId: schoolId,
+          schoolKaId: schoolKaId,
         })
         .then((res) => {
           getUsers();
@@ -179,6 +181,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                     onClick={() => {
                       setUser({ ...user, schoolName: e?.name });
                       setSchoolId(e?.id);
+                      setSchoolKaId(e?._id);
                       setPhone(e.phone);
                       setSchoolSaved(true);
                       setEmail(e?.email);

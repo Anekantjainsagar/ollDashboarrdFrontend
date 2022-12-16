@@ -4,7 +4,13 @@ import times from "../BatchDetails/times";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 
-const MeetingAndFollow = ({ getMeetings, user, getUsers, getFollowUps }) => {
+const MeetingAndFollow = ({
+  getMeetings,
+  user,
+  getUsers,
+  getFollowUps,
+  status,
+}) => {
   const [meeting, setMeeting] = useState({
     name: user?.schoolName,
     type: "",
@@ -28,7 +34,11 @@ const MeetingAndFollow = ({ getMeetings, user, getUsers, getFollowUps }) => {
   const addfollows = () => {
     if (follows.name && follows.time) {
       axios
-        .post(`${MONITOR_BACKEND}/addFollowUP`, follows)
+        .post(`${MONITOR_BACKEND}/addFollowUP`, {
+          ...follows,
+          id: user?.schoolId,
+          userId: user?._id,
+        })
         .then((res) => {
           if (res.data) {
             getFollowUps();
@@ -117,19 +127,23 @@ const MeetingAndFollow = ({ getMeetings, user, getUsers, getFollowUps }) => {
         >
           Set Meeting
         </button>
-        <button
-          style={{
-            marginTop: "1rem",
-            backgroundColor: "#90ee90",
-            color: "#00804b",
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            setFollowShow(!followShow);
-          }}
-        >
-          Follow Up
-        </button>
+        {status !== "Started" ? (
+          <button
+            style={{
+              marginTop: "1rem",
+              backgroundColor: "#90ee90",
+              color: "#00804b",
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              setFollowShow(!followShow);
+            }}
+          >
+            Follow Up
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
       <div
         className={styles.meetingH}

@@ -22,7 +22,6 @@ const UserHeadings = ({ filter, setfilter }) => {
             className="filterSelector"
             value={filter.priority}
             onChange={(e) => {
-              console.log(e.target.value);
               setfilter({ ...filter, priority: e.target.value });
             }}
           >
@@ -43,7 +42,6 @@ const UserHeadings = ({ filter, setfilter }) => {
             className="filterSelector"
             value={filter.stage}
             onChange={(e) => {
-              console.log(e.target.value);
               setfilter({ ...filter, stage: e.target.value });
             }}
           >

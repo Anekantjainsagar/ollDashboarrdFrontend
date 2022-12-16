@@ -72,7 +72,12 @@ const RightSection = ({
         </div>
       </div>
       <div className={styles.blocks}>
-        <FollowUp getFollowUps={getFollowUps} followUp={followUp} />
+        <FollowUp
+          getFollowUps={getFollowUps}
+          followUp={followUp}
+          schools={schools}
+          getUsers={getUsers}
+        />
         <Meetings meetings={meetings} getMeetings={getMeetings} />
       </div>
     </div>

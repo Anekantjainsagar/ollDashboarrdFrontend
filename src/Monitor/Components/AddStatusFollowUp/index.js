@@ -26,6 +26,7 @@ const AddStatusfollows = ({
       backgroundColor: "#000",
     },
   };
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -40,7 +41,11 @@ const AddStatusfollows = ({
   const addfollows = () => {
     if (follows.name && follows.time) {
       axios
-        .post(`${MONITOR_BACKEND}/addFollowUP`, follows)
+        .post(`${MONITOR_BACKEND}/addFollowUP`, {
+          ...follows,
+          id: user?.schoolId,
+          userId: user?._id,
+        })
         .then((res) => {
           if (res.data) {
             getFollowUps();
@@ -62,6 +67,8 @@ const AddStatusfollows = ({
               .catch((err) => {
                 console.log(err);
               });
+            getFollowUps();
+            closeModal();
           }
         })
         .catch((err) => {

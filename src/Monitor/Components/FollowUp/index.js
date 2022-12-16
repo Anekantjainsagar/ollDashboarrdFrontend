@@ -1,22 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./style.module.css";
 import Bar from "./Bar/index";
-import AddStatusfollows from "../AddStatusFollowUp";
 
-const FollowUp = ({ followUp, getFollowUps }) => {
-  const [followUpModal, setFollowUpModal] = useState(false);
-  function openFollowModal() {
-    setFollowUpModal(true);
-  }
+const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
 
   return (
     <>
-      <AddStatusfollows
-        modalIsOpen={followUpModal}
-        openModal={openFollowModal}
-        setIsOpen={setFollowUpModal}
-        getFollowUps={getFollowUps}
-      />
       <div className={styles.follow}>
         <div className={styles.header}>
           <h1>Follow Up</h1>
@@ -32,7 +21,14 @@ const FollowUp = ({ followUp, getFollowUps }) => {
               }
             })
             .map((follow) => {
-              return <Bar follow={follow} />;
+              return (
+                <Bar
+                  follow={follow}
+                  schools={schools}
+                  getFollowUps={getFollowUps}
+                  getUsers={getUsers}
+                />
+              );
             })}
         </div>
       </div>

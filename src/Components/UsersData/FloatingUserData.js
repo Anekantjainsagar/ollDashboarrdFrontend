@@ -267,7 +267,6 @@ const FloatingUserData = ({
   };
 
   const deleteComment = (id) => {
-    console.log(id);
     axios
       .delete(`${BASE_URL}/deleteComment`, {
         headers: {

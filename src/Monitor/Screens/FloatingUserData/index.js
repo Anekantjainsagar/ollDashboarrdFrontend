@@ -70,6 +70,15 @@ const FloatingUserData = ({
     terms: "Terms",
     training: "Training",
   });
+  const [school, setSchool] = useState("");
+
+  useEffect(() => {
+    const sch = schools?.find((e) => {
+      return e?._id == user?.schoolId;
+    });
+    setSchool(sch);
+  }, [schools]);
+
   const [costing, setCosting] = useState({
     commission: "",
     kitCosting: "",
@@ -96,13 +105,6 @@ const FloatingUserData = ({
 
   useOutsideAlerter(ref, showUserData, setShowUserData);
 
-  console.log({
-    ...offer,
-    pricing,
-    school: user?.schoolName,
-    costing,
-    schoolID: user?._id,
-  });
   const addNewProgram = () => {
     if (offer.name.length > 0) {
       axios
@@ -320,6 +322,17 @@ const FloatingUserData = ({
           />
         </div>
         <h1 style={{ fontSize: "1.75rem", marginTop: "1rem" }}>{schoolName}</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0.5rem",
+          }}
+        >
+          <p style={{ fontSize: "1.55rem" }}>{school?.phone}</p>
+          <p style={{ fontSize: "1.55rem" }}>{school?.email}</p>
+        </div>
         <div className={styles.contactContainer}>
           <p>Contact</p>
           <div className={styles.container}>
@@ -386,6 +399,7 @@ const FloatingUserData = ({
           getMeetings={getMeetings}
           getUsers={getUsers}
           getFollowUps={getFollowUps}
+          status={status}
         />
         {status === "FollowUp" ? (
           <form

@@ -73,15 +73,12 @@ const BatchDetails = ({
           onClick={(e) => {
             e.preventDefault();
             if (sessionsCount && price) {
-              console.log("total price setted");
               settotalPrice(sessionsCount * price);
             }
             if (totalPrice && sessionsCount) {
-              console.log("price setted");
               setprice(totalPrice / sessionsCount);
             }
             if (totalPrice && price) {
-              console.log("sessions setted");
               setsessionsCount(parseInt(totalPrice / price));
             }
             setTimeout(() => {
