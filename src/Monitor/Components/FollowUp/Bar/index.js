@@ -9,10 +9,10 @@ const Bar = ({ follow, schools, getFollowUps, getUsers }) => {
 
   useEffect(() => {
     const sch = schools?.find((e) => {
-      return e?._id == follow?.schoolId;
+      return e?._id === follow?.schoolId;
     });
     setSchool(sch);
-  }, [schools]);
+  }, [schools, follow?.schoolId]);
 
   const [followUpModal, setFollowUpModal] = useState(false);
   function openFollowModal() {

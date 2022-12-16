@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import styles from "./style.module.css";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";

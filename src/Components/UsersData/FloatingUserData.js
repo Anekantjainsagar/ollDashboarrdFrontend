@@ -1072,6 +1072,7 @@ const FloatingUserData = ({
               <>
                 <div
                   className="commentsDisplay"
+                  style={{ gridTemplateColumns: "26% 45% 27%" }}
                   onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
                 >
                   <h3>
@@ -1103,6 +1104,7 @@ const FloatingUserData = ({
                     <div
                       className="commentsDisplay"
                       key={i}
+                      style={{ gridTemplateColumns: "26% 45% 27%" }}
                       onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
                     >
                       <h3>{user ? user : "Samantha"}</h3>

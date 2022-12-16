@@ -81,3 +81,80 @@
   border-radius: 1rem;
   margin-top: 1rem;
 }
+
+@media (max-width: 500px) {
+  .time {
+    display: flex;
+    align-items: center;
+    font-size: 2.5rem;
+    width: 55%;
+    justify-content: space-evenly;
+    font-weight: 700;
+    color: white;
+    margin-top: 2rem;
+  }
+
+  .container .box {
+    width: 90%;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .container .box h1 {
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .inputBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container .box .inputEmail {
+    margin: 1rem 0;
+    background-color: #2b2b2b;
+    font-size: 1.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: white;
+    border: none;
+    outline: none;
+    width: 75%;
+  }
+
+  .container .box .inputPassword {
+    margin: 1rem 0;
+    margin-left: 2.7rem;
+    background-color: #2b2b2b;
+    font-size: 1.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: white;
+    border: none;
+    outline: none;
+    width: 75%;
+  }
+
+  .container .box .btn {
+    background-color: #00a510;
+    color: white;
+    border: none;
+    font-size: 1.75rem;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+  }
+}
