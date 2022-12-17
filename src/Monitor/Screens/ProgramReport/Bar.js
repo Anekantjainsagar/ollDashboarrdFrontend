@@ -95,7 +95,7 @@ const Bar = ({ report, getReports }) => {
               style={{ width: "19%", padding: "0.2rem 0" }}
               onClick={(e) => {
                 e.preventDefault();
-                if (student?.name.length > 0) {
+                if (student?.name?.length > 0) {
                   axios
                     .put(`${MONITOR_BACKEND}/addStudent`, {
                       ...student,
@@ -245,14 +245,14 @@ const Bar = ({ report, getReports }) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (
-                  batchDetails?.noOfStudents.length > 0 &&
-                  batchDetails?.days.length > 0 &&
-                  batchDetails?.location.length > 0 &&
-                  batchDetails?.startDate.length > 0 &&
-                  batchDetails?.time.length > 0 &&
-                  batchDetails?.holidays.length > 0 &&
-                  batchDetails?.noOfSessions.length > 0 &&
-                  batchDetails?.educator.length > 0
+                  batchDetails?.noOfStudents?.length > 0 &&
+                  batchDetails?.days?.length > 0 &&
+                  batchDetails?.location?.length > 0 &&
+                  batchDetails?.startDate?.length > 0 &&
+                  batchDetails?.time?.length > 0 &&
+                  batchDetails?.holidays?.length > 0 &&
+                  batchDetails?.noOfSessions?.length > 0 &&
+                  batchDetails?.educator?.length > 0
                 ) {
                   axios
                     .put(`${MONITOR_BACKEND}/addBatchDetails`, {
