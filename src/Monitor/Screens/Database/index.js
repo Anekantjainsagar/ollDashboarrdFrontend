@@ -13,6 +13,7 @@ const Database = ({
   AllSchools,
   getSchools,
 }) => {
+
   return (
     <>
       <div className={styles.home}>

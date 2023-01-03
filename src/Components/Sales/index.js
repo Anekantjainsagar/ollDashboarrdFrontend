@@ -65,7 +65,6 @@ function Sales({ sales }) {
               return e;
             }
           } else {
-            
             filterBySearch = filterBySearch;
             if (filterBySearch.toString().length > e?.id.toString().length) {
               if (e?.phone.toString().includes(filterBySearch)) {
@@ -126,7 +125,7 @@ function Sales({ sales }) {
         boxSizing: "border-box",
       }}
     >
-      <Nav sales={sales} />
+      <Nav sales={sales} data={data} />
       <Topbar
         getUserData={getUserData}
         filterBySearch={filterBySearch}

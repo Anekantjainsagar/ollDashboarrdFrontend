@@ -1,69 +1,79 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-size: 10px;
-    font-family: arial,sans-serif;
-    overflow: hidden;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-family: arial, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.nav{
-    width: 100%;
-    padding: 0.5rem 1.5rem 1.5rem 1rem;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav {
+  width: 100%;
+  padding: 0.5rem 1.5rem 1.5rem 1rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nav h1{
-    font-size: 2.5rem;
+.nav h1 {
+  font-size: 2.5rem;
 }
 
-.nav .time{
-    display: flex;
-    align-items: center;
-    font-size: 2.5rem;
-    width: 13%;
-    justify-content: space-evenly;
-    font-weight: 700;
+.nav .time {
+  display: flex;
+  align-items: center;
+  font-size: 2.5rem;
+  width: 13%;
+  justify-content: space-evenly;
+  font-weight: 700;
 }
 
-.nav .profileSection{
-    display: flex;
-    width: 22%;
-    align-items: center;
-    justify-content: space-evenly;
+.nav .profileSection {
+  display: flex;
+  width: 22%;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.nav .profileSection select{
-    background-color: #414141;
-    width: 38%;
-    outline: none;
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    font-size: 1.75rem;
-    border-radius: 1rem;
+.nav .profileSection select {
+  background-color: #414141;
+  width: 38%;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.75rem;
+  border-radius: 1rem;
 }
 
-.nav .profileSection .profileDisplay{
-    width: 25%;
-    border: 1px solid white;
+.nav .profileSection .profileDisplay {
+  width: 25%;
+  border: 1px solid white;
 }
 
-.nav .profileSection p{
-    font-size: 1.75rem;
+.nav .profileSection p {
+  font-size: 1.75rem;
 }
 
 .nav .profileSection img {
-    width: 15%;
-    border-radius: 50%;
+  width: 15%;
+  border-radius: 50%;
 }
 
-.nav .profileSection select option{
-    outline: none;
-    border: none;
-    color: white;
-    font-size: 1.75rem;
+.nav .profileSection select option {
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 1.75rem;
+}
+
+.nav .btn {
+  color: white;
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 600;
+  border: 1px solid white;
+  padding: 0.25rem 1.25rem;
+  border-radius: 1rem;
 }

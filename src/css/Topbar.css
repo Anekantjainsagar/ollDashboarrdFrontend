@@ -154,9 +154,9 @@ form {
 
 .topbarSearch {
   align-self: flex-end;
-  width: 20vw;
+  width: 25vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 1.5rem;
   align-items: center;
 }
@@ -178,13 +178,14 @@ form {
   color: rgb(212, 212, 212);
 }
 
-.topbarSearch select {
+.topbarSearch .btn {
   background-color: transparent;
-  width: 45%;
+  width: 60%;
   outline: none;
+  text-decoration: none;
   border: none;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 1rem;
   font-size: 1.75rem;
   border-radius: 1rem;
 }

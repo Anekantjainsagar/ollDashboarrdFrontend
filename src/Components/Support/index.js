@@ -116,6 +116,7 @@ function Support({ sales }) {
         sales={sales}
         filterBySearch={filterBySearch}
         setfilterBySearch={setfilterBySearch}
+        usersData={filteredData}
       />
       <UsersData
         getUserData={getUserData}

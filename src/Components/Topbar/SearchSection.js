@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
+
   return (
     <>
       <div className="topbarSearch">
@@ -37,11 +38,7 @@ const SearchSection = ({ filterBySearch, setfilterBySearch }) => {
             onChange={(e) => setfilterBySearch(e.target.value)}
           />
         </div>
-        <select name="" id="">
-          <option value="Type">Type</option>
-          <option value="sales">Sales</option>
-          <option value="support">Support</option>
-        </select>
+
       </div>
     </>
   );
