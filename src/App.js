@@ -16,6 +16,7 @@ import MONITOR_BACKEND from "./Monitor/Utils";
 import OnboardingForm from "./Components/Training/Components/UsersData/OnboardingForm";
 import ProgramReport from "./Monitor/Screens/ProgramReport";
 import ProgramReportDetails from "./Monitor/Screens/ProgramReportDetails";
+import Mobile from "./Monitor/Screens/Mobile/index";
 
 const App = () => {
   const history = useNavigate();
@@ -280,6 +281,8 @@ const App = () => {
     getPrograms();
   }, [page, location.pathname]);
 
+  const { innerWidth } = window;
+
   return (
     <Routes>
       <Route path="/" element={<Login setsales={setsales} />} />
@@ -290,7 +293,7 @@ const App = () => {
         path="/training/teacherOnboarding/:id"
         element={<OnboardingForm />}
       />
-      <Route path="/b2b" element={<Home />} />
+      <Route path="/b2b" element={innerWidth < 550 ? <Mobile /> : <Home />} />
       <Route
         path="/db"
         element={

@@ -1,9 +1,11 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../Utils/index";
 
-const Nav = ({ sales, data }) => {
+const Nav = ({ sales }) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
   const [logoutBtn, setlogoutBtn] = useState(false);
   const history = useNavigate();
@@ -11,30 +13,19 @@ const Nav = ({ sales, data }) => {
   const [exportData, setExportData] = useState([]);
 
   useEffect(() => {
+    updateSchools();
     setInterval(() => {
       settime(new Date().toLocaleTimeString());
     }, 1000);
-    updateSchools();
   }, []);
 
   const updateSchools = () => {
-    const exports = data?.filter((element) => {
-      element["Address"] = element?.batchDetails?.address;
-      element["Mode"] = element?.batchDetails?.mode;
-      element["Start Date"] = new Date(element?.batchDetails?.startDate);
-      element["Type"] = element?.batchDetails?.type;
-      element["Price"] = element?.batchDetails?.price;
-      element["Sessions Count"] = element?.batchDetails?.sessionsCount;
-      element["Total Price"] =
-        parseInt(element?.batchDetails?.sessionsCount) *
-        parseInt(element?.batchDetails?.price);
-      delete element["batchDetails"];
-      delete element["__v"];
+    axios.get(`${BASE_URL}/getAllUsers`).then((response) => {
+      const exports = response?.data;
+      console.log(exports);
+      setExportData(exports);
     });
-    setExportData(exports);
   };
-
-  console.log(data);
 
   return (
     <>
@@ -44,9 +35,9 @@ const Nav = ({ sales, data }) => {
           <MdOutlineAccessTimeFilled size={25} color={"grey"} /> {time}
         </div>
         <div className="profileSection">
-          {data?.length > 0 ? (
+          {exportData?.length > 0 ? (
             <CSVLink
-              data={exportData?.length > 0 ? exportData : data}
+              data={exportData}
               filename="Schools"
               className="btn"
               onClick={() => {
