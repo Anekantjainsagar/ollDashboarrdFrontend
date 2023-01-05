@@ -22,7 +22,6 @@ const Nav = ({ sales }) => {
   const updateSchools = () => {
     axios.get(`${BASE_URL}/getAllUsers`).then((response) => {
       const exports = response?.data;
-      console.log(exports);
       setExportData(exports);
     });
   };

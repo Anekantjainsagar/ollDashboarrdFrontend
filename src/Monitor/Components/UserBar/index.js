@@ -16,6 +16,7 @@ const UserBar = ({
   getPrograms,
   programs,
   schools,
+  followUp,
 }) => {
   const [statusChange, setStatus] = useState("");
   const [showUserData, setShowUserData] = useState(false);
@@ -126,6 +127,8 @@ const UserBar = ({
           getOffers={getOffers}
           getPrograms={getPrograms}
           schools={schools}
+          followUp={followUp}
+          id={_id}
         />
         <p className={styles.status} onClick={(e) => e.stopPropagation()}>
           <select

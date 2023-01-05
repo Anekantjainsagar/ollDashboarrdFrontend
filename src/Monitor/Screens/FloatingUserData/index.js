@@ -26,6 +26,7 @@ import fileDownload from "js-file-download";
 import AddStatusfollows from "../../Components/AddStatusFollowUp";
 import MeetingAndFollow from "../../Components/MeetingAndFollow";
 import FollowUpProgram from "../../Components/FollowUpProgram";
+import DisplayFollowUps from "../../Components/DisplayFollowUps";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -53,6 +54,7 @@ const FloatingUserData = ({
   programs,
   schools,
   getMeetings,
+  followUp,
 }) => {
   const ref = useRef(null);
   const [statusChange, setStatus] = useState("");
@@ -401,6 +403,7 @@ const FloatingUserData = ({
           getFollowUps={getFollowUps}
           status={status}
         />
+        <DisplayFollowUps followUp={followUp} schools={schools} />
         {status === "FollowUp" ? (
           <form
             encType="multipart/form-data"

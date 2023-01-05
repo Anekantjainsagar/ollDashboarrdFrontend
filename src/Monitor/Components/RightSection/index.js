@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 
 import NewLead from "../NewLead/index";
@@ -28,9 +28,25 @@ const RightSection = ({
   setFilter,
   filteredUsers,
 }) => {
+  const [search, setSearch] = useState("");
   return (
     <div className={styles.mainPanel}>
-      <h1 className={styles.mainHead}>Leads</h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1 className={styles.mainHead}>Leads</h1>
+        <input
+          type="text"
+          style={{ width: "30%" }}
+          placeholder="Search here..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <NewLead
         schools={schools}
         getSchools={getSchools}
@@ -41,21 +57,31 @@ const RightSection = ({
       <div className={styles.usersDisplay}>
         <UserHeading filter={filter} setFilter={setFilter} agents={agents} />
         <div className={styles.usersDisplayContainer}>
-          {filteredUsers.map((user, i) => {
-            return (
-              <UserBar
-                user={user}
-                key={i}
-                schools={schools}
-                getUsers={getUsers}
-                getMeetings={getMeetings}
-                getFollowUps={getFollowUps}
-                getOffers={getOffers}
-                getPrograms={getPrograms}
-                programs={programs}
-              />
-            );
-          })}
+          {filteredUsers
+            .filter((e) => {
+              if (search?.length > 0) {
+                return e.schoolName
+                  .toLowerCase()
+                  .includes(search.toLowerCase());
+              }
+              return e;
+            })
+            .map((user, i) => {
+              return (
+                <UserBar
+                  user={user}
+                  key={i}
+                  schools={schools}
+                  getUsers={getUsers}
+                  getMeetings={getMeetings}
+                  getFollowUps={getFollowUps}
+                  getOffers={getOffers}
+                  getPrograms={getPrograms}
+                  programs={programs}
+                  followUp={followUp}
+                />
+              );
+            })}
           {noOfUsers ? (
             noOfUsers <= page * 10 ? null : (
               <div

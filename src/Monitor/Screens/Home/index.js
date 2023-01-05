@@ -231,6 +231,7 @@ const Home = () => {
               users={users}
               filteredUsers={filteredUsers}
               schools={schools}
+              followUp={followUp}
               page={page}
               noOfUsers={totalNoOfUsers}
               getSchools={getSchools}
@@ -238,7 +239,6 @@ const Home = () => {
               setPage={setPage}
               meetings={meetings}
               getMeetings={getMeetings}
-              followUp={followUp}
               getOffers={getOffers}
               getFollowUps={getFollowUps}
               agents={agents}
