@@ -55,7 +55,12 @@ const RightSection = ({
         offers={offers}
       />
       <div className={styles.usersDisplay}>
-        <UserHeading filter={filter} setFilter={setFilter} agents={agents} />
+        <UserHeading
+          filter={filter}
+          setFilter={setFilter}
+          agents={agents}
+          offers={offers}
+        />
         <div className={styles.usersDisplayContainer}>
           {filteredUsers
             .filter((e) => {

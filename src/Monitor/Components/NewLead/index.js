@@ -112,26 +112,26 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           //   .catch((err) => console.error(err));
 
           //Sending mail
-          emailjs
-            .send(
-              "service_2ynwyzb",
-              "template_p4hiil9",
-              {
-                name: user?.schoolName,
-                from_name: "OLL",
-                email: email,
-              },
-              "SkxN6CQDdddlQ84Qj"
-            )
-            .then(
-              function (response) {
-                console.log(response);
-                console.log("SUCCESS!", response.status, response.text);
-              },
-              function (err) {
-                console.log("FAILED...", err);
-              }
-            );
+          // emailjs
+          //   .send(
+          //     "service_2ynwyzb",
+          //     "template_p4hiil9",
+          //     {
+          //       name: user?.schoolName,
+          //       from_name: "OLL",
+          //       email: email,
+          //     },
+          //     "SkxN6CQDdddlQ84Qj"
+          //   )
+          //   .then(
+          //     function (response) {
+          //       console.log(response);
+          //       console.log("SUCCESS!", response.status, response.text);
+          //     },
+          //     function (err) {
+          //       console.log("FAILED...", err);
+          //     }
+          //   );
         })
         .catch((err) => {
           console.log(err);

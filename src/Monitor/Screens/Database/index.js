@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 
 import DbHeader from "../../Components/DbHeader/index";
@@ -13,7 +13,6 @@ const Database = ({
   AllSchools,
   getSchools,
 }) => {
-
   return (
     <>
       <div className={styles.home}>

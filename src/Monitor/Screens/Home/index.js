@@ -25,6 +25,8 @@ const Home = () => {
     status: "all",
     handler: "all",
     stage: "all",
+    source: "all",
+    offer: "all",
   });
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [dbFilters, setDbFilters] = useState({
@@ -119,7 +121,9 @@ const Home = () => {
     var searchFilter = schools
       ?.filter((e) => {
         if (dbFilters.name !== undefined && dbFilters.name !== "") {
-          return e.name.toLowerCase().includes(dbFilters.name);
+          return e?.name
+            ?.toLowerCase()
+            .includes(dbFilters?.name?.toLowerCase());
         } else {
           return e;
         }
@@ -205,6 +209,20 @@ const Home = () => {
           return e;
         } else {
           return e.stage?.toLowerCase().includes(filter.stage?.toLowerCase());
+        }
+      })
+      .filter((e) => {
+        if (filter.source === "all") {
+          return e;
+        } else {
+          return e.source?.toLowerCase().includes(filter.source?.toLowerCase());
+        }
+      })
+      .filter((e) => {
+        if (filter.offer === "all") {
+          return e;
+        } else {
+          return e.offer?.toLowerCase().includes(filter.offer?.toLowerCase());
         }
       });
     setFilteredUsers(searchFilter);

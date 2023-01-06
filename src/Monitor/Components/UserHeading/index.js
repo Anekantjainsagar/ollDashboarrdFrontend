@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./style.module.css";
 import { BsChevronDown } from "react-icons/bs";
 
-const UserHeading = ({ filter, setFilter, agents }) => {
+const UserHeading = ({ filter, setFilter, agents, offers }) => {
   return (
     <div className={styles.bar}>
       <p className={styles.id}>ID</p>
@@ -41,8 +41,64 @@ const UserHeading = ({ filter, setFilter, agents }) => {
           </option>
         </select>
       </p>
-      <p className={styles.phone}>Source</p>
-      <p className={styles.offerDetails}>Offer Details</p>
+      <p className={styles.phone}>
+        Source
+        <BsChevronDown size={15} />
+        <select
+          style={{
+            width: "15%",
+            position: "relative",
+            right: "17.5%",
+            zIndex: 1,
+            opacity: 0,
+            backgroundColor: "transparent",
+            paddingLeft: "0.5rem",
+          }}
+          value={filter.source}
+          onChange={(e) => setFilter({ ...filter, source: e.target.value })}
+        >
+          <option style={{ fontSize: "1.5rem", color: "#fff" }} value="all">
+            All
+          </option>
+          <option value="Event">Event</option>
+          <option value="Email">Email</option>
+          <option value="WhatsApp">WhatsApp</option>
+          <option value="Referral">Referral</option>
+          <option value="Word of Mouth">Word of Mouth</option>
+          <option value="Digital">Digital</option>
+        </select>
+      </p>
+      <p className={styles.offerDetails}>
+        Offer Details
+        <BsChevronDown size={15} />
+        <select
+          style={{
+            width: "15%",
+            position: "relative",
+            right: "17.5%",
+            zIndex: 1,
+            opacity: 0,
+            backgroundColor: "transparent",
+            paddingLeft: "0.5rem",
+          }}
+          value={filter.offer}
+          onChange={(e) => setFilter({ ...filter, offer: e.target.value })}
+        >
+          <option style={{ fontSize: "1.5rem", color: "#fff" }} value="all">
+            All
+          </option>
+          {offers?.map((offer) => {
+            return (
+              <option
+                style={{ fontSize: "1.5rem", color: "#fff" }}
+                value={offer.name}
+              >
+                {offer.name}
+              </option>
+            );
+          })}
+        </select>
+      </p>
       <p className={styles.status}>
         Status
         <BsChevronDown size={15} />
