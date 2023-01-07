@@ -10,7 +10,7 @@ const ProgramBar = ({ program }) => {
     <>
       <div className={styles.headings} style={{ cursor: "pointer" }}>
         <div className={styles.header}>
-          <p className={styles.checkBox}>1</p>
+          <p className={styles.course}>{program?.school}</p>
           <p className={styles.course}>{program?.name}</p>
           <p className={styles.typeDrop}>Upcoming</p>
           <p className={styles.duration}>
@@ -27,7 +27,7 @@ const ProgramBar = ({ program }) => {
               size={20}
               onClick={(e) => {
                 e.preventDefault();
-                history(`/programs/report/${program._id}`);
+                history(`/programs/report/${program._id}`, { program });
               }}
             />
             <AiFillEye

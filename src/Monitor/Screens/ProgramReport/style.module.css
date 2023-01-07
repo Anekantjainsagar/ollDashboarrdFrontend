@@ -153,3 +153,17 @@
   margin: 2rem auto;
   cursor: pointer;
 }
+
+.daysDisplay {
+  position: absolute;
+  background-color: #181818;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.daysDisplay div {
+  display: flex;
+  align-items: center;
+  align-items: center;
+}

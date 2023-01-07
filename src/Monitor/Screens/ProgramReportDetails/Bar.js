@@ -2,16 +2,41 @@ import React from "react";
 import styles from "./style.module.css";
 
 const Bar = ({ report }) => {
-  console.log(report.batchDetails);
   return (
     <>
       <div className={styles.bar}>
-        <h1>STD {report?.className} : DIV A</h1>
+        <h1>
+          STD {report?.className} : DIV{" "}
+          {(report?.division ? report?.division : 1) === 1
+            ? "A"
+            : (report?.division ? report?.division : 2) === 2
+            ? "B"
+            : (report?.division ? report?.division : 3) === 3
+            ? "C"
+            : (report?.division ? report?.division : 4) === 4
+            ? "D"
+            : (report?.division ? report?.division : 5) === 5
+            ? "E"
+            : (report?.division ? report?.division : 6) === 6
+            ? "F"
+            : (report?.division ? report?.division : 7) === 7
+            ? "G"
+            : (report?.division ? report?.division : 8) === 8
+            ? "H"
+            : (report?.division ? report?.division : 9) === 9
+            ? "I"
+            : "J"}
+        </h1>
         <div className={styles.dataDisplay}>
           <div className={styles.form}>
             <p>No. of Students : {report?.batchDetails?.noOfStudents}</p>
             <p>Location : {report?.batchDetails?.location}</p>
-            <p>Days : {report?.batchDetails?.days}</p>
+            <p>
+              Days :{" "}
+              {report?.batchDetails?.days.map((e) => {
+                return e + " ";
+              })}
+            </p>
             <p>
               Start Date :{" "}
               {new Date(report?.batchDetails?.startDate)

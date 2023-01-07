@@ -33,6 +33,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
   const [offerSaved, setofferSaved] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [schoolKaId, setSchoolKaId] = useState("");
+  const [sendEmail, setSendEmail] = useState(true);
 
   function openModal() {
     setIsOpen(true);
@@ -112,26 +113,28 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           //   .catch((err) => console.error(err));
 
           //Sending mail
-          // emailjs
-          //   .send(
-          //     "service_2ynwyzb",
-          //     "template_p4hiil9",
-          //     {
-          //       name: user?.schoolName,
-          //       from_name: "OLL",
-          //       email: email,
-          //     },
-          //     "SkxN6CQDdddlQ84Qj"
-          //   )
-          //   .then(
-          //     function (response) {
-          //       console.log(response);
-          //       console.log("SUCCESS!", response.status, response.text);
-          //     },
-          //     function (err) {
-          //       console.log("FAILED...", err);
-          //     }
-          //   );
+          if (sendEmail == true) {
+            emailjs
+              .send(
+                "service_2ynwyzb",
+                "template_p4hiil9",
+                {
+                  name: user?.schoolName,
+                  from_name: "OLL",
+                  email: email,
+                },
+                "SkxN6CQDdddlQ84Qj"
+              )
+              .then(
+                function (response) {
+                  console.log(response);
+                  console.log("SUCCESS!", response.status, response.text);
+                },
+                function (err) {
+                  console.log("FAILED...", err);
+                }
+              );
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -221,7 +224,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                 ? {
                     display: "block",
                     top: `${offerLocation.y + 22}px`,
-                    left: "475px",
+                    left: "425px",
                   }
                 : { display: "none" }
             }
@@ -308,7 +311,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                 ? {
                     display: "block",
                     top: `${handlerLocation.y + 22}px`,
-                    left: "932px",
+                    left: "832px",
                   }
                 : { display: "none" }
             }
@@ -343,6 +346,23 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
             >
               Add New
             </button>
+          </div>
+          <div
+            style={{
+              width: "10%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <p>Send Email</p>
+            <input
+              type={"checkbox"}
+              checked={sendEmail}
+              onChange={(e) => {
+                setSendEmail(e.target.checked);
+              }}
+            />
           </div>
           <button
             className={styles.btn}

@@ -4,9 +4,21 @@ import styles from "./style.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
+import DatePicker from "react-multi-date-picker";
 import MONITOR_BACKEND from "../../Utils/index";
 
 const Bar = ({ report, getReports }) => {
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const [daysValue, setDays] = useState(false);
+  const [daysPositio, setDaysPositio] = useState({ x: "", y: "" });
   const [student, setStudent] = useState({
     name: "",
     phone: "",
@@ -14,15 +26,16 @@ const Bar = ({ report, getReports }) => {
     amount: "",
   });
   const [batchDetails, setBatchDetails] = useState({
-    noOfStudents: undefined,
+    noOfStudents: parseInt(report?.noOfStudents),
     location: undefined,
-    days: undefined,
+    days: [],
     startDate: undefined,
     time: undefined,
     holidays: undefined,
     noOfSessions: undefined,
     educator: undefined,
   });
+  console.log(report);
   return (
     <>
       <div style={{ position: "absolute" }}>
@@ -153,19 +166,59 @@ const Bar = ({ report, getReports }) => {
             />
             <input
               type="text"
-              value={
-                batchDetails?.days
-                  ? batchDetails?.days
-                  : report?.batchDetails?.days
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  days: e.target.value,
-                })
-              }
+              onClick={(e) => {
+                setDays(!daysValue);
+                setDaysPositio({ x: e.clientX, y: e.clientY });
+              }}
               placeholder="Days"
             />
+            <div
+              className={styles.daysDisplay}
+              style={
+                daysValue
+                  ? {
+                      display: "block",
+                      left: "25.25%",
+                      top: `${daysPositio.y + 30}px`,
+                    }
+                  : { display: "none" }
+              }
+            >
+              {days?.map((e, i) => {
+                return (
+                  <div key={i}>
+                    <input
+                      type="checkbox"
+                      value={e}
+                      checked={
+                        batchDetails?.days?.length > 0
+                          ? batchDetails?.days.includes(e)
+                          : report?.batchDetails?.days.includes(e)
+                      }
+                      style={{ width: "10%", margin: "1rem" }}
+                      onChange={async (e) => {
+                        if (
+                          batchDetails?.days?.includes(e.target.value) === false
+                        ) {
+                          if (e.target.checked === true) {
+                            setBatchDetails({
+                              ...batchDetails,
+                              days: [...batchDetails.days, e.target.value],
+                            });
+                          }
+                        } else if (e.target.checked === false) {
+                          let arr = [...batchDetails?.days];
+                          const index = arr.indexOf(e.target.value);
+                          arr.splice(index, 1);
+                          setBatchDetails({ ...batchDetails, days: [...arr] });
+                        }
+                      }}
+                    />
+                    <p>{e}</p>
+                  </div>
+                );
+              })}
+            </div>
             <input
               type="date"
               value={
@@ -209,7 +262,6 @@ const Bar = ({ report, getReports }) => {
                   holidays: e.target.value,
                 })
               }
-              placeholder="Holidays"
             />
             <input
               type="number"

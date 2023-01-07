@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Bar from "./Bar";
 import styles from "./style.module.css";
 
 const ProgramReport = ({ programs, reports, getReports }) => {
   const { id } = useParams();
   const [program, setProgram] = useState();
+  const location = useLocation();
 
   useEffect(() => {
     if (programs?.length > 0) {
@@ -72,7 +73,14 @@ const ProgramReport = ({ programs, reports, getReports }) => {
         ?.filter((report) => report?.programId === id)
         .sort((a, b) => a.className - b.className)
         .map((report, i) => {
-          return <Bar report={report} getReports={getReports} key={i} />;
+          return (
+            <Bar
+              report={report}
+              getReports={getReports}
+              key={i}
+              program={location.program}
+            />
+          );
         })}
     </div>
   );
