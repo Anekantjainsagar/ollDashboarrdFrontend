@@ -27,13 +27,13 @@ const Bar = ({ report, getReports }) => {
   });
   const [batchDetails, setBatchDetails] = useState({
     noOfStudents: parseInt(report?.noOfStudents),
-    location: undefined,
+    location: "",
     days: [],
-    startDate: undefined,
-    time: undefined,
-    holidays: undefined,
-    noOfSessions: undefined,
-    educator: undefined,
+    startDate: "",
+    time: "",
+    holidays: "",
+    noOfSessions: "",
+    educator: "",
   });
   return (
     <>
@@ -161,7 +161,7 @@ const Bar = ({ report, getReports }) => {
                   location: e.target.value,
                 })
               }
-              placeholder="Location"
+              placeholder="Course"
             />
             <input
               type="text"
@@ -326,6 +326,78 @@ const Bar = ({ report, getReports }) => {
                         notify();
                       }
                     });
+                } else {
+                  console.log(batchDetails);
+                  if (
+                    batchDetails?.noOfStudents.length === 0 ||
+                    batchDetails?.noOfStudents.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill Number of students", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (batchDetails?.days.length === 0) {
+                    const notify = () =>
+                      toast("Please fill Days", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.location.length === 0 ||
+                    batchDetails?.location.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill Course name", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.startDate.length === 0 ||
+                    batchDetails?.startDate.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the Start Date", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.time.length === 0 ||
+                    batchDetails?.time.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the Time", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.holidays.length === 0 ||
+                    batchDetails?.holidays.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the Holidays", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.noOfSessions.length === 0 ||
+                    batchDetails?.noOfSessions.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the Number of sessions", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.educator.length === 0 ||
+                    batchDetails?.educator.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill Educator name", {
+                        type: "warning",
+                      });
+                    notify();
+                  }
                 }
               }}
             >
@@ -378,6 +450,7 @@ const Bar = ({ report, getReports }) => {
                       <option value="Started">Started</option>
                       <option value="Kit Rec.">Kit Rec.</option>
                       <option value="Kit Pen.">Kit Pen.</option>
+                      <option value="Sessions Done">Sessions Done</option>
                     </select>
                   </p>
                 </div>

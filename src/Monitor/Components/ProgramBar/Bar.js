@@ -2,16 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 const Bar = ({ programs, reports, i, e }) => {
-  const [report, setReport] = useState();
-  useEffect(() => {
-    reports?.map((report) => {
-      const reportSearch = programs.find((e) => {
-        return e._id === report.programId;
-      });
-      setReport(reportSearch);
-    });
-  }, []);
-
   return (
     <div className={styles.bar}>
       <p>{i + 1}</p>
@@ -40,9 +30,7 @@ const Bar = ({ programs, reports, i, e }) => {
       <p>Upcoming</p>
       <p>{e?.students}</p>
       <p>-</p>
-      <p>
-        {report?.batchDetails?.educator ? report?.batchDetails?.educator : "-"}
-      </p>
+      <p>{"-"}</p>
       <p>-</p>
       <p>-</p>
     </div>

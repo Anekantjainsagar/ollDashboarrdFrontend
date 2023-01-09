@@ -46,7 +46,14 @@ const ProgramBar = ({ program, reports, programs }) => {
           ?.sort((a, b) => a.name - b.name)
           .map((e, i) => {
             return (
-              <Bar programs={programs} key={i} reports={reports} i={i} e={e} />
+              <Bar
+                programs={programs}
+                key={i}
+                reports={reports}
+                i={i}
+                e={e}
+                program={program}
+              />
             );
           })}
       </div>

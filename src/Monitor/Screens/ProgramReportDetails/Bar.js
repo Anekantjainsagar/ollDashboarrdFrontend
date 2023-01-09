@@ -30,7 +30,7 @@ const Bar = ({ report }) => {
         <div className={styles.dataDisplay}>
           <div className={styles.form}>
             <p>No. of Students : {report?.batchDetails?.noOfStudents}</p>
-            <p>Location : {report?.batchDetails?.location}</p>
+            <p>Course : {report?.batchDetails?.location}</p>
             <p>
               Days :{" "}
               {report?.batchDetails?.days.map((e) => {
