@@ -5,7 +5,7 @@ import ProgramHeading from "../../Components/ProgramHeading";
 import ProgramBar from "../../Components/ProgramBar";
 import Sidebar from "../../Components/Sidebar";
 
-const Programs = ({ programs }) => {
+const Programs = ({ programs, reports }) => {
   const [filter, setFilter] = useState();
 
   return (
@@ -28,7 +28,14 @@ const Programs = ({ programs }) => {
                 return e;
               })
               .map((program, index) => {
-                return <ProgramBar program={program} key={index} />;
+                return (
+                  <ProgramBar
+                    program={program}
+                    programs={programs}
+                    key={index}
+                    reports={reports}
+                  />
+                );
               })}
           </div>
         </div>

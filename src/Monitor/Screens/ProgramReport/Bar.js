@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,7 +35,6 @@ const Bar = ({ report, getReports }) => {
     noOfSessions: undefined,
     educator: undefined,
   });
-  console.log(report);
   return (
     <>
       <div style={{ position: "absolute" }}>

@@ -314,7 +314,10 @@ const App = () => {
         path="/agents"
         element={<Agents getAgents={getAgents} agents={agents} />}
       />
-      <Route path="/programs" element={<Programs programs={programs} />} />
+      <Route
+        path="/programs"
+        element={<Programs programs={programs} reports={reports} />}
+      />
       <Route
         path="/programs/report/:id"
         element={

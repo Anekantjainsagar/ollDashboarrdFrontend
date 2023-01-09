@@ -36,11 +36,7 @@ const User = ({ data, getApplicants }) => {
         <p
           style={{ textDecoration: "underline", cursor: "pointer" }}
           onClick={() => {
-            window.open(
-              `https://meet.new/`,
-              "_blank",
-              "noopener,noreferrer"
-            );
+            window.open(`https://meet.new/`, "_blank", "noopener,noreferrer");
           }}
         >
           Link
