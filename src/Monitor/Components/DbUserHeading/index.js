@@ -90,6 +90,8 @@ const DbUserHeading = ({ dbFilters, setDbFilters, school, AllSchools }) => {
           })}
         </select>
       </p>
+      <p className={styles.trustee}>Email</p>
+      <p className={styles.coordinator}>Mobile</p>
       <p className={styles.location}>
         <input
           type="text"
@@ -107,26 +109,6 @@ const DbUserHeading = ({ dbFilters, setDbFilters, school, AllSchools }) => {
           value={dbFilters.principal}
           onChange={(e) =>
             setDbFilters({ ...dbFilters, principal: e.target.value })
-          }
-        />
-      </p>
-      <p className={styles.trustee}>
-        <input
-          type="text"
-          placeholder="Trustee"
-          value={dbFilters.trustee}
-          onChange={(e) =>
-            setDbFilters({ ...dbFilters, trustee: e.target.value })
-          }
-        />
-      </p>
-      <p className={styles.coordinator}>
-        <input
-          type="text"
-          placeholder="Coordinator"
-          value={dbFilters.coordinator}
-          onChange={(e) =>
-            setDbFilters({ ...dbFilters, coordinator: e.target.value })
           }
         />
       </p>

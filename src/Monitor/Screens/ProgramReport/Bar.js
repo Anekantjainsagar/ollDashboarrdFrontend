@@ -4,7 +4,6 @@ import styles from "./style.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-import DatePicker from "react-multi-date-picker";
 import MONITOR_BACKEND from "../../Utils/index";
 
 const Bar = ({ report, getReports }) => {
@@ -196,6 +195,10 @@ const Bar = ({ report, getReports }) => {
                       }
                       style={{ width: "10%", margin: "1rem" }}
                       onChange={async (e) => {
+                        setBatchDetails({
+                          ...batchDetails,
+                          days: [...batchDetails.days],
+                        });
                         if (
                           batchDetails?.days?.includes(e.target.value) === false
                         ) {
@@ -295,8 +298,9 @@ const Bar = ({ report, getReports }) => {
             <button
               onClick={(e) => {
                 e.preventDefault();
+                console.log(batchDetails);
                 if (
-                  batchDetails?.noOfStudents?.length > 0 &&
+                  batchDetails?.noOfStudents !== "" &&
                   batchDetails?.days?.length > 0 &&
                   batchDetails?.location?.length > 0 &&
                   batchDetails?.startDate?.length > 0 &&
@@ -305,6 +309,7 @@ const Bar = ({ report, getReports }) => {
                   batchDetails?.noOfSessions?.length > 0 &&
                   batchDetails?.educator?.length > 0
                 ) {
+                  console.log("HO gya");
                   axios
                     .put(`${MONITOR_BACKEND}/addBatchDetails`, {
                       ...batchDetails,
@@ -327,7 +332,6 @@ const Bar = ({ report, getReports }) => {
                       }
                     });
                 } else {
-                  console.log(batchDetails);
                   if (
                     batchDetails?.noOfStudents.length === 0 ||
                     batchDetails?.noOfStudents.length === ""

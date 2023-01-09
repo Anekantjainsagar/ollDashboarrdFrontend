@@ -1,6 +1,6 @@
 .headings {
   display: grid;
-  padding: 0.75rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   border-radius: 1rem;
   grid-template-columns: 4% 5% 18% 10% 10% 13% 14% 13% 14%;
   color: white;
@@ -9,9 +9,13 @@
   margin: 0.75rem 0.75rem;
 }
 
-.headings p{
+.headings p {
   text-align: center;
   font-size: 1.5rem;
+}
+
+.trustee {
+  overflow-wrap: break-word;
 }
 
 .checkBox,

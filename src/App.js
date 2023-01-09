@@ -179,28 +179,32 @@ const App = () => {
     var searchFilter = schools
       ?.filter((e) => {
         if (dbFilters.name !== undefined && dbFilters.name !== "") {
-          return e.name.toLowerCase().includes(dbFilters.name);
+          return e.name.toLowerCase().includes(dbFilters.name.toLowerCase());
         } else {
           return e;
         }
       })
       .filter((e) => {
         if (dbFilters.location !== undefined && dbFilters.location !== "") {
-          return e.city.toLowerCase().includes(dbFilters.location);
+          return e.city
+            .toLowerCase()
+            .includes(dbFilters.location.toLowerCase());
         } else {
           return e;
         }
       })
       .filter((e) => {
         if (dbFilters.principal !== undefined && dbFilters.principal !== "") {
-          return e.principal?.name.toLowerCase().includes(dbFilters.principal);
+          return e.principal?.name
+            .toLowerCase()
+            .includes(dbFilters.principal.toLowerCase());
         } else {
           return e;
         }
       })
       .filter((e) => {
         if (dbFilters.trustee !== undefined && dbFilters.trustee !== "") {
-          return e.trustee?.name.toLowerCase().includes(dbFilters.trustee);
+          return e.trustee?.name.toLowerCase().includes(dbFilters.trustee.toLowerCase());
         } else {
           return e;
         }
@@ -212,7 +216,7 @@ const App = () => {
         ) {
           return e.coordinator?.name
             .toLowerCase()
-            .includes(dbFilters.coordinator);
+            .includes(dbFilters.coordinator.toLowerCase());
         } else {
           return e;
         }

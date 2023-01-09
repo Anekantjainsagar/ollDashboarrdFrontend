@@ -43,21 +43,13 @@ const DbUserBar = ({ school, getSchools }) => {
             <p className={styles.school}>{school?.name}</p>
             <p className={styles.type}>{school?.type}</p>
             <p className={styles.board}>{school?.board}</p>
+            <p className={styles.trustee}>{school?.email}</p>
+            <p className={styles.coordinator}>{school?.phone}</p>
             <p className={styles.location}>{school?.city}</p>
             <p className={styles.principal}>
               {school["Principal Name"]
                 ? school["Principal Name"]
                 : school?.principal?.name}
-            </p>
-            <p className={styles.trustee}>
-              {school["Trustee Name"]
-                ? school["Trustee Name"]
-                : school?.trustee?.name}
-            </p>
-            <p className={styles.coordinator}>
-              {school["Coordinator Name"]
-                ? school["Coordinator Name"]
-                : school?.coordinator?.name}
             </p>
           </div>
         </>
