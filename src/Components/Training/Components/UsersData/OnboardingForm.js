@@ -104,13 +104,7 @@ const OnboardingForm = () => {
         />
       </div>
       <div className={styles.form}>
-        <h1>We are hiring for {requirement?.course} Educators</h1>
-        <h6>
-          Only {requirement?.openings}{" "}
-          {requirement?.openings === 1
-            ? "opportunity left"
-            : "opportunities are available"}
-        </h6>
+        <h1>Urgent requirement for {requirement?.course} Educators</h1>
         <input
           type="text"
           required={true}
@@ -168,14 +162,14 @@ const OnboardingForm = () => {
         <input
           type="text"
           value={form.refrence}
-          placeholder="Refence name ( If you have )"
+          placeholder="Refrence name ( If you have )"
           onChange={(e) => {
             setForm({ ...form, refrence: e.target.value });
           }}
         />
         <input
           type="link"
-          placeholder="Your work profile"
+          placeholder="Work profile link"
           required={true}
           value={form.link}
           onChange={(e) => {
