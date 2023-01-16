@@ -9,6 +9,7 @@ import MONITOR_BACKEND from "../../Utils";
 import Offers from "../Offers";
 import Agents from "../Agents";
 import Programs from "../Programs";
+import emailjs from "@emailjs/browser";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -74,7 +75,7 @@ const Home = () => {
 
   const getUsers = () => {
     axios
-      .get(`${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 10}`)
+      .get(`${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 50}`)
       .then((response) => {
         setUsers(response.data.users);
         setTotalNoOfUsers(response.data.noOfUsers);
@@ -227,6 +228,54 @@ const Home = () => {
       });
     setFilteredUsers(searchFilter);
   }, [filter, users]);
+
+  const [time, settime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    setInterval(() => {
+      settime(new Date().toLocaleTimeString());
+    }, 1000);
+  }, []);
+
+  // useEffect(() => {
+  //   if (time === "9:24:00 PM") {
+  //     console.log(time);
+  //     const follows = followUp?.filter((follow) => {
+  //       if (
+  //         new Date(Date.now()).toString().slice(4, 16) ===
+  //         new Date(follow.startDate).toString().slice(4, 16)
+  //       ) {
+  //         return follow;
+  //       }
+  //     });
+  //     console.log(follows);
+  //     follows.map((e) => {
+  //       emailjs
+  //         .send(
+  //           "service_2ynwyzb",
+  //           "template_ng0vqrv",
+  //           {
+  //             from_name: "OLL Follow ups management",
+  //             to_name: "Anekant",
+  //             email: "anekantjainsagar@gmail.com",
+  //             school: e?.name,
+  //             mail: e?.email,
+  //             phone: e?.phone,
+  //           },
+  //           "SkxN6CQDdddlQ84Qj"
+  //         )
+  //         .then(
+  //           function (response) {
+  //             console.log(response);
+  //             console.log("SUCCESS!", response.status, response.text);
+  //           },
+  //           function (err) {
+  //             console.log("FAILED...", err);
+  //           }
+  //         );
+  //     });
+  //   }
+  // }, [time]);
 
   useEffect(() => {
     getUsers();

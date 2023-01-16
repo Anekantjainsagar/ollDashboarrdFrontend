@@ -3,7 +3,6 @@ import styles from "./style.module.css";
 import Bar from "./Bar/index";
 
 const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
-
   return (
     <>
       <div className={styles.follow}>
@@ -20,6 +19,10 @@ const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
                 return follow;
               }
             })
+            .sort(
+              (a, b) =>
+                parseInt(a.time.split(":")[0]) - parseInt(b.time.split(":")[0])
+            )
             .map((follow) => {
               return (
                 <Bar

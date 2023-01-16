@@ -125,6 +125,7 @@ const FloatingUserData = ({
           };
           if (response?.data) {
             pricing.map((e) => {
+              console.log(e);
               axios
                 .post(`${MONITOR_BACKEND}/addReport`, {
                   className: e.name,
@@ -134,6 +135,7 @@ const FloatingUserData = ({
                   offer: user?.offer,
                   programId: response?.data?.program?._id,
                   division: 1,
+                  reportId: e?._id,
                 })
                 .then((res) => {
                   console.log(res);
