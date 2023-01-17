@@ -4,7 +4,12 @@ import MONITOR_BACKEND from "../../../Utils";
 import AddStatusfollows from "../../AddStatusFollowUp";
 import styles from "../style.module.css";
 
-const Bar = ({ follow, schools, getFollowUps, getUsers }) => {
+const Bar = ({
+  follow,
+  schools,
+  getFollowUps,
+  getUsers
+}) => {
   const [school, setSchool] = useState("");
 
   useEffect(() => {

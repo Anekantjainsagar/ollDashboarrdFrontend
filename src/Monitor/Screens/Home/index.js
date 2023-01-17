@@ -75,7 +75,7 @@ const Home = () => {
 
   const getUsers = () => {
     axios
-      .get(`${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 50}`)
+      .get(`${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 20}`)
       .then((response) => {
         setUsers(response.data.users);
         setTotalNoOfUsers(response.data.noOfUsers);
@@ -278,13 +278,16 @@ const Home = () => {
   // }, [time]);
 
   useEffect(() => {
-    getUsers();
     getSchools();
     getMeetings();
     getFollowUps();
     getOffers();
     getAgents();
     getPrograms();
+  }, []);
+
+  useEffect(() => {
+    getUsers();
   }, [page]);
 
   return (

@@ -1,11 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import MONITOR_BACKEND from "../../Utils";
 import Bar from "./Bar";
 import styles from "./style.module.css";
 
 const ProgramReport = ({ programs, reports, getReports }) => {
   const { id } = useParams();
   const [program, setProgram] = useState();
+  const [payStatus, setPayStatus] = useState("");
   const location = useLocation();
 
   useEffect(() => {
@@ -65,7 +68,25 @@ const ProgramReport = ({ programs, reports, getReports }) => {
             Terms : <span>{program?.terms}</span>
           </p>
           <p>
-            Pay Status : <span>Pending</span>
+            Pay Status :{" "}
+            <select
+              value={payStatus?.length > 0 ? payStatus : program?.payStatus}
+              onChange={(e) => {
+                setPayStatus(e.target.value);
+                axios
+                  .put(`${MONITOR_BACKEND}/updatePaymentStatus`, {
+                    payStatus: e.target.value,
+                    id: program?._id,
+                  })
+                  .then((response) => {
+                    console.log(response);
+                  });
+              }}
+            >
+              <option value="Pending">Pending</option>
+              <option value="Partially">Partially</option>
+              <option value="Completed">Completed</option>
+            </select>
           </p>
         </div>
       </div>

@@ -22,7 +22,7 @@ const Bar = ({ report, getReports }) => {
     name: "",
     phone: "",
     email: "",
-    amount: "",
+    amount: parseInt(report?.price),
   });
   const [batchDetails, setBatchDetails] = useState({
     noOfStudents: parseInt(report?.noOfStudents),
@@ -253,6 +253,7 @@ const Bar = ({ report, getReports }) => {
             />
             <input
               type="text"
+              placeholder="Holidays"
               value={
                 batchDetails?.holidays
                   ? batchDetails?.holidays

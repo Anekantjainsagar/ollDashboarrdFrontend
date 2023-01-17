@@ -1,22 +1,22 @@
-import React from "react";
-import Bar from "../FollowUp/Bar/index";
+import React, { useEffect, useState } from "react";
+import Bar from "./Bar";
+import styles from "./style.module.css";
 
-const DisplayFollowUps = ({ followUp, schools, id }) => {
+const DisplayFollowUps = ({ followUp, user, schools }) => {
+  const [userFollowUps, setUserFollowUps] = useState([]);
+  useEffect(() => {
+    const follows = followUp.filter((follow) => {
+      return follow.userId === user._id;
+    });
+    console.log(follows);
+    setUserFollowUps(follows);
+  }, []);
+
   return (
     <div>
-      {followUp
-        ?.filter((follow) => {
-          if (
-            new Date(Date.now()).toString().slice(4, 16) ===
-              new Date(follow.startDate).toString().slice(4, 16) &&
-            follow?.userId.includes(id)
-          ) {
-            return follow;
-          }
-        })
-        .map((follow) => {
-          return <Bar follow={follow} schools={schools} />;
-        })}
+      {userFollowUps.map((follow) => {
+        return <Bar follow={follow} schools={schools} />;
+      })}
     </div>
   );
 };

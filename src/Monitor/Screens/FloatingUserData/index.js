@@ -125,7 +125,6 @@ const FloatingUserData = ({
           };
           if (response?.data) {
             pricing.map((e) => {
-              console.log(e);
               axios
                 .post(`${MONITOR_BACKEND}/addReport`, {
                   className: e.name,
@@ -404,8 +403,9 @@ const FloatingUserData = ({
           getUsers={getUsers}
           getFollowUps={getFollowUps}
           status={status}
+          setShowUserData={setShowUserData}
         />
-        <DisplayFollowUps followUp={followUp} schools={schools} />
+        <DisplayFollowUps followUp={followUp} user={user} schools={schools} />
         {status === "FollowUp" ? (
           <form
             encType="multipart/form-data"
@@ -887,6 +887,15 @@ const FloatingUserData = ({
                       })
                     : null}
                 </div>
+                <button
+                  className={styles.btns}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addNewProgram();
+                  }}
+                >
+                  Add Program
+                </button>
                 <p style={{ marginBottom: "0.25rem" }}>Actions : </p>
                 <div className={styles.actions}>
                   <button
@@ -981,15 +990,6 @@ const FloatingUserData = ({
                   </button>
                 </div>
               </div>
-              <button
-                className={styles.btns}
-                onClick={(e) => {
-                  e.preventDefault();
-                  addNewProgram();
-                }}
-              >
-                Add Program
-              </button>
               <div style={{ margin: "0.5rem 0" }}>
                 <div
                   style={{

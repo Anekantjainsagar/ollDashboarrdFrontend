@@ -125,7 +125,7 @@ const AddStatusfollows = ({
             <div className={styles.container}>
               <div className={styles.left}>
                 <div className={styles.sDate}>
-                  <p>Start Date</p>
+                  <p>Next FollowUp</p>
                   <input
                     type="date"
                     value={follows.startDate}

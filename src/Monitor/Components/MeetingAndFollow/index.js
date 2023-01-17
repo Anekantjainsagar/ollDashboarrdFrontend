@@ -10,6 +10,7 @@ const MeetingAndFollow = ({
   getUsers,
   getFollowUps,
   status,
+  setShowUserData,
 }) => {
   const [meeting, setMeeting] = useState({
     name: user?.schoolName,
@@ -54,6 +55,7 @@ const MeetingAndFollow = ({
               .then((res) => {
                 if (res) {
                   getUsers();
+                  setShowUserData(false);
                   setMeeting({ comment: "" });
                 }
               })
@@ -91,6 +93,7 @@ const MeetingAndFollow = ({
               .then((res) => {
                 if (res) {
                   getUsers();
+                  setShowUserData(false);
                   setMeeting({ comment: "" });
                 }
               })

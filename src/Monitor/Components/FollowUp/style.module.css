@@ -11,6 +11,15 @@
   justify-content: space-between;
 }
 
+.header select {
+  width: 30%;
+}
+
+.header select option {
+  background-color: black;
+  color: white;
+}
+
 .header h1 {
   font-size: 1.7rem;
   font-weight: 600;
@@ -72,4 +81,13 @@
 
 .bar .btnBox button:hover {
   border: 1px solid white;
+}
+
+.btn {
+  font-size: 1.65rem;
+  color: white;
+  text-decoration: none;
+  background-color: #00a510;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
 }
