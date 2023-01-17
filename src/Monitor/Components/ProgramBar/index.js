@@ -14,7 +14,7 @@ const ProgramBar = ({ program, reports, programs }) => {
         <div className={styles.header}>
           <p className={styles.course}>{program?.school}</p>
           <p className={styles.course}>{program?.name}</p>
-          <p className={styles.typeDrop}>Upcoming</p>
+          <p className={styles.typeDrop}>{program?.payStatus}</p>
           <p className={styles.duration}>
             {program?.pricing?.forEach((e) => {
               totalStudents = totalStudents + parseInt(e?.students);

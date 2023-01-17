@@ -30,6 +30,7 @@ const MeetingAndFollow = ({
     time: "",
     startDate: "",
     comment: "",
+    mode: "Online",
   });
 
   const addfollows = () => {
@@ -299,6 +300,26 @@ const MeetingAndFollow = ({
               </select>
             </div>
           </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.15rem 0.75rem",
+          }}
+        >
+          <p>Mode :- </p>
+          <select
+            style={{ width: "80%" }}
+            value={follows?.mode}
+            onChange={(e) => {
+              setFollows({ ...follows, mode: e.target.value });
+            }}
+          >
+            <option value="Online">Online</option>
+            <option value="Offline">Offline</option>
+          </select>
         </div>
         <input
           type="text"

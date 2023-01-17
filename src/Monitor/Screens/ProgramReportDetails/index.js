@@ -63,7 +63,7 @@ const ProgramReportDetails = ({ programs, reports, getReports }) => {
             Terms : <span>{program?.terms}</span>
           </p>
           <p>
-            Pay Status : <span>Pending</span>
+            Pay Status : <span>{program?.payStatus}</span>
           </p>
         </div>
       </div>

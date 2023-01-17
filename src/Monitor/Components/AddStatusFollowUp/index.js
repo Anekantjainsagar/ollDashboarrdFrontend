@@ -36,6 +36,7 @@ const AddStatusfollows = ({
     name: user?.schoolName,
     time: "",
     startDate: "",
+    mode: "Online",
   });
 
   const addfollows = () => {
@@ -163,6 +164,26 @@ const AddStatusfollows = ({
                   </select>
                 </div>
               </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "0.15rem 0.75rem",
+              }}
+            >
+              <p>Mode :- </p>
+              <select
+                style={{ width: "80%" }}
+                value={follows?.mode}
+                onChange={(e) => {
+                  setFollows({ ...follows, mode: e.target.value });
+                }}
+              >
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+              </select>
             </div>
             <input
               type="text"

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 const Bar = ({ programs, reports, i, e }) => {
+  // const [report, setReport] = useState();
+  // useEffect(() => {
+  //   const report = reports?.find((e) => {
+  //     return programs.map((program) => {
+  //       return program.pricing.map((price) => {
+  //         return price?._id === e?._id;
+  //       });
+  //     });
+  //   });
+  //   setReport(report);
+  // }, [e]);
+
   return (
     <div className={styles.bar}>
       <p>{i + 1}</p>
@@ -27,7 +39,7 @@ const Bar = ({ programs, reports, i, e }) => {
           ? "I"
           : "J"}
       </p>
-      <p>Upcoming</p>
+      <p>-</p>
       <p>{e?.students}</p>
       <p>-</p>
       <p>{"-"}</p>

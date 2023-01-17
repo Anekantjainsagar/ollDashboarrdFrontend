@@ -32,6 +32,8 @@ const Bar = ({ report, getReports }) => {
     time: "",
     holidays: "",
     noOfSessions: "",
+    completedSessions: "",
+    endDate: "",
     educator: "",
   });
   return (
@@ -237,6 +239,21 @@ const Bar = ({ report, getReports }) => {
               placeholder="Start Date"
             />
             <input
+              type="date"
+              value={
+                batchDetails?.endDate
+                  ? batchDetails?.endDate
+                  : report?.batchDetails?.endDate.slice(0, 10)
+              }
+              onChange={(e) =>
+                setBatchDetails({
+                  ...batchDetails,
+                  endDate: e.target.value,
+                })
+              }
+              placeholder="End Date"
+            />
+            <input
               type="time"
               value={
                 batchDetails?.time
@@ -282,6 +299,21 @@ const Bar = ({ report, getReports }) => {
               placeholder="No. of Sessions"
             />
             <input
+              type="number"
+              value={
+                batchDetails?.completedSessions
+                  ? batchDetails?.completedSessions
+                  : report?.batchDetails?.completedSessions
+              }
+              onChange={(e) =>
+                setBatchDetails({
+                  ...batchDetails,
+                  completedSessions: e.target.value,
+                })
+              }
+              placeholder="Completed Sessions"
+            />
+            <input
               type="text"
               value={
                 batchDetails?.educator
@@ -308,9 +340,10 @@ const Bar = ({ report, getReports }) => {
                   batchDetails?.time?.length > 0 &&
                   batchDetails?.holidays?.length > 0 &&
                   batchDetails?.noOfSessions?.length > 0 &&
+                  batchDetails?.endDate?.length > 0 &&
+                  batchDetails?.completedSessions?.length > 0 &&
                   batchDetails?.educator?.length > 0
                 ) {
-                  console.log("HO gya");
                   axios
                     .put(`${MONITOR_BACKEND}/addBatchDetails`, {
                       ...batchDetails,
@@ -372,6 +405,24 @@ const Bar = ({ report, getReports }) => {
                   ) {
                     const notify = () =>
                       toast("Please fill the Time", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.endDate.length === 0 ||
+                    batchDetails?.endDate.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the End Date", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.completedSessions.length === 0 ||
+                    batchDetails?.completedSessions.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill the No. of Completed Sessions", {
                         type: "warning",
                       });
                     notify();

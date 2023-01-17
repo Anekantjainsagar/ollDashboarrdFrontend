@@ -43,9 +43,14 @@ const Bar = ({ report }) => {
                 .toString()
                 .slice(4, 16)}
             </p>
+            <p>
+              End Date :{" "}
+              {new Date(report?.batchDetails?.endDate).toString().slice(4, 16)}
+            </p>
             <p>Time : {report?.batchDetails?.time}</p>
             <p>Holidays : {report?.batchDetails?.holidays}</p>
             <p>No. of Sessions : {report?.batchDetails?.noOfSessions}</p>
+            <p>No. of Sessions : {report?.batchDetails?.completedSessions}</p>
             <p>Educator : {report?.batchDetails?.educator}</p>
           </div>
           <div className={styles.data}>
