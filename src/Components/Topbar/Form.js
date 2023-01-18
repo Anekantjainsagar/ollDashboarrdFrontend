@@ -1,13 +1,11 @@
 import { BASE_URL } from "../../Utils/index";
-import React, { useState, useEffect, useContext } from "react";
-import { IoIosAdd } from "react-icons/io";
+import React, { useState, useContext } from "react";
 import BatchDetails from "./BatchDetails";
 import axios from "axios";
 import { css } from "glamor";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import times from "./times";
-import testData from "./testData";
 import styles from "./style.module.css";
 import AddDataModal from "./AddDataModal";
 import StudentContext from "../Context/StudentsContext";
@@ -21,7 +19,7 @@ const Form = ({ getUserData, sales }) => {
   const [age, setage] = useState();
   const [school, setschool] = useState();
   const [course, setcourse] = useState();
-  const [source, setsource] = useState("Website");
+  const [source, setsource] = useState("Source");
   const [mode, setmode] = useState("none");
   const [type, settype] = useState("none");
   const [days, setdays] = useState([]);
@@ -40,6 +38,7 @@ const Form = ({ getUserData, sales }) => {
   const [dataSaved, setDataSaved] = useState(false);
   const [dataLocation, setDataLocation] = useState({ x: "", y: "" });
   const [searchData, setSearchData] = useState("");
+  const [sourceInput, setSourceInput] = useState("");
 
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -69,7 +68,7 @@ const Form = ({ getUserData, sales }) => {
         age: age === undefined || age === "" ? "" : age,
         school: school === undefined || school === "" ? "" : school,
         course: course === undefined || course === "" ? "" : course,
-        source: source === undefined || source === "" ? "" : source,
+        source: source === "Other" ? sourceInput : source,
         mode: mode === undefined || mode === "" ? "none" : mode,
         type: type === undefined || type === "" ? "none" : type,
         address,
@@ -92,7 +91,7 @@ const Form = ({ getUserData, sales }) => {
         assignee: sales?.name,
         totalPrice,
       });
-      if (res.status == 500) {
+      if (res.status === 500) {
         alert("Internal server error");
       }
 
@@ -148,11 +147,12 @@ const Form = ({ getUserData, sales }) => {
         setDataSaved={setDataSaved}
       />
       <div className="inputUserContainer">
-        <form action="">
+        <form action="" style={{ display: "flex", alignItems: "center" }}>
           <div className="inputSection">
             <div className="inputContainer">
               <input
                 type="text"
+                style={{ width: "19%" }}
                 name="name"
                 placeholder="Name *"
                 required
@@ -198,7 +198,7 @@ const Form = ({ getUserData, sales }) => {
                         key={i}
                       >
                         <p style={{ paddingBottom: "0.25rem" }}>{e.name}</p>
-                        <p>{e.phone}</p>
+                        <p>{e.mobile}</p>
                       </div>
                     );
                   })}
@@ -249,6 +249,7 @@ const Form = ({ getUserData, sales }) => {
             <div className="inputContainer">
               <input
                 type="text"
+                style={{width:"50%"}}
                 name="school"
                 value={school}
                 onChange={(e) => setschool(e.target.value)}
@@ -257,6 +258,7 @@ const Form = ({ getUserData, sales }) => {
               /> */}
               <input
                 type="text"
+                style={{ width: "19%" }}
                 value={course}
                 name="course"
                 onChange={(e) => setcourse(e.target.value)}
@@ -265,6 +267,11 @@ const Form = ({ getUserData, sales }) => {
               />
               <button
                 className="detailsBtn"
+                style={{
+                  width: "22%",
+                  padding: "0.5rem 0.75rem",
+                  margin: "0.65rem 0",
+                }}
                 onClick={(e) => {
                   setHeight(e.clientY);
                   e.preventDefault();
@@ -298,20 +305,60 @@ const Form = ({ getUserData, sales }) => {
                 price={price}
                 setprice={setprice}
               />
-              <input
-                type="text"
+              <select
+                name=""
+                id=""
                 value={source}
-                name="source"
-                onChange={(e) => setsource(e.target.value)}
-                placeholder="Source *"
-                required
-                className="input"
-              />
+                style={{
+                  backgroundColor: "#333",
+                  width: "16%",
+                  border: 0,
+                  padding: "0.5rem 0",
+                }}
+                onChange={(e) => {
+                  setsource(e.target.value);
+                }}
+              >
+                <option value="Source" selected disabled>
+                  Source
+                </option>
+                <option value="Event">Event</option>
+                <option value="Email">Email</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Referral">Referral</option>
+                <option value="Word of Mouth">Word of Mouth</option>
+                <option value="Digital">Digital</option>
+                <option value="Other">Other</option>
+              </select>
+              {source === "Other" ? (
+                <input
+                  type="text"
+                  placeholder="Source"
+                  value={sourceInput}
+                  style={{ width: "20%" }}
+                  onChange={(e) => {
+                    setSourceInput(e.target.value);
+                  }}
+                />
+              ) : null}
             </div>
           </div>
-          <button className="button" onClick={postData}>
-            Save Lead
-          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "20%",
+            }}
+          >
+            <button
+              className="button"
+              onClick={postData}
+              style={{ width: "100%" }}
+            >
+              Save Lead
+            </button>
+          </div>
         </form>
       </div>
       <ToastContainer

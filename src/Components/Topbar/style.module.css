@@ -22,17 +22,17 @@
   border: 1px solid grey;
   left: 30px;
   padding: 0 0.65rem;
-  width: 12.5%;
+  width: 10%;
 }
 
 .selectSchool div {
   font-size: 1.5rem;
   cursor: pointer;
-  margin: 0.65rem 0;
+  margin: 1rem 0;
   text-align: center;
   border: 1px solid grey;
   border-radius: 0.5rem;
-  padding: 0.15rem;
+  padding: 0.75rem 0.1rem;
 }
 
 .selectSchool .input {

@@ -76,7 +76,7 @@ const FloatingUserData = ({
 
   useEffect(() => {
     const sch = schools?.find((e) => {
-      return e?._id == user?.schoolId;
+      return e?._id === user?.schoolId;
     });
     setSchool(sch);
   }, [schools]);
@@ -139,6 +139,7 @@ const FloatingUserData = ({
                 .then((res) => {
                   console.log(res);
                 });
+              return 0;
             });
             setShowUserData(false);
             getPrograms();
@@ -230,8 +231,7 @@ const FloatingUserData = ({
 
   let expense;
   let revenue = 0;
-  let margin;
-  let pg;
+  let margin = revenue - expense;
 
   useEffect(() => {
     const pg = programs.find((program) =>
@@ -1200,7 +1200,7 @@ const FloatingUserData = ({
               }}
             >
               <p>Margin :- </p>
-              <p> Rs. {(margin = revenue - expense)}</p>
+              <p> Rs. {margin}</p>
             </div>
             <div
               style={{

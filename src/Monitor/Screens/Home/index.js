@@ -9,7 +9,6 @@ import MONITOR_BACKEND from "../../Utils";
 import Offers from "../Offers";
 import Agents from "../Agents";
 import Programs from "../Programs";
-import emailjs from "@emailjs/browser";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -228,14 +227,6 @@ const Home = () => {
       });
     setFilteredUsers(searchFilter);
   }, [filter, users]);
-
-  const [time, settime] = useState(new Date().toLocaleTimeString());
-
-  useEffect(() => {
-    setInterval(() => {
-      settime(new Date().toLocaleTimeString());
-    }, 1000);
-  }, []);
 
   // useEffect(() => {
   //   if (time === "9:24:00 PM") {

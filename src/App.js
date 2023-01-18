@@ -17,6 +17,7 @@ import OnboardingForm from "./Components/Training/Components/UsersData/Onboardin
 import ProgramReport from "./Monitor/Screens/ProgramReport";
 import ProgramReportDetails from "./Monitor/Screens/ProgramReportDetails";
 import Mobile from "./Monitor/Screens/Mobile/index";
+import SalesMobile from "./Components/SalesMobile";
 
 const App = () => {
   const history = useNavigate();
@@ -69,13 +70,7 @@ const App = () => {
   const [offers, setOffers] = useState([]);
   const [agents, setAgents] = useState([]);
   const [programs, setPrograms] = useState([]);
-  const [filter, setFilter] = useState({
-    status: "all",
-    handler: "all",
-    stage: "all",
-  });
   const [reports, setReports] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
   const [dbFilters, setDbFilters] = useState({
     name: "",
     type: "",
@@ -204,7 +199,9 @@ const App = () => {
       })
       .filter((e) => {
         if (dbFilters.trustee !== undefined && dbFilters.trustee !== "") {
-          return e.trustee?.name.toLowerCase().includes(dbFilters.trustee.toLowerCase());
+          return e.trustee?.name
+            .toLowerCase()
+            .includes(dbFilters.trustee.toLowerCase());
         } else {
           return e;
         }
@@ -249,32 +246,6 @@ const App = () => {
   }, [dbFilters, schools]);
 
   useEffect(() => {
-    var searchFilter = users
-      ?.filter((e) => {
-        if (filter.handler === "all") {
-          return e;
-        } else {
-          return e.handler.toLowerCase().includes(filter.handler.toLowerCase());
-        }
-      })
-      .filter((e) => {
-        if (filter.status === "all") {
-          return e;
-        } else {
-          return e.status.toLowerCase().includes(filter.status.toLowerCase());
-        }
-      })
-      .filter((e) => {
-        if (filter.stage === "all") {
-          return e;
-        } else {
-          return e.stage?.toLowerCase().includes(filter.stage?.toLowerCase());
-        }
-      });
-    setFilteredUsers(searchFilter);
-  }, [filter, users]);
-
-  useEffect(() => {
     getUsers();
     getSchools();
     getMeetings();
@@ -290,7 +261,22 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Login setsales={setsales} />} />
-      <Route path="/sales" element={<Sales sales={checkUser} />} />
+      <Route
+        path="/sales"
+        element={
+          innerWidth < 550 ? (
+            <SalesMobile sales={checkUser} page={page} setPage={setPage} />
+          ) : (
+            <Sales
+              sales={checkUser}
+              page={page}
+              setPage={setPage}
+              getUserData={getUsers}
+              noOfUsers={totalNoOfUsers}
+            />
+          )
+        }
+      />
       <Route path="/Operations" element={<Support sales={checkUser} />} />
       <Route path="/training" element={<Training sales={checkUser} />} />
       <Route

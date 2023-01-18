@@ -18,7 +18,7 @@ const ProgramReport = ({ programs, reports, getReports }) => {
       });
       setProgram(pg);
     }
-  }, [programs]);
+  }, [programs, id]);
 
   return (
     <div className={styles.report}>
