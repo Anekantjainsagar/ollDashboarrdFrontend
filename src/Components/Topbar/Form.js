@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../Utils/index";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { IoIosAdd } from "react-icons/io";
 import BatchDetails from "./BatchDetails";
 import axios from "axios";
@@ -10,6 +10,7 @@ import times from "./times";
 import testData from "./testData";
 import styles from "./style.module.css";
 import AddDataModal from "./AddDataModal";
+import StudentContext from "../Context/StudentsContext";
 
 const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
@@ -136,6 +137,8 @@ const Form = ({ getUserData, sales }) => {
     }
   };
 
+  const apiData = useContext(StudentContext);
+
   return (
     <>
       <AddDataModal
@@ -170,7 +173,7 @@ const Form = ({ getUserData, sales }) => {
                 }
                 className={styles.selectSchool}
               >
-                {testData
+                {apiData?.data
                   ?.filter((data) =>
                     data.name.toLowerCase().includes(searchData.toLowerCase())
                   )
@@ -180,10 +183,17 @@ const Form = ({ getUserData, sales }) => {
                         onClick={() => {
                           setDataSaved(true);
                           setName(e.name);
-                          setage(e.age);
-                          setphone(e.phone);
+                          setphone(e.mobile);
                           setemail(e.email);
-                          setschool(e.school);
+                          setschool(e.institute_name);
+                          setSearchData("");
+                          if (e.date_of_birth !== null) {
+                            const age =
+                              parseInt(
+                                new Date(Date.now).toString().slice(12, 16)
+                              ) - e.date_of_birth.getYear();
+                            setage(age);
+                          }
                         }}
                         key={i}
                       >
@@ -208,7 +218,7 @@ const Form = ({ getUserData, sales }) => {
                   Add New
                 </button>
               </div>
-              <input
+              {/* <input
                 type="number"
                 name="phone"
                 value={phone}
@@ -244,7 +254,7 @@ const Form = ({ getUserData, sales }) => {
                 onChange={(e) => setschool(e.target.value)}
                 placeholder="School"
                 className="input"
-              />
+              /> */}
               <input
                 type="text"
                 value={course}
