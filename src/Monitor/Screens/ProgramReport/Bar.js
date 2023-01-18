@@ -134,44 +134,53 @@ const Bar = ({ report, getReports }) => {
         </div>
         <div className={styles.dataDisplay}>
           <div className={styles.form}>
-            <input
-              type="number"
-              value={
-                batchDetails?.noOfStudents
-                  ? batchDetails?.noOfStudents
-                  : report?.batchDetails?.noOfStudents
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  noOfStudents: e.target.value,
-                })
-              }
-              placeholder="No. of Students"
-            />
-            <input
-              type="text"
-              value={
-                batchDetails?.location
-                  ? batchDetails?.location
-                  : report?.batchDetails?.location
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  location: e.target.value,
-                })
-              }
-              placeholder="Course"
-            />
-            <input
-              type="text"
-              onClick={(e) => {
-                setDays(!daysValue);
-                setDaysPositio({ x: e.clientX, y: e.clientY });
-              }}
-              placeholder="Days"
-            />
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>No. of Students</p>
+              <input
+                type="number"
+                value={
+                  batchDetails?.noOfStudents
+                    ? batchDetails?.noOfStudents
+                    : report?.batchDetails?.noOfStudents
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    noOfStudents: e.target.value,
+                  })
+                }
+                placeholder="No. of Students"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Course</p>
+              <input
+                type="text"
+                value={
+                  batchDetails?.location
+                    ? batchDetails?.location
+                    : report?.batchDetails?.location
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    location: e.target.value,
+                  })
+                }
+                placeholder="Course"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Days</p>
+              <input
+                type="text"
+                onClick={(e) => {
+                  setDays(!daysValue);
+                  setDaysPositio({ x: e.clientX, y: e.clientY });
+                }}
+                placeholder="Days"
+              />
+            </div>
             <div
               className={styles.daysDisplay}
               style={
@@ -223,111 +232,132 @@ const Bar = ({ report, getReports }) => {
                 );
               })}
             </div>
-            <input
-              type="date"
-              value={
-                batchDetails?.startDate
-                  ? batchDetails?.startDate
-                  : report?.batchDetails?.startDate.slice(0, 10)
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  startDate: e.target.value,
-                })
-              }
-              placeholder="Start Date"
-            />
-            <input
-              type="date"
-              value={
-                batchDetails?.endDate
-                  ? batchDetails?.endDate
-                  : report?.batchDetails?.endDate.slice(0, 10)
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  endDate: e.target.value,
-                })
-              }
-              placeholder="End Date"
-            />
-            <input
-              type="time"
-              value={
-                batchDetails?.time
-                  ? batchDetails?.time
-                  : report?.batchDetails?.time
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  time: e.target.value,
-                })
-              }
-              placeholder="Time"
-            />
-            <input
-              type="text"
-              placeholder="Holidays"
-              value={
-                batchDetails?.holidays
-                  ? batchDetails?.holidays
-                  : report?.batchDetails?.holidays
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  holidays: e.target.value,
-                })
-              }
-            />
-            <input
-              type="number"
-              value={
-                batchDetails?.noOfSessions
-                  ? batchDetails?.noOfSessions
-                  : report?.batchDetails?.noOfSessions
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  noOfSessions: e.target.value,
-                })
-              }
-              placeholder="No. of Sessions"
-            />
-            <input
-              type="number"
-              value={
-                batchDetails?.completedSessions
-                  ? batchDetails?.completedSessions
-                  : report?.batchDetails?.completedSessions
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  completedSessions: e.target.value,
-                })
-              }
-              placeholder="Completed Sessions"
-            />
-            <input
-              type="text"
-              value={
-                batchDetails?.educator
-                  ? batchDetails?.educator
-                  : report?.batchDetails?.educator
-              }
-              onChange={(e) =>
-                setBatchDetails({
-                  ...batchDetails,
-                  educator: e.target.value,
-                })
-              }
-              placeholder="Educator"
-            />
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Start Date</p>
+              <input
+                type="date"
+                value={
+                  batchDetails?.startDate
+                    ? batchDetails?.startDate
+                    : report?.batchDetails?.startDate.slice(0, 10)
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    startDate: e.target.value,
+                  })
+                }
+                placeholder="Start Date"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>End Date</p>
+              <input
+                type="date"
+                value={
+                  batchDetails?.endDate
+                    ? batchDetails?.endDate
+                    : report?.batchDetails?.endDate.slice(0, 10)
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    endDate: e.target.value,
+                  })
+                }
+                placeholder="End Date"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Time</p>
+              <input
+                type="time"
+                value={
+                  batchDetails?.time
+                    ? batchDetails?.time
+                    : report?.batchDetails?.time
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    time: e.target.value,
+                  })
+                }
+                placeholder="Time"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Holidays</p>
+              <input
+                type="text"
+                placeholder="Holidays"
+                value={
+                  batchDetails?.holidays
+                    ? batchDetails?.holidays
+                    : report?.batchDetails?.holidays
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    holidays: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>No. of Sessions</p>
+              <input
+                type="number"
+                value={
+                  batchDetails?.noOfSessions
+                    ? batchDetails?.noOfSessions
+                    : report?.batchDetails?.noOfSessions
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    noOfSessions: e.target.value,
+                  })
+                }
+                placeholder="No. of Sessions"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Completed Sess.</p>
+              <input
+                type="number"
+                value={
+                  batchDetails?.completedSessions
+                    ? batchDetails?.completedSessions
+                    : report?.batchDetails?.completedSessions
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    completedSessions: e.target.value,
+                  })
+                }
+                placeholder="Completed Sessions"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Educator</p>
+              <input
+                type="text"
+                value={
+                  batchDetails?.educator
+                    ? batchDetails?.educator
+                    : report?.batchDetails?.educator
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    educator: e.target.value,
+                  })
+                }
+                placeholder="Educator"
+              />
+            </div>
             <button
               onClick={(e) => {
                 e.preventDefault();

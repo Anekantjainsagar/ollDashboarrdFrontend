@@ -81,16 +81,24 @@
 }
 
 .data {
-  width: 65%;
+  width: 62%;
 }
 
 .form {
-  width: 35%;
+  width: 38%;
   display: grid;
   grid-template-columns: 33.333% 33.333% 33.333%;
   background-color: rgb(24, 24, 24);
   border-radius: 1rem;
   padding: 0.5rem 0;
+}
+
+.form .div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.25rem 0;
+  justify-content: center;
 }
 
 .form input {
@@ -106,7 +114,7 @@
 
 .data {
   border: 1px solid rgb(187, 187, 187);
-  height: 23vh;
+  height: 45vh;
   margin: 0 1.5rem;
   border-radius: 1rem;
   overflow-y: scroll;

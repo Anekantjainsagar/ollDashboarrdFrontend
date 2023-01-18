@@ -64,11 +64,11 @@
 }
 
 .data {
-  width: 65%;
+  width: 62%;
 }
 
 .form {
-  width: 35%;
+  width: 38%;
   display: grid;
   grid-template-columns: 33.333% 33.333% 33.333%;
   background-color: rgb(24, 24, 24);
@@ -90,7 +90,7 @@
 
 .data {
   border: 1px solid rgb(187, 187, 187);
-  height: 21vh;
+  height: 31vh;
   margin: 0 1.5rem;
   border-radius: 1rem;
   overflow-y: scroll;

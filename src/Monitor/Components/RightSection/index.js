@@ -42,7 +42,7 @@ const RightSection = ({
         <input
           type="text"
           style={{ width: "30%" }}
-          placeholder="Search here..."
+          placeholder="Search Id / School name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -65,9 +65,13 @@ const RightSection = ({
           {filteredUsers
             .filter((e) => {
               if (search?.length > 0) {
-                return e.schoolName
-                  .toLowerCase()
-                  .includes(search.toLowerCase());
+                if (Number.isInteger(parseInt(search))) {
+                  return e?.id.toString().includes(search.toString());
+                } else {
+                  return e?.schoolName
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
+                }
               }
               return e;
             })

@@ -36,16 +36,10 @@ const Bar = ({ follow, schools, getFollowUps, getUsers }) => {
         getUsers={getUsers}
       />
       <div className={styles.bar}>
-        <div className={styles.header}>
-          <h1>{follow?.name}</h1>
-          <p className={styles.date}>
-            {new Date(follow?.startDate).toString().slice(4, 16)} {follow?.time}
-          </p>
-        </div>
-        <div className={styles.barStyle}>
-          <p>{school?.email}</p>
-          <p>{school?.phone}</p>
-        </div>
+        <p className={styles.date}>
+          {new Date(follow?.startDate).toString().slice(4, 16)} {follow?.time}
+        </p>
+        <p>{follow?.mode}</p>
       </div>
     </>
   );

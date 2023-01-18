@@ -30,12 +30,15 @@ const SalesMobile = ({ sales }) => {
     totalPrice: "",
   });
   const apiData = useContext(StudentsContext);
+
+  const postData = () => {};
+
   return (
     <div className={styles.main}>
       <input
         type="text"
         placeholder="Name"
-        value={user.searchSchool}
+        value={user?.name?.length > 0 ? user?.name : user?.searchSchool}
         disabled={user?.dataSaved}
         onChange={(e) => {
           setUser({
@@ -53,7 +56,7 @@ const SalesMobile = ({ sales }) => {
       <div
         style={
           user?.searchSchool?.length > 0 && user?.dataSaved === false
-            ? { display: "block", top: `${user?.schoolLocation.y + 20}px` }
+            ? { display: "block", top: `${user?.schoolLocation.y + 25}px` }
             : { display: "none" }
         }
         className={styles.selectSchool}
@@ -96,10 +99,18 @@ const SalesMobile = ({ sales }) => {
         value={user.course}
         onChange={(e) => setUser({ ...user, course: e.target.value })}
       />
-      <input type="text" />
+      <div
+        className={styles.btn}
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        Batch Details
+      </div>
       <select
         name=""
         id=""
+        required={true}
         value={user?.source}
         style={{
           backgroundColor: "#333",
@@ -132,7 +143,14 @@ const SalesMobile = ({ sales }) => {
           }}
         />
       ) : null}
-      <button>Add Lead</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          postData();
+        }}
+      >
+        Add Lead
+      </button>
     </div>
   );
 };
