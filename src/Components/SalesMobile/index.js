@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useContext } from "react";
 import StudentsContext from "../Context/StudentsContext";
 import BatchDetails from "./BatchDetails";
 import styles from "./style.module.css";
+import BASE_URL from "../../Utils/index";
 
 const SalesMobile = ({ sales }) => {
   const [user, setUser] = useState({
@@ -17,8 +19,8 @@ const SalesMobile = ({ sales }) => {
     course: "",
     source: "",
     sourceInput: "",
-    mode: "",
-    type: "",
+    mode: "none",
+    type: "none",
     address: "",
     price: "",
     days: [],
@@ -34,9 +36,67 @@ const SalesMobile = ({ sales }) => {
   const [details, setDetails] = useState(false);
   const apiData = useContext(StudentsContext);
 
-  console.log(user)
+  const postData = async () => {
+    await axios
+      .post(`${BASE_URL}/addUser`, {
+        name: user?.name,
+        phone: parseInt(user?.phone),
+        email: user?.email,
+        age: parseInt(user?.age),
+        school: user?.school,
+        course: user?.course,
+        source: user?.source,
+        mode: user?.mode,
+        type: user?.type,
+        address: user?.address,
+        price: parseInt(user?.price),
+        days: user?.days,
+        startDate: user?.startDate,
+        time: user?.sTime + " " + eTime,
+        sessionsCount: user?.sessionCount,
+        stage: "🔥 hot",
+        status: "new",
+        assignee: sales?.name,
+        totalPrice: user?.totalPrice,
+      })
+      .then((res) => {
+        if (res.status === 500) {
+          alert("Internal server error");
+        }
 
-  const postData = () => {};
+        if (res.data.message === "User Saved Successfully") {
+          setUser({
+            school: "",
+            searchSchool: "",
+            schoolLocation: { x: "", y: "" },
+            dataSaved: false,
+            phone: "",
+            age: "",
+            name: "",
+            email: "",
+            course: "",
+            source: "",
+            sourceInput: "",
+            mode: "none",
+            type: "none",
+            address: "",
+            price: "",
+            days: [],
+            startDate: "",
+            sTime: "",
+            sessionCount: "",
+            stage: "🔥 hot",
+            status: "new",
+            assignee: sales?.name,
+            totalPrice: "",
+          });
+          setETime("");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className={styles.main}>
