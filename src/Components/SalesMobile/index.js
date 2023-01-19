@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import StudentsContext from "../Context/StudentsContext";
+import BatchDetails from "./BatchDetails";
 import styles from "./style.module.css";
 
 const SalesMobile = ({ sales }) => {
@@ -22,14 +23,18 @@ const SalesMobile = ({ sales }) => {
     price: "",
     days: [],
     startDate: "",
-    time: "",
+    sTime: "",
     sessionCount: "",
     stage: "🔥 hot",
     status: "new",
     assignee: sales?.name,
     totalPrice: "",
   });
+  const [eTime, setETime] = useState("");
+  const [details, setDetails] = useState(false);
   const apiData = useContext(StudentsContext);
+
+  console.log(user)
 
   const postData = () => {};
 
@@ -103,10 +108,19 @@ const SalesMobile = ({ sales }) => {
         className={styles.btn}
         onClick={(e) => {
           e.preventDefault();
+          setDetails(!details);
         }}
       >
         Batch Details
       </div>
+      <BatchDetails
+        user={user}
+        setUser={setUser}
+        details={details}
+        setDetails={setDetails}
+        setETime={setETime}
+        eTime={eTime}
+      />
       <select
         name=""
         id=""
