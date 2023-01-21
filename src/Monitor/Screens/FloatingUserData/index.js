@@ -889,6 +889,8 @@ const FloatingUserData = ({
                 </div>
                 <button
                   className={styles.btns}
+                  disabled={pricing?.length > 0 ? false : true}
+                  style={pricing?.length > 0 ? {} : { backgroundColor: "grey" }}
                   onClick={(e) => {
                     e.preventDefault();
                     addNewProgram();

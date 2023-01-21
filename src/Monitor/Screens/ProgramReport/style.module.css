@@ -123,10 +123,12 @@
 .data .head {
   display: grid;
   width: 100%;
-  grid-template-columns: 5% 16% 20% 22% 11% 11% 15%;
+  grid-template-columns: 5% 20% 22% 24% 14% 15%;
+  word-break: normal;
 }
 
 .data .head p {
+  word-break: normal;
   text-transform: uppercase;
   padding: 0.5rem 0;
   background-color: rgb(34, 34, 34);
@@ -134,9 +136,10 @@
 }
 
 .data .user {
+  word-break: normal;
   display: grid;
   width: 100%;
-  grid-template-columns: 5% 16% 20% 22% 11% 11% 15%;
+  grid-template-columns: 5% 20% 22% 24% 14% 15%;
   border: 1px solid rgb(87, 87, 87);
   margin: 0.5rem auto;
   width: 99.2%;
@@ -146,6 +149,7 @@
 }
 
 .data .user p {
+  word-break: normal;
   padding: 0.5rem 0;
   text-transform: uppercase;
   text-align: center;

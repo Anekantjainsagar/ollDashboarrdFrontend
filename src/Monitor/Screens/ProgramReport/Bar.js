@@ -1,10 +1,26 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./style.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import MONITOR_BACKEND from "../../Utils/index";
+
+function useOutsideAlerter(ref, show, setShow) {
+  useEffect(() => {
+    if (show) {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setShow(false);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [ref, show, setShow]);
+}
 
 const Bar = ({ report, getReports }) => {
   const days = [
@@ -36,6 +52,9 @@ const Bar = ({ report, getReports }) => {
     endDate: "",
     educator: "",
   });
+  const ref = useRef(null);
+  useOutsideAlerter(ref, daysValue, setDays);
+
   return (
     <>
       <div style={{ position: "absolute" }}>
@@ -174,6 +193,11 @@ const Bar = ({ report, getReports }) => {
               <p style={{ textAlign: "center" }}>Days</p>
               <input
                 type="text"
+                value={
+                  batchDetails?.days?.length > 0
+                    ? batchDetails?.days.map((e) => " " + e)
+                    : report?.batchDetails?.days?.map((e) => " " + e)
+                }
                 onClick={(e) => {
                   setDays(!daysValue);
                   setDaysPositio({ x: e.clientX, y: e.clientY });
@@ -187,7 +211,7 @@ const Bar = ({ report, getReports }) => {
                 daysValue
                   ? {
                       display: "block",
-                      left: "25.25%",
+                      left: "27.4%",
                       top: `${daysPositio.y + 30}px`,
                     }
                   : { display: "none" }
@@ -195,7 +219,7 @@ const Bar = ({ report, getReports }) => {
             >
               {days?.map((e, i) => {
                 return (
-                  <div key={i}>
+                  <div key={i} ref={ref}>
                     <input
                       type="checkbox"
                       value={e}
@@ -497,7 +521,6 @@ const Bar = ({ report, getReports }) => {
               <p>Phone</p>
               <p>EMail</p>
               <p>AMount</p>
-              <p>Attend</p>
               <p>Status</p>
             </div>
             {report?.students?.map((e, i) => {
@@ -508,7 +531,6 @@ const Bar = ({ report, getReports }) => {
                   <p>{e?.phone}</p>
                   <p>{e?.email}</p>
                   <p>{e?.amount}</p>
-                  <p>Attend</p>
                   <p>
                     <select
                       name=""

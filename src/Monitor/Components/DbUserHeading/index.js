@@ -91,7 +91,16 @@ const DbUserHeading = ({ dbFilters, setDbFilters, school, AllSchools }) => {
         </select>
       </p>
       <p className={styles.trustee}>Email</p>
-      <p className={styles.coordinator}>Mobile</p>
+      <p className={styles.coordinator}>
+        <input
+          type="text"
+          placeholder="Mobile"
+          value={dbFilters.mobile}
+          onChange={(e) =>
+            setDbFilters({ ...dbFilters, mobile: e.target.value })
+          }
+        />
+      </p>
       <p className={styles.location}>
         <input
           type="text"

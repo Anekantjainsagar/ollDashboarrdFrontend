@@ -60,6 +60,7 @@ const SalesMobile = ({ sales }) => {
         totalPrice: user?.totalPrice,
       })
       .then((res) => {
+        console.log(res);
         if (res.status === 500) {
           alert("Internal server error");
         }
@@ -143,12 +144,6 @@ const SalesMobile = ({ sales }) => {
                     school: e.institute_name,
                     searchData: "",
                   });
-                  if (e.date_of_birth !== null) {
-                    const age =
-                      parseInt(new Date(Date.now).toString().slice(12, 16)) -
-                      e.date_of_birth.getYear();
-                    setUser({ ...user, age });
-                  }
                 }}
                 key={i}
               >

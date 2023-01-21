@@ -79,6 +79,7 @@ const App = () => {
     principal: "",
     trustee: "",
     coordinator: "",
+    mobile: "",
   });
 
   const getSchools = () => {
@@ -190,9 +191,14 @@ const App = () => {
       })
       .filter((e) => {
         if (dbFilters.principal !== undefined && dbFilters.principal !== "") {
-          return e.principal?.name
-            .toLowerCase()
-            .includes(dbFilters.principal.toLowerCase());
+          return (
+            e.principal?.name
+              ?.toLowerCase()
+              .includes(dbFilters.principal.toLowerCase()) ||
+            e["Principal Name"]
+              ?.toLowerCase()
+              .includes(dbFilters.principal.toLowerCase())
+          );
         } else {
           return e;
         }
@@ -238,6 +244,13 @@ const App = () => {
               .toLowerCase()
               .includes(dbFilters.board.toLowerCase());
           }
+        } else {
+          return e;
+        }
+      })
+      .filter((e) => {
+        if (dbFilters.mobile !== undefined && dbFilters.mobile !== "") {
+          return e?.phone?.toString().includes(dbFilters?.mobile.toString());
         } else {
           return e;
         }

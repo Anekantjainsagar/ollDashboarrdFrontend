@@ -34,7 +34,7 @@ const Bar = ({ report }) => {
             <p>
               Days :{" "}
               {report?.batchDetails?.days.map((e) => {
-                return e + " ";
+                return " " + e + ",";
               })}
             </p>
             <p>
@@ -60,7 +60,6 @@ const Bar = ({ report }) => {
               <p>Phone</p>
               <p>EMail</p>
               <p>AMount</p>
-              <p>Attend</p>
               <p>Status</p>
             </div>
             {report?.students.map((student, i) => {
@@ -71,7 +70,6 @@ const Bar = ({ report }) => {
                   <p>{student?.phone}</p>
                   <p>{student?.email}</p>
                   <p>{student?.amount}</p>
-                  <p>Attend</p>
                   <p>{student?.status}</p>
                 </div>
               );

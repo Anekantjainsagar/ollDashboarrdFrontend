@@ -99,7 +99,7 @@
 .data .head {
   display: grid;
   width: 100%;
-  grid-template-columns: 5% 16% 20% 22% 11% 11% 15%;
+  grid-template-columns: 5% 20% 22% 24% 14% 15%;
 }
 
 .data .head p {
@@ -112,7 +112,7 @@
 .data .user {
   display: grid;
   width: 100%;
-  grid-template-columns: 5% 16% 20% 22% 11% 11% 15%;
+  grid-template-columns: 5% 20% 22% 24% 14% 15%;
   border: 1px solid rgb(87, 87, 87);
   margin: 0.5rem auto;
   width: 99.2%;
