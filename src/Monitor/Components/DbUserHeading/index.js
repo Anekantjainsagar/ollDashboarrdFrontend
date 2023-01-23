@@ -58,8 +58,12 @@ const DbUserHeading = ({ dbFilters, setDbFilters, school, AllSchools }) => {
             setDbFilters({ ...dbFilters, type: e.target.value });
           }}
         >
-          {["All", ...new Set(types)].map((e) => {
-            return <option value={e}>{e}</option>;
+          {["All", ...new Set(types)].map((e, i) => {
+            return (
+              <option value={e} key={i}>
+                {e}
+              </option>
+            );
           })}
         </select>
       </p>
@@ -85,8 +89,12 @@ const DbUserHeading = ({ dbFilters, setDbFilters, school, AllSchools }) => {
             setDbFilters({ ...dbFilters, board: e.target.value });
           }}
         >
-          {["All", ...new Set(board)].map((e) => {
-            return <option value={e}>{e}</option>;
+          {["All", ...new Set(board)].map((e, i) => {
+            return (
+              <option value={e} key={i}>
+                {e}
+              </option>
+            );
           })}
         </select>
       </p>

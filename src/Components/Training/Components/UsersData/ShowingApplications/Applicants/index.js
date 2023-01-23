@@ -13,8 +13,8 @@ const Applicants = ({ applicants, id, getApplicants }) => {
         {applicants
           ?.filter((e) => e.courseId === id)
           .filter((e) => e.status === "Applicants")
-          .map((app) => {
-            return <User data={app} getApplicants={getApplicants} />;
+          .map((app,i) => {
+            return <User data={app} getApplicants={getApplicants} key={i} />;
           })}
       </div>
     </div>

@@ -87,9 +87,10 @@ const UserHeading = ({ filter, setFilter, agents, offers }) => {
           <option style={{ fontSize: "1.5rem", color: "#fff" }} value="all">
             All
           </option>
-          {offers?.map((offer) => {
+          {offers?.map((offer, i) => {
             return (
               <option
+                key={i}
                 style={{ fontSize: "1.5rem", color: "#fff" }}
                 value={offer.name}
               >
@@ -149,9 +150,10 @@ const UserHeading = ({ filter, setFilter, agents, offers }) => {
           <option style={{ fontSize: "1.5rem", color: "#fff" }} value="all">
             All
           </option>
-          {agents?.map((agent) => {
+          {agents?.map((agent, i) => {
             return (
               <option
+                key={i}
                 style={{ fontSize: "1.5rem", color: "#fff" }}
                 value={agent.name}
               >

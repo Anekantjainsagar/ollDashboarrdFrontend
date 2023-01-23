@@ -135,6 +135,7 @@ const SalesMobile = ({ sales }) => {
             .map((e, i) => {
               return (
                 <div
+                  key={i}
                   onClick={() => {
                     setUser({
                       ...user,
@@ -146,7 +147,6 @@ const SalesMobile = ({ sales }) => {
                       searchData: "",
                     });
                   }}
-                  key={i}
                 >
                   <p style={{ paddingBottom: "0.25rem" }}>{e.name}</p>
                   <p>{e.mobile}</p>

@@ -302,9 +302,9 @@ const FloatingUserData = ({
         <div className="postings">
           <h1>Postings</h1>
           <div className="container">
-            {postingsOptions?.map((e) => {
+            {postingsOptions?.map((e, i) => {
               return (
-                <div className="box">
+                <div className="box" key={i}>
                   <input
                     type="checkbox"
                     id={e}

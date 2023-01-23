@@ -1101,7 +1101,7 @@ const FloatingUserData = ({
             ) : (
               comment.map(({ msg, date, user, _id }, i) => {
                 return (
-                  <>
+                  <div key={i}>
                     <div
                       className="commentsDisplay"
                       key={i}
@@ -1119,7 +1119,7 @@ const FloatingUserData = ({
                         onClick={() => deleteComment(_id)}
                       />
                     ) : null}
-                  </>
+                  </div>
                 );
               })
             )}

@@ -8,14 +8,13 @@ const DisplayFollowUps = ({ followUp, user, schools }) => {
     const follows = followUp.filter((follow) => {
       return follow.userId === user._id;
     });
-    console.log(follows);
     setUserFollowUps(follows);
   }, []);
 
   return (
     <div>
-      {userFollowUps.map((follow) => {
-        return <Bar follow={follow} schools={schools} />;
+      {userFollowUps.map((follow, i) => {
+        return <Bar follow={follow} schools={schools} key={i} />;
       })}
     </div>
   );

@@ -91,7 +91,7 @@ const Agents = ({ agents, getAgents }) => {
         <div className={styles.usersTable}>
           {agents?.map((agent, i) => {
             return (
-              <>
+              <div key={i}>
                 <div
                   className={styles.agents}
                   onClick={() => setShowDelete(!showDelete)}
@@ -133,7 +133,7 @@ const Agents = ({ agents, getAgents }) => {
                     }}
                   />
                 </div>
-              </>
+              </div>
             );
           })}
         </div>

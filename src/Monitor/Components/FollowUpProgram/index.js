@@ -500,9 +500,10 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
           >
             <p>Pricing</p>
             {offer?.classes?.length > 0 || !offer?.classes?.includes("")
-              ? pricing?.map((e) => {
+              ? pricing?.map((e, i) => {
                   return (
                     <div
+                      key={i}
                       className={styles.pricingInputs}
                       style={{
                         display: "flex",

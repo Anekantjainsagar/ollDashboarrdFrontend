@@ -2,23 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 const Bar = ({ programs, reports, i, e }) => {
-  // const [report, setReport] = useState();
-  // useEffect(() => {
-  //   const report = reports?.find((e) => {
-  //     return programs.map((program) => {
-  //       return program.pricing.map((price) => {
-  //         return price?._id === e?._id;
-  //       });
-  //     });
-  //   });
-  //   setReport(report);
-  // }, [e]);
-
   return (
     <div className={styles.bar}>
       <p>{i + 1}</p>
       <p>
-        STD {e?.name} : DIV{" "}
+        STD {e?.className} : DIV{" "}
         {(e?.division ? e?.division : 1) === 1
           ? "A"
           : (e?.division ? e?.division : 2) === 2
@@ -40,9 +28,17 @@ const Bar = ({ programs, reports, i, e }) => {
           : "J"}
       </p>
       <p>-</p>
-      <p>{e?.students}</p>
-      <p>-</p>
-      <p>{"-"}</p>
+      <p>{e?.noOfStudents}</p>
+      <p>
+        {e?.batchDetails?.completedSessions / e?.batchDetails?.noOfSessions
+          ? (
+              (e?.batchDetails?.completedSessions /
+                e?.batchDetails?.noOfSessions) *
+              10
+            ).toFixed(0) + "%"
+          : "-"}
+      </p>
+      <p>{e?.batchDetails?.educator ? e?.batchDetails?.educator : "-"}</p>
       <p>-</p>
       <p>-</p>
     </div>

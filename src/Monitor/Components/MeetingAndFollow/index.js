@@ -219,8 +219,12 @@ const MeetingAndFollow = ({
                   setMeeting({ ...meeting, time: e.target.value })
                 }
               >
-                {times.map((time) => {
-                  return <option value={time}>{time}</option>;
+                {times.map((time, i) => {
+                  return (
+                    <option value={time} key={i}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -294,8 +298,12 @@ const MeetingAndFollow = ({
                   setFollows({ ...follows, time: e.target.value })
                 }
               >
-                {times.map((time) => {
-                  return <option value={time}>{time}</option>;
+                {times.map((time, i) => {
+                  return (
+                    <option value={time} key={i}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
             </div>

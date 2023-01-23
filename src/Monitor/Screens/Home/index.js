@@ -228,46 +228,6 @@ const Home = () => {
     setFilteredUsers(searchFilter);
   }, [filter, users]);
 
-  // useEffect(() => {
-  //   if (time === "9:24:00 PM") {
-  //     console.log(time);
-  //     const follows = followUp?.filter((follow) => {
-  //       if (
-  //         new Date(Date.now()).toString().slice(4, 16) ===
-  //         new Date(follow.startDate).toString().slice(4, 16)
-  //       ) {
-  //         return follow;
-  //       }
-  //     });
-  //     console.log(follows);
-  //     follows.map((e) => {
-  //       emailjs
-  //         .send(
-  //           "service_2ynwyzb",
-  //           "template_ng0vqrv",
-  //           {
-  //             from_name: "OLL Follow ups management",
-  //             to_name: "Anekant",
-  //             email: "anekantjainsagar@gmail.com",
-  //             school: e?.name,
-  //             mail: e?.email,
-  //             phone: e?.phone,
-  //           },
-  //           "SkxN6CQDdddlQ84Qj"
-  //         )
-  //         .then(
-  //           function (response) {
-  //             console.log(response);
-  //             console.log("SUCCESS!", response.status, response.text);
-  //           },
-  //           function (err) {
-  //             console.log("FAILED...", err);
-  //           }
-  //         );
-  //     });
-  //   }
-  // }, [time]);
-
   useEffect(() => {
     getSchools();
     getMeetings();

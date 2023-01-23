@@ -51,7 +51,7 @@ const ProgramReport = ({ programs, reports, getReports }) => {
             {/* <div>
               {program?.pricing?.map((e, i) => {
                 return (
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center" }} key={i}>
                     <input
                       type="checkbox"
                       checked={e.name == i ? true : false}
@@ -100,6 +100,7 @@ const ProgramReport = ({ programs, reports, getReports }) => {
               getReports={getReports}
               key={i}
               program={location.program}
+              id={id}
             />
           );
         })}

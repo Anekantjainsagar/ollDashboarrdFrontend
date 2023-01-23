@@ -413,9 +413,9 @@ const AddOffer = ({ setIsOpen, modalIsOpen, getOffers }) => {
               }
             >
               <p style={{ fontSize: "1.65rem" }}>Pricing</p>
-              {offer.classes.map((e) => {
+              {offer.classes.map((e, i) => {
                 return (
-                  <div className={styles.pricingInputs}>
+                  <div className={styles.pricingInputs} key={i}>
                     <input type="text" value={e} />
                     <input
                       type="number"

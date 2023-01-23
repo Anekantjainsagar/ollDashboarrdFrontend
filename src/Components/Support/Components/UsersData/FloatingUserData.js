@@ -400,9 +400,9 @@ const FloatingUserData = ({
               }}
             >
               <p>
-                {batchDetails?.days.map((e) => {
+                {batchDetails?.days.map((e, i) => {
                   return (
-                    <p style={{ fontSize: "1.6rem" }}>
+                    <p style={{ fontSize: "1.6rem" }} key={i}>
                       {e.charAt(0).toUpperCase() + e.slice(1)}
                     </p>
                   );
@@ -626,10 +626,9 @@ const FloatingUserData = ({
             ) : (
               comment.map(({ msg, date, user, _id }, i) => {
                 return (
-                  <>
+                  <div key={i}>
                     <div
                       className="commentsDisplay"
-                      key={i}
                       onClick={() => setCmntDeleteDisplay(!cmntDeleteDisplay)}
                     >
                       <h3>{user ? user : "Samantha"}</h3>
@@ -643,7 +642,7 @@ const FloatingUserData = ({
                         onClick={() => deleteComment(_id)}
                       />
                     ) : null}
-                  </>
+                  </div>
                 );
               })
             )}

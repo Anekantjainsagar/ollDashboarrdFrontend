@@ -69,9 +69,10 @@ const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
                 return new Date(follow.startDate) > new Date(Date.now());
               }
             })
-            .map((follow) => {
+            .map((follow, i) => {
               return (
                 <Bar
+                  key={i}
                   follow={follow}
                   schools={schools}
                   getFollowUps={getFollowUps}

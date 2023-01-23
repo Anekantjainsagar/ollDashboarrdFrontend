@@ -51,7 +51,9 @@ const Bar = ({ report }) => {
             <p>Hours : {report?.batchDetails?.hrs + " Hours"}</p>
             <p>Holidays : {report?.batchDetails?.holidays}</p>
             <p>No. of Sessions : {report?.batchDetails?.noOfSessions}</p>
-            <p>No. of Sessions : {report?.batchDetails?.completedSessions}</p>
+            <p>
+              Completed Sessions : {report?.batchDetails?.completedSessions}
+            </p>
             <p>Educator : {report?.batchDetails?.educator}</p>
           </div>
           <div className={styles.data}>
@@ -65,7 +67,7 @@ const Bar = ({ report }) => {
             </div>
             {report?.students.map((student, i) => {
               return (
-                <div className={styles.user}>
+                <div className={styles.user} key={i}>
                   <p>{i + 1}</p>
                   <p>{student?.name}</p>
                   <p>{student?.phone}</p>

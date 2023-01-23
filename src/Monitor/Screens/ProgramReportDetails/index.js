@@ -46,7 +46,7 @@ const ProgramReportDetails = ({ programs, reports, getReports }) => {
             {/* <div>
               {program?.pricing?.map((e, i) => {
                 return (
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center" }} key={i}>
                     <input
                       type="checkbox"
                       checked={e.name == i ? true : false}
@@ -70,8 +70,8 @@ const ProgramReportDetails = ({ programs, reports, getReports }) => {
       {reports
         ?.filter((report) => report?.programId === id)
         .sort((a, b) => a.className - b.className)
-        .map((report) => {
-          return <Bar report={report} getReports={getReports} />;
+        .map((report, i) => {
+          return <Bar report={report} getReports={getReports} key={i} />;
         })}
     </div>
   );

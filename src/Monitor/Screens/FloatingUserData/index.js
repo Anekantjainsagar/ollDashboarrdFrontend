@@ -853,9 +853,10 @@ const FloatingUserData = ({
                 >
                   <p>Pricing</p>
                   {offer.classes?.length > 0 || !offer.classes.includes("")
-                    ? offer.classes?.map((e) => {
+                    ? offer.classes?.map((e, i) => {
                         return (
                           <div
+                            key={i}
                             className={styles.pricingInputs}
                             style={{
                               display: "flex",
@@ -1105,9 +1106,9 @@ const FloatingUserData = ({
               .map((program) => {
                 return program.pricing
                   .sort((a, b) => a.name - b.name)
-                  .map((price) => {
+                  .map((price, i) => {
                     return (
-                      <div className={styles.programBar}>
+                      <div className={styles.programBar} key={i}>
                         <p>
                           Std {price.name} : Div{" "}
                           {(price?.division ? price?.division : 1) === 1

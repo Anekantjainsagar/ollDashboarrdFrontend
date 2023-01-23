@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import MONITOR_BACKEND from "../../Utils/index";
+import { AiOutlineDelete } from "react-icons/ai";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -22,7 +23,7 @@ function useOutsideAlerter(ref, show, setShow) {
   }, [ref, show, setShow]);
 }
 
-const Bar = ({ report, getReports }) => {
+const Bar = ({ report, getReports, id }) => {
   const days = [
     "Monday",
     "Tuesday",
@@ -71,7 +72,7 @@ const Bar = ({ report, getReports }) => {
       </div>
       <div className={styles.bar}>
         <div className={styles.head}>
-          <h1>
+          <h1 style={{ display: "flex", alignItems: "center" }}>
             STD {report?.className} : DIV{" "}
             {(report?.division ? report?.division : 1) === 1
               ? "A"
@@ -92,6 +93,33 @@ const Bar = ({ report, getReports }) => {
               : (report?.division ? report?.division : 9) === 9
               ? "I"
               : "J"}
+            <div
+              style={{
+                width: "15%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+                marginLeft: "1rem",
+              }}
+              onClick={(e) => {
+                axios
+                  .put(`${MONITOR_BACKEND}/deleteReport`, {
+                    reportId: report?._id,
+                    programId: report?.programId,
+                    id: id,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    getReports();
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }}
+            >
+              <AiOutlineDelete size={25} />
+            </div>
           </h1>
           <div>
             <input
@@ -556,7 +584,7 @@ const Bar = ({ report, getReports }) => {
             </div>
             {report?.students?.map((e, i) => {
               return (
-                <div className={styles.user}>
+                <div className={styles.user} key={i}>
                   <p>{i + 1}</p>
                   <p>{e?.name}</p>
                   <p>{e?.phone}</p>

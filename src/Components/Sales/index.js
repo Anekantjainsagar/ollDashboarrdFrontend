@@ -67,7 +67,12 @@ function Sales({ sales }) {
           } else {
             filterBySearch = filterBySearch;
             if (filterBySearch.toString().length > e?.id.toString().length) {
-              if (e?.phone.toString().includes(filterBySearch)) {
+              if (
+                e?.phone.toString().includes(filterBySearch) ||
+                (e?.cCode?.toString() + e?.phone?.toString()).includes(
+                  filterBySearch
+                )
+              ) {
                 return e;
               }
             } else if (e?.id.toString().includes(filterBySearch)) {

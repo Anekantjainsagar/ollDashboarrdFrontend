@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import { AiFillFileAdd, AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,14 @@ import Bar from "./Bar";
 const ProgramBar = ({ program, reports, programs }) => {
   let totalStudents = 0;
   const history = useNavigate();
+  const [reportDisplay, setReportDisplay] = useState([]);
+
+  useEffect(() => {
+    const report = reports.filter((report) => {
+      return report.programId == program?._id;
+    });
+    setReportDisplay(report);
+  }, []);
 
   return (
     <>
@@ -42,7 +50,7 @@ const ProgramBar = ({ program, reports, programs }) => {
             />
           </p>
         </div>
-        {program?.pricing
+        {reportDisplay
           ?.sort((a, b) => a.name - b.name)
           .map((e, i) => {
             return (

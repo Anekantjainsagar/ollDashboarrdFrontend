@@ -18,9 +18,9 @@ const Onboarded = ({ applicants, id }) => {
         {applicants
           ?.filter((e) => e.courseId === id)
           .filter((e) => e.status === "Onboarded")
-          .map((app) => {
+          .map((app, i) => {
             return (
-              <div className={styles.OnboardedUser}>
+              <div className={styles.OnboardedUser} key={i}>
                 <p>{app?.name}</p>
                 <p>{app?.phone}</p>
                 <p>{app?.email}</p>

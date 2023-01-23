@@ -160,8 +160,12 @@ const Meetings = ({ meetings, getMeetings }) => {
                   setMeeting({ ...meeting, time: e.target.value })
                 }
               >
-                {times.map((time) => {
-                  return <option value={time}>{time}</option>;
+                {times.map((time, i) => {
+                  return (
+                    <option value={time} key={i}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -202,8 +206,8 @@ const Meetings = ({ meetings, getMeetings }) => {
               return meet;
             }
           })
-          .map((meet) => {
-            return <Bar meet={meet} />;
+          .map((meet, i) => {
+            return <Bar meet={meet} key={i} />;
           })}
       </div>
     </div>

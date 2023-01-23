@@ -158,8 +158,12 @@ const AddStatusfollows = ({
                       setFollows({ ...follows, time: e.target.value })
                     }
                   >
-                    {times.map((time) => {
-                      return <option value={time}>{time}</option>;
+                    {times.map((time, i) => {
+                      return (
+                        <option key={i} value={time}>
+                          {time}
+                        </option>
+                      );
                     })}
                   </select>
                 </div>
