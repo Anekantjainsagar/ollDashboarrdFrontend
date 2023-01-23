@@ -48,6 +48,7 @@ const Bar = ({ report }) => {
               {new Date(report?.batchDetails?.endDate).toString().slice(4, 16)}
             </p>
             <p>Time : {report?.batchDetails?.time}</p>
+            <p>Hours : {report?.batchDetails?.hrs + " Hours"}</p>
             <p>Holidays : {report?.batchDetails?.holidays}</p>
             <p>No. of Sessions : {report?.batchDetails?.noOfSessions}</p>
             <p>No. of Sessions : {report?.batchDetails?.completedSessions}</p>

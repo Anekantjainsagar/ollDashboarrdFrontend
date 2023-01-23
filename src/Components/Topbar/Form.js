@@ -9,6 +9,7 @@ import times from "./times";
 import styles from "./style.module.css";
 import AddDataModal from "./AddDataModal";
 import StudentContext from "../Context/StudentsContext";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
@@ -164,6 +165,22 @@ const Form = ({ getUserData, sales }) => {
                   setDataSaved(false);
                 }}
               />
+              {dataSaved ? (
+                <AiOutlineClose
+                  size={20}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setDataSaved(true);
+                    setName("");
+                    setphone("");
+                    setemail("");
+                    setschool("");
+                    setSearchData("");
+                    setDataSaved(false);
+                  }}
+                />
+              ) : null}
+
               <div
                 style={
                   searchData?.length > 0 && dataSaved === false
@@ -186,13 +203,6 @@ const Form = ({ getUserData, sales }) => {
                           setemail(e.email);
                           setschool(e.institute_name);
                           setSearchData("");
-                          if (e.date_of_birth !== null) {
-                            const age =
-                              parseInt(
-                                new Date(Date.now).toString().slice(12, 16)
-                              ) - e.date_of_birth.getYear();
-                            setage(age);
-                          }
                         }}
                         key={i}
                       >

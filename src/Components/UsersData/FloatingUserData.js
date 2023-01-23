@@ -386,6 +386,7 @@ const FloatingUserData = ({
     pdf.save(`${name}`);
   };
 
+  console.log(name + " - " + batchDetails?.time);
   return (
     <>
       <ShowModal

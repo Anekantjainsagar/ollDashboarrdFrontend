@@ -51,6 +51,7 @@ const Bar = ({ report, getReports }) => {
     completedSessions: "",
     endDate: "",
     educator: "",
+    hrs: "",
   });
   const ref = useRef(null);
   useOutsideAlerter(ref, daysValue, setDays);
@@ -140,7 +141,7 @@ const Bar = ({ report, getReports }) => {
                           name: "",
                           phone: "",
                           email: "",
-                          amount: "",
+                          amount: parseInt(report?.price),
                         });
                       }
                     });
@@ -207,19 +208,21 @@ const Bar = ({ report, getReports }) => {
             </div>
             <div
               className={styles.daysDisplay}
+              ref={ref}
               style={
                 daysValue
                   ? {
                       display: "block",
                       left: "27.4%",
                       top: `${daysPositio.y + 30}px`,
+                      zIndex: 10,
                     }
                   : { display: "none" }
               }
             >
               {days?.map((e, i) => {
                 return (
-                  <div key={i} ref={ref}>
+                  <div key={i}>
                     <input
                       type="checkbox"
                       value={e}
@@ -228,12 +231,12 @@ const Bar = ({ report, getReports }) => {
                           ? batchDetails?.days.includes(e)
                           : report?.batchDetails?.days.includes(e)
                       }
-                      style={{ width: "10%", margin: "1rem" }}
-                      onChange={async (e) => {
-                        setBatchDetails({
-                          ...batchDetails,
-                          days: [...batchDetails.days],
-                        });
+                      style={{
+                        width: "10%",
+                        margin: "1rem",
+                        cursor: "pointer",
+                      }}
+                      onClick={async (e) => {
                         if (
                           batchDetails?.days?.includes(e.target.value) === false
                         ) {
@@ -308,6 +311,24 @@ const Bar = ({ report, getReports }) => {
                   })
                 }
                 placeholder="Time"
+              />
+            </div>
+            <div className={styles.div}>
+              <p style={{ textAlign: "center" }}>Hours</p>
+              <input
+                type="number"
+                value={
+                  batchDetails?.hrs
+                    ? batchDetails?.hrs
+                    : report?.batchDetails?.hrs
+                }
+                onChange={(e) =>
+                  setBatchDetails({
+                    ...batchDetails,
+                    hrs: e.target.value,
+                  })
+                }
+                placeholder="Hours"
               />
             </div>
             <div className={styles.div}>
@@ -396,6 +417,7 @@ const Bar = ({ report, getReports }) => {
                   batchDetails?.noOfSessions?.length > 0 &&
                   batchDetails?.endDate?.length > 0 &&
                   batchDetails?.completedSessions?.length > 0 &&
+                  batchDetails?.hrs?.length > 0 &&
                   batchDetails?.educator?.length > 0
                 ) {
                   axios
@@ -504,6 +526,15 @@ const Bar = ({ report, getReports }) => {
                   ) {
                     const notify = () =>
                       toast("Please fill Educator name", {
+                        type: "warning",
+                      });
+                    notify();
+                  } else if (
+                    batchDetails?.hrs.length === 0 ||
+                    batchDetails?.hrs.length === ""
+                  ) {
+                    const notify = () =>
+                      toast("Please fill Hours", {
                         type: "warning",
                       });
                     notify();

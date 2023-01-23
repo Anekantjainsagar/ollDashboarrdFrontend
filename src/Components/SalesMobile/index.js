@@ -44,7 +44,7 @@ const SalesMobile = ({ sales }) => {
         age: parseInt(user?.age),
         school: user?.school,
         course: user?.course,
-        source: user?.source,
+        source: user?.source === "Other" ? user?.sourceInput : user?.source,
         mode: user?.mode,
         type: user?.type,
         address: user?.address,
