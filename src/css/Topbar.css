@@ -97,6 +97,7 @@ form {
   width: 20%;
   left: 21%;
   z-index: 10;
+  overflow: scroll;
 }
 
 .detailsBtnContainer .header {

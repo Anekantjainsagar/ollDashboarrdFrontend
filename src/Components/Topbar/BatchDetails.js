@@ -62,7 +62,12 @@ const BatchDetails = ({
       className="detailsBtnContainer"
       style={
         details === true
-          ? { display: "block", top: `${height + 30}px` }
+          ? {
+              display: "block",
+              top: `${height + 30}px`,
+              width: "20%",
+              height: "50vh",
+            }
           : { display: "none" }
       }
     >

@@ -1,4 +1,4 @@
-.main {
+.mainBox {
   height: 100vh;
   width: 100vw;
   background-color: black;
@@ -6,7 +6,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.mainBox h1 {
+  color: white;
+  font-size: 2.5rem;
+  padding-top: 2rem;
+  font-weight: 600;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+  width: 100%;
+  align-items: center;
 }
 
 .main input,

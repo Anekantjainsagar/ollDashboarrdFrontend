@@ -34,7 +34,6 @@ const Form = ({ getUserData, sales }) => {
   const [etime, setetime] = useState(times[index]);
   const [price, setprice] = useState();
   const [totalPrice, settotalPrice] = useState();
-
   const [dataSaved, setDataSaved] = useState(false);
   const [dataLocation, setDataLocation] = useState({ x: "", y: "" });
   const [searchData, setSearchData] = useState("");
