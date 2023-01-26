@@ -28,6 +28,7 @@ const Home = () => {
     source: "all",
     offer: "all",
   });
+  const [search, setSearch] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [dbFilters, setDbFilters] = useState({
     name: "",
@@ -74,7 +75,11 @@ const Home = () => {
 
   const getUsers = () => {
     axios
-      .get(`${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 20}`)
+      .get(
+        `${MONITOR_BACKEND}/getUsers?page=${page}&size=${
+          page * 20
+        }&search=${search}`
+      )
       .then((response) => {
         setUsers(response.data.users);
         setTotalNoOfUsers(response.data.noOfUsers);
@@ -137,7 +142,14 @@ const Home = () => {
       })
       .filter((e) => {
         if (dbFilters.principal !== undefined && dbFilters.principal !== "") {
-          return e.principal?.name.toLowerCase().includes(dbFilters.principal);
+          return (
+            e.principal?.name
+              .toLowerCase()
+              .includes(dbFilters.principal.toLowerCase()) ||
+            e["Principal Name"]
+              .toLowerCase()
+              .includes(dbFilters.principal.toLowerCase())
+          );
         } else {
           return e;
         }
@@ -239,7 +251,7 @@ const Home = () => {
 
   useEffect(() => {
     getUsers();
-  }, [page]);
+  }, [page, search]);
 
   return (
     <div className={styles.home}>
@@ -268,6 +280,8 @@ const Home = () => {
               programs={programs}
               filter={filter}
               setFilter={setFilter}
+              search={search}
+              setSearch={setSearch}
             />
           }
         />

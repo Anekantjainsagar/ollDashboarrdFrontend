@@ -383,7 +383,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
               <input
                 type="text"
                 placeholder="Name"
-                value={schools["Principal Name"]}
+                value={
+                  schools["Principal Name"]?.length > 0
+                    ? schools["Principal Name"]
+                    : schools?.principal?.name
+                }
                 onChange={(e) =>
                   setSchool({
                     ...school,
@@ -394,7 +398,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
               <input
                 type="text"
                 placeholder="Email"
-                value={schools["Principal Email"]}
+                value={
+                  schools["Principal Email"]
+                    ? schools["Principal Email"]
+                    : schools?.principal?.email
+                }
                 onChange={(e) =>
                   setSchool({
                     ...school,
@@ -405,7 +413,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
               <input
                 type="text"
                 placeholder="Phone"
-                value={schools["Principal Phone"]}
+                value={
+                  schools["Principal Phone"]
+                    ? schools["Principal Phone"]
+                    : principal?.phone
+                }
                 onChange={(e) =>
                   setSchool({
                     ...school,

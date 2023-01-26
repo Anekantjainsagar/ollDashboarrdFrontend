@@ -27,8 +27,9 @@ const RightSection = ({
   filter,
   setFilter,
   filteredUsers,
+  search,
+  setSearch,
 }) => {
-  const [search, setSearch] = useState("");
   return (
     <div className={styles.mainPanel}>
       <div
@@ -42,7 +43,7 @@ const RightSection = ({
         <input
           type="text"
           style={{ width: "30%" }}
-          placeholder="Search Id / School name..."
+          placeholder="Search by School name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -62,35 +63,22 @@ const RightSection = ({
           offers={offers}
         />
         <div className={styles.usersDisplayContainer}>
-          {filteredUsers
-            .filter((e) => {
-              if (search?.length > 0) {
-                if (Number.isInteger(parseInt(search))) {
-                  return e?.id.toString().includes(search.toString());
-                } else {
-                  return e?.schoolName
-                    .toLowerCase()
-                    .includes(search.toLowerCase());
-                }
-              }
-              return e;
-            })
-            .map((user, i) => {
-              return (
-                <UserBar
-                  user={user}
-                  key={i}
-                  schools={schools}
-                  getUsers={getUsers}
-                  getMeetings={getMeetings}
-                  getFollowUps={getFollowUps}
-                  getOffers={getOffers}
-                  getPrograms={getPrograms}
-                  programs={programs}
-                  followUp={followUp}
-                />
-              );
-            })}
+          {filteredUsers.map((user, i) => {
+            return (
+              <UserBar
+                user={user}
+                key={i}
+                schools={schools}
+                getUsers={getUsers}
+                getMeetings={getMeetings}
+                getFollowUps={getFollowUps}
+                getOffers={getOffers}
+                getPrograms={getPrograms}
+                programs={programs}
+                followUp={followUp}
+              />
+            );
+          })}
           {noOfUsers ? (
             noOfUsers <= page * 10 ? null : (
               <div

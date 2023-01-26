@@ -34,10 +34,6 @@ const DbHeader = ({ getSchools, schools }) => {
       school["Trustee Email"] = school.trustee?.email;
       school["Trustee Phone"] = school.trustee?.phone;
       school["Trustee Role"] = school.trustee?.role;
-      delete school["principal"];
-      delete school["coordinator"];
-      delete school["trustee"];
-      delete school["logo"];
     });
     setSchoolsToExport(exports);
   };

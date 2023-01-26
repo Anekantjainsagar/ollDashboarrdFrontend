@@ -47,7 +47,7 @@ const DbUserBar = ({ school, getSchools }) => {
             <p className={styles.coordinator}>{school?.phone}</p>
             <p className={styles.location}>{school?.city}</p>
             <p className={styles.principal}>
-              {school["Principal Name"]
+              {school["Principal Name"]?.length > 0
                 ? school["Principal Name"]
                 : school?.principal?.name}
             </p>
