@@ -79,7 +79,7 @@ const FloatingUserData = ({
       return e?._id === user?.schoolId;
     });
     setSchool(sch);
-  }, [schools]);
+  }, [user]);
 
   const [costing, setCosting] = useState({
     commission: "",

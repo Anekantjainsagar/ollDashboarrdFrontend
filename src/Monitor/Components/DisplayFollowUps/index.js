@@ -9,7 +9,7 @@ const DisplayFollowUps = ({ followUp, user, schools }) => {
       return follow.userId === user._id;
     });
     setUserFollowUps(follows);
-  }, []);
+  }, [user, schools]);
 
   return (
     <div>
