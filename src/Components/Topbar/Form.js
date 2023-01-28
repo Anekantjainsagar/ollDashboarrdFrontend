@@ -145,6 +145,7 @@ const Form = ({ getUserData, sales }) => {
         openModal={openModal}
         setIsOpen={setIsOpen}
         setDataSaved={setDataSaved}
+        getUserData={getUserData}
       />
       <div className="inputUserContainer">
         <form action="" style={{ display: "flex", alignItems: "center" }}>
@@ -199,15 +200,18 @@ const Form = ({ getUserData, sales }) => {
                         onClick={() => {
                           setDataSaved(true);
                           setName(e.name);
-                          setphone(e.mobile);
+                          setphone(e.mobile ? e.mobile : e.phone);
                           setemail(e.email);
-                          setschool(e.institute_name);
+                          setschool(
+                            e.institute_name ? e.institute_name : e.school
+                          );
+                          setage(e?.age);
                           setSearchData("");
                         }}
                         key={i}
                       >
                         <p style={{ paddingBottom: "0.25rem" }}>{e.name}</p>
-                        <p>{e.mobile}</p>
+                        <p>{e.mobile ? e.mobile : e.phone}</p>
                       </div>
                     );
                   })}
@@ -218,10 +222,11 @@ const Form = ({ getUserData, sales }) => {
                     textAlign: "center",
                     marginBottom: "0.5rem",
                   }}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(true);
                     setDataSaved(true);
                     setSearchData("");
-                    setIsOpen(true);
                   }}
                 >
                   Add New

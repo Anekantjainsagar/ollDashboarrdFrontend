@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import array from "../../Screens/Database/array";
 import SchoolModal from "../SchoolModal/index";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const DbHeader = ({ getSchools, schools }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
