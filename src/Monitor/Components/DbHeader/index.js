@@ -3,9 +3,14 @@ import styles from "./style.module.css";
 import array from "../../Screens/Database/array";
 import SchoolModal from "../SchoolModal/index";
 import { CSVLink, CSVDownload } from "react-csv";
+import axios from "axios";
+import MONITOR_BACKEND from "../../Utils";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const DbHeader = ({ getSchools, schools }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [file, setFile] = useState();
   const [schoolsToExport, setSchoolsToExport] = useState([]);
   function openModal() {
     setIsOpen(true);
@@ -37,6 +42,7 @@ const DbHeader = ({ getSchools, schools }) => {
     });
     setSchoolsToExport(exports);
   };
+
   useEffect(() => {
     updateSchools();
   }, [schools]);
@@ -52,6 +58,48 @@ const DbHeader = ({ getSchools, schools }) => {
       <div className={styles.head}>
         <h1>Database</h1>
         <div className={styles.rSection}>
+          <form
+            encType="multipart/form-data"
+            method="post"
+            style={{ width: "45%" }}
+          >
+            <input
+              type="file"
+              style={{ width: "100%" }}
+              name="uploadfile"
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+            />
+            {file ? (
+              <button
+                style={{ width: "40%" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData();
+                  formData.append("uploadfile", file);
+                  axios
+                    .post(`${MONITOR_BACKEND}/uploadSchool`, formData)
+                    .then((res) => {
+                      if (res?.data[0]?._id) {
+                        getSchools();
+                        const notify = () =>
+                          toast("School Saved Successfully", {
+                            type: "success",
+                          });
+                        notify();
+                        setFile("");
+                      }
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                Import
+              </button>
+            ) : null}
+          </form>
           <CSVLink
             data={schoolsToExport}
             filename="Schools"

@@ -8,11 +8,11 @@ const Bar = ({ follow, schools, getFollowUps, getUsers }) => {
   const [school, setSchool] = useState("");
 
   useEffect(() => {
-    const sch = schools?.find((e) => {
-      return e?._id === follow?.schoolId;
+    const sch = schools?.filter((e) => {
+      return follow?.name === e?.name;
     });
-    setSchool(sch);
-  }, [schools, follow?.schoolId]);
+    setSchool(sch[0]);
+  }, [follow]);
 
   const [followUpModal, setFollowUpModal] = useState(false);
   function openFollowModal() {
@@ -47,9 +47,10 @@ const Bar = ({ follow, schools, getFollowUps, getUsers }) => {
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
+              wordBreak: "normal",
             }}
           >
-            <p>{school?.email}</p>
+            <p style={{ wordBreak: "normal" }}>{school?.email}</p>
             <p>{school?.phone}</p>
           </div>
           <div className={styles.btnBox}>
