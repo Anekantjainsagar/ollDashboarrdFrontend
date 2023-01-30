@@ -63,31 +63,6 @@ function Sales({ sales }) {
   useEffect(() => {
     var searchFilter = data
       ?.filter((e) => {
-        if (filterBySearch !== undefined && filterBySearch !== "") {
-          if (isNaN(filterBySearch) === true) {
-            if (e.name.toLowerCase().includes(filterBySearch)) {
-              return e;
-            }
-          } else {
-            filterBySearch = filterBySearch;
-            if (filterBySearch.toString().length > e?.id.toString().length) {
-              if (
-                e?.phone.toString().includes(filterBySearch) ||
-                (e?.cCode?.toString() + e?.phone?.toString()).includes(
-                  filterBySearch
-                )
-              ) {
-                return e;
-              }
-            } else if (e?.id.toString().includes(filterBySearch)) {
-              return e;
-            }
-          }
-        } else {
-          return e;
-        }
-      })
-      .filter((e) => {
         if (filter.stage !== "") {
           if (filter.stage == "all") {
             return e;
