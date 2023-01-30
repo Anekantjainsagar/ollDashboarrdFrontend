@@ -12,7 +12,7 @@ import UsersData from "../UsersData/UsersData";
 
 function Sales({ sales }) {
   const [data, setdata] = useState();
-  let [filterBySearch, setfilterBySearch] = useState();
+  let [filterBySearch, setfilterBySearch] = useState("");
   const [filter, setFilter] = useState({ stage: "", status: "", class: "" });
   const [filteredData, setfilteredData] = useState(data);
   const [page, setpage] = useState(1);
@@ -42,7 +42,11 @@ function Sales({ sales }) {
 
   const getUserData = () => {
     axios
-      .get(`${BASE_URL}/getUser?page=${page}&size=${page * 10}`)
+      .get(
+        `${BASE_URL}/getUser?page=${page}&size=${
+          page * 10
+        }&search=${filterBySearch}`
+      )
       .then((res) => {
         setdata(res.data.users);
         setnoOfUsers(res.data.NoOfUsers - 1);
@@ -54,7 +58,7 @@ function Sales({ sales }) {
 
   useEffect(() => {
     getUserData();
-  }, [page, data]);
+  }, [page, data, filterBySearch]);
 
   useEffect(() => {
     var searchFilter = data
