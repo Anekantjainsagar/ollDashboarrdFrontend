@@ -42,120 +42,121 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
     noOfStudents,
     schoolFee,
     category,
-    principal,
-    trustee,
-    coordinator,
   } = schools;
 
   const [school, setSchool] = useState({
-    name: "",
-    website: "",
-    address: "",
-    city: "",
-    state: "",
-    email: "",
-    phone: "",
-    schoolLink: "",
-    board: "",
-    type: "",
-    noOfStudents: "",
-    schoolFee: "",
-    category: "",
+    name: undefined,
+    website: undefined,
+    address: undefined,
+    city: undefined,
+    state: undefined,
+    email: undefined,
+    phone: undefined,
+    schoolLink: undefined,
+    board: undefined,
+    type: undefined,
+    noOfStudents: undefined,
+    schoolFee: undefined,
+    category: undefined,
     principal: {
-      name: "",
-      email: "",
-      phone: "",
-      role: "",
+      name: undefined,
+      email: undefined,
+      phone: undefined,
+      role: undefined,
     },
     trustee: {
-      name: "",
-      email: "",
-      phone: "",
-      role: "",
+      name: undefined,
+      email: undefined,
+      phone: undefined,
+      role: undefined,
     },
     coordinator: {
-      name: "",
-      email: "",
-      phone: "",
-      role: "",
+      name: undefined,
+      email: undefined,
+      phone: undefined,
+      role: undefined,
     },
   });
   const [logo, setLogo] = useState({});
 
   const updateSchool = () => {
-    var id;
+    const updatedSchool = {
+      id: schools?._id,
+      name: school?.name === undefined ? name : school?.name,
+      email: school?.email === undefined ? email : school?.email,
+      phone: school?.phone === undefined ? phone : school?.phone,
+      address: school?.address === undefined ? address : school?.address,
+      website: school?.website === undefined ? website : school?.website,
+      city: school?.city === undefined ? city : school?.city,
+      state: school?.state === undefined ? state : school?.state,
+      schoolLink:
+        school?.schoolLink === undefined ? schoolLink : school?.schoolLink,
+      board: school?.board === undefined ? board : school?.board,
+      type: school?.type === undefined ? type : school?.type,
+      noOfStudents:
+        school?.noOfStudents === undefined
+          ? noOfStudents
+          : school?.noOfStudents,
+      schoolFee:
+        school?.schoolFee === undefined ? schoolFee : school?.schoolFee,
+      category: school?.category === undefined ? category : school?.category,
+      principal: {
+        name:
+          school?.principal?.name === undefined
+            ? schools["Principal Name"]
+            : school?.principal?.name,
+        email:
+          school?.principal?.email === undefined
+            ? schools["Principal Email"]
+            : school?.principal?.email,
+        phone:
+          school?.principal?.phone === undefined
+            ? schools["Principal Phone"]
+            : school?.principal?.phone,
+        role:
+          school?.principal?.role === undefined
+            ? schools["Principal Role"]
+            : school?.principal?.role,
+      },
+      trustee: {
+        name:
+          school?.trustee?.name === undefined
+            ? schools["Trustee Name"]
+            : school?.trustee?.name,
+        email:
+          school?.trustee?.email === undefined
+            ? schools["Trustee Email"]
+            : school?.trustee?.email,
+        phone:
+          school?.trustee?.phone === undefined
+            ? schools["Trustee Phone"]
+            : school?.trustee?.phone,
+        role:
+          school?.trustee?.role === undefined
+            ? schools["Trustee Role"]
+            : school?.trustee?.role,
+      },
+      coordinator: {
+        name:
+          school?.coordinator?.name === undefined
+            ? schools["Coordinator Name"]
+            : school?.coordinator?.name,
+        email:
+          school?.coordinator?.email === undefined
+            ? schools["Coordinator Email"]
+            : school?.coordinator?.email,
+        phone:
+          school?.coordinator?.phone === undefined
+            ? schools["Coordinator Phone"]
+            : school?.coordinator?.phone,
+        role:
+          school?.coordinator?.role === undefined
+            ? schools["Coordinator Role"]
+            : school?.coordinator?.role,
+      },
+    };
     axios
-      .put(`${MONITOR_BACKEND}/updateSchool`, {
-        id: schools?._id,
-        name: school?.name === "" ? name : school?.name,
-        email: school?.email === "" ? email : school?.email,
-        phone: school?.phone === "" ? phone : school?.phone,
-        address: school?.address === "" ? address : school?.address,
-        website: school?.website === "" ? website : school?.website,
-        city: school?.city === "" ? city : school?.city,
-        state: school?.state === "" ? state : school?.state,
-        schoolLink: school?.schoolLink === "" ? schoolLink : school?.schoolLink,
-        board: school?.board === "" ? board : school?.board,
-        type: school?.type === "" ? type : school?.type,
-        noOfStudents:
-          school?.noOfStudents === "" ? noOfStudents : school?.noOfStudents,
-        schoolFee: school?.schoolFee === "" ? schoolFee : school?.schoolFee,
-        category: school?.category === "" ? category : school?.category,
-        principal: {
-          name:
-            school?.principal?.name === ""
-              ? schools["Principal Name"]
-              : school?.principal?.name,
-          email:
-            school?.principal?.email === ""
-              ? schools["Principal Email"]
-              : school?.principal?.email,
-          phone:
-            school?.principal?.phone === ""
-              ? schools["Principal Phone"]
-              : school?.principal?.phone,
-          role:
-            school?.principal?.role === ""
-              ? schools["Principal Role"]
-              : school?.principal?.role,
-        },
-        trustee: {
-          name:
-            school?.trustee?.name === ""
-              ? schools["Trustee Name"]
-              : school?.trustee?.name,
-          email:
-            school?.trustee?.email === ""
-              ? schools["Trustee Email"]
-              : school?.trustee?.email,
-          phone:
-            school?.trustee?.phone === ""
-              ? schools["Trustee Phone"]
-              : school?.trustee?.phone,
-          role:
-            school?.trustee?.role === ""
-              ? schools["Trustee Role"]
-              : school?.trustee?.role,
-        },
-        coordinator: {
-          name:
-            school?.coordinator?.name === ""
-              ? schools["Coordinator Name"]
-              : school?.coordinator?.name,
-          email:
-            school?.coordinator?.email === ""
-              ? schools["Coordinator Email"]
-              : school?.coordinator?.email,
-          phone:
-            school?.coordinator?.phone === ""
-              ? schools["Coordinator Phone"]
-              : school?.coordinator?.phone,
-          role:
-            school?.coordinator?.role === ""
-              ? schools["Coordinator Role"]
-              : school?.coordinator?.role,
-        },
-      })
+      .put(`${MONITOR_BACKEND}/updateSchool`, updatedSchool)
       .then((response) => {
         console.log(response);
         if (response.data.modifiedCount > 0) {
@@ -246,7 +247,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
               <input
                 className={styles.mInput}
                 type="text"
-                value={school?.name === "" ? name : school?.name}
+                value={school?.name === undefined ? name : school?.name}
                 onChange={(e) => setSchool({ ...school, name: e.target.value })}
                 placeholder="Name *"
               />
@@ -257,7 +258,9 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
               <input
                 className={styles.mInput}
                 type="url"
-                value={school?.website === "" ? website : school?.website}
+                value={
+                  school?.website === undefined ? website : school?.website
+                }
                 onChange={(e) =>
                   setSchool({ ...school, website: e.target.value })
                 }
@@ -269,7 +272,9 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="Address"
-                value={school?.address === "" ? address : school?.address}
+                value={
+                  school?.address === undefined ? address : school?.address
+                }
                 onChange={(e) =>
                   setSchool({ ...school, address: e.target.value })
                 }
@@ -278,14 +283,14 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="City"
-                value={school?.city === "" ? city : school?.city}
+                value={school?.city === undefined ? city : school?.city}
                 onChange={(e) => setSchool({ ...school, city: e.target.value })}
               />
               <input
                 className={styles.mInput}
                 type="text"
                 placeholder="State"
-                value={school?.state === "" ? state : school?.state}
+                value={school?.state === undefined ? state : school?.state}
                 onChange={(e) =>
                   setSchool({ ...school, state: e.target.value })
                 }
@@ -296,7 +301,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="email"
                 placeholder="Email ID"
-                value={school?.email === "" ? email : school?.email}
+                value={school?.email === undefined ? email : school?.email}
                 onChange={(e) =>
                   setSchool({ ...school, email: e.target.value })
                 }
@@ -305,7 +310,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="number"
                 placeholder="Phone *"
-                value={school?.phone === "" ? phone : school?.phone}
+                value={school?.phone === undefined ? phone : school?.phone}
                 onChange={(e) =>
                   setSchool({ ...school, phone: e.target.value })
                 }
@@ -315,7 +320,9 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="url"
                 placeholder="School Link"
                 value={
-                  school?.schoolLink === "" ? schoolLink : school?.schoolLink
+                  school?.schoolLink === undefined
+                    ? schoolLink
+                    : school?.schoolLink
                 }
                 onChange={(e) =>
                   setSchool({ ...school, schoolLink: e.target.value })
@@ -327,7 +334,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="Board"
-                value={school?.board === "" ? board : school?.board}
+                value={school?.board === undefined ? board : school?.board}
                 onChange={(e) =>
                   setSchool({ ...school, board: e.target.value })
                 }
@@ -336,7 +343,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="Type"
-                value={school?.type === "" ? type : school?.type}
+                value={school?.type === undefined ? type : school?.type}
                 onChange={(e) => setSchool({ ...school, type: e.target.value })}
               />
               <input
@@ -344,7 +351,7 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="number"
                 placeholder="No. of Students"
                 value={
-                  school?.noOfStudents === ""
+                  school?.noOfStudents === undefined
                     ? noOfStudents
                     : school?.noOfStudents
                 }
@@ -358,7 +365,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="School Fees"
-                value={school?.schoolFee === "" ? schoolFee : school?.schoolFee}
+                value={
+                  school?.schoolFee === undefined
+                    ? schoolFee
+                    : school?.schoolFee
+                }
                 onChange={(e) =>
                   setSchool({ ...school, schoolFee: e.target.value })
                 }
@@ -367,7 +378,9 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 className={styles.mInput}
                 type="text"
                 placeholder="Category"
-                value={school?.category === "" ? category : school?.category}
+                value={
+                  school?.category === undefined ? category : school?.category
+                }
                 onChange={(e) =>
                   setSchool({ ...school, category: e.target.value })
                 }
@@ -384,9 +397,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Name"
                 value={
-                  schools["Principal Name"]?.length > 0
+                  school?.principal?.name === undefined
                     ? schools["Principal Name"]
-                    : schools?.principal?.name
+                      ? schools["Principal Name"]
+                      : schools?.principal?.name
+                    : school?.principal?.name
                 }
                 onChange={(e) =>
                   setSchool({
@@ -399,9 +414,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Email"
                 value={
-                  schools["Principal Email"]
+                  school?.principal?.email === undefined
                     ? schools["Principal Email"]
-                    : schools?.principal?.email
+                      ? schools["Principal Email"]
+                      : schools?.principal?.email
+                    : school?.principal?.email
                 }
                 onChange={(e) =>
                   setSchool({
@@ -414,9 +431,11 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Phone"
                 value={
-                  schools["Principal Phone"]
+                  school?.principal?.phone === undefined
                     ? schools["Principal Phone"]
-                    : principal?.phone
+                      ? schools["Principal Phone"]
+                      : schools?.principal?.phone
+                    : school?.principal?.phone
                 }
                 onChange={(e) =>
                   setSchool({
@@ -429,8 +448,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Role"
                 value={
-                  school?.principal?.role === ""
+                  school?.principal?.role === undefined
                     ? schools["Principal Role"]
+                      ? schools["Principal Role"]
+                      : schools?.principal?.role
                     : school?.principal?.role
                 }
                 onChange={(e) =>
@@ -452,8 +473,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Name"
                 value={
-                  school?.trustee?.name === ""
+                  school?.trustee?.name === undefined
                     ? schools["Trustee Name"]
+                      ? schools["Trustee Name"]
+                      : schools?.trustee?.name
                     : school?.trustee?.name
                 }
                 onChange={(e) =>
@@ -467,8 +490,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Email"
                 value={
-                  school?.trustee?.email === ""
+                  school?.trustee?.email === undefined
                     ? schools["Trustee Email"]
+                      ? schools["Trustee Email"]
+                      : schools?.trustee?.email
                     : school?.trustee?.email
                 }
                 onChange={(e) =>
@@ -482,8 +507,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Phone"
                 value={
-                  school?.trustee?.phone === ""
+                  school?.trustee?.phone === undefined
                     ? schools["Trustee Phone"]
+                      ? schools["Trustee Phone"]
+                      : schools?.trustee?.phone
                     : school?.trustee?.phone
                 }
                 onChange={(e) =>
@@ -497,8 +524,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Role"
                 value={
-                  school?.trustee?.role === ""
+                  school?.trustee?.role === undefined
                     ? schools["Trustee Role"]
+                      ? schools["Trustee Role"]
+                      : schools?.trustee?.role
                     : school?.trustee?.role
                 }
                 onChange={(e) =>
@@ -520,8 +549,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Name"
                 value={
-                  school?.coordinator?.name === ""
+                  school?.coordinator?.name === undefined
                     ? schools["Coordinator Name"]
+                      ? schools["Coordinator Name"]
+                      : schools?.coordinator?.name
                     : school?.coordinator?.name
                 }
                 onChange={(e) =>
@@ -538,8 +569,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Email"
                 value={
-                  school?.coordinator?.email === ""
+                  school?.coordinator?.email === undefined
                     ? schools["Coordinator Email"]
+                      ? schools["Coordinator Email"]
+                      : schools?.coordinator?.email
                     : school?.coordinator?.email
                 }
                 onChange={(e) =>
@@ -556,8 +589,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Phone"
                 value={
-                  school?.coordinator?.phone === ""
+                  school?.coordinator?.phone === undefined
                     ? schools["Coordinator Phone"]
+                      ? schools["Coordinator Phone"]
+                      : schools?.coordinator?.phone
                     : school?.coordinator?.phone
                 }
                 onChange={(e) =>
@@ -574,8 +609,10 @@ const ShowSchoolDetails = ({ setIsOpen, modalIsOpen, getSchools, schools }) => {
                 type="text"
                 placeholder="Role"
                 value={
-                  school?.coordinator?.role === ""
+                  school?.coordinator?.role === undefined
                     ? schools["Coordinator Role"]
+                      ? schools["Coordinator Role"]
+                      : schools?.coordinator?.role
                     : school?.coordinator?.role
                 }
                 onChange={(e) =>
