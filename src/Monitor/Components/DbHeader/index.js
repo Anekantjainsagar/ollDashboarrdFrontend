@@ -3,10 +3,11 @@ import styles from "./style.module.css";
 import array from "../../Screens/Database/array";
 import SchoolModal from "../SchoolModal/index";
 import { CSVLink } from "react-csv";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import fileDownload from "js-file-download";
 
 const DbHeader = ({ getSchools, schools }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -100,6 +101,22 @@ const DbHeader = ({ getSchools, schools }) => {
               </button>
             ) : null}
           </form>
+          <button
+            style={{ width: "23%" }}
+            onClick={(e) => {
+              e.preventDefault();
+              Axios({
+                url: `${MONITOR_BACKEND}/download/predefinedFormat`,
+                method: "GET",
+                responseType: "blob",
+              }).then((res) => {
+                console.log(res);
+                fileDownload(res.data, "format.csv");
+              });
+            }}
+          >
+            Predefined Fomat
+          </button>
           <CSVLink
             data={schoolsToExport}
             filename="Schools"
