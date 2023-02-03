@@ -3,11 +3,13 @@ import styles from "./style.module.css";
 import array from "../../Screens/Database/array";
 import SchoolModal from "../SchoolModal/index";
 import { CSVLink } from "react-csv";
-import axios, { Axios } from "axios";
+import axios from "axios";
+import Axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import fileDownload from "js-file-download";
+import "jspdf-autotable";
 
 const DbHeader = ({ getSchools, schools }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -111,7 +113,7 @@ const DbHeader = ({ getSchools, schools }) => {
                 responseType: "blob",
               }).then((res) => {
                 console.log(res);
-                fileDownload(res.data, "format.csv");
+                fileDownload(res.data, "format.xlsx");
               });
             }}
           >
