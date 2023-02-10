@@ -182,9 +182,9 @@ const App = () => {
       })
       .filter((e) => {
         if (dbFilters.location !== undefined && dbFilters.location !== "") {
-          return e.city
-            .toLowerCase()
-            .includes(dbFilters.location.toLowerCase());
+          return e?.city
+            ?.toLowerCase()
+            .includes(dbFilters?.location?.toLowerCase());
         } else {
           return e;
         }
