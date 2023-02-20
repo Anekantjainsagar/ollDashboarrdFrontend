@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./style.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import SchoolModal from "../SchoolModal/index";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils/index";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
+import B2BContext from "../../Context/B2BContext";
 
 const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
   const history = useNavigate();
+  const location = useLocation();
+  const b2b = useContext(B2BContext);
   const [user, setUser] = useState({
     schoolName: "",
     offer: "",
@@ -35,12 +38,25 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
   const [schoolKaId, setSchoolKaId] = useState("");
   const [sendEmail, setSendEmail] = useState(true);
 
+  useEffect(() => {
+    if (location.pathname.includes("b2b")) {
+      if (b2b?.login?.name !== "Vidushi") {
+        const agent = agents.find((e) =>
+          e?.name?.toLowerCase().includes(b2b?.login?.name.toLowerCase())
+        );
+        if (agent?.name?.length > 0) {
+          setUser({ ...user, handler: agent?.name });
+        }
+      }
+    }
+  }, [location.pathname]);
+
   function openModal() {
     setIsOpen(true);
   }
 
   const addUser = () => {
-    if (selectSchool.length > 0) {
+    if (selectSchool?.length > 0) {
       axios
         .post(`${MONITOR_BACKEND}/addUser`, {
           ...user,
@@ -157,7 +173,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
             type="text"
             placeholder="School"
             disabled={schoolSaved}
-            value={user.schoolName.length > 0 ? user.schoolName : selectSchool}
+            value={user.schoolName?.length > 0 ? user.schoolName : selectSchool}
             onClick={(e) => setSchoolLocation({ x: e.clientX, y: e.clientY })}
             onChange={(e) => {
               setSelectSchool(e.target.value);
@@ -176,7 +192,9 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {schools
               ?.filter((school) =>
-                school.name?.toLowerCase().includes(selectSchool?.toLowerCase())
+                school?.name
+                  ?.toLowerCase()
+                  .includes(selectSchool?.toLowerCase())
               )
               .map((e, i) => {
                 return (
@@ -191,7 +209,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
                     }}
                     key={i}
                   >
-                    {e.name}
+                    {e?.name}
                   </p>
                 );
               })}
@@ -212,7 +230,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
             type="text"
             placeholder="Offer"
             disabled={offerSaved}
-            value={user.offer.length > 0 ? user.offer : selectOffer}
+            value={user.offer?.length > 0 ? user.offer : selectOffer}
             onClick={(e) => setofferLocation({ x: e.clientX, y: e.clientY })}
             onChange={(e) => {
               setselectOffer(e.target.value);
@@ -232,18 +250,18 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {offers
               ?.filter((offer) =>
-                offer.name?.toLowerCase().includes(selectOffer?.toLowerCase())
+                offer?.name?.toLowerCase().includes(selectOffer?.toLowerCase())
               )
               .map((e, i) => {
                 return (
                   <p
                     onClick={() => {
-                      setUser({ ...user, offer: e.name });
+                      setUser({ ...user, offer: e?.name });
                       setofferSaved(true);
                     }}
                     key={i}
                   >
-                    {e.name}
+                    {e?.name}
                   </p>
                 );
               })}
@@ -298,7 +316,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           <input
             type="text"
             placeholder="Handler"
-            value={user.handler.length > 0 ? user.handler : selectHandler}
+            value={user.handler?.length > 0 ? user.handler : selectHandler}
             onChange={(e) => {
               setselectHandler(e.target.value);
             }}
@@ -319,18 +337,20 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           >
             {agents
               ?.filter((agent) =>
-                agent.name?.toLowerCase().includes(selectHandler?.toLowerCase())
+                agent?.name
+                  ?.toLowerCase()
+                  .includes(selectHandler?.toLowerCase())
               )
               .map((e, i) => {
                 return (
                   <p
                     onClick={() => {
-                      setUser({ ...user, handler: e.name });
+                      setUser({ ...user, handler: e?.name });
                       sethandlerSaved(true);
                     }}
                     key={i}
                   >
-                    {e.name}
+                    {e?.name}
                   </p>
                 );
               })}

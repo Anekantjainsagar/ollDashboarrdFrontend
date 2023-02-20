@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Sales from "./Components/Sales/index";
 import Login from "./Components/Login/Login";
@@ -18,12 +18,14 @@ import ProgramReport from "./Monitor/Screens/ProgramReport";
 import ProgramReportDetails from "./Monitor/Screens/ProgramReportDetails";
 import Mobile from "./Monitor/Screens/Mobile/index";
 import SalesMobile from "./Components/SalesMobile";
+import B2BContext from "./Monitor/Context/B2BContext";
 
 const App = () => {
   const history = useNavigate();
   const location = useLocation();
   const [sales, setsales] = useState([]);
   const [checkUser, setcheck] = useState([]);
+  const b2b = useContext(B2BContext);
 
   const check = async () => {
     await axios
@@ -34,6 +36,7 @@ const App = () => {
         const obj = res.data.message;
         if (Object.keys(obj)[0] === "_id") {
           setcheck(res.data.message);
+          b2b.setLogin(res.data.message);
         }
       })
       .catch((err) => {
@@ -48,6 +51,7 @@ const App = () => {
       if (token?.length > 0) {
         await check();
         if (Object.keys(checkUser)[0] === "_id") {
+          b2b.setLogin(checkUser);
           history(`/${checkUser?.type}`);
         }
       } else {

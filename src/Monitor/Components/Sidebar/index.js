@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import B2BContext from "../../Context/B2BContext";
 
 const Sidebar = () => {
   const location = useLocation();
   const history = useNavigate();
+  const b2b = useContext(B2BContext);
 
   return (
     <div className={styles.Sidebar}>
+      <div
+        className={styles.optionSelected}
+        style={{ fontWeight: 900, textAlign: "center" }}
+      >
+        {b2b?.login?.name === "Vidushi"
+          ? "MASTER PANEL"
+          : `${b2b?.login?.name}'s PANEL`}
+      </div>
       <div
         className={
           location?.pathname === "/b2b"

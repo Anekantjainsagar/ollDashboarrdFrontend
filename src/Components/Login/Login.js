@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.css";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import axios from "axios";
@@ -6,9 +6,11 @@ import { BASE_URL } from "../../Utils/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import B2BContext from "../../Monitor/Context/B2BContext";
 
 const Login = ({ setsales }) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
+  const b2b = useContext(B2BContext);
 
   useEffect(() => {
     setInterval(() => {
@@ -48,6 +50,7 @@ const Login = ({ setsales }) => {
             );
           notify();
           localStorage.setItem("token", res.data.token);
+          b2b.setLogin(res.data.data[0]);
           setsales(res.data.data[0]);
         })
         .catch((err) => {

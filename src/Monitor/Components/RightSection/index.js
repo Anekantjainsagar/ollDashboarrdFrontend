@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 import NewLead from "../NewLead/index";
@@ -6,6 +6,8 @@ import UserHeading from "../UserHeading/index";
 import UserBar from "../UserBar/index";
 import FollowUp from "../../Components/FollowUp/index";
 import Meetings from "../../Components/Meetings/index";
+import B2BContext from "../../Context/B2BContext";
+import { useLocation } from "react-router-dom";
 
 const RightSection = ({
   users,
@@ -30,6 +32,18 @@ const RightSection = ({
   search,
   setSearch,
 }) => {
+  const b2b = useContext(B2BContext);
+  const location = useLocation();
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    if (b2b?.login?.type === "b2b") {
+      if (b2b?.login?.name !== "Vidushi") {
+        setUser(b2b?.login?.name);
+      }
+    }
+  }, [location.pathname]);
+
   return (
     <div className={styles.mainPanel}>
       <div
@@ -63,22 +77,29 @@ const RightSection = ({
           offers={offers}
         />
         <div className={styles.usersDisplayContainer}>
-          {filteredUsers.map((user, i) => {
-            return (
-              <UserBar
-                user={user}
-                key={i}
-                schools={schools}
-                getUsers={getUsers}
-                getMeetings={getMeetings}
-                getFollowUps={getFollowUps}
-                getOffers={getOffers}
-                getPrograms={getPrograms}
-                programs={programs}
-                followUp={followUp}
-              />
-            );
-          })}
+          {filteredUsers
+            ?.filter((e) => {
+              if (user?.length > 0) {
+                return e.handler.toLowerCase().includes(user.toLowerCase());
+              }
+              return e;
+            })
+            .map((user, i) => {
+              return (
+                <UserBar
+                  user={user}
+                  key={i}
+                  schools={schools}
+                  getUsers={getUsers}
+                  getMeetings={getMeetings}
+                  getFollowUps={getFollowUps}
+                  getOffers={getOffers}
+                  getPrograms={getPrograms}
+                  programs={programs}
+                  followUp={followUp}
+                />
+              );
+            })}
           {noOfUsers ? (
             noOfUsers <= page * 10 ? null : (
               <div
