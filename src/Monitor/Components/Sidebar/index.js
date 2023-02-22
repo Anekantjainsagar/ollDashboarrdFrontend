@@ -28,16 +28,19 @@ const Sidebar = () => {
       >
         Dashboard
       </div>
-      <div
-        className={
-          location?.pathname === "/agents"
-            ? `${styles.option}, ${styles.optionSelected}`
-            : `${styles.option}`
-        }
-        onClick={() => history("/agents")}
-      >
-        Agents
-      </div>
+      {b2b.login.name === "Vidushi" ? (
+        <div
+          className={
+            location?.pathname === "/agents"
+              ? `${styles.option}, ${styles.optionSelected}`
+              : `${styles.option}`
+          }
+          onClick={() => history("/agents")}
+        >
+          Agents
+        </div>
+      ) : null}
+
       <div
         className={
           location?.pathname === "/db"
