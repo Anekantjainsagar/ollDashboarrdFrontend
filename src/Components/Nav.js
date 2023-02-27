@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CSVLink } from "react-csv";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import B2BContext from "../Monitor/Context/B2BContext";
 import { BASE_URL } from "../Utils/index";
 
 const Nav = ({ sales }) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
   const [logoutBtn, setlogoutBtn] = useState(false);
   const history = useNavigate();
+  const b2b = useContext(B2BContext);
 
   const [exportData, setExportData] = useState([]);
 
@@ -46,7 +48,7 @@ const Nav = ({ sales }) => {
               Export
             </CSVLink>
           ) : null}
-          <p>{sales?.name}</p>
+          <p>{b2b?.login?.name}</p>
           <img
             src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
             alt="Profile"
@@ -71,7 +73,8 @@ const Nav = ({ sales }) => {
           padding: "0.5rem 2rem",
         }}
         onClick={() => {
-          localStorage.clear();
+          localStorage.removeItem("token");
+          b2b.setLogin({});
           history("/");
         }}
       >

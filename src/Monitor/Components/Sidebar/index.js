@@ -28,7 +28,7 @@ const Sidebar = () => {
       >
         Dashboard
       </div>
-      {b2b.login.name === "Vidushi" ? (
+      {b2b?.login?.name === "Vidushi" ? (
         <div
           className={
             location?.pathname === "/agents"
@@ -77,7 +77,12 @@ const Sidebar = () => {
             ? `${styles.option}, ${styles.optionSelected}`
             : `${styles.option}`
         }
-        onClick={() => history("/")}
+        onClick={() => {
+          localStorage.removeItem("token");
+          b2b.setLogin({});
+          history("/");
+          console.log(b2b.login);
+        }}
       >
         Logout
       </div>

@@ -33,7 +33,6 @@ const UsersData = ({
         <>
           {usersData?.length >= 0 ? (
             usersData.map((e, index) => {
-              console.log(e);
               return (
                 <User
                   getUserData={getUserData}

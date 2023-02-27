@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import B2BContext from "../../Monitor/Context/B2BContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setsales }) => {
   const [time, settime] = useState(new Date().toLocaleTimeString());
@@ -20,6 +21,7 @@ const Login = ({ setsales }) => {
 
   const [user, setUser] = useState({ email: "", password: "" });
   const [view, setView] = useState(false);
+  const history = useNavigate();
 
   const postData = async () => {
     localStorage.clear();
@@ -48,9 +50,10 @@ const Login = ({ setsales }) => {
                     : "error",
               }
             );
-          notify();
           localStorage.setItem("token", res.data.token);
+          history(`/${res?.data?.data[0]?.type}`);
           b2b.setLogin(res.data.data[0]);
+          notify();
           setsales(res.data.data[0]);
         })
         .catch((err) => {

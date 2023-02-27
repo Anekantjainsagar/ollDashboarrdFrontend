@@ -44,25 +44,23 @@ const App = () => {
       });
   };
 
-  const token = localStorage?.getItem("token");
+  console.log(b2b.login);
 
   const checkLogin = async () => {
     if (!window?.location?.href.includes("training/teacherOnboarding")) {
-      if (token?.length > 0) {
-        await check();
-        if (Object.keys(checkUser)[0] === "_id") {
-          b2b.setLogin(checkUser);
-          history(`/${checkUser?.type}`);
-        }
-      } else {
-        history("/");
+      await check();
+      if (Object.keys(b2b.login)[0] === "_id") {
+        b2b.setLogin(checkUser);
+        history(`/${b2b?.login?.type}`);
       }
+    } else {
+      history("/");
     }
   };
 
   useEffect(() => {
     checkLogin();
-  }, [token]);
+  }, []);
 
   const [users, setUsers] = useState([]);
   const [schools, setSchools] = useState([]);
