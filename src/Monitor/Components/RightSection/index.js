@@ -8,6 +8,9 @@ import FollowUp from "../../Components/FollowUp/index";
 import Meetings from "../../Components/Meetings/index";
 import B2BContext from "../../Context/B2BContext";
 import { useLocation } from "react-router-dom";
+import { CSVLink } from "react-csv";
+import axios from "axios";
+import MONITOR_BACKEND from "../../Utils";
 
 const RightSection = ({
   users,
@@ -44,6 +47,17 @@ const RightSection = ({
     }
   }, [location.pathname]);
 
+  const [b2bUser, setB2bUser] = useState([]);
+  const downloadData = () => {
+    axios.get(`${MONITOR_BACKEND}/getAllUsers`).then((res) => {
+      setB2bUser(res.data);
+    });
+  };
+
+  useEffect(() => {
+    downloadData();
+  }, []);
+
   return (
     <div className={styles.mainPanel}>
       <div
@@ -54,6 +68,16 @@ const RightSection = ({
         }}
       >
         <h1 className={styles.mainHead}>Leads</h1>
+        <CSVLink
+          data={b2bUser}
+          filename="B2BUsers"
+          className={styles.btns}
+          onClick={() => {
+            downloadData();
+          }}
+        >
+          Export
+        </CSVLink>
         <input
           type="text"
           style={{ width: "30%" }}

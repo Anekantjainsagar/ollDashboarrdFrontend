@@ -58,3 +58,15 @@
   background-color: transparent;
   color: #00a510;
 }
+
+.btns{
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  font-size: 1.76rem;
+  padding: 0.15rem 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
