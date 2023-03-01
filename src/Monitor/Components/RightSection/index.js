@@ -48,9 +48,12 @@ const RightSection = ({
   }, [location.pathname]);
 
   const [b2bUser, setB2bUser] = useState([]);
+  const [date, setDate] = useState("2023-01-01");
+
   const downloadData = () => {
     axios.get(`${MONITOR_BACKEND}/getAllUsers`).then((res) => {
-      setB2bUser(res.data);
+      const data = res.data.filter((e) => new Date(e.inqDate) > new Date(date));
+      setB2bUser(data);
     });
   };
 
@@ -68,16 +71,27 @@ const RightSection = ({
         }}
       >
         <h1 className={styles.mainHead}>Leads</h1>
-        <CSVLink
-          data={b2bUser}
-          filename="B2BUsers"
-          className={styles.btns}
-          onClick={() => {
-            downloadData();
-          }}
-        >
-          Export
-        </CSVLink>
+        <div style={{ width: "30%" }}>
+          <input
+            type="date"
+            style={{ width: "50%" }}
+            value={date}
+            onChange={(e) => {
+              setDate(e.target.value);
+              downloadData();
+            }}
+          />
+          <CSVLink
+            data={b2bUser}
+            filename="B2BUsers"
+            className={styles.btns}
+            onClick={() => {
+              downloadData();
+            }}
+          >
+            Export
+          </CSVLink>
+        </div>
         <input
           type="text"
           style={{ width: "30%" }}
