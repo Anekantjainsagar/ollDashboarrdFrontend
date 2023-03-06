@@ -49,10 +49,19 @@ const RightSection = ({
 
   const [b2bUser, setB2bUser] = useState([]);
   const [date, setDate] = useState("2023-01-01");
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
 
   const downloadData = () => {
     axios.get(`${MONITOR_BACKEND}/getAllUsers`).then((res) => {
-      const data = res.data.filter((e) => new Date(e.inqDate) > new Date(date));
+      const data = res.data.filter((e) => {
+        return (
+          new Date(e.inqDate) >= new Date(date) &&
+          new Date(e.inqDate) <= new Date(currentDate)
+        );
+      });
+      console.log(data);
       setB2bUser(data);
     });
   };
@@ -71,10 +80,17 @@ const RightSection = ({
         }}
       >
         <h1 className={styles.mainHead}>Leads</h1>
-        <div style={{ width: "30%" }}>
+        <div
+          style={{
+            width: "40%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
           <input
             type="date"
-            style={{ width: "50%" }}
+            style={{ width: "30%" }}
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
@@ -91,6 +107,15 @@ const RightSection = ({
           >
             Export
           </CSVLink>
+          <input
+            type="date"
+            style={{ width: "30%" }}
+            value={currentDate}
+            onChange={(e) => {
+              setCurrentDate(e.target.value);
+              downloadData();
+            }}
+          />
         </div>
         <input
           type="text"
