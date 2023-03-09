@@ -1012,7 +1012,7 @@ const FloatingUserData = ({
             </div>
           </div>
           <div>
-            <p>Start Date :</p>
+            <p>Batch Start Date :</p>
             <div
               style={{ display: "flex", justifyContent: "start", width: "75%" }}
             >
