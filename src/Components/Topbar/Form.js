@@ -10,6 +10,7 @@ import styles from "./style.module.css";
 import AddDataModal from "./AddDataModal";
 import StudentContext from "../Context/StudentsContext";
 import { AiOutlineClose } from "react-icons/ai";
+import B2BContext from "../../Monitor/Context/B2BContext";
 
 const Form = ({ getUserData, sales }) => {
   const [details, setDetails] = useState(false);
@@ -41,6 +42,7 @@ const Form = ({ getUserData, sales }) => {
   const [sourceInput, setSourceInput] = useState("");
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const b2b = useContext(B2BContext);
   function openModal() {
     setIsOpen(true);
   }
@@ -88,7 +90,7 @@ const Form = ({ getUserData, sales }) => {
             : sessionsCount,
         stage: "🔥 hot",
         status: "new",
-        assignee: sales?.name,
+        assignee: b2b?.login?.name,
         totalPrice,
       });
       if (res.status === 500) {
