@@ -38,7 +38,7 @@
   position: fixed;
   width: 95%;
   z-index: 0;
-  grid-template-columns: 5% 8% 12% 9% 10% 10% 13% 13% 10% 12%;
+  grid-template-columns: 4% 8% 11% 9% 10% 10% 12% 12% 10% 4% 12%;
   padding: 1rem 1.6rem;
 }
 
@@ -50,6 +50,7 @@
 .status,
 .actions,
 .source,
+.assignee,
 .stage,
 .classType {
   font-size: 1.6rem;
@@ -64,7 +65,7 @@
   background-color: rgb(48, 48, 48);
   display: grid;
   grid-template-rows: repeat(1, 1fr);
-  grid-template-columns: 5% 8% 12% 9% 10% 10% 13% 13% 10% 12%;
+  grid-template-columns: 4% 8% 11% 9% 10% 10% 12% 12% 10% 4% 12%;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   margin: 1.5rem 0;
@@ -79,6 +80,7 @@
 .actionsValue,
 .sourceValue,
 .stageValue,
+.assigneeValue,
 .classTypeValue {
   font-size: 1.6rem;
   padding: 0.2rem 0;

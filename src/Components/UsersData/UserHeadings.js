@@ -5,7 +5,12 @@ import "../../css/filters.css";
 const UserHeadings = ({ filter, setfilter }) => {
   return (
     <>
-      <div className="userPanelHeadings">
+      <div
+        className="userPanelHeadings"
+        style={{
+          gridTemplateColumns: "3% 8% 10% 9% 10% 10% 12% 12% 10% 7% 11%",
+        }}
+      >
         <p className="id">ID</p>
         <p className="inquiryDate">Inquiry Date</p>
         <p className="name">Name</p>
@@ -63,6 +68,7 @@ const UserHeadings = ({ filter, setfilter }) => {
         </p>
         <p className="actions">Actions</p>
         <p className="source">Source</p>
+        <p className="assignee">Assignee</p>
         <p className="stage">
           Stage
           <AiOutlineFilter

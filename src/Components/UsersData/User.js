@@ -41,6 +41,7 @@ const User = (props) => {
     stage,
     inqDate,
     email,
+    assignee,
     cCode,
   } = props.data;
 
@@ -160,10 +161,12 @@ const User = (props) => {
         onClick={() => {
           setDetails(!details);
         }}
-        style={{ cursor: "pointer" }}
+        style={{
+          cursor: "pointer",
+          gridTemplateColumns: "3% 8% 10% 9% 10% 10% 12% 12% 10% 7% 11%",
+        }}
       >
         <p className="idValue">{id}</p>
-        {/* <p className="idValue">{props.noOfUsers - props.index}</p> */}
         <p className="inquiryDateValue">{d.slice(4, 21)}</p>
         <p className="nameValue">{name}</p>
         <p className="phoneValue">{`${cCode ? cCode : ""}${phone}`}</p>
@@ -457,6 +460,7 @@ const User = (props) => {
           </CopyToClipboard>
         </p>
         <p className="sourceValue">{source}</p>
+        <p className="assigneeValue">{assignee}</p>
         <p className="stageValue" onClick={(e) => e.stopPropagation()}>
           <select
             style={{ width: "73%" }}
