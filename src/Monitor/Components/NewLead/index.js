@@ -20,6 +20,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
     mode: "",
     model: "",
     payment: "",
+    deadline: "",
   });
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
@@ -313,6 +314,25 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               }}
             />
           ) : null}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              width: "15%",
+            }}
+          >
+            <p>Deadline : </p>
+            <input
+              type="date"
+              style={{ width: "60%" }}
+              placeholder="Deadline"
+              value={user.deadline}
+              onChange={(e) => {
+                setUser({ ...user, deadline: e.target.value });
+              }}
+            />
+          </div>
           <input
             type="text"
             placeholder="Handler"

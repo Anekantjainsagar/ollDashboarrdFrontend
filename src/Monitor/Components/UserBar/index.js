@@ -32,6 +32,7 @@ const UserBar = ({
     _id,
     source,
     getOffers,
+    deadline,
     stage,
   } = user;
 
@@ -214,6 +215,10 @@ const UserBar = ({
           </div>
         </p>
         <p className={styles.handler}>{handler}</p>
+        <p className={styles.cmnt}>
+          {/* {Math.round(Math.abs((deadline - inqDate) / (24 * 60 * 60 * 1000)))} */}
+          {new Date(deadline).toString().slice(4, 16)}
+        </p>
       </div>
     </>
   );

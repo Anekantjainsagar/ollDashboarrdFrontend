@@ -1,6 +1,6 @@
 .bar {
   display: grid;
-  grid-template-columns: 6% 12.5% 15% 8% 12% 11% 13% 13% 8%;
+  grid-template-columns: 4% 10% 12% 8% 12% 11% 13% 13% 8% 8%;
   padding: 1.25rem 0;
   background-color: rgb(20, 20, 20);
   align-items: center;

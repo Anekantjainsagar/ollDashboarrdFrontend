@@ -163,6 +163,7 @@ const UserHeading = ({ filter, setFilter, agents, offers }) => {
           })}
         </select>
       </p>
+      <p className={styles.cmnt}>Deadline</p>
     </div>
   );
 };
