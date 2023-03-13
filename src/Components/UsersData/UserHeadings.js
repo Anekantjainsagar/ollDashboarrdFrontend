@@ -68,7 +68,7 @@ const UserHeadings = ({ filter, setfilter }) => {
         </p>
         <p className="actions">Actions</p>
         <p className="source">Source</p>
-        <p className="assignee">Assignee</p>
+        <p className="assignee">Handler</p>
         <p className="stage">
           Stage
           <AiOutlineFilter
