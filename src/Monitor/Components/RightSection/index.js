@@ -62,7 +62,6 @@ const RightSection = ({
           new Date(e.inqDate) <= new Date(currentDate)
         );
       });
-      console.log(data);
       setB2bUser(data);
     });
   };
@@ -70,6 +69,8 @@ const RightSection = ({
   useEffect(() => {
     downloadData();
   }, []);
+
+  console.log(filteredUsers);
 
   return (
     <div className={styles.mainPanel}>
@@ -192,7 +193,7 @@ const RightSection = ({
             <h1>Report</h1>
           </div>
           <div className={styles.data}>
-            <p>No of leads :- 0</p>
+            <p>No of leads :- {noOfUsers}</p>
             <p>
               No of followups :-{" "}
               {
