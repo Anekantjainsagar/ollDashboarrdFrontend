@@ -192,17 +192,29 @@ const RightSection = ({
             <h1>Report</h1>
           </div>
           <div className={styles.data}>
-            {followUp.map((follow, i) => {
-              return (
-                <Bar
-                  key={i}
-                  follow={follow}
-                  schools={schools}
-                  getFollowUps={getFollowUps}
-                  getUsers={getUsers}
-                />
-              );
-            })}
+            <p>No of leads :- 0</p>
+            <p>
+              No of followups :-{" "}
+              {
+                followUp?.filter((follow) => {
+                  return (
+                    new Date(Date.now()).toString().slice(4, 16) ===
+                    new Date(follow.startDate).toString().slice(4, 16)
+                  );
+                }).length
+              }
+            </p>
+            <p>
+              No of meetings :-{" "}
+              {
+                meetings.filter((meet) => {
+                  return (
+                    new Date(Date.now()).toString().slice(4, 16) ===
+                    new Date(meet.startDate).toString().slice(4, 16)
+                  );
+                }).length
+              }
+            </p>
           </div>
         </div>
       </div>

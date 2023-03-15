@@ -85,31 +85,18 @@
   justify-content: space-between;
 }
 
-.header select {
-  width: 30%;
-}
-
-.header select option {
-  background-color: black;
-  color: white;
-}
-
 .header h1 {
   font-size: 1.7rem;
   font-weight: 600;
 }
 
-.header .plus {
-  color: white;
-  cursor: pointer;
-  background-color: rgb(43, 43, 43);
-  border-radius: 50%;
-  padding: 0.5rem;
-}
-
 .data {
   overflow-y: scroll;
-  height: 25vh;
+  height: 12vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .bar {
@@ -119,49 +106,7 @@
   padding: 0.75rem 0;
 }
 
-.bar .barStyle {
-  color: white;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 15% 12% 25% 38% 10%;
-  padding: 0.5rem 0;
-}
-
-.bar .time,
-.bar .title,
-.bar .date {
-  text-align: center;
+.data p{
   font-size: 1.6rem;
-}
-
-.bar .btnBox {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.bar .btnBox button {
-  background-color: rgba(0, 165, 16, 1);
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.5s ease-in-out;
-}
-
-.bar .btnBox button:hover {
-  border: 1px solid white;
-}
-
-.btn {
-  font-size: 1.65rem;
-  color: white;
-  text-decoration: none;
-  background-color: #00a510;
-  padding: 0.5rem 1.5rem;
-  border-radius: 1rem;
+  padding: 0.65rem 0;
 }
