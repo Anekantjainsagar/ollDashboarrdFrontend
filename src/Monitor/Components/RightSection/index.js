@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
+import Bar from "./Bar";
 
 const RightSection = ({
   users,
@@ -186,6 +187,24 @@ const RightSection = ({
           getUsers={getUsers}
         />
         <Meetings meetings={meetings} getMeetings={getMeetings} />
+        <div className={styles.report}>
+          <div className={styles.header}>
+            <h1>Report</h1>
+          </div>
+          <div className={styles.data}>
+            {followUp.map((follow, i) => {
+              return (
+                <Bar
+                  key={i}
+                  follow={follow}
+                  schools={schools}
+                  getFollowUps={getFollowUps}
+                  getUsers={getUsers}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
