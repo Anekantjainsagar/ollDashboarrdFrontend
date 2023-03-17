@@ -20,6 +20,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
     mode: "",
     model: "",
     payment: "",
+    description: "",
     deadline: new Date().toISOString().split("T")[0],
   });
   const [phone, setPhone] = useState();
@@ -77,6 +78,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
             mode: "",
             model: "",
             payment: "",
+            description: "",
           });
           setPhone("");
           setselectHandler("");
@@ -242,8 +244,8 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               selectOffer?.length > 0 && offerSaved === false
                 ? {
                     display: "block",
-                    top: `${offerLocation.y + 22}px`,
-                    left: "425px",
+                    top: `${offerLocation.y + 25}px`,
+                    left: "400px",
                   }
                 : { display: "none" }
             }
@@ -279,31 +281,33 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               Add New
             </button>
           </div>
-          <select
-            name=""
-            id=""
-            value={user.source}
-            style={{
-              backgroundColor: "#333",
-              width: "15%",
-              border: 0,
-              padding: "0.5rem 0",
-            }}
-            onChange={(e) => {
-              setUser({ ...user, source: e.target.value });
-            }}
-          >
-            <option value="Source" selected disabled>
-              Source
-            </option>
-            <option value="Event">Event</option>
-            <option value="Email">Email</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Referral">Referral</option>
-            <option value="Word of Mouth">Word of Mouth</option>
-            <option value="Digital">Digital</option>
-            <option value="Other">Other</option>
-          </select>
+          {user.source != "Other" ? (
+            <select
+              name=""
+              id=""
+              value={user.source}
+              style={{
+                backgroundColor: "#333",
+                width: "15%",
+                border: 0,
+                padding: "0.5rem 0",
+              }}
+              onChange={(e) => {
+                setUser({ ...user, source: e.target.value });
+              }}
+            >
+              <option value="Source" selected disabled>
+                Source
+              </option>
+              <option value="Event">Event</option>
+              <option value="Email">Email</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Referral">Referral</option>
+              <option value="Word of Mouth">Word of Mouth</option>
+              <option value="Digital">Digital</option>
+              <option value="Other">Other</option>
+            </select>
+          ) : null}
           {user.source === "Other" ? (
             <input
               type="text"
@@ -319,7 +323,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-evenly",
-              width: "15%",
+              width: "20%",
             }}
           >
             <p>Deadline : </p>
@@ -348,8 +352,8 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               selectHandler?.length > 0 && handlerSaved === false
                 ? {
                     display: "block",
-                    top: `${handlerLocation.y + 22}px`,
-                    left: "832px",
+                    top: `${handlerLocation.y + 25}px`,
+                    left: "1025px",
                   }
                 : { display: "none" }
             }
@@ -404,6 +408,25 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               }}
             />
           </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <input
+            type="text"
+            value={user?.description}
+            placeholder={`Enter the task for ${
+              user?.handler ? user?.handler : "Handler"
+            }`}
+            onChange={(e) => {
+              setUser({ ...user, description: e.target.value });
+            }}
+            style={{ width: "80%", marginRight: "1rem" }}
+          />
           <button
             className={styles.btn}
             onClick={(e) => {

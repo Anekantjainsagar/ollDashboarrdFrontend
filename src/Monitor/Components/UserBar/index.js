@@ -158,6 +158,9 @@ const UserBar = ({
             }}
             className={statusChange.length > 0 ? statusChange : status}
           >
+            <option className={styles.Rejected} value="Rejected">
+              Rejected
+            </option>
             <option
               className={styles.New}
               value="New"

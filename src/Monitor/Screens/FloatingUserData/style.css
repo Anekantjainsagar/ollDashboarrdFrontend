@@ -13,6 +13,11 @@
   background-color: rgb(255, 109, 109);
 }
 
+.Rejected {
+  color: rgb(0, 0, 0);
+  background-color: rgb(175, 175, 175);
+}
+
 .MouSigned,
 .ParentOnta,
 .Circular {

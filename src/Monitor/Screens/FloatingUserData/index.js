@@ -91,7 +91,18 @@ const FloatingUserData = ({
     other: "",
     total: "",
   });
-  const { schoolName, phone, id, status, inqDate, _id, source, comment } = user;
+  const {
+    schoolName,
+    phone,
+    id,
+    status,
+    inqDate,
+    _id,
+    source,
+    comment,
+    handler,
+    description,
+  } = user;
 
   const [followUpModal, setFollowUpModal] = useState(false);
   function openFollowModal() {
@@ -300,6 +311,9 @@ const FloatingUserData = ({
             }}
             className={statusChange.length > 0 ? statusChange : status}
           >
+            <option className={styles.Rejected} value="Rejected">
+              Rejected
+            </option>
             <option
               className={styles.New}
               value="New"
@@ -336,6 +350,23 @@ const FloatingUserData = ({
           <p style={{ fontSize: "1.55rem" }}>{school?.phone}</p>
           <p style={{ fontSize: "1.55rem" }}>{school?.email}</p>
         </div>
+        {description ? (
+          <div
+            style={{
+              margin: "1rem 0.75rem",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "1.6rem",
+              }}
+            >
+              Task for {handler} is{" "}
+              <b style={{ fontSize: "1.65rem" }}>{description}</b>
+            </p>
+          </div>
+        ) : null}
+
         <div className={styles.contactContainer}>
           <p>Contact</p>
           <div className={styles.container}>
