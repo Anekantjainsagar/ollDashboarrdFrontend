@@ -20,7 +20,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
     mode: "",
     model: "",
     payment: "",
-    deadline: "",
+    deadline: new Date().toISOString().split("T")[0],
   });
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
