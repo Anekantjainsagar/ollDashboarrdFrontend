@@ -60,6 +60,7 @@ const AddStatusfollows = ({
               .put(`${MONITOR_BACKEND}/addComment`, {
                 comment: `Follow Up : ${comment}`,
                 id: user?._id,
+                user: b2b?.login?.name,
               })
               .then((res) => {
                 if (res) {

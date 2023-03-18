@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./style.module.css";
 import times from "../BatchDetails/times";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
+import B2BContext from "../../Context/B2BContext";
 
 const MeetingAndFollow = ({
   getMeetings,
@@ -23,7 +24,7 @@ const MeetingAndFollow = ({
     comment: "",
   });
   const [meetingShow, setMeetingShow] = useState(false);
-
+  const b2b = useContext(B2BContext);
   const [followShow, setFollowShow] = useState(false);
   const [follows, setFollows] = useState({
     name: user?.schoolName,
@@ -52,6 +53,7 @@ const MeetingAndFollow = ({
               .put(`${MONITOR_BACKEND}/addComment`, {
                 comment: `Follow Up : ${follows?.comment}`,
                 id: user?._id,
+                user: b2b?.login?.name,
               })
               .then((res) => {
                 if (res) {
@@ -90,6 +92,7 @@ const MeetingAndFollow = ({
               .put(`${MONITOR_BACKEND}/addComment`, {
                 comment: `Meeting : ${meeting?.comment}`,
                 id: user?._id,
+                user: b2b?.login?.name,
               })
               .then((res) => {
                 if (res) {

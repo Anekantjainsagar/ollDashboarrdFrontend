@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import styles from "./style.module.css";
 import {
   AiOutlineClose,
@@ -27,6 +27,7 @@ import AddStatusfollows from "../../Components/AddStatusFollowUp";
 import MeetingAndFollow from "../../Components/MeetingAndFollow";
 import FollowUpProgram from "../../Components/FollowUpProgram";
 import DisplayFollowUps from "../../Components/DisplayFollowUps";
+import B2BContext from "../../Context/B2BContext";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -228,6 +229,7 @@ const FloatingUserData = ({
     setSchoolfind(s);
   }, []);
 
+  const b2b = useContext(B2BContext);
   useEffect(() => {
     if (offer.classes?.length > 0) {
       const newState = offer.classes.map((e) => {
@@ -1304,6 +1306,7 @@ const FloatingUserData = ({
                   .put(`${MONITOR_BACKEND}/addComment`, {
                     comment: comments,
                     id: _id,
+                    user: b2b?.login?.name,
                   })
                   .then((res) => {
                     if (res) {

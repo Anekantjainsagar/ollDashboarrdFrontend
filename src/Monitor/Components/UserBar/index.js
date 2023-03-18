@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MONITOR_BACKEND from "../../Utils";
 import axios from "axios";
 import "./styles.css";
@@ -7,6 +7,7 @@ import AddStatusMeeting from "../AddStatusMeeting";
 import AddStatusFollowUp from "../AddStatusFollowUp/index";
 import FloatingUserData from "../../Screens/FloatingUserData";
 import { AiOutlineRight } from "react-icons/ai";
+import B2BContext from "../../Context/B2BContext";
 
 const UserBar = ({
   user,
@@ -41,6 +42,7 @@ const UserBar = ({
     setIsOpen(true);
   }
 
+  const b2b = useContext(B2BContext);
   const [followUpModal, setFollowUpModal] = useState(false);
   function openFollowModal() {
     setFollowUpModal(true);
@@ -202,6 +204,7 @@ const UserBar = ({
                     .put(`${MONITOR_BACKEND}/addComment`, {
                       comment: comments,
                       id: _id,
+                      user: b2b?.login?.name,
                     })
                     .then((res) => {
                       if (res) {

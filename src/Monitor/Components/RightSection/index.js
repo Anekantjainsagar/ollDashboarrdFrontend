@@ -103,7 +103,6 @@ const RightSection = ({
         const sch = schools?.filter((school) => {
           return e?.name === school?.name;
         });
-        console.log(sch);
         var temp = [
           new Date(e?.startDate).toString().slice(4, 16) + e?.time,
           e?.name,
