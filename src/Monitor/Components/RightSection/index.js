@@ -11,10 +11,10 @@ import { useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
-import Bar from "./Bar";
+import "jspdf-autotable";
+import jsPDF from "jspdf";
 
 const RightSection = ({
-  users,
   schools,
   getSchools,
   getUsers,
@@ -70,7 +70,122 @@ const RightSection = ({
     downloadData();
   }, []);
 
-  console.log(filteredUsers);
+  const print = () => {
+    const pdf = new jsPDF("p", "pt", "a4");
+
+    const columns = ["Time", "Name", "Email", "Phone"];
+    var rows = [];
+
+    pdf.text(
+      225,
+      40,
+      `FollowUps (${
+        followUp?.filter((follow) => {
+          return (
+            new Date(Date.now()).toString().slice(4, 16) ===
+            new Date(follow.startDate).toString().slice(4, 16)
+          );
+        }).length
+      })`,
+      {
+        halign: "center",
+        valign: "middle",
+      }
+    );
+    followUp
+      ?.filter((follow) => {
+        return (
+          new Date(Date.now()).toString().slice(4, 16) ===
+          new Date(follow.startDate).toString().slice(4, 16)
+        );
+      })
+      .map((e, i) => {
+        const sch = schools?.filter((school) => {
+          return e?.name === school?.name;
+        });
+        console.log(sch);
+        var temp = [
+          new Date(e?.startDate).toString().slice(4, 16) + e?.time,
+          e?.name,
+          sch[0]?.email,
+          sch[0]?.phone,
+        ];
+        rows.push(temp);
+      });
+
+    pdf.autoTable(columns, rows, {
+      startY: 55,
+      theme: "grid",
+      styles: {
+        font: "times",
+        halign: "center",
+        cellPadding: 3.5,
+        lineWidth: 0.5,
+        lineColor: [0, 0, 0],
+        textColor: [0, 0, 0],
+      },
+      headStyles: {
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        fillColor: [166, 204, 247],
+      },
+    });
+
+    const meetColumns = ["Time", "Name", "URL"];
+    var meetRows = [];
+
+    pdf.text(
+      225,
+      410,
+      `Meetings (${
+        meetings.filter((meet) => {
+          return (
+            new Date(Date.now()).toString().slice(4, 16) ===
+            new Date(meet.startDate).toString().slice(4, 16)
+          );
+        }).length
+      })`,
+      {
+        halign: "center",
+        valign: "middle",
+      }
+    );
+    meetings
+      .filter((meet) => {
+        return (
+          new Date(Date.now()).toString().slice(4, 16) ===
+          new Date(meet.startDate).toString().slice(4, 16)
+        );
+      })
+      .map((e, i) => {
+        var temp = [
+          new Date(e?.startDate).toString().slice(4, 16) + e?.time,
+          e?.name + " (" + e?.type + ")",
+          e?.link,
+        ];
+        meetRows.push(temp);
+      });
+
+    pdf.autoTable(meetColumns, meetRows, {
+      startY: 430,
+      theme: "grid",
+      styles: {
+        font: "times",
+        halign: "center",
+        cellPadding: 3.5,
+        lineWidth: 0.5,
+        lineColor: [0, 0, 0],
+        textColor: [0, 0, 0],
+      },
+      headStyles: {
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        fillColor: [166, 204, 247],
+      },
+    });
+
+    pdf.save("Report");
+  };
 
   return (
     <div className={styles.mainPanel}>
@@ -191,6 +306,15 @@ const RightSection = ({
         <div className={styles.report}>
           <div className={styles.header}>
             <h1>Report</h1>
+            <button
+              style={{ padding: "0.2rem 0.75rem", fontSize: "1.3rem" }}
+              onClick={(e) => {
+                e.preventDefault();
+                print();
+              }}
+            >
+              Download
+            </button>
           </div>
           <div className={styles.data}>
             <p>No of leads :- {noOfUsers}</p>

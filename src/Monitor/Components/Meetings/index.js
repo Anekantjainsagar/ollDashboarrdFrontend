@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import styles from "./style.module.css";
-import Bar from "../RightSection/Bar/index";
+import Bar from "./Bar/index";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import times from "../BatchDetails/times";

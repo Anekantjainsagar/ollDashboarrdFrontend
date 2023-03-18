@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./style.module.css";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import times from "../BatchDetails/times";
+import B2BContext from "../../Context/B2BContext";
 
 const AddStatusfollows = ({
   setIsOpen,
@@ -31,6 +32,7 @@ const AddStatusfollows = ({
     setIsOpen(false);
   }
 
+  const b2b = useContext(B2BContext);
   const [comment, setComment] = useState();
   const [follows, setFollows] = useState({
     name: user?.schoolName,
