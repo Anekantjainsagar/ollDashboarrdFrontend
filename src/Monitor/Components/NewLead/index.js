@@ -39,6 +39,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [schoolKaId, setSchoolKaId] = useState("");
   const [sendEmail, setSendEmail] = useState(true);
+  const [file, setFile] = useState();
 
   useEffect(() => {
     if (location.pathname.includes("b2b")) {
@@ -89,6 +90,21 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           setSchoolSaved(false);
           setofferSaved(false);
           console.log(res);
+          setTimeout(() => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("id", res.data.user._id);
+            axios
+              .put(`${MONITOR_BACKEND}/addFile`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          }, 5000);
           // const options = {
           //   method: "POST",
           //   headers: {
@@ -425,7 +441,14 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
             onChange={(e) => {
               setUser({ ...user, description: e.target.value });
             }}
-            style={{ width: "80%", marginRight: "1rem" }}
+            style={{ width: "60%", marginRight: "1rem" }}
+          />
+          <input
+            type="file"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+            style={{ width: "20%", marginRight: "1rem" }}
           />
           <button
             className={styles.btn}

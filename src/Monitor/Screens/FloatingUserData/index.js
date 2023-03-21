@@ -368,7 +368,38 @@ const FloatingUserData = ({
             </p>
           </div>
         ) : null}
-
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            // Axios({
+            //   url: `${MONITOR_BACKEND}/download/downloadFile`,
+            //   method: "GET",
+            //   responseType: "blob",
+            //   body: JSON.stringify({
+            //     id: _id,
+            //   }),
+            //   headers: {
+            //     "Content-type": "application/json; charset=UTF-8",
+            //   },
+            // }).then((res) => {
+            //   console.log(res);
+            //   fileDownload(res.data, "file.pdf");
+            // });
+            axios
+              .post(`${MONITOR_BACKEND}/download/downloadFile`, {
+                id: _id,
+              })
+              .then((res) => {
+                console.log(res);
+                fileDownload(res.data, "file.pdf");
+                if (res?.data?.data?.acknowledged === false) {
+                  alert("File not available");
+                }
+              });
+          }}
+        >
+          Download Attachment
+        </button>
         <div className={styles.contactContainer}>
           <p>Contact</p>
           <div className={styles.container}>
