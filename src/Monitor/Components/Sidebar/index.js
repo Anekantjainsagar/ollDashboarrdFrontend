@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./style.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import B2BContext from "../../Context/B2BContext";
@@ -7,6 +7,7 @@ const Sidebar = () => {
   const location = useLocation();
   const history = useNavigate();
   const b2b = useContext(B2BContext);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={styles.Sidebar}>
@@ -71,6 +72,75 @@ const Sidebar = () => {
       >
         Offers
       </div>
+      {b2b?.login?.name === "Vidushi" ? (
+        <>
+          <div
+            className={
+              location?.pathname.includes("/hr/employees")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/employees");
+              setOpen(!open);
+            }}
+          >
+            Employees
+          </div>
+          <div
+            className={
+              location?.pathname.includes("/hr/holiday")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/holiday");
+              setOpen(!open);
+            }}
+          >
+            Holiday
+          </div>
+          <div
+            className={
+              location?.pathname.includes("/hr/appreciation")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/appreciation");
+              setOpen(!open);
+            }}
+          >
+            Appreciation
+          </div>
+          <div
+            className={
+              location?.pathname.includes("/hr/designation")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/designation");
+              setOpen(!open);
+            }}
+          >
+            Designation
+          </div>
+          <div
+            className={
+              location?.pathname.includes("/hr/department")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/department");
+              setOpen(!open);
+            }}
+          >
+            Department
+          </div>
+        </>
+      ) : null}
       <div
         className={
           location?.pathname === "/"

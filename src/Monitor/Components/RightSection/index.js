@@ -131,7 +131,7 @@ const RightSection = ({
     });
 
     const meetColumns = ["Time", "Name", "URL"];
-    var meetRows = [];
+    var meetRows = [];  
 
     pdf.text(
       225,

@@ -44,8 +44,6 @@ const App = () => {
       });
   };
 
-  console.log(b2b.login);
-
   const checkLogin = async () => {
     if (!window?.location?.href.includes("training/teacherOnboarding")) {
       await check();
@@ -322,6 +320,34 @@ const App = () => {
       <Route
         path="/programs"
         element={<Programs programs={programs} reports={reports} />}
+      />
+      <Route
+        path="/hr/employees"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/leaves"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/attendance"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/holiday"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/appreciation"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/designation"
+        element={<Offers offers={offers} getOffers={getOffers} />}
+      />
+      <Route
+        path="/hr/department"
+        element={<Offers offers={offers} getOffers={getOffers} />}
       />
       <Route
         path="/programs/report/:id"
