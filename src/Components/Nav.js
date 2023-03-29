@@ -1,4 +1,5 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
+import Axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { CSVLink } from "react-csv";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
@@ -78,17 +79,18 @@ const Nav = ({ sales }) => {
             style={{ width: "23%" }}
             onClick={(e) => {
               e.preventDefault();
+              console.log("Clicked");
               Axios({
                 url: `${MONITOR_BACKEND}/download/b2cFormat`,
                 method: "GET",
-                responseType: "blob",
+                // responseType: "blob",
               }).then((res) => {
                 console.log(res);
                 fileDownload(res.data, "format.csv");
               });
             }}
           >
-            Predefined Fomat
+            Format
           </button>
         </div>
         <div className="profileSection">
