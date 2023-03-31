@@ -1,0 +1,24 @@
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 88vw;
+    padding: 2rem;
+    color: white;
+  }
+  
+  .head h1 {
+    font-size: 2.35rem;
+    font-weight: 700;
+  }
+
+  .rsection{
+    display: flex;
+    width: 45%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .head input{
+    width: 25%;
+  }

@@ -1,0 +1,12 @@
+.bar{
+    align-items: center;
+    display: grid;
+    grid-template-columns: 11% 18% 22% 16% 15% 17%;
+    margin-top: 1rem;
+}
+
+.bar p{
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
