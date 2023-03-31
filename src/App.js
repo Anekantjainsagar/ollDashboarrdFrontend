@@ -48,7 +48,7 @@ const App = () => {
   const checkLogin = async () => {
     if (!window?.location?.href.includes("training/teacherOnboarding")) {
       await check();
-      if (Object.keys(b2b.login)[0] === "_id") {
+      if (Object.keys(b2b?.login)[0] === "_id") {
         b2b.setLogin(checkUser);
         history(`/${b2b?.login?.type}`);
       }

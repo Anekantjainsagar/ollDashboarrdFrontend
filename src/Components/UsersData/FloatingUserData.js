@@ -55,6 +55,7 @@ const FloatingUserData = ({
   getUserData,
   templateMsg,
   sales,
+  usersData,
 }) => {
   const {
     name,
@@ -106,8 +107,16 @@ const FloatingUserData = ({
   const [height, setheight] = useState(undefined);
   const [cmntDeleteDisplay, setCmntDeleteDisplay] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const d = new Date(inqDate).toString();
+  const [userData, setUserData] = useState();
   useOutsideAlerter(sideRef, details, setDetails);
+
+  useEffect(() => {
+    const dataValue = usersData.filter((e) => {
+      return e._id === data?._id && e.name === data?.name;
+    });
+    setUserData(dataValue[0]);
+  }, [data?._id]);
 
   const updateData = async (e) => {
     e.preventDefault();
@@ -157,8 +166,6 @@ const FloatingUserData = ({
       notify();
     });
   };
-
-  const d = new Date(inqDate).toString();
 
   const sendMsgOnComment = () => {
     const options = {
@@ -571,7 +578,7 @@ const FloatingUserData = ({
             <input
               type="text"
               style={{ width: "35%" }}
-              value={number === undefined ? phone : number}
+              value={number === undefined ? userData?.phone : number}
               placeholder="Phone"
               onChange={(e) => setNumber(e.target.value)}
             />
@@ -579,7 +586,7 @@ const FloatingUserData = ({
               type="text"
               style={{ width: "44%" }}
               placeholder="Email"
-              value={emailName === undefined ? email : emailName}
+              value={emailName === undefined ? userData?.email : emailName}
               onChange={(e) => setemailName(e.target.value)}
             />
           </div>
@@ -603,14 +610,18 @@ const FloatingUserData = ({
               type="text"
               style={{ width: "36%" }}
               placeholder="School"
-              value={schoolName === undefined ? school : schoolName}
+              value={schoolName === undefined ? userData?.school : schoolName}
               onChange={(e) => setschoolName(e.target.value)}
             />
             <input
               type="text"
               style={{ width: "43%" }}
               placeholder="Address"
-              value={address === undefined ? batchDetails?.address : address}
+              value={
+                address === undefined
+                  ? userData?.batchDetails?.address
+                  : address
+              }
               onChange={(e) => setaddress(e.target.value)}
             />
           </div>
@@ -743,7 +754,7 @@ const FloatingUserData = ({
               type="text"
               style={{ width: "78%" }}
               placeholder="Course name"
-              value={courseName === undefined ? course : courseName}
+              value={courseName === undefined ? userData?.course : courseName}
               onChange={(e) => {
                 setCourseName(e.target.value);
               }}
@@ -893,7 +904,7 @@ const FloatingUserData = ({
                 placeholder="Sessions"
                 value={
                   NoSessions == undefined
-                    ? batchDetails?.sessionsCount
+                    ? userData?.batchDetails?.sessionsCount
                     : NoSessions
                 }
                 onChange={(e) => {
@@ -906,7 +917,9 @@ const FloatingUserData = ({
                   type="text"
                   placeholder="Price"
                   style={{ width: "45%", textAlign: "center" }}
-                  value={price === undefined ? batchDetails?.price : price}
+                  value={
+                    price === undefined ? userData?.batchDetails?.price : price
+                  }
                   onChange={(e) => {
                     setprice(e.target.value);
                   }}
@@ -1004,7 +1017,11 @@ const FloatingUserData = ({
                 type="text"
                 style={{ width: "50%", marginRight: "1rem" }}
                 placeholder="Source"
-                value={sourcePlatform === undefined ? source : sourcePlatform}
+                value={
+                  sourcePlatform === undefined
+                    ? userData?.source
+                    : sourcePlatform
+                }
                 onChange={(e) => {
                   setsourcePlatform(e.target.value);
                 }}
@@ -1019,7 +1036,7 @@ const FloatingUserData = ({
               <input
                 type="date"
                 style={{ width: "50%", textAlign: "center" }}
-                value={batchDetails?.startDate?.slice(0, 10)}
+                value={userData?.batchDetails?.startDate?.slice(0, 10)}
                 onChange={(e) => {
                   setsourceTime(e.target.value);
                 }}
@@ -1027,7 +1044,9 @@ const FloatingUserData = ({
             </div>
           </div>
           <p style={{ fontSize: "1.6rem", textAlign: "center" }}>
-            Total price is : {batchDetails?.sessionsCount * batchDetails?.price}
+            Total price is :{" "}
+            {userData?.batchDetails?.sessionsCount *
+              userData?.batchDetails?.price}
           </p>
         </div>
         <div className="commentContainer">
