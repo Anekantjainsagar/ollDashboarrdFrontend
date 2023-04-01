@@ -6,7 +6,7 @@ const EmployeeHeader = () => {
   return (
     <div className={styles.head}>
       <h1>Employee</h1>
-      <input type="text" placeholder="Search here..." />
+      <input type="search" placeholder="Search here..." />
       <div className={styles.rsection}>
         <button>Add Employee</button>
         <input

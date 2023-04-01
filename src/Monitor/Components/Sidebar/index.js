@@ -89,6 +89,19 @@ const Sidebar = () => {
           </div>
           <div
             className={
+              location?.pathname.includes("/hr/leaves")
+                ? `${styles.option}, ${styles.optionSelected}`
+                : `${styles.option}`
+            }
+            onClick={() => {
+              history("/hr/leaves");
+              setOpen(!open);
+            }}
+          >
+            Leaves
+          </div>
+          <div
+            className={
               location?.pathname.includes("/hr/holiday")
                 ? `${styles.option}, ${styles.optionSelected}`
                 : `${styles.option}`

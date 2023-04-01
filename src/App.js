@@ -20,6 +20,8 @@ import Mobile from "./Monitor/Screens/Mobile/index";
 import SalesMobile from "./Components/SalesMobile";
 import B2BContext from "./Monitor/Context/B2BContext";
 import Employee from "./Monitor/Screens/HrModal/Employee";
+import Leaves from "./Monitor/Screens/HrModal/Leaves";
+import Holiday from "./Monitor/Screens/HrModal/Holiday";
 
 const App = () => {
   const history = useNavigate();
@@ -323,16 +325,10 @@ const App = () => {
         element={<Programs programs={programs} reports={reports} />}
       />
       <Route path="/hr/employees" element={<Employee />} />
-      <Route
-        path="/hr/leaves"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
+      <Route path="/hr/leaves" element={<Leaves />} />
+      <Route path="/hr/holiday" element={<Holiday />} />
       <Route
         path="/hr/attendance"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
-      <Route
-        path="/hr/holiday"
         element={<Offers offers={offers} getOffers={getOffers} />}
       />
       <Route
