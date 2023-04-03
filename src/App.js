@@ -22,6 +22,8 @@ import B2BContext from "./Monitor/Context/B2BContext";
 import Employee from "./Monitor/Screens/HrModal/Employee";
 import Leaves from "./Monitor/Screens/HrModal/Leaves";
 import Holiday from "./Monitor/Screens/HrModal/Holiday";
+import Appreciation from "./Monitor/Screens/HrModal/Appreciation";
+import Department from "./Monitor/Screens/HrModal/Department";
 
 const App = () => {
   const history = useNavigate();
@@ -327,20 +329,14 @@ const App = () => {
       <Route path="/hr/employees" element={<Employee />} />
       <Route path="/hr/leaves" element={<Leaves />} />
       <Route path="/hr/holiday" element={<Holiday />} />
+      <Route path="/hr/appreciation" element={<Appreciation />} />
+      <Route path="/hr/department" element={<Department />} />
       <Route
         path="/hr/attendance"
         element={<Offers offers={offers} getOffers={getOffers} />}
       />
       <Route
-        path="/hr/appreciation"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
-      <Route
         path="/hr/designation"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
-      <Route
-        path="/hr/department"
         element={<Offers offers={offers} getOffers={getOffers} />}
       />
       <Route
