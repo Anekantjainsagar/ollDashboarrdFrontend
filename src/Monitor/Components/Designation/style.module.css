@@ -1,0 +1,66 @@
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 88vw;
+    padding: 2rem;
+    color: white;
+  }
+  
+  .head h1 {
+    font-size: 2.35rem;
+    font-weight: 700;
+  }
+
+  .rsection{
+    display: flex;
+    width: 45%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .head input{
+    width: 30%;
+  }
+
+  .bar{
+    align-items: center;
+    display: grid;
+    grid-template-columns: 8% 30% 37% 24% 14%;
+    margin-top: 1rem;
+}
+
+.bar p{
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.barH{
+  align-items: center;
+  display: grid;
+  grid-template-columns: 8% 30% 37% 24% 14%;
+  margin: 1rem 0.5rem;
+  background-color: rgb(31, 31, 31);
+  padding: 1.2rem 0;
+  border-radius: 1rem;
+}
+
+.barH p{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.barH p select{
+  text-align: center;
+  padding: 0 0.5rem;
+  width: 70%;
+  margin: auto;
+}
+
+.barH p select{
+  text-align: center;
+  padding: 0 0.5rem;
+  width: 70%;
+  margin: auto;
+}

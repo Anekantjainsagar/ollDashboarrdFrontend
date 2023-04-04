@@ -24,6 +24,8 @@ import Leaves from "./Monitor/Screens/HrModal/Leaves";
 import Holiday from "./Monitor/Screens/HrModal/Holiday";
 import Appreciation from "./Monitor/Screens/HrModal/Appreciation";
 import Department from "./Monitor/Screens/HrModal/Department";
+import Designation from "./Monitor/Screens/HrModal/Designation";
+import Attendance from "./Monitor/Screens/HrModal/Attendance";
 
 const App = () => {
   const history = useNavigate();
@@ -319,26 +321,20 @@ const App = () => {
         element={<Offers offers={offers} getOffers={getOffers} />}
       />
       <Route
-        path="/agents"
-        element={<Agents getAgents={getAgents} agents={agents} />}
-      />
-      <Route
         path="/programs"
         element={<Programs programs={programs} reports={reports} />}
+      />
+      <Route
+        path="/agents"
+        element={<Agents getAgents={getAgents} agents={agents} />}
       />
       <Route path="/hr/employees" element={<Employee />} />
       <Route path="/hr/leaves" element={<Leaves />} />
       <Route path="/hr/holiday" element={<Holiday />} />
       <Route path="/hr/appreciation" element={<Appreciation />} />
       <Route path="/hr/department" element={<Department />} />
-      <Route
-        path="/hr/attendance"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
-      <Route
-        path="/hr/designation"
-        element={<Offers offers={offers} getOffers={getOffers} />}
-      />
+      <Route path="/hr/designation" element={<Designation />} />
+      <Route path="/hr/attendance" element={<Attendance />} />
       <Route
         path="/programs/report/:id"
         element={
