@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import B2BContext from "../../Context/B2BContext";
+import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 const Sidebar = () => {
   const location = useLocation();
   const history = useNavigate();
   const b2b = useContext(B2BContext);
-  const [open, setOpen] = useState(false);
 
   return (
     <div className={styles.Sidebar}>
@@ -76,95 +76,127 @@ const Sidebar = () => {
         <>
           <div
             className={
-              location?.pathname.includes("/hr/employees")
+              !b2b?.dropDown
                 ? `${styles.option}, ${styles.optionSelected}`
                 : `${styles.option}`
             }
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              b2b?.setDropDown(!b2b?.dropDown);
               history("/hr/employees");
-              setOpen(!open);
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            Employees
+            Hr
+            {b2b?.dropDown ? (
+              <AiFillCaretDown style={{ paddingLeft: "0.5rem" }} size={20} />
+            ) : (
+              <AiFillCaretUp style={{ paddingLeft: "0.5rem" }} size={20} />
+            )}
           </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/attendance")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/attendance");
-              setOpen(!open);
-            }}
-          >
-            Attendance
-          </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/leaves")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/leaves");
-              setOpen(!open);
-            }}
-          >
-            Leaves
-          </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/holiday")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/holiday");
-              setOpen(!open);
-            }}
-          >
-            Holiday
-          </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/appreciation")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/appreciation");
-              setOpen(!open);
-            }}
-          >
-            Appreciation
-          </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/designation")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/designation");
-              setOpen(!open);
-            }}
-          >
-            Designation
-          </div>
-          <div
-            className={
-              location?.pathname.includes("/hr/department")
-                ? `${styles.option}, ${styles.optionSelected}`
-                : `${styles.option}`
-            }
-            onClick={() => {
-              history("/hr/department");
-              setOpen(!open);
-            }}
-          >
-            Department
-          </div>
+          {!b2b?.dropDown ? (
+            <div
+              style={{
+                backgroundColor: "rgba(150,150,150,0.1)",
+                borderRadius: "0.5rem",
+                padding: "0.25rem 0.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <div
+                className={
+                  location?.pathname.includes("/hr/employees")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  history("/hr/employees");
+                }}
+              >
+                Employees
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/attendance")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  history("/hr/attendance");
+                }}
+              >
+                Attendance
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/leaves")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={() => {
+                  history("/hr/leaves");
+                }}
+              >
+                Leaves
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/holiday")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  history("/hr/holiday");
+                }}
+              >
+                Holiday
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/appreciation")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={() => {
+                  history("/hr/appreciation");
+                }}
+              >
+                Appreciation
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/designation")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={() => {
+                  history("/hr/designation");
+                }}
+              >
+                Designation
+              </div>
+              <div
+                className={
+                  location?.pathname.includes("/hr/department")
+                    ? `${styles.option}, ${styles.optionSelected}`
+                    : `${styles.option}`
+                }
+                onClick={() => {
+                  history("/hr/department");
+                }}
+              >
+                Department
+              </div>
+            </div>
+          ) : null}
         </>
       ) : null}
       <div
