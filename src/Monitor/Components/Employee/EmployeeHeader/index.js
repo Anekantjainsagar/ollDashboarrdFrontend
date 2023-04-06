@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styles from "./style.module.css";
 import AddModal from "../Modal/index";
 import B2BContext from "../../../Context/B2BContext";
+import { CSVLink } from "react-csv";
 
 const EmployeeHeader = () => {
   const [file, setFile] = useState();
@@ -38,7 +39,13 @@ const EmployeeHeader = () => {
             style={file ? { width: "28%" } : { width: "40%" }}
           />
           {file ? <button>Import</button> : null}
-          <button>Export</button>
+          <CSVLink
+            data={context?.employee?.allEmployees}
+            filename="Employees"
+            className={styles.btns}
+          >
+            Export
+          </CSVLink>
         </div>
       </div>
     </>

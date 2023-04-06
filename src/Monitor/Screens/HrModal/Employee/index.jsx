@@ -17,7 +17,7 @@ const Employee = () => {
         <div>
           <EmployeeNav />
           <div className={styles.users}>
-            {context.employee.employees.map((e) => {
+            {context?.employee?.employees?.map((e) => {
               return <EmployeeBar data={e} />;
             })}
           </div>

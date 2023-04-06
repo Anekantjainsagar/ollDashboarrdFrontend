@@ -19,6 +19,16 @@
     justify-content: space-evenly;
   }
 
+
+  .btns{
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: 0.5rem 2rem;
+    background-color:#00a510;
+    text-decoration: none;
+  }
   .head input{
     width: 30%;
   }

@@ -134,6 +134,14 @@ function AddModal({ setIsOpen, modalIsOpen }) {
           onClick={(e) => {
             e.preventDefault();
             context.employee.addEmployee({ details: employee });
+            setEmployee({
+              name: "",
+              email: "",
+              department: "Department",
+              designation: "Designation",
+              phone: "",
+              role: "User Role",
+            });
             closeModal();
           }}
         >

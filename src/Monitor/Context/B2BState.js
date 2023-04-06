@@ -6,7 +6,9 @@ const uri = "https://crm.oll.co/api/hr";
 const B2BState = (props) => {
   const [login, setLogin] = useState();
   const [dropDown, setDropDown] = useState(true);
+  const [allEmployees, setAllEmployees] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [appreciations, setAppreciations] = useState([]);
   const [empPage, setEmpPage] = useState(1);
   const [empSearch, setEmpSearch] = useState("");
 
@@ -24,6 +26,12 @@ const B2BState = (props) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const getAllEmployees = () => {
+    axios.get(`${uri}/getAllEmployees`).then((res) => {
+      setAllEmployees(res.data.employees);
+    });
   };
 
   const addEmployee = ({ details }) => {
@@ -63,6 +71,43 @@ const B2BState = (props) => {
       });
   };
 
+  const addAppreciations = ({ details }) => {
+    axios
+      .post(`${uri}/addAppreciations`, { ...details })
+      .then((res) => {
+        getAppreciations();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteAppreciations = ({ id }) => {
+    axios
+      .delete(`${uri}/deleteAppreciation`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+        getAppreciations();
+      });
+  };
+
+  const getAppreciations = () => {
+    axios
+      .get(`${uri}/getAppreciations`)
+      .then((response) => {
+        setAppreciations(response.data.appreciations);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const employee = {
     addEmployee,
     empPage,
@@ -73,15 +118,28 @@ const B2BState = (props) => {
     deleteEmployee,
     updateStatus,
     setEmpSearch,
+    allEmployees,
+  };
+
+  const appreciation = {
+    addAppreciations,
+    deleteAppreciations,
+    getAppreciations,
+    appreciations,
   };
 
   useEffect(() => {
     getEmployees();
   }, [empSearch]);
 
+  useEffect(() => {
+    getAppreciations();
+    getAllEmployees();
+  }, []);
+
   return (
     <B2BContext.Provider
-      value={{ login, setLogin, dropDown, setDropDown, employee }}
+      value={{ login, setLogin, dropDown, setDropDown, employee, appreciation }}
     >
       {props.children}
     </B2BContext.Provider>

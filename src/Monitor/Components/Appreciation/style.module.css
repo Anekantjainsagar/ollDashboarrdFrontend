@@ -42,13 +42,13 @@
   grid-template-columns: 8% 23% 28% 24% 16%;
   margin: 1rem 0.5rem;
   background-color: rgb(31, 31, 31);
-  padding: 1.2rem 0;
+  padding: 0.75rem 0;
   border-radius: 1rem;
 }
 
 .barH p{
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .barH p select{
@@ -63,4 +63,14 @@
   padding: 0 0.5rem;
   width: 70%;
   margin: auto;
+}
+
+.btns{
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  background-color:#00a510;
+  text-decoration: none;
 }

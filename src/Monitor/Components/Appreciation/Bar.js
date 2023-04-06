@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.css";
+import B2BContext from "../../Context/B2BContext";
 
-const Bar = () => {
+const Bar = ({ data, i }) => {
+  const context = useContext(B2BContext);
   return (
     <div className={styles.barH}>
-      <p>1</p>
-      <p>Anekant Jain</p>
-      <p>Most Improved Employee</p>
+      <p>{i + 1}</p>
+      <p>{data?.employeeName}</p>
+      <p>{data?.awardName}</p>
       <p>{new Date().toString().slice(0, 21)}</p>
-      <p>Actions</p>
+      <p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            context?.appreciation.deleteAppreciations({ id: data?._id });
+          }}
+        >
+          Delete
+        </button>
+      </p>
     </div>
   );
 };
