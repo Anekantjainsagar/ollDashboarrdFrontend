@@ -9,9 +9,12 @@ const B2BState = (props) => {
   const [allEmployees, setAllEmployees] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [appreciations, setAppreciations] = useState([]);
+  const [designations, setDesignations] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [empPage, setEmpPage] = useState(1);
   const [empSearch, setEmpSearch] = useState("");
 
+  // Employees
   const getEmployees = () => {
     axios
       .get(
@@ -71,6 +74,7 @@ const B2BState = (props) => {
       });
   };
 
+  // Appreciations
   const addAppreciations = ({ details }) => {
     axios
       .post(`${uri}/addAppreciations`, { ...details })
@@ -108,6 +112,82 @@ const B2BState = (props) => {
       });
   };
 
+  // Designation
+  const addDesignation = ({ details }) => {
+    axios
+      .post(`${uri}/addDesignation`, { ...details })
+      .then((res) => {
+        getDesignations();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteDesignations = ({ id }) => {
+    axios
+      .delete(`${uri}/deleteDesignation`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+        getDesignations();
+      });
+  };
+
+  const getDesignations = () => {
+    axios
+      .get(`${uri}/getDesignation`)
+      .then((response) => {
+        setDesignations(response.data.designations);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Designation
+  const addDepartment = ({ details }) => {
+    axios
+      .post(`${uri}/addDepartment`, { ...details })
+      .then((res) => {
+        getDepartments();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteDepartment = ({ id }) => {
+    axios
+      .delete(`${uri}/deleteDepartment`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+        getDepartments();
+      });
+  };
+
+  const getDepartments = () => {
+    axios
+      .get(`${uri}/getDepartments`)
+      .then((response) => {
+        setDepartments(response.data.departments);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const employee = {
     addEmployee,
     empPage,
@@ -128,6 +208,18 @@ const B2BState = (props) => {
     appreciations,
   };
 
+  const designation = {
+    addDesignation,
+    deleteDesignations,
+    designations,
+  };
+
+  const department = {
+    addDepartment,
+    deleteDepartment,
+    departments,
+  };
+
   useEffect(() => {
     getEmployees();
   }, [empSearch]);
@@ -135,11 +227,22 @@ const B2BState = (props) => {
   useEffect(() => {
     getAppreciations();
     getAllEmployees();
+    getDesignations();
+    getDepartments();
   }, []);
 
   return (
     <B2BContext.Provider
-      value={{ login, setLogin, dropDown, setDropDown, employee, appreciation }}
+      value={{
+        login,
+        setLogin,
+        dropDown,
+        setDropDown,
+        employee,
+        appreciation,
+        designation,
+        department,
+      }}
     >
       {props.children}
     </B2BContext.Provider>
