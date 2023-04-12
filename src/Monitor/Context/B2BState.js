@@ -11,8 +11,10 @@ const B2BState = (props) => {
   const [appreciations, setAppreciations] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [leaves, setLeaves] = useState([]);
   const [empPage, setEmpPage] = useState(1);
   const [empSearch, setEmpSearch] = useState("");
+  const [leaveSearch, setLeaveSearch] = useState("");
 
   // Employees
   const getEmployees = () => {
@@ -188,6 +190,67 @@ const B2BState = (props) => {
       });
   };
 
+  // Leaves
+  const getLeaves = () => {
+    axios
+      .get(`${uri}/getAllLeaves?search=${leaveSearch}`)
+      .then((response) => {
+        console.log(response);
+        setLeaves(response.data.leaves);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addLeave = ({ details }) => {
+    axios
+      .post(`${uri}/addLeave`, { ...details })
+      .then((res) => {
+        getLeaves();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const setLeaveStatus = ({ details }) => {
+    axios
+      .put(`${uri}/setLeaveStatus`, { ...details })
+      .then((res) => {
+        getLeaves();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const setIsPaid = ({ details }) => {
+    axios
+      .put(`${uri}/setIsPaid`, { ...details })
+      .then((res) => {
+        getLeaves();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteLeave = ({ id }) => {
+    axios
+      .delete(`${uri}/deleteLeave`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+        getLeaves();
+      });
+  };
+
   const employee = {
     addEmployee,
     empPage,
@@ -220,9 +283,24 @@ const B2BState = (props) => {
     departments,
   };
 
+  const leave = {
+    leaves,
+    leaveSearch,
+    setLeaveSearch,
+    getLeaves,
+    addLeave,
+    setLeaveStatus,
+    setIsPaid,
+    deleteLeave,
+  };
+
   useEffect(() => {
     getEmployees();
   }, [empSearch]);
+
+  useEffect(() => {
+    getLeaves();
+  }, [leaveSearch]);
 
   useEffect(() => {
     getAppreciations();
@@ -242,6 +320,7 @@ const B2BState = (props) => {
         appreciation,
         designation,
         department,
+        leave,
       }}
     >
       {props.children}

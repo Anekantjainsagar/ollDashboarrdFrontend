@@ -9,7 +9,7 @@ const Bar = ({ data, i }) => {
       <p>{i + 1}</p>
       <p>{data?.employeeName}</p>
       <p>{data?.awardName}</p>
-      <p>{new Date().toString().slice(0, 21)}</p>
+      <p>{new Date(data.given).toString().slice(4, 21)}</p>
       <p>
         <button
           onClick={(e) => {

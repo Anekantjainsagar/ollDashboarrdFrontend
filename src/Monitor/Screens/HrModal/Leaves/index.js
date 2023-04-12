@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../../Components/Leave/Header/Header";
 import Nav from "../../../Components/Leave/Header/Nav";
 import Bar from "../../../Components/Leave/Header/Bar";
 import Sidebar from "../../../Components/Sidebar";
 import styles from "./style.module.css";
+import B2BContext from "../../../Context/B2BContext";
 
 const Leaves = () => {
+  const context = useContext(B2BContext);
   return (
     <div style={{ backgroundColor: "black", display: "flex" }}>
       <Sidebar />
@@ -14,27 +16,9 @@ const Leaves = () => {
         <div>
           <Nav />
           <div className={styles.users}>
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
+            {context?.leave?.leaves?.map((e) => {
+              return <Bar data={e} />;
+            })}
           </div>
         </div>
       </div>
