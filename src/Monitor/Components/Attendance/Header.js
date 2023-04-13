@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.css";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdFlight } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { VscDash } from "react-icons/vsc";
+import B2BContext from "../../Context/B2BContext";
 
 const Header = () => {
+  const context = useContext(B2BContext);
   return (
     <div className={styles.head}>
       <h1>Attendance</h1>
-      <input type="search" placeholder="Search here..." />
+      <input
+        type="search"
+        placeholder="Search here..."
+        value={context.employee.empSearch}
+        onChange={(e) => {
+          context.employee.setEmpSearch(e.target.value);
+        }}
+      />
       <div className={styles.rsection}>
         <button>Add Attendance</button>
         <button>Export</button>

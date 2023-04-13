@@ -24,13 +24,11 @@ function AddModal({ setIsOpen, modalIsOpen }) {
     setIsOpen(false);
   }
 
+  const context = useContext(B2BContext);
   const [holidayData, setHolidayData] = useState({
     occasion: "",
     date: new Date().toISOString().split("T")[0],
-    day: "Monday",
   });
-
-  const context = useContext(B2BContext);
 
   return (
     <div>
@@ -58,28 +56,6 @@ function AddModal({ setIsOpen, modalIsOpen }) {
               setHolidayData({ ...holidayData, occasion: e.target.value });
             }}
           />
-          <select
-            className={styles.select}
-            value={holidayData.day}
-            onChange={(e) => {
-              setHolidayData({
-                ...holidayData,
-                day: e.target.value,
-              });
-            }}
-          >
-            {[
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday",
-            ].map((e) => {
-              return <option value={e}>{e}</option>;
-            })}
-          </select>
           <input
             type="date"
             className={styles.input}
@@ -98,7 +74,6 @@ function AddModal({ setIsOpen, modalIsOpen }) {
             setHolidayData({
               occasion: "",
               date: new Date().toISOString().split("T")[0],
-              day: "Monday",
             });
             closeModal();
           }}

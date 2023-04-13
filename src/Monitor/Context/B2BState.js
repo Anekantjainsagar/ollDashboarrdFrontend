@@ -26,7 +26,6 @@ const B2BState = (props) => {
         }&search=${empSearch}`
       )
       .then((response) => {
-        console.log(response);
         setEmployees(response.data.employees);
       })
       .catch((err) => {
@@ -196,7 +195,6 @@ const B2BState = (props) => {
     axios
       .get(`${uri}/getAllLeaves?search=${leaveSearch}`)
       .then((response) => {
-        console.log(response);
         setLeaves(response.data.leaves);
       })
       .catch((err) => {
@@ -290,6 +288,40 @@ const B2BState = (props) => {
       });
   };
 
+  //Attendance
+  const setPresent = ({ details }) => {
+    axios
+      .put(`${uri}/setPresent`, { ...details })
+      .then((res) => {
+        getEmployees();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const setHalfDay = ({ details }) => {
+    axios
+      .put(`${uri}/setHalfDay`, { ...details })
+      .then((res) => {
+        getEmployees();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const setAbsent = ({ details }) => {
+    axios
+      .put(`${uri}/setAbsent`, { ...details })
+      .then((res) => {
+        getEmployees();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const employee = {
     addEmployee,
     empPage,
@@ -339,6 +371,12 @@ const B2BState = (props) => {
     deleteHoliday,
   };
 
+  const attendance = {
+    setPresent,
+    setAbsent,
+    setHalfDay,
+  };
+
   useEffect(() => {
     getEmployees();
   }, [empSearch]);
@@ -368,6 +406,7 @@ const B2BState = (props) => {
         department,
         leave,
         holiday,
+        attendance,
       }}
     >
       {props.children}

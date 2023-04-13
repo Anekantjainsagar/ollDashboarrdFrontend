@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.css";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { MdFlight } from "react-icons/md";
+import { MdCleaningServices, MdFlight } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { VscDash } from "react-icons/vsc";
+import B2BContext from "../../Context/B2BContext";
 
-const Bar = () => {
+const Bar = ({ data }) => {
+  const context = useContext(B2BContext);
   const d = new Date();
   const month = d.getMonth();
   const dates = [
@@ -62,98 +64,34 @@ const Bar = () => {
   return (
     <div className={styles.barH}>
       <p style={{ padding: "0.3rem 1rem", whiteSpace: "no-wrap" }}>
-        Anekant Jain
+        {data?.name}
       </p>
-      <p className={styles.icon}>
-        <FaStar size={20} />
-      </p>
-      <p className={styles.icon}>
-        <FaStarHalfAlt size={20} />
-      </p>
-      <p className={styles.icon}>
-        <AiOutlineClose size={20} />
-      </p>
-      <p className={styles.icon}>
-        <MdFlight size={20} />
-      </p>
-      <p className={styles.icon}>
-        <TiTick size={20} fontWeight={900} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
-      <p className={styles.icon}>
-        <VscDash size={20} />
-      </p>
+      {dates[month].map((e) => {
+        const date = new Date(`${month + 1} ${e}, ${d.getFullYear()}`);
+        return (
+          <p className={styles.icon}>
+            {new Date(
+              context?.holiday?.holidays?.find((e) => {
+                return new Date(e?.date)
+                  .toString()
+                  .slice(0, 15)
+                  .includes(date.toString().slice(0, 15));
+              })?.date
+            )
+              .toString()
+              .slice(0, 15) === date.toString().slice(0, 15) ||
+            date.getDay() === 0 ? (
+              <FaStar size={20} />
+            ) : (
+              <VscDash size={20} />
+            )}
+            {/* <FaStarHalfAlt size={20} />
+            <AiOutlineClose size={20} />
+            <MdFlight size={20} />
+            <TiTick size={20} /> */}
+          </p>
+        );
+      })}
     </div>
   );
 };
