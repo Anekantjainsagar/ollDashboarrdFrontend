@@ -11,6 +11,7 @@ const B2BState = (props) => {
   const [appreciations, setAppreciations] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [holidays, setHolidays] = useState([]);
   const [leaves, setLeaves] = useState([]);
   const [empPage, setEmpPage] = useState(1);
   const [empSearch, setEmpSearch] = useState("");
@@ -251,6 +252,44 @@ const B2BState = (props) => {
       });
   };
 
+  // Holiday
+  const addHoliday = ({ details }) => {
+    axios
+      .post(`${uri}/addHoliday`, { ...details })
+      .then((res) => {
+        getHolidays();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteHoliday = ({ id }) => {
+    axios
+      .delete(`${uri}/deleteHoliday`, {
+        headers: {
+          Authorization: "***",
+        },
+        data: {
+          id: id,
+        },
+      })
+      .then((res) => {
+        getHolidays();
+      });
+  };
+
+  const getHolidays = () => {
+    axios
+      .get(`${uri}/getHolidays`)
+      .then((response) => {
+        setHolidays(response.data.holidays);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const employee = {
     addEmployee,
     empPage,
@@ -294,6 +333,12 @@ const B2BState = (props) => {
     deleteLeave,
   };
 
+  const holiday = {
+    holidays,
+    addHoliday,
+    deleteHoliday,
+  };
+
   useEffect(() => {
     getEmployees();
   }, [empSearch]);
@@ -307,6 +352,7 @@ const B2BState = (props) => {
     getAllEmployees();
     getDesignations();
     getDepartments();
+    getHolidays();
   }, []);
 
   return (
@@ -321,6 +367,7 @@ const B2BState = (props) => {
         designation,
         department,
         leave,
+        holiday,
       }}
     >
       {props.children}

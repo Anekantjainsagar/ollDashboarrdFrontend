@@ -1,40 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Header from "../../../Components/Holiday/Header/Header";
 import Nav from "../../../Components/Holiday/Header/Nav";
 import Bar from "../../../Components/Holiday/Header/Bar";
 import Sidebar from "../../../Components/Sidebar";
 import styles from "./style.module.css";
+import B2BContext from "../../../Context/B2BContext";
 
 const Holiday = () => {
+  const context = useContext(B2BContext);
+  const [search, setSearch] = useState("");
   return (
     <div style={{ backgroundColor: "black", display: "flex" }}>
       <Sidebar />
       <div style={{ width: "88vw" }}>
-        <Header />
+        <Header search={search} setSearch={setSearch} />
         <div>
           <Nav />
           <div className={styles.users}>
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
-            <Bar />
+            {context?.holiday?.holidays
+              .filter((e) => {
+                if (search) {
+                  return e.occasion
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
+                }
+                return e;
+              })
+              .map((e, i) => {
+                return <Bar data={e} i={i} key={i} />;
+              })}
           </div>
         </div>
       </div>

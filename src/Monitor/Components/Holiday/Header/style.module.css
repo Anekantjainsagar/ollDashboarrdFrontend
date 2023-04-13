@@ -36,6 +36,16 @@
     font-weight: 700;
 }
 
+.btns{
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  background-color:#00a510;
+  text-decoration: none;
+}
+
 .barH{
   align-items: center;
   display: grid;
@@ -56,11 +66,5 @@
   padding: 0 0.5rem;
   width: 70%;
   margin: auto;
-}
-
-.barH p select{
-  text-align: center;
-  padding: 0 0.5rem;
-  width: 70%;
-  margin: auto;
+  color: white;
 }
