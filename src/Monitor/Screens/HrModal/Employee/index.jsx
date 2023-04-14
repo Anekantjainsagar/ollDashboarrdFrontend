@@ -20,6 +20,24 @@ const Employee = () => {
             {context?.employee?.employees?.map((e) => {
               return <EmployeeBar data={e} />;
             })}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {context.employee.noOfEmps > context.employee.empPage * 10 ? (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    context.employee.setEmpPage(context.employee.empPage + 1);
+                  }}
+                >
+                  Load more..
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

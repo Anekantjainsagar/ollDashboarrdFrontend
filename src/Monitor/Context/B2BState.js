@@ -16,6 +16,7 @@ const B2BState = (props) => {
   const [empPage, setEmpPage] = useState(1);
   const [empSearch, setEmpSearch] = useState("");
   const [leaveSearch, setLeaveSearch] = useState("");
+  const [noOfEmps, setNoOfEmps] = useState();
 
   // Employees
   const getEmployees = () => {
@@ -26,6 +27,7 @@ const B2BState = (props) => {
         }&search=${empSearch}`
       )
       .then((response) => {
+        setNoOfEmps(response.data.noOfEmployees);
         setEmployees(response.data.employees);
       })
       .catch((err) => {
@@ -324,6 +326,7 @@ const B2BState = (props) => {
   };
 
   const employee = {
+    noOfEmps,
     addEmployee,
     empPage,
     setEmpPage,
@@ -334,7 +337,7 @@ const B2BState = (props) => {
     updateStatus,
     setEmpSearch,
     allEmployees,
-    getEmployees
+    getEmployees,
   };
 
   const appreciation = {
@@ -381,7 +384,7 @@ const B2BState = (props) => {
 
   useEffect(() => {
     getEmployees();
-  }, [empSearch]);
+  }, [empSearch, empPage]);
 
   useEffect(() => {
     getLeaves();
