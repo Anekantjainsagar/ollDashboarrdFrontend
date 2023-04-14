@@ -3,6 +3,10 @@ import styles from "./style.module.css";
 import AddModal from "../Modal/index";
 import B2BContext from "../../../Context/B2BContext";
 import { CSVLink } from "react-csv";
+import fileDownload from "js-file-download";
+import Axios from "axios";
+import axios from "axios";
+const uri = "https://crm.oll.co/api/hr";
 
 const EmployeeHeader = () => {
   const [file, setFile] = useState();
@@ -25,20 +29,53 @@ const EmployeeHeader = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
+              Axios({
+                url: `${uri}/download/format`,
+                method: "GET",
+                responseType: "blob",
+              }).then((res) => {
+                fileDownload(res.data, "format.csv");
+              });
+            }}
+          >
+            Format
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
               setIsOpen(true);
             }}
           >
             Add Employee
           </button>
-          <input
-            type="file"
-            onChange={(e) => {
-              e.preventDefault();
-              setFile(e.target.files[0]);
-            }}
-            style={file ? { width: "28%" } : { width: "40%" }}
-          />
-          {file ? <button>Import</button> : null}
+          {file ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                const formData = new FormData();
+                formData.append("file", file);
+                axios
+                  .post(`${uri}/uploadEmployees`, formData)
+                  .then((res) => {
+                    context.employee.getEmployees();
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }}
+            >
+              Import
+            </button>
+          ) : (
+            <input
+              type="file"
+              onChange={(e) => {
+                e.preventDefault();
+                setFile(e.target.files[0]);
+              }}
+              style={{ width: "24%" }}
+            />
+          )}
           <CSVLink
             data={context?.employee?.allEmployees}
             filename="Employees"

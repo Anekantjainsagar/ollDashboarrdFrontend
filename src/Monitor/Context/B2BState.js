@@ -214,6 +214,7 @@ const B2BState = (props) => {
   };
 
   const setLeaveStatus = ({ details }) => {
+    console.log(details);
     axios
       .put(`${uri}/setLeaveStatus`, { ...details })
       .then((res) => {
@@ -333,6 +334,7 @@ const B2BState = (props) => {
     updateStatus,
     setEmpSearch,
     allEmployees,
+    getEmployees
   };
 
   const appreciation = {

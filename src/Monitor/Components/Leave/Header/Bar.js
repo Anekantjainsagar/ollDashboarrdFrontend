@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import styles from "./style.module.css";
 import B2BContext from "../../../Context/B2BContext";
+import axios from "axios";
+const uri = "https://crm.oll.co/api/hr";
 
 const Bar = ({ data }) => {
   const context = useContext(B2BContext);
   const [status, setStatus] = useState(data?.paid);
-  const [role, setRole] = useState(data?.role);
+  const [role, setRole] = useState(data?.leaveStatus);
   return (
     <div className={styles.barH}>
       <p>Emp - {data?.id}</p>
@@ -16,11 +18,18 @@ const Bar = ({ data }) => {
           name="role"
           value={role}
           onChange={(e) => {
+            axios
+              .put(`${uri}/setLeaveStatus`, {
+                id: data._id,
+                leaveStatus: e.target.value,
+              })
+              .then((res) => {
+                context.leave.getLeaves();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             setRole(e.target.value);
-            context?.leave.setLeaveStatus({
-              id: data?._id,
-              leaveStatus: e.target.value,
-            });
           }}
         >
           {["Approved", "Rejected"].map((e) => {

@@ -62,37 +62,86 @@ const Bar = ({ data }) => {
     ],
   ];
   return (
-    <div className={styles.barH}>
-      <p style={{ padding: "0.3rem 1rem", whiteSpace: "no-wrap" }}>
-        {data?.name}
-      </p>
-      {dates[month].map((e) => {
-        const date = new Date(`${month + 1} ${e}, ${d.getFullYear()}`);
-        return (
-          <p className={styles.icon}>
-            {new Date(
-              context?.holiday?.holidays?.find((e) => {
-                return new Date(e?.date)
+    <>
+      <div className={styles.barH}>
+        <p style={{ padding: "0.3rem 1rem", whiteSpace: "no-wrap" }}>
+          {data?.name}
+        </p>
+        {dates[month].map((e) => {
+          const date = new Date(`${month + 1} ${e}, ${d.getFullYear()}`);
+          return (
+            <p className={styles.icon}>
+              {new Date(
+                context?.holiday?.holidays?.find((e) => {
+                  return new Date(e?.date)
+                    .toString()
+                    .slice(0, 15)
+                    .includes(date.toString().slice(0, 15));
+                })?.date
+              )
+                .toString()
+                .slice(0, 15) === date.toString().slice(0, 15) ||
+              date.getDay() === 0 ? (
+                <FaStar size={20} />
+              ) : new Date(
+                  context?.leave?.leaves?.filter((e) => {
+                    return (
+                      data?.name
+                        .toLowerCase()
+                        .includes(e?.name.toLowerCase()) &&
+                      e?.leaveStatus === "Approved"
+                    );
+                  })[0]?.leaveDate
+                )
                   .toString()
-                  .slice(0, 15)
-                  .includes(date.toString().slice(0, 15));
-              })?.date
-            )
-              .toString()
-              .slice(0, 15) === date.toString().slice(0, 15) ||
-            date.getDay() === 0 ? (
-              <FaStar size={20} />
-            ) : (
-              <VscDash size={20} />
-            )}
-            {/* <FaStarHalfAlt size={20} />
-            <AiOutlineClose size={20} />
-            <MdFlight size={20} />
-            <TiTick size={20} /> */}
-          </p>
-        );
-      })}
-    </div>
+                  .slice(0, 15) === date.toString().slice(0, 15) ? (
+                <MdFlight size={20} />
+              ) : new Date(
+                  data?.present?.find((e) => {
+                    return (
+                      new Date(e?.date).toString().slice(0, 15) ===
+                      date.toString().slice(0, 15)
+                    );
+                  })?.date
+                )
+                  ?.toString()
+                  .slice(0, 15) === date?.toString().slice(0, 15) ? (
+                <TiTick size={20} />
+              ) : new Date(
+                  data?.absent?.find((e) => {
+                    return (
+                      new Date(e?.date).toString().slice(0, 15) ===
+                      date.toString().slice(0, 15)
+                    );
+                  })?.date
+                )
+                  ?.toString()
+                  .slice(0, 15) === date?.toString().slice(0, 15) ? (
+                <AiOutlineClose size={20} />
+              ) : new Date(
+                  data?.halfDay?.find((e) => {
+                    return (
+                      new Date(e?.date).toString().slice(0, 15) ===
+                      date.toString().slice(0, 15)
+                    );
+                  })?.date
+                )
+                  ?.toString()
+                  .slice(0, 15) === date?.toString().slice(0, 15) ? (
+                <FaStarHalfAlt size={20} />
+              ) : (
+                <VscDash size={20} />
+              )}
+            </p>
+          );
+        })}
+      </div>
+      <div className={styles.info}>
+        <p>Present :- {data?.present.length}</p>
+        <p>Absent :- {data?.absent.length}</p>
+        <p>Half Days :- {data?.halfDay.length}</p>
+      </div>
+    </>
   );
 };
 
