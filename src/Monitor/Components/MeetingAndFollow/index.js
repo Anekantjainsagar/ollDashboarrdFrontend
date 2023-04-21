@@ -12,9 +12,10 @@ const MeetingAndFollow = ({
   getFollowUps,
   status,
   setShowUserData,
+  school,
 }) => {
   const [meeting, setMeeting] = useState({
-    name: user?.schoolName,
+    name: school?.name,
     type: "",
     location: "",
     time: "",
@@ -27,7 +28,7 @@ const MeetingAndFollow = ({
   const b2b = useContext(B2BContext);
   const [followShow, setFollowShow] = useState(false);
   const [follows, setFollows] = useState({
-    name: user?.schoolName,
+    name: school?.name,
     time: "",
     startDate: "",
     comment: "",

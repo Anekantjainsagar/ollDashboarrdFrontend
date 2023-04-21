@@ -467,6 +467,7 @@ const FloatingUserData = ({
           getUsers={getUsers}
           getFollowUps={getFollowUps}
           status={status}
+          school={school}
           setShowUserData={setShowUserData}
         />
         <DisplayFollowUps followUp={followUp} user={user} schools={schools} />

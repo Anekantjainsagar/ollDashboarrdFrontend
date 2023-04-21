@@ -5,6 +5,7 @@ import Bar from "./Bar/index";
 import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import times from "../BatchDetails/times";
+import { CSVLink } from "react-csv";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -25,6 +26,8 @@ function useOutsideAlerter(ref, show, setShow) {
 const Meetings = ({ meetings, getMeetings }) => {
   const meetRef = useRef();
   const [showAddMeet, setShowAddMeet] = useState(false);
+  const [showingFollowUp, setShowingFollowUp] = useState("Today");
+  const [tommorow, setTommorow] = useState();
   useOutsideAlerter(meetRef, showAddMeet, setShowAddMeet);
   const { innerWidth: width } = window;
   const [meetLocation, setMeetLocation] = useState({
@@ -41,6 +44,14 @@ const Meetings = ({ meetings, getMeetings }) => {
     link: "",
     startDate: "",
   });
+
+  useEffect(() => {
+    let tommorow;
+    var today = new Date();
+    tommorow = new Date(today);
+    tommorow.setDate(today.getDate() + 1);
+    setTommorow(tommorow);
+  }, [meetings]);
 
   const addMeeting = () => {
     if (meeting.name && meeting.location) {
@@ -70,6 +81,37 @@ const Meetings = ({ meetings, getMeetings }) => {
     <div className={styles.meetings}>
       <div className={styles.header}>
         <h1>Meetings</h1>
+        <select
+          onChange={(e) => setShowingFollowUp(e.target.value)}
+          value={showingFollowUp}
+        >
+          <option value="Today">Today</option>
+          <option value="Tommorow">Tommorow</option>
+          <option value="Upcoming">Upcoming</option>
+        </select>
+        {meetings?.length > 0 ? (
+          <CSVLink
+            data={meetings?.filter((follow) => {
+              if (showingFollowUp === "Today") {
+                return (
+                  new Date(Date.now()).toString().slice(4, 16) ===
+                  new Date(follow.startDate).toString().slice(4, 16)
+                );
+              } else if (showingFollowUp === "Tommorow") {
+                return (
+                  tommorow.toString().slice(4, 16) ===
+                  new Date(follow.startDate).toString().slice(4, 16)
+                );
+              } else {
+                return new Date(follow.startDate) > new Date(Date.now());
+              }
+            })}
+            filename="Meetings"
+            className={styles.btn}
+          >
+            Export
+          </CSVLink>
+        ) : null}
       </div>
       <div
         className={styles.addMeet}
@@ -198,12 +240,19 @@ const Meetings = ({ meetings, getMeetings }) => {
       </div>
       <div className={styles.data}>
         {meetings
-          .filter((meet) => {
-            if (
-              new Date(Date.now()).toString().slice(4, 16) ===
-              new Date(meet.startDate).toString().slice(4, 16)
-            ) {
-              return meet;
+          ?.filter((follow) => {
+            if (showingFollowUp === "Today") {
+              return (
+                new Date(Date.now()).toString().slice(4, 16) ===
+                new Date(follow.startDate).toString().slice(4, 16)
+              );
+            } else if (showingFollowUp === "Tommorow") {
+              return (
+                tommorow.toString().slice(4, 16) ===
+                new Date(follow.startDate).toString().slice(4, 16)
+              );
+            } else {
+              return new Date(follow.startDate) > new Date(Date.now());
             }
           })
           .map((meet, i) => {
