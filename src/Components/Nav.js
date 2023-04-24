@@ -16,6 +16,10 @@ const Nav = ({ sales }) => {
   const b2b = useContext(B2BContext);
   const [file, setFile] = useState();
   const [exportData, setExportData] = useState([]);
+  const [startDate, setStartDate] = useState("2023-01-01");
+  const [endDate, setEndDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
 
   useEffect(() => {
     updateSchools();
@@ -26,8 +30,13 @@ const Nav = ({ sales }) => {
 
   const updateSchools = () => {
     axios.get(`${BASE_URL}/getAllUsers`).then((response) => {
-      const exports = response?.data;
-      setExportData(exports);
+      const data = response?.data?.filter((e) => {
+        return (
+          new Date(e.inqDate) >= new Date(startDate) &&
+          new Date(e.inqDate) <= new Date(endDate)
+        );
+      });
+      setExportData(data);
     });
   };
 
@@ -38,11 +47,11 @@ const Nav = ({ sales }) => {
         <div className="time">
           <MdOutlineAccessTimeFilled size={25} color={"grey"} /> {time}
         </div>
-        <div style={{ width: "45%", display: "flex", alignItems: "center" }}>
+        <div style={{ width: "30%", display: "flex", alignItems: "center" }}>
           <form
             encType="multipart/form-data"
             method="post"
-            style={{ width: "45%" }}
+            style={{ width: "30%" }}
           >
             <input
               type="file"
@@ -54,7 +63,7 @@ const Nav = ({ sales }) => {
             />
             {file ? (
               <button
-                style={{ width: "40%" }}
+                style={{ width: "20%" }}
                 onClick={(e) => {
                   e.preventDefault();
                   const formData = new FormData();
@@ -93,23 +102,44 @@ const Nav = ({ sales }) => {
             Format
           </button>
         </div>
-        <div className="profileSection">
+        <div className="profileSection" style={{ width: "42%" }}>
           {exportData?.length > 0 ? (
-            <CSVLink
-              data={exportData}
-              filename="Schools"
-              className="btn"
-              onClick={() => {
-                updateSchools();
-              }}
-            >
-              Export
-            </CSVLink>
+            <>
+              <input
+                type="date"
+                value={startDate}
+                style={{ width: "30%" }}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                  updateSchools();
+                }}
+              />
+              <CSVLink
+                data={exportData}
+                filename="Schools"
+                className="btn"
+                onClick={() => {
+                  updateSchools();
+                }}
+              >
+                Export
+              </CSVLink>
+              <input
+                type="date"
+                value={endDate}
+                style={{ width: "30%" }}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                  updateSchools();
+                }}
+              />
+            </>
           ) : null}
           <p>{b2b?.login?.name}</p>
           <img
             src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=463"
             alt="Profile"
+            style={{ width: "7%" }}
             onClick={() => {
               setlogoutBtn(!logoutBtn);
             }}

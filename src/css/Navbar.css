@@ -31,7 +31,7 @@
 
 .nav .profileSection {
   display: flex;
-  width: 22%;
+  width: 42%;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -57,7 +57,7 @@
 }
 
 .nav .profileSection img {
-  width: 15%;
+  width: 10%;
   border-radius: 50%;
 }
 
