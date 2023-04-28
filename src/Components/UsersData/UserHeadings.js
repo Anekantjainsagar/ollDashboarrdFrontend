@@ -8,7 +8,7 @@ const UserHeadings = ({ filter, setfilter }) => {
       <div
         className="userPanelHeadings"
         style={{
-          gridTemplateColumns: "3% 8% 10% 9% 10% 10% 12% 12% 10% 7% 11%",
+          gridTemplateColumns: "5% 8% 10% 9% 10% 10% 12% 12% 9% 6% 11%",
         }}
       >
         <p className="id">ID</p>

@@ -163,7 +163,7 @@ const User = (props) => {
         }}
         style={{
           cursor: "pointer",
-          gridTemplateColumns: "3% 8% 10% 9% 10% 10% 12% 12% 10% 7% 11%",
+          gridTemplateColumns: "5% 8% 10% 9% 10% 10% 12% 12% 9% 6% 11%",
         }}
       >
         <p className="idValue">{id}</p>
