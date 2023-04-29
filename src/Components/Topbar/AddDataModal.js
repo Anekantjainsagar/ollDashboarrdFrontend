@@ -139,7 +139,7 @@ const AddDataModal = ({
         <button
           onClick={(e) => {
             e.preventDefault();
-            if (data?.name?.length > 0 && phone?.length > 0) {
+            if (phone?.length > 0) {
               postData();
               setIsOpen(false);
               setDataSaved(false);
