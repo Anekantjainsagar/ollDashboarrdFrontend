@@ -45,7 +45,7 @@ const AddDataModal = ({
   const postData = async () => {
     const res = await axios.post(`${BASE_URL}/addUser`, {
       name: data?.name,
-      phone,
+      phone: parseInt(phone),
       email: data?.email,
       age,
       school: data?.school,
