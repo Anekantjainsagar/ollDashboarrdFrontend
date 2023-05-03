@@ -112,8 +112,7 @@ const DbHeader = ({ getSchools, schools }) => {
                 method: "GET",
                 responseType: "blob",
               }).then((res) => {
-                console.log(res);
-                fileDownload(res.data, "format.xlsx");
+                fileDownload(res.data, "school_format.csv");
               });
             }}
           >
