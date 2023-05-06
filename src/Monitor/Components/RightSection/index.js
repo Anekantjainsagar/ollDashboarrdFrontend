@@ -233,13 +233,7 @@ const RightSection = ({
             }}
           />
         </div>
-        <input
-          type="text"
-          style={{ width: "30%" }}
-          placeholder="Search by School name..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        
       </div>
       <NewLead
         schools={schools}
@@ -254,6 +248,9 @@ const RightSection = ({
           setFilter={setFilter}
           agents={agents}
           offers={offers}
+          search={search}
+
+          setSearch={setSearch}
         />
         <div className={styles.usersDisplayContainer}>
           {filteredUsers

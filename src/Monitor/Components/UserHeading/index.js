@@ -2,12 +2,25 @@ import React from "react";
 import styles from "./style.module.css";
 import { BsChevronDown } from "react-icons/bs";
 
-const UserHeading = ({ filter, setFilter, agents, offers }) => {
+const UserHeading = ({
+  filter,
+  setFilter,
+  agents,
+  offers,
+  search,
+  setSearch,
+}) => {
   return (
     <div className={styles.bar}>
       <p className={styles.id}>ID</p>
       <p className={styles.inqDate}>Inquiry Date</p>
-      <p className={styles.name}>Name</p>
+      <input
+        type="text"
+        placeholder="School name..."
+        style={{ margin: 0, width: "95%" }}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <p className={styles.type}>
         Stage
         <BsChevronDown size={15} />

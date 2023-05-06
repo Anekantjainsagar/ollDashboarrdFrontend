@@ -90,21 +90,6 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
           setSchoolSaved(false);
           setofferSaved(false);
           console.log(res);
-          setTimeout(() => {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("id", res.data.user._id);
-            axios
-              .put(`${MONITOR_BACKEND}/addFile`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-              })
-              .then((res) => {
-                console.log(res);
-              })
-              .catch((e) => {
-                console.log(e);
-              });
-          }, 5000);
           // const options = {
           //   method: "POST",
           //   headers: {
@@ -334,25 +319,7 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               }}
             />
           ) : null}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-              width: "20%",
-            }}
-          >
-            <p>Deadline : </p>
-            <input
-              type="date"
-              style={{ width: "60%" }}
-              placeholder="Deadline"
-              value={user.deadline}
-              onChange={(e) => {
-                setUser({ ...user, deadline: e.target.value });
-              }}
-            />
-          </div>
+
           <input
             type="text"
             placeholder="Handler"
@@ -424,46 +391,29 @@ const NewLead = ({ schools, getSchools, getUsers, agents, offers }) => {
               }}
             />
           </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <input
-            type="text"
-            value={user?.description}
-            placeholder={`Enter the task for ${
-              user?.handler ? user?.handler : "Handler"
-            }`}
-            onChange={(e) => {
-              setUser({ ...user, description: e.target.value });
-            }}
-            style={{ width: "60%", marginRight: "1rem" }}
-          />
-          <input
-            type="file"
-            onChange={(e) => {
-              setFile(e.target.files[0]);
-            }}
-            style={{ width: "20%", marginRight: "1rem" }}
-          />
-          <button
-            className={styles.btn}
-            onClick={(e) => {
-              e.preventDefault();
-              addUser();
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              width: "25%",
             }}
           >
-            <AiOutlinePlus
-              color="white"
-              size={16}
-              style={{ marginRight: "0.5rem" }}
-            />
-            Create Lead
-          </button>
+            <button
+              className={styles.btn}
+              onClick={(e) => {
+                e.preventDefault();
+                addUser();
+              }}
+            >
+              <AiOutlinePlus
+                color="white"
+                size={16}
+                style={{ marginRight: "0.5rem" }}
+              />
+              Create Lead
+            </button>
+          </div>
         </div>
       </div>
     </>
