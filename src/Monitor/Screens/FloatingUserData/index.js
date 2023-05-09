@@ -28,6 +28,7 @@ import MeetingAndFollow from "../../Components/MeetingAndFollow";
 import FollowUpProgram from "../../Components/FollowUpProgram";
 import DisplayFollowUps from "../../Components/DisplayFollowUps";
 import B2BContext from "../../Context/B2BContext";
+import { useNavigate } from "react-router-dom";
 
 function useOutsideAlerter(ref, show, setShow) {
   useEffect(() => {
@@ -106,6 +107,7 @@ const FloatingUserData = ({
   } = user;
 
   const [followUpModal, setFollowUpModal] = useState(false);
+  const history = useNavigate();
   function openFollowModal() {
     setFollowUpModal(true);
   }
@@ -352,54 +354,16 @@ const FloatingUserData = ({
           <p style={{ fontSize: "1.55rem" }}>{school?.phone}</p>
           <p style={{ fontSize: "1.55rem" }}>{school?.email}</p>
         </div>
-        {description ? (
-          <div
-            style={{
-              margin: "1rem 0.75rem",
+        <CopyToClipboard text={schoolName}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              history("/db");
             }}
           >
-            <p
-              style={{
-                fontSize: "1.6rem",
-              }}
-            >
-              Task for {handler} is{" "}
-              <b style={{ fontSize: "1.65rem" }}>{description}</b>
-            </p>
-          </div>
-        ) : null}
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            // Axios({
-            //   url: `${MONITOR_BACKEND}/download/downloadFile`,
-            //   method: "GET",
-            //   responseType: "blob",
-            //   body: JSON.stringify({
-            //     id: _id,
-            //   }),
-            //   headers: {
-            //     "Content-type": "application/json; charset=UTF-8",
-            //   },
-            // }).then((res) => {
-            //   console.log(res);
-            //   fileDownload(res.data, "file.pdf");
-            // });
-            axios
-              .post(`${MONITOR_BACKEND}/download/downloadFile`, {
-                id: _id,
-              })
-              .then((res) => {
-                console.log(res);
-                fileDownload(res.data, "file.pdf");
-                if (res?.data?.data?.acknowledged === false) {
-                  alert("File not available");
-                }
-              });
-          }}
-        >
-          Download Attachment
-        </button>
+            View Details
+          </button>
+        </CopyToClipboard>
         <div className={styles.contactContainer}>
           <p>Contact</p>
           <div className={styles.container}>
@@ -446,19 +410,6 @@ const FloatingUserData = ({
                 className={styles.iconStyle}
               />
             </CopyToClipboard>
-            <div
-              className={styles.btn}
-              onClick={() =>
-                window.open("https://live-11507.wati.io/teamInbox/")
-              }
-            >
-              <BsWhatsapp
-                size={20}
-                style={{ marginRight: "0.3rem" }}
-                color={"#0ac032"}
-              />
-              History
-            </div>
           </div>
         </div>
         <MeetingAndFollow
