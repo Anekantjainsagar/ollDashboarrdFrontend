@@ -125,6 +125,9 @@ const FloatingUserData = ({
 
   useOutsideAlerter(ref, showUserData, setShowUserData);
 
+  var dueDate = new Date(inqDate);
+  dueDate.setDate(dueDate.getDate() + 1);
+
   const addNewProgram = () => {
     if (offer.name.length > 0) {
       axios
@@ -1439,7 +1442,7 @@ const FloatingUserData = ({
           <div className={styles.content}>
             <div className={styles.container1}>
               <p>Start Time : {new Date(inqDate).toString().slice(4, 21)}</p>
-              <p>Due Time : {new Date(inqDate).toString().slice(4, 21)}</p>
+              <p>Due Time : {new Date(dueDate).toString().slice(4, 21)}</p>
             </div>
             <div className={styles.container2}>
               <p>End Time : </p>
