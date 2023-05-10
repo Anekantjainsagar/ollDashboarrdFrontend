@@ -115,6 +115,10 @@ const FloatingUserData = ({
   const [programKaCosting, setprogramKaCosting] = useState();
   const [expenseShow, setExpenseShow] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [toBeUpdateDetails, setToBeUpdateDetails] = useState({
+    handler: handler,
+    source: source,
+  });
   function openModal() {
     setIsOpen(true);
   }
@@ -411,6 +415,66 @@ const FloatingUserData = ({
               />
             </CopyToClipboard>
           </div>
+        </div>
+        <div style={{ margin: "auto" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <p>Handler : </p>
+            <input
+              type="text"
+              value={toBeUpdateDetails?.handler}
+              style={{ width: "76%" }}
+              onChange={(e) => {
+                setToBeUpdateDetails({
+                  ...toBeUpdateDetails,
+                  handler: e.target.value,
+                });
+              }}
+              placeholder="Enter the handler"
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <p>Source : </p>
+            <input
+              type="text"
+              value={toBeUpdateDetails?.source}
+              style={{ width: "76%" }}
+              onChange={(e) => {
+                setToBeUpdateDetails({
+                  ...toBeUpdateDetails,
+                  source: e.target.value,
+                });
+              }}
+              placeholder="Enter the source"
+            />
+          </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              axios
+                .put("https://crm.oll.co/api/b2b/setDetails", {
+                  ...toBeUpdateDetails,
+                  id: _id,
+                })
+                .then((res) => {
+                  console.log(res);
+                  getUsers();
+                });
+            }}
+          >
+            Change the source / handler
+          </button>
         </div>
         <MeetingAndFollow
           user={user}
