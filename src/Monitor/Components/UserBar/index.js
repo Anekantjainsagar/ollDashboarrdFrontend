@@ -48,6 +48,9 @@ const UserBar = ({
     setFollowUpModal(true);
   }
 
+  var dueDate = new Date(inqDate);
+  dueDate.setDate(dueDate.getDate() + 1);
+
   return (
     <>
       <AddStatusMeeting
@@ -67,7 +70,11 @@ const UserBar = ({
       />
       <div
         className={styles.bar}
-        style={{ cursor: "pointer" }}
+        style={
+          dueDate < new Date(Date.now()) && status == "New"
+            ? { cursor: "pointer", border: "1px solid red" }
+            : { cursor: "pointer" }
+        }
         onClick={() => {
           if (showUserData === false) {
             setShowUserData(!showUserData);
