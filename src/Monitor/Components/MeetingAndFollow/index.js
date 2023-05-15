@@ -58,9 +58,19 @@ const MeetingAndFollow = ({
               })
               .then((res) => {
                 if (res) {
-                  getUsers();
                   setShowUserData(false);
                   setMeeting({ comment: "" });
+                  axios
+                    .put(`${MONITOR_BACKEND}/setStatus`, {
+                      id: user?._id,
+                      status: "FollowUp",
+                    })
+                    .then((response) => {
+                      console.log(response);
+                      if (response.data) {
+                        getUsers();
+                      }
+                    });
                 }
               })
               .catch((err) => {
@@ -97,9 +107,19 @@ const MeetingAndFollow = ({
               })
               .then((res) => {
                 if (res) {
-                  getUsers();
                   setShowUserData(false);
                   setMeeting({ comment: "" });
+                  axios
+                    .put(`${MONITOR_BACKEND}/setStatus`, {
+                      id: user?._id,
+                      status: "FollowUp",
+                    })
+                    .then((response) => {
+                      console.log(response);
+                      if (response.data) {
+                        getUsers();
+                      }
+                    });
                 }
               })
               .catch((err) => {
