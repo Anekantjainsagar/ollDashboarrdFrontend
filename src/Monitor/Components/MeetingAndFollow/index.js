@@ -40,6 +40,7 @@ const MeetingAndFollow = ({
       axios
         .post(`${MONITOR_BACKEND}/addFollowUP`, {
           ...follows,
+          name: school?.name,
           id: user?.schoolId,
           userId: user?._id,
         })
@@ -87,7 +88,10 @@ const MeetingAndFollow = ({
   const addMeeting = () => {
     if (meeting.name && meeting.location) {
       axios
-        .post(`${MONITOR_BACKEND}/addMeeting`, meeting)
+        .post(`${MONITOR_BACKEND}/addMeeting`, {
+          ...meeting,
+          name: school?.name,
+        })
         .then((res) => {
           if (res.data) {
             getMeetings();
@@ -181,7 +185,7 @@ const MeetingAndFollow = ({
           type="text"
           className={styles.name}
           placeholder="Meeting Name"
-          value={meeting.name}
+          value={school?.name}
           onChange={(e) => setMeeting({ ...meeting, name: e.target.value })}
         />
         <div className={styles.container}>
@@ -287,7 +291,7 @@ const MeetingAndFollow = ({
           type="text"
           className={styles.name}
           placeholder="School Name"
-          value={follows.name}
+          value={school?.name}
           onChange={(e) => setFollows({ ...follows, name: e.target.value })}
         />
         <div className={styles.container}>

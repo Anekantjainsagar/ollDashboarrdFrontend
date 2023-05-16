@@ -233,7 +233,6 @@ const RightSection = ({
             }}
           />
         </div>
-        
       </div>
       <NewLead
         schools={schools}
@@ -249,7 +248,6 @@ const RightSection = ({
           agents={agents}
           offers={offers}
           search={search}
-
           setSearch={setSearch}
         />
         <div className={styles.usersDisplayContainer}>
@@ -336,6 +334,15 @@ const RightSection = ({
                 }).length
               }
             </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "1rem",
+            }}
+          >
+            <button className={styles.btns}>Import</button>
           </div>
         </div>
       </div>

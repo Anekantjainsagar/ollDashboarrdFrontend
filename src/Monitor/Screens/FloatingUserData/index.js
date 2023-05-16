@@ -548,7 +548,7 @@ const FloatingUserData = ({
             </div>
           </form>
         ) : status === "New" ? (
-            <>
+          <>
             {/* <form
               encType="multipart/form-data"
               style={{
@@ -564,7 +564,7 @@ const FloatingUserData = ({
               <div className={styles.inputSections}>
                 <input
                   type="text"
-                  placeholder="Class Name"
+                  placeholder="Offer Name"
                   value={offer.name}
                   onChange={(e) => setOffer({ ...offer, name: e.target.value })}
                 />
