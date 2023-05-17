@@ -18,6 +18,7 @@ const UserBar = ({
   programs,
   schools,
   followUp,
+  meetings,
 }) => {
   const [statusChange, setStatus] = useState("");
   const [showUserData, setShowUserData] = useState(false);
@@ -130,6 +131,7 @@ const UserBar = ({
           showUserData={showUserData}
           setShowUserData={setShowUserData}
           user={user}
+          meetings={meetings}
           getUsers={getUsers}
           getFollowUps={getFollowUps}
           getMeetings={getMeetings}

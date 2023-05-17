@@ -272,6 +272,7 @@ const RightSection = ({
                   getFollowUps={getFollowUps}
                   getOffers={getOffers}
                   getPrograms={getPrograms}
+                  meetings={meetings}
                   programs={programs}
                   followUp={followUp}
                 />
@@ -382,7 +383,6 @@ const RightSection = ({
               className={styles.btns}
               style={{ padding: "0.25rem 0.75rem", fontSize: "1.5rem" }}
               onClick={(e) => {
-                console.log("Hello wol");
                 e.preventDefault();
                 Axios({
                   url: `${MONITOR_BACKEND}/download/b2bformat`,

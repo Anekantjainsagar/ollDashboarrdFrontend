@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Bar from "./Bar";
 import styles from "./style.module.css";
 
-const DisplayFollowUps = ({ followUp, user, schools }) => {
+const DisplayFollowUps = ({ followUp, user, schools, meetings }) => {
   const [userFollowUps, setUserFollowUps] = useState([]);
   useEffect(() => {
     const follows = followUp.filter((follow) => {
@@ -10,6 +10,16 @@ const DisplayFollowUps = ({ followUp, user, schools }) => {
     });
     setUserFollowUps(follows);
   }, [user, schools]);
+
+  const [userMeetings, setUserMeetings] = useState([]);
+  useEffect(() => {
+    const meeting = meetings.filter((follow) => {
+      return follow.name.toLowerCase().includes(user.schoolName.toLowerCase());
+    });
+    setUserMeetings(meeting);
+  }, [user, schools]);
+
+  console.log(userMeetings);
 
   return (
     <>
@@ -46,6 +56,16 @@ const DisplayFollowUps = ({ followUp, user, schools }) => {
           .map((follow, i) => {
             return <Bar follow={follow} schools={schools} key={i} />;
           })}
+      </div>
+      <div
+        style={{
+          margin: "1rem 0",
+        }}
+      >
+        <h1 style={{ fontSize: "1.75rem", textAlign: "center" }}>Meetings</h1>
+        {userMeetings.map((follow, i) => {
+          return <Bar follow={follow} schools={schools} key={i} />;
+        })}
       </div>
     </>
   );

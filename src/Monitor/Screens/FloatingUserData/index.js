@@ -57,6 +57,7 @@ const FloatingUserData = ({
   schools,
   getMeetings,
   followUp,
+  meetings,
 }) => {
   const ref = useRef(null);
   const [statusChange, setStatus] = useState("");
@@ -488,7 +489,12 @@ const FloatingUserData = ({
           school={school}
           setShowUserData={setShowUserData}
         />
-        <DisplayFollowUps followUp={followUp} user={user} schools={schools} />
+        <DisplayFollowUps
+          followUp={followUp}
+          user={user}
+          meetings={meetings}
+          schools={schools}
+        />
         {status === "FollowUp" ? (
           <form
             encType="multipart/form-data"
