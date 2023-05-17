@@ -10,9 +10,11 @@ import B2BContext from "../../Context/B2BContext";
 import { useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import axios from "axios";
+import Axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import "jspdf-autotable";
 import jsPDF from "jspdf";
+import fileDownload from "js-file-download";
 
 const RightSection = ({
   schools,
@@ -39,6 +41,7 @@ const RightSection = ({
   const b2b = useContext(B2BContext);
   const location = useLocation();
   const [user, setUser] = useState("");
+  const [file, setFile] = useState();
 
   useEffect(() => {
     if (b2b?.login?.type === "b2b") {
@@ -342,7 +345,56 @@ const RightSection = ({
               marginTop: "1rem",
             }}
           >
-            <button className={styles.btns}>Import</button>
+            {file ? (
+              <button
+                style={{ padding: "0.25rem 0.75rem", fontSize: "1.5rem" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData();
+                  formData.append("file", file);
+                  axios
+                    .post(`${MONITOR_BACKEND}/uploadUsers`, formData)
+                    .then((res) => {
+                      if (res?.data[0]?._id) {
+                        getUsers();
+                        setFile("");
+                      }
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+                className={styles.btns}
+              >
+                import
+              </button>
+            ) : (
+              <input
+                type="file"
+                style={{ width: "50%", fontSize: "1.25rem" }}
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+                name="file"
+              />
+            )}
+            <button
+              className={styles.btns}
+              style={{ padding: "0.25rem 0.75rem", fontSize: "1.5rem" }}
+              onClick={(e) => {
+                console.log("Hello wol");
+                e.preventDefault();
+                Axios({
+                  url: `${MONITOR_BACKEND}/download/b2bformat`,
+                  method: "GET",
+                  responseType: "blob",
+                }).then((res) => {
+                  fileDownload(res.data, "b2b_users_format.csv");
+                });
+              }}
+            >
+              Format
+            </button>
           </div>
         </div>
       </div>
