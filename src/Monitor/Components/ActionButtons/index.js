@@ -1,7 +1,7 @@
 import React from "react";
 import fileDownload from "js-file-download";
 import MONITOR_BACKEND from "../../Utils";
-import { Axios } from "axios";
+import Axios from "axios";
 
 const ActionButtons = () => {
   return (

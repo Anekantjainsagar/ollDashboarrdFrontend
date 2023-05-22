@@ -126,7 +126,7 @@ const FollowUpProgram = ({ getPrograms, user, setShowUserData, programs }) => {
         <div className={styles.inputSections}>
           <input
             type="text"
-            placeholder="Class Name"
+            placeholder="Offer Name"
             value={offer.name}
             onChange={(e) => setOffer({ ...offer, name: e.target.value })}
           />

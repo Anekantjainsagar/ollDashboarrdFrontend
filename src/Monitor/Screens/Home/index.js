@@ -240,6 +240,17 @@ const Home = () => {
     setFilteredUsers(searchFilter);
   }, [filter, users]);
 
+  const setStatusIfGreater = () => {
+    axios
+      .get("https://crm.oll.co/api/b2b/setStatusIfGreater")
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getSchools();
     getMeetings();
@@ -247,6 +258,7 @@ const Home = () => {
     getOffers();
     getAgents();
     getPrograms();
+    setStatusIfGreater();
   }, []);
 
   useEffect(() => {
