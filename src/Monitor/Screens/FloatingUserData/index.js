@@ -664,47 +664,60 @@ const FloatingUserData = ({
               <p>Margin :- </p>
               <p> Rs. {margin}</p>
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-evenly",
-                marginTop: "0.75rem",
-              }}
-            >
-              <p>Payment Status?</p>
-              <button
+            {user.paid ? (
+              <div
                 style={{
-                  backgroundColor: "#00a510",
-                  color: "white",
-                  padding: "0.5rem 1rem",
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  borderRadius: "1rem",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setShowUserData(false);
-                  axios
-                    .put(`${MONITOR_BACKEND}/setStatus`, {
-                      id: _id,
-                      status: "MeetingSet",
-                    })
-                    .then((response) => {
-                      console.log(response);
-                      if (response.data.data.modifiedCount > 0) {
-                        getUsers();
-                        openModal();
-                      }
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  marginTop: "0.75rem",
+                    border: "3px solid green",
+                    fontWeight: "bold",
+                    padding: "0.5rem 0",
+                    borderRadius: "1rem"
                 }}
               >
-                !Pay
-              </button>
-            </div>
+                <p>Payment Status is Done</p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  marginTop: "0.75rem",
+                }}
+              >
+                <p>Payment Status?</p>
+                <button
+                  style={{
+                    backgroundColor: "#00a510",
+                    color: "white",
+                    padding: "0.5rem 1rem",
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    borderRadius: "1rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setShowUserData(false);
+                    axios
+                      .put(`${MONITOR_BACKEND}/setIsPaid`, {
+                        id: _id,
+                        paid: true,
+                      })
+                      .then((response) => {
+                        console.log(response);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  Paid
+                </button>
+              </div>
+            )}
           </>
         )}
         <div className={styles.commentContainer}>
