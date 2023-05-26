@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
+import emailjs from "@emailjs/browser";
 import styles from "./style.module.css";
 import {
   AiOutlineClose,
@@ -664,6 +665,46 @@ const FloatingUserData = ({
               <p>Margin :- </p>
               <p> Rs. {margin}</p>
             </div>
+            <button
+              style={{
+                backgroundColor: "#00a510",
+                color: "white",
+                padding: "0.5rem 1rem",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                borderRadius: "1rem",
+                cursor: "pointer",
+                margin: "1rem auto",
+                display: "block",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                emailjs
+                  .send(
+                    "service_2ynwyzb",
+                    "template_hsdvnog",
+                    {
+                      name: user?.schoolName,
+                      pay: user?.paid ? "Paid" : "Unpaid",
+                      phone: school?.phone,
+                      email: school?.email,
+                      from_name: "OLL",
+                    },
+                    "SkxN6CQDdddlQ84Qj"
+                  )
+                  .then(
+                    function (response) {
+                      console.log(response);
+                      console.log("SUCCESS!", response.status, response.text);
+                    },
+                    function (err) {
+                      console.log("FAILED...", err);
+                    }
+                  );
+              }}
+            >
+              Send To Acc.
+            </button>
             {user.paid ? (
               <div
                 style={{
@@ -671,10 +712,10 @@ const FloatingUserData = ({
                   alignItems: "center",
                   justifyContent: "space-evenly",
                   marginTop: "0.75rem",
-                    border: "3px solid green",
-                    fontWeight: "bold",
-                    padding: "0.5rem 0",
-                    borderRadius: "1rem"
+                  border: "3px solid green",
+                  fontWeight: "bold",
+                  padding: "0.5rem 0",
+                  borderRadius: "1rem",
                 }}
               >
                 <p>Payment Status is Done</p>
