@@ -41,7 +41,16 @@ const Sidebar = () => {
           Agents
         </div>
       ) : null}
-
+      <div
+        className={
+          location?.pathname === "/products"
+            ? `${styles.option}, ${styles.optionSelected}`
+            : `${styles.option}`
+        }
+        onClick={() => history("/products")}
+      >
+        Product Team
+      </div>
       <div
         className={
           location?.pathname === "/db"

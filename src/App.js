@@ -26,6 +26,7 @@ import Appreciation from "./Monitor/Screens/HrModal/Appreciation";
 import Department from "./Monitor/Screens/HrModal/Department";
 import Designation from "./Monitor/Screens/HrModal/Designation";
 import Attendance from "./Monitor/Screens/HrModal/Attendance";
+import Product from "./Monitor/Screens/Product";
 
 const App = () => {
   const history = useNavigate();
@@ -327,6 +328,10 @@ const App = () => {
       <Route
         path="/agents"
         element={<Agents getAgents={getAgents} agents={agents} />}
+      />
+      <Route
+        path="/products"
+        element={<Product getAgents={getAgents} agents={agents} />}
       />
       <Route path="/hr/employees" element={<Employee />} />
       <Route path="/hr/leaves" element={<Leaves />} />
