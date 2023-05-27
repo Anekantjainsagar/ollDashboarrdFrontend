@@ -5,7 +5,7 @@ import MONITOR_BACKEND from "../../Utils/index";
 import { AiOutlineDelete } from "react-icons/ai";
 import Sidebar from "../../Components/Sidebar";
 
-const Product = ({ agents, getAgents }) => {
+const Product = ({ products, getProducts }) => {
   const [handler, setHandler] = useState({
     name: "",
     email: "",
@@ -13,16 +13,16 @@ const Product = ({ agents, getAgents }) => {
   const [phone, setPhone] = useState();
   const [showDelete, setShowDelete] = useState(false);
 
-  const addNewAgent = () => {
+  const addNewProduct = () => {
     if (handler.name.length > 0) {
       axios
-        .post(`${MONITOR_BACKEND}/addAgent`, { ...handler, phone })
+        .post(`${MONITOR_BACKEND}/addProduct`, { ...handler, phone })
         .then((response) => {
           console.log(response);
           if (response) {
             setHandler({ name: "", email: "" });
             setPhone("");
-            getAgents();
+            getProducts();
           }
         })
         .catch((err) => {
@@ -55,7 +55,7 @@ const Product = ({ agents, getAgents }) => {
         <div className={styles.addAgent}>
           <input
             type="text"
-            placeholder="Enter agent name"
+            placeholder="Enter name"
             value={handler?.name}
             onChange={(e) => setHandler({ ...handler, name: e.target.value })}
           />
@@ -74,10 +74,10 @@ const Product = ({ agents, getAgents }) => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              addNewAgent();
+              addNewProduct();
             }}
           >
-            Save Agent
+            Save Team
           </button>
         </div>
         <div className={styles.table}>
@@ -89,37 +89,58 @@ const Product = ({ agents, getAgents }) => {
           </div>
         </div>
         <div className={styles.usersTable}>
-          <div>
-            <div
-              className={styles.agents}
-              onClick={() => setShowDelete(!showDelete)}
-            >
-              <p className={styles.id}>1</p>
-              <p className={styles.name}>Name</p>
-              <p className={styles.email}>Email</p>
-              <p className={styles.phone}>Phone</p>
-            </div>
-            <div
-              style={
-                showDelete
-                  ? {
-                      display: "flex",
-                      justifyContent: "end",
-                      margin: "0 2rem",
-                    }
-                  : { display: "none" }
-              }
-            >
-              <AiOutlineDelete
-                color="white"
-                style={{ cursor: "pointer" }}
-                size={20}
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              />
-            </div>
-          </div>
+          {products?.map((product, i) => {
+            return (
+              <div key={i}>
+                <div
+                  className={styles.agents}
+                  onClick={() => setShowDelete(!showDelete)}
+                >
+                  <p className={styles.id}>{i+1}</p>
+                  <p className={styles.name}>{product.name}</p>
+                  <p className={styles.email}>{product.email}</p>
+                  <p className={styles.phone}>{product.phone}</p>
+                </div>
+                <div
+                  style={
+                    showDelete
+                      ? {
+                          display: "flex",
+                          justifyContent: "end",
+                          margin: "0 2rem",
+                        }
+                      : { display: "none" }
+                  }
+                >
+                  <AiOutlineDelete
+                    color="white"
+                    style={{ cursor: "pointer" }}
+                    size={20}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      axios
+                        .delete(`${MONITOR_BACKEND}/deleteProduct`, {
+                          headers: {
+                            Authorization: "***",
+                          },
+                          data: {
+                            id: product._id,
+                          },
+                        })
+                        .then((res) => {
+                          if (res) {
+                            getProducts();
+                          }
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

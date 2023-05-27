@@ -77,6 +77,7 @@ const App = () => {
   const [followUp, setFollowUp] = useState([]);
   const [offers, setOffers] = useState([]);
   const [agents, setAgents] = useState([]);
+  const [products, setProducts] = useState([]);
   const [programs, setPrograms] = useState([]);
   const [reports, setReports] = useState([]);
   const [dbFilters, setDbFilters] = useState({
@@ -179,6 +180,17 @@ const App = () => {
       });
   };
 
+  const getProducts = () => {
+    axios
+      .get(`${MONITOR_BACKEND}/getProducts`)
+      .then((response) => {
+        setProducts(response.data.products?.reverse());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     var searchFilter = schools
       ?.filter((e) => {
@@ -273,6 +285,7 @@ const App = () => {
     getFollowUps();
     getOffers();
     getAgents();
+    getProducts();
     getReports();
     getPrograms();
   }, [page, location.pathname]);
@@ -331,7 +344,7 @@ const App = () => {
       />
       <Route
         path="/products"
-        element={<Product getAgents={getAgents} agents={agents} />}
+        element={<Product getProducts={getProducts} products={products} />}
       />
       <Route path="/hr/employees" element={<Employee />} />
       <Route path="/hr/leaves" element={<Leaves />} />
