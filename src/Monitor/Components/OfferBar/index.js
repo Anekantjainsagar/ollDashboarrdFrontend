@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import ShowOffer from "../ShowOffer/index";
+import axios from "axios";
+import MONITOR_BACKEND from "../../Utils";
 
-const OfferBar = ({ offer }) => {
+const OfferBar = ({ offer, getOffers }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(true);
   }
+  const [status, setStatus] = useState(offer?.status);
 
   return (
     <>
@@ -29,7 +32,31 @@ const OfferBar = ({ offer }) => {
         <p className={styles.duration}>{offer.duration}</p>
         <p className={styles.type}>Type</p>
         <p className={styles.resources}>Resources</p>
-        <p className={styles.actions}>Actions</p>
+        <p className={styles.actions}>
+          <select
+            name="status"
+            id=""
+            value={status}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            onChange={(e) => {
+              setStatus(e.target.value);
+              axios
+                .put(`${MONITOR_BACKEND}/updateOfferStatus`, {
+                  id: offer._id,
+                  status: e.target.value,
+                })
+                .then((res) => {
+                  console.log(res);
+                  getOffers();
+                });
+            }}
+          >
+            <option value="UnApproved">UnApproved</option>
+            <option value="Approved">Approved</option>
+          </select>
+        </p>
       </div>
     </>
   );

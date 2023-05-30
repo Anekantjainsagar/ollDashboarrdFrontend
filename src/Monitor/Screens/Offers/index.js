@@ -25,7 +25,9 @@ const Offers = ({ offers, getOffers }) => {
                 return e;
               })
               .map((offer, index) => {
-                return <OfferBar offer={offer} key={index} />;
+                return (
+                  <OfferBar getOffers={getOffers} offer={offer} key={index} />
+                );
               })}
           </div>
         </div>
