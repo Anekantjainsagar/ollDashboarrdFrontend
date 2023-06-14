@@ -19,8 +19,6 @@ const DisplayFollowUps = ({ followUp, user, schools, meetings }) => {
     setUserMeetings(meeting);
   }, [user, schools]);
 
-  console.log(userMeetings);
-
   return (
     <>
       {userFollowUps.filter((e) => {

@@ -36,7 +36,7 @@ const MeetingAndFollow = ({
   });
 
   const addfollows = () => {
-    if (follows.name && follows.time) {
+    if (follows.name && follows.time && follows.startDate) {
       axios
         .post(`${MONITOR_BACKEND}/addFollowUP`, {
           ...follows,
@@ -82,6 +82,8 @@ const MeetingAndFollow = ({
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      alert("Please fill date and time");
     }
   };
 
@@ -303,7 +305,11 @@ const MeetingAndFollow = ({
                 value={follows.startDate}
                 style={{ color: "white" }}
                 onChange={(e) =>
-                  setFollows({ ...follows, startDate: e.target.value })
+                  setFollows({
+                    ...follows,
+                    startDate: e.target.value,
+                    name: school?.name,
+                  })
                 }
               />
             </div>
@@ -365,8 +371,8 @@ const MeetingAndFollow = ({
         />
         <button
           className={styles.btn}
-          onClick={(e) => {
-            e.preventDefault();
+          style={{ zIndex: 10 }}
+          onClick={() => {
             addfollows();
           }}
         >
