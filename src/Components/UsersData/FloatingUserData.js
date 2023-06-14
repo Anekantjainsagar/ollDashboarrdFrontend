@@ -689,7 +689,7 @@ const FloatingUserData = ({
                       .filter((e) => {
                         if (searchTemplate) {
                           if (
-                            e.elementName.toLowerCase().includes(searchTemplate)
+                            e.elementName?.toLowerCase().includes(searchTemplate)
                           ) {
                             return e;
                           }

@@ -194,7 +194,9 @@ const Form = ({ getUserData, sales }) => {
               >
                 {apiData?.data
                   ?.filter((data) =>
-                    data.name?.toLowerCase().includes(searchData?.toLowerCase())
+                    data?.name
+                      ?.toLowerCase()
+                      .includes(searchData?.toLowerCase())
                   )
                   .map((e, i) => {
                     return (
