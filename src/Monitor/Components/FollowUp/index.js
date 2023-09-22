@@ -30,7 +30,7 @@ const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
           </select>
           {followUp?.length > 0 ? (
             <CSVLink
-              data={followUp?.filter((follow) => {
+              data={followUp?.map(({ _id, schoolId, userId, done, __v, ...rest }) => ({ ...rest })).filter((follow) => {
                 if (showingFollowUp === "Today") {
                   return (
                     new Date(Date.now()).toString().slice(4, 16) ===
