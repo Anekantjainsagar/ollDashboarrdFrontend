@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import Bar from "./Bar/index";
 import { CSVLink } from "react-csv";
 
-const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
+const FollowUp = ({ followUp, getFollowUps, schools, getUsers,AllSchools }) => {
   const [showingFollowUp, setShowingFollowUp] = useState("Today");
   const [tommorow, setTommorow] = useState();
 
@@ -44,6 +44,10 @@ const FollowUp = ({ followUp, getFollowUps, schools, getUsers }) => {
                 } else {
                   return new Date(follow.startDate) > new Date(Date.now());
                 }
+              })?.map((follow)=>{
+                let school = AllSchools?.find((e)=>e?.name==follow?.name);
+                follow.phone = school?.phone
+                return follow;
               })}
               filename="FollowUps"
               className={styles.btn}

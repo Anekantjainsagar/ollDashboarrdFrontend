@@ -294,7 +294,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Login setsales={setsales} />} />
+      <Route path="/" element={<Login setsales={setsales}  />} />
       <Route
         path="/sales"
         element={
@@ -317,7 +317,7 @@ const App = () => {
         path="/training/teacherOnboarding/:id"
         element={<OnboardingForm />}
       />
-      <Route path="/b2b" element={innerWidth < 550 ? <Mobile /> : <Home />} />
+      <Route path="/b2b" element={innerWidth < 550 ? <Mobile /> : <Home  AllSchools={schools} />} />
       <Route
         path="/db"
         element={

@@ -17,6 +17,7 @@ import jsPDF from "jspdf";
 import fileDownload from "js-file-download";
 
 const RightSection = ({
+  AllSchools,
   schools,
   getSchools,
   getUsers,
@@ -45,6 +46,7 @@ const RightSection = ({
 
   useEffect(() => {
     if (b2b?.login?.type === "b2b") {
+      console.log(b2b.login)
       if (b2b?.login?.name !== "Vidushi") {
         setUser(b2b?.login?.name);
       }
@@ -255,12 +257,6 @@ const RightSection = ({
         />
         <div className={styles.usersDisplayContainer}>
           {filteredUsers
-            ?.filter((e) => {
-              if (user?.length > 0) {
-                return e.handler.toLowerCase().includes(user.toLowerCase());
-              }
-              return e;
-            })
             .map((user, i) => {
               return (
                 <UserBar
@@ -299,6 +295,7 @@ const RightSection = ({
           followUp={followUp}
           schools={schools}
           getUsers={getUsers}
+          AllSchools={AllSchools}
         />
         <Meetings meetings={meetings} getMeetings={getMeetings} />
         <div className={styles.report}>

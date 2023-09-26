@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.css";
 import Sidebar from "../../Components/Sidebar/index";
 import RightSection from "../../Components/RightSection/index";
@@ -9,8 +9,9 @@ import MONITOR_BACKEND from "../../Utils";
 import Offers from "../Offers";
 import Agents from "../Agents";
 import Programs from "../Programs";
+import B2BContext from "../../Context/B2BContext";
 
-const Home = () => {
+const Home = ({ AllSchools }) => {
   const [users, setUsers] = useState([]);
   const [schools, setSchools] = useState([]);
   const [filteredSchools, setFilteredSchools] = useState([]);
@@ -73,12 +74,13 @@ const Home = () => {
       });
   };
 
+  const b2b = useContext(B2BContext);
+
   const getUsers = () => {
     axios
       .get(
-        `${MONITOR_BACKEND}/getUsers?page=${page}&size=${
-          page * 20
-        }&search=${search}`
+        `${MONITOR_BACKEND}/getUsers?page=${page}&size=${page * 20
+        }&search=${search}&handler=${b2b?.login?.name != "Vidushi" ? b2b?.login?.name : ""}`
       )
       .then((response) => {
         setUsers(response.data.users);
@@ -273,6 +275,7 @@ const Home = () => {
           path="/"
           element={
             <RightSection
+              AllSchools={AllSchools}
               users={users}
               filteredUsers={filteredUsers}
               schools={schools}
