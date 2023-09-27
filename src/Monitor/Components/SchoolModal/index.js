@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
 import styles from "./style.module.css";
@@ -6,8 +6,12 @@ import axios from "axios";
 import MONITOR_BACKEND from "../../Utils";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import B2BContext from '../../Context/B2BContext'
 
 const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
+  
+  const b2b = useContext(B2BContext);
+
   const customStyles = {
     content: {
       top: "50%",
@@ -70,7 +74,7 @@ const SchoolModal = ({ setIsOpen, modalIsOpen, getSchools }) => {
       (school.name.length > 0 && school.email.length > 0)
     ) {
       axios
-        .post(`${MONITOR_BACKEND}/addSchool`, school)
+        .post(`${MONITOR_BACKEND}/addSchool`, { ...school, handler: b2b?.login?.name })
         .then((response) => {
           id = response.data.school._id;
           if (id && logo) {

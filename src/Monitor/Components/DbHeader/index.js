@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./style.module.css";
 import array from "../../Screens/Database/array";
 import SchoolModal from "../SchoolModal/index";
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import fileDownload from "js-file-download";
 import "jspdf-autotable";
+import B2BContext from "../../Context/B2BContext";
 
 const DbHeader = ({ getSchools, schools }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -50,6 +51,8 @@ const DbHeader = ({ getSchools, schools }) => {
     updateSchools();
   }, [schools]);
 
+  let b2b = useContext(B2BContext);
+
   return (
     <>
       <SchoolModal
@@ -82,7 +85,7 @@ const DbHeader = ({ getSchools, schools }) => {
                   const formData = new FormData();
                   formData.append("uploadfile", file);
                   axios
-                    .post(`${MONITOR_BACKEND}/uploadSchool`, formData)
+                    .post(`${MONITOR_BACKEND}/uploadSchool`, { ...formData, handler: b2b?.login?.name })
                     .then((res) => {
                       if (res?.data[0]?._id) {
                         getSchools();
