@@ -93,7 +93,7 @@ const App = () => {
 
   const getSchools = () => {
     axios
-      .get(`${MONITOR_BACKEND}/getSchools`)
+      .get(`${MONITOR_BACKEND}/getSchools?handler=${b2b?.login?.name != "Vidushi" ? b2b?.login?.name : ""}`)
       .then((response) => {
         setSchools(response.data.schools);
       })
@@ -294,7 +294,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Login setsales={setsales}  />} />
+      <Route path="/" element={<Login setsales={setsales} />} />
       <Route
         path="/sales"
         element={
@@ -317,7 +317,7 @@ const App = () => {
         path="/training/teacherOnboarding/:id"
         element={<OnboardingForm />}
       />
-      <Route path="/b2b" element={innerWidth < 550 ? <Mobile /> : <Home  AllSchools={schools} />} />
+      <Route path="/b2b" element={innerWidth < 550 ? <Mobile /> : <Home AllSchools={schools} />} />
       <Route
         path="/db"
         element={
