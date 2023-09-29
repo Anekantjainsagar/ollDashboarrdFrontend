@@ -84,7 +84,6 @@ const DbHeader = ({ getSchools, schools }) => {
                   e.preventDefault();
                   const formData = new FormData();
                   formData.append("uploadfile", file);
-                  formData.append("handler", b2b?.login?.name);
                   axios
                     .post(`${MONITOR_BACKEND}/uploadSchool`, formData)
                     .then((res) => {

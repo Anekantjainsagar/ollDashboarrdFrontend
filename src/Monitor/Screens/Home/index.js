@@ -43,7 +43,7 @@ const Home = ({ AllSchools }) => {
 
   const getSchools = () => {
     axios
-      .get(`${MONITOR_BACKEND}/getSchools?handler=${b2b?.login?.name != "Vidushi" ? b2b?.login?.name : ""}`)
+      .get(`${MONITOR_BACKEND}/getSchools?handler=${b2b?.login?.name}`)
       .then((response) => {
         setSchools(response.data.schools);
       })
